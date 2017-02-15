@@ -3,10 +3,10 @@
 Program for an autonomous can sorting machine. Microcontroller used: PIC18F4620
 
 #.c files
-##main.c
+###main.c
 - Calls initialization functions and runs the main loop
 
-##sort.c
+###sort.c
 - The can-sorting algorithm and actuator/sensor helper functions
 
 ##lcd.c
