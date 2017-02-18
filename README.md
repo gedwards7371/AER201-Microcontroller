@@ -1,10 +1,10 @@
 # AER201-Microcontroller
 
-Program for an autonomous can sorting machine. Microcontroller used: PIC18F4620
+Program for an autonomous can sorting machine. Microcontroller used: PIC18F4620. Noteworthy files will be described below
 
 #.c files
 ###main.c
-- Calls initialization functions and runs the main loop
+- Calls initialization functions and runs the main operation loop
 
 ###sort.c
 - The can-sorting algorithm and actuator/sensor helper functions
@@ -20,9 +20,6 @@ Program for an autonomous can sorting machine. Microcontroller used: PIC18F4620
 
 ###PortHigh.c
 - Will set certain pins high on keypress (for rapid prototyping purposes)
-
-###PWM.c
-- Functions to configure and use built-in PWM (suitable for large frequencies)
 
 ###MachineConfig.c
 - Configures PIC ports, interrupts, timers, and clock speed
