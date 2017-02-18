@@ -49,6 +49,7 @@ void machineConfig(void) {
     
     //**INTERRUPTS**//
     INT1IE = 1; // Enable external interrupts on INT1/RB1 (for keypad!)
-    TMR0IE = 1; // Enable timer 0 interrupts
+    TMR0IE = 1; // Enable Timer0 interrupts
+    TMR1IE = 1; // Enable Timer1 interrupts
     di(); // Disable all interrupts for now
 }

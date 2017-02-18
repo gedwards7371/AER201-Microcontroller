@@ -19,7 +19,7 @@ int first=1;//flag for first entry
 int sortTimerCounter;
 int PWMTimerCounter;
 int servoSelectFlag; // Used in the interrupt routine to indicate whether we're interested in moving the pan or the tilt servo
-int servoSwitch;
+int was_low; // flag to indicate whether servo is refreshing (20ms low) or not refreshing (sending high signal)
 int startTime[7];
 int total_time;
 

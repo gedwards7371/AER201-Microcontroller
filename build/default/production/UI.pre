@@ -3869,7 +3869,7 @@ int first=1;
 int sortTimerCounter;
 int PWMTimerCounter;
 int servoSelectFlag;
-int servoSwitch;
+int was_low;
 int startTime[7];
 int total_time;
 
@@ -4333,16 +4333,15 @@ updateMenu();
 if(TMR0IF){
 TMR0IF = 0;
 if(machine_state == Sorting_state){
-if(sortTimerCounter == 31250){
-sortTimerCounter = 0;
 printSortTimer();
-}
-else{
-sortTimerCounter++;
-}
-T0CON = 0b11011000;
+
+
+T0CON = 0b00010111;
+TMR0H = 0b10000101;
+TMR0L = 0b11101110;
+T0CON = T0CON | 0b10000000;
 }
 }
 
-# 537
+# 539
 }

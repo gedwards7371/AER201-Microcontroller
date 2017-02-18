@@ -87,6 +87,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _printSortTimer `(v ~T0 @X0 0 ef ]
 "5781 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
+"5869
+[v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
+"5863
+[v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2974,8 +2978,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _servoSelectFlag `i ~T0 @X0 1 e ]
 [; ;sort.h: 21: int servoSelectFlag;
 "22
-[v _servoSwitch `i ~T0 @X0 1 e ]
-[; ;sort.h: 22: int servoSwitch;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 22: int was_low;
 "23
 [v _startTime `i ~T0 @X0 -> 7 `i e ]
 [; ;sort.h: 23: int startTime[7];
@@ -4740,44 +4744,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 "505
 [e $ ! == -> _machine_state `i -> . `E3112 1 `i 456  ]
 {
-[; ;UI.c: 506: if(sortTimerCounter == 31250){
+[; ;UI.c: 506: printSortTimer();
 "506
-[e $ ! == _sortTimerCounter -> 31250 `i 457  ]
-{
-[; ;UI.c: 507: sortTimerCounter = 0;
-"507
-[e = _sortTimerCounter -> 0 `i ]
-[; ;UI.c: 508: printSortTimer();
-"508
 [e ( _printSortTimer ..  ]
+[; ;UI.c: 509: T0CON = 0b00010111;
 "509
-}
-[; ;UI.c: 509: }
-[e $U 458  ]
+[e = _T0CON -> -> 23 `i `uc ]
+[; ;UI.c: 510: TMR0H = 0b10000101;
 "510
-[e :U 457 ]
-[; ;UI.c: 510: else{
-{
-[; ;UI.c: 511: sortTimerCounter++;
+[e = _TMR0H -> -> 133 `i `uc ]
+[; ;UI.c: 511: TMR0L = 0b11101110;
 "511
-[e ++ _sortTimerCounter -> 1 `i ]
+[e = _TMR0L -> -> 238 `i `uc ]
+[; ;UI.c: 512: T0CON = T0CON | 0b10000000;
 "512
-}
-[e :U 458 ]
-[; ;UI.c: 512: }
-[; ;UI.c: 513: T0CON = 0b11011000;
+[e = _T0CON -> | -> _T0CON `i -> 128 `i `uc ]
 "513
-[e = _T0CON -> -> 216 `i `uc ]
-"514
 }
 [e :U 456 ]
-"515
+"514
 }
 [e :U 455 ]
+[; ;UI.c: 513: }
 [; ;UI.c: 514: }
-[; ;UI.c: 515: }
-[; ;UI.c: 537: }
-"537
+[; ;UI.c: 539: }
+"539
 [e :UE 452 ]
 }
 [p f _printf 8421508 ]

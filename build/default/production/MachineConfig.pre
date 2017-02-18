@@ -3866,7 +3866,7 @@ int first=1;
 int sortTimerCounter;
 int PWMTimerCounter;
 int servoSelectFlag;
-int servoSwitch;
+int was_low;
 int startTime[7];
 int total_time;
 
@@ -3917,5 +3917,6 @@ ADFM = 1;
 
 INT1IE = 1;
 TMR0IE = 1;
+TMR1IE = 1;
 (INTCONbits.GIE = 0);
 }

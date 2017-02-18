@@ -93,7 +93,7 @@ void ID(void){
         // use the local variable that we just initialized from the sensors to determine the can type
         moveServoBlock(Lower);
         // characteristic delay
-        f_can_coming_to_distribution;
+        f_can_coming_to_distribution = 1;
         moveServoBlock(Raise);
         f_can_coming_to_ID = 0; // clear ID flag to allow another can to come
     }
@@ -116,7 +116,22 @@ void initSortTimer(){
     for(int i = 0; i < 7; i++){
         startTime[i] = __bcd_to_num(time[i]); // store the start time of the sort operation
     }
-    T0CON = 0b11011000;
+    //T0CON = 0b11011000;
+    // Configure 16-bit timer with 1:256 prescaler
+    T0CON = 0b00010111;
+    
+    // Load timer with value such that only 1 interrupt needs to occur to get to 1s
+    // 32000000 CPU cycles per second
+    // * 0.25 instructions per CPU cycle
+    // * (1/256) timer ticks per instruction
+    // = 31250 timer ticks per second
+    // Now, we have a total of 65536 (2^16) bits in the timer. We need to overflow it.
+    // Therefore, load the timer with 65526-31250 = 34286
+    // d'34286 = 0b1000010111101110
+    TMR0H = 0b10000101;
+    TMR0L = 0b11101110;
+    
+    T0CON = T0CON | 0b10000000; // set TMR0ON = 1 (start timer))
 }
 
 // need to figure out the math to get the difference properly
@@ -168,11 +183,49 @@ int MAGNETISM_in(void){
     // gets analog reading from magnetism sensor
 }
 
+//pg129 for Timer1
 void moveServoBlock(enum blockPositions myPosition){
     // lower or raise the block
+    
+    int pwmTimer = 0b0; // Pulse time in milliseconds
+    
+    switch(myPosition){
+        case Raise:
+            pwmTimer = 2;
+            break;
+        case Lower:
+            pwmTimer = 1;
+            break;
+        default:
+            break;
+    }
 }
 
 void moveServoCup(enum motorPositions myPosition){
     // Hit servo with pulses characteristic to each position
+    
+    int pwmTimer = 0b0; // Load settings for Timer2
+    T1CON = 0b1011; // idk if bit 6 should be 0 or 1
+    
+    switch(myPosition){
+        case Home:
+            pwmTimer = 1.5;
+            break;
+        case popCanNoTab:
+            pwmTimer = 1;
+            break;
+        case popCanWithTab:
+            pwmTimer = 1.25;
+            break;
+        case soupCanNoLabel:
+            pwmTimer = 1.75;
+            break;
+        case soupCanWithLabel:
+            pwmTimer = 2;
+            break;
+        default:
+            break;
+    }
+    
     
 }

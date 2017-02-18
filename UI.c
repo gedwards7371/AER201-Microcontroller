@@ -1,5 +1,4 @@
-#include <xc.h>;
-
+#include <xc.h>
 #include <stdio.h>
 #include "configBits.h"
 #include "constants.h"
@@ -500,38 +499,47 @@ void interrupt handler(void) {
     }
     
     //** 1 SECOND TIMER THAT CALLS printSortTimer() **
-    if(TMR0IF){
+     if(TMR0IF){
         TMR0IF = 0;
         if(machine_state == Sorting_state){
-            if(sortTimerCounter == 31250){//31250 min frequency to print once per second
-            sortTimerCounter = 0;
             printSortTimer();
-            }
-            else{
-                sortTimerCounter++;  
-            }
-            T0CON = 0b11011000; // Initialize timer again!
+            
+            // Initialize timer again!
+            T0CON = 0b00010111;
+            TMR0H = 0b10000101;
+            TMR0L = 0b11101110;
+            T0CON = T0CON | 0b10000000;
         }
     }
     
     //** Timer for servo delays **
+    // For  TMR1, we'll want to set it as: 0b00000001
     /*
     if(TMR1IF){
-        TMR1IF = 1;
+        TMR1IF = 1; // Clear interrupt flag
         if(machine_state = Sorting_state){
-            if(PWMTimerCounter == 31){ // 31.25 to be exact...
-                PWMTimerCounter = 0;
-                switch(servoSwitch){
-                    // if it was on last time then turn it off this time
-                    
-                }
+            if(was_low){
                 if(servoSelectFlag == 1){
                     LATCbits.LATC1 = 1;
                 }
                 if(servoSelectFlag == 2){
                     LATCbits.LATC2 = 1;
                 }
-            } // supposing that Timer1 works like Timer1
+                // Set Timer1 to interrupt after appropriate pulse time
+                was_low = 0;
+            }
+            else{
+                if(servoSelectFlag == 1){
+                    LATCbits.LATC1 = 0;
+                }
+                if(servoSelectFlag == 2){
+                    LATCbits.LATC2 = 0;
+                }
+                // Set Timer1 to interrupt on 20 ms
+                was_low = 1;
+            }
+                
+            }
         }
     }*/
 }

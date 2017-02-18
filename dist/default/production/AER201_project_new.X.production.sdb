@@ -292,15 +292,15 @@ Lower 1
 [v _Distribution Distribution `(v  1 e 1 0 ]
 "112
 [v _initSortTimer initSortTimer `(v  1 e 1 0 ]
-"123
+"138
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
-"150
+"165
 [v _getIR getIR `(v  1 e 1 0 ]
-"167
+"182
 [v _MAGNETISM_in MAGNETISM_in `(i  1 e 2 0 ]
-"171
+"187
 [v _moveServoBlock moveServoBlock `(v  1 e 1 0 ]
-"175
+"204
 [v _moveServoCup moveServoCup `(v  1 e 1 0 ]
 "63 D:\Users\Tyler\Documents\MPLABX\AER201_code\AER201_project_new.X\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -337,7 +337,7 @@ Lower 1
 [v _change_state_to_logs_34 change_state_to_logs_34 `(v  1 e 1 0 ]
 "492
 [v _handler handler `II(v  1 e 1 0 ]
-[s S1156 . 1 `uc 1 RA0 1 0 :1:0 
+[s S1159 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -347,31 +347,31 @@ Lower 1
 `uc 1 RA7 1 0 :1:7 
 ]
 "96 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
-[s S1165 . 1 `uc 1 . 1 0 :4:0 
+[s S1168 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 T0CKI 1 0 :1:4 
 `uc 1 AN4 1 0 :1:5 
 ]
-[s S1169 . 1 `uc 1 . 1 0 :5:0 
+[s S1172 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SS 1 0 :1:5 
 ]
-[s S1172 . 1 `uc 1 . 1 0 :5:0 
+[s S1175 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_SS 1 0 :1:5 
 ]
-[s S1175 . 1 `uc 1 . 1 0 :5:0 
+[s S1178 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 nSS 1 0 :1:5 
 ]
-[s S1178 . 1 `uc 1 . 1 0 :5:0 
+[s S1181 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 LVDIN 1 0 :1:5 
 ]
-[s S1181 . 1 `uc 1 . 1 0 :5:0 
+[s S1184 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 HLVDIN 1 0 :1:5 
 ]
-[s S1184 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+[s S1187 . 1 `uc 1 ULPWUIN 1 0 :1:0 
 `uc 1 . 1 0 :6:1 
 `uc 1 RJPU 1 0 :1:7 
 ]
-[u S1188 . 1 `S1156 1 . 1 0 `S1165 1 . 1 0 `S1169 1 . 1 0 `S1172 1 . 1 0 `S1175 1 . 1 0 `S1178 1 . 1 0 `S1181 1 . 1 0 `S1184 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES1188  1 e 1 @3968 ]
+[u S1191 . 1 `S1159 1 . 1 0 `S1168 1 . 1 0 `S1172 1 . 1 0 `S1175 1 . 1 0 `S1178 1 . 1 0 `S1181 1 . 1 0 `S1184 1 . 1 0 `S1187 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES1191  1 e 1 @3968 ]
 "185
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
 [s S217 . 1 `uc 1 RB0 1 0 :1:0 
@@ -469,21 +469,21 @@ Lower 1
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 "2251
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S853 . 1 `uc 1 TUN 1 0 :5:0 
+[s S855 . 1 `uc 1 TUN 1 0 :5:0 
 `uc 1 . 1 0 :1:5 
 `uc 1 PLLEN 1 0 :1:6 
 `uc 1 INTSRC 1 0 :1:7 
 ]
 "2434
-[s S858 . 1 `uc 1 TUN0 1 0 :1:0 
+[s S860 . 1 `uc 1 TUN0 1 0 :1:0 
 `uc 1 TUN1 1 0 :1:1 
 `uc 1 TUN2 1 0 :1:2 
 `uc 1 TUN3 1 0 :1:3 
 `uc 1 TUN4 1 0 :1:4 
 ]
-[u S864 . 1 `S853 1 . 1 0 `S858 1 . 1 0 ]
-[v _OSCTUNEbits OSCTUNEbits `VES864  1 e 1 @3995 ]
-[s S892 . 1 `uc 1 CM 1 0 :3:0 
+[u S866 . 1 `S855 1 . 1 0 `S860 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES866  1 e 1 @3995 ]
+[s S894 . 1 `uc 1 CM 1 0 :3:0 
 `uc 1 CIS 1 0 :1:3 
 `uc 1 C1INV 1 0 :1:4 
 `uc 1 C2INV 1 0 :1:5 
@@ -491,16 +491,16 @@ Lower 1
 `uc 1 C2OUT 1 0 :1:7 
 ]
 "3647
-[s S899 . 1 `uc 1 CM0 1 0 :1:0 
+[s S901 . 1 `uc 1 CM0 1 0 :1:0 
 `uc 1 CM1 1 0 :1:1 
 `uc 1 CM2 1 0 :1:2 
 ]
-[s S903 . 1 `uc 1 CMEN0 1 0 :1:0 
+[s S905 . 1 `uc 1 CMEN0 1 0 :1:0 
 `uc 1 CMEN1 1 0 :1:1 
 `uc 1 CMEN2 1 0 :1:2 
 ]
-[u S907 . 1 `S892 1 . 1 0 `S899 1 . 1 0 `S903 1 . 1 0 ]
-[v _CMCONbits CMCONbits `VES907  1 e 1 @4020 ]
+[u S909 . 1 `S894 1 . 1 0 `S901 1 . 1 0 `S905 1 . 1 0 ]
+[v _CMCONbits CMCONbits `VES909  1 e 1 @4020 ]
 "3711
 [v _CVRCON CVRCON `VEuc  1 e 1 @4021 ]
 "4390
@@ -549,10 +549,16 @@ Lower 1
 [v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
 "4966
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
+"5157
+[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
 "5705
 [v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
 "5781
 [v _T0CON T0CON `VEuc  1 e 1 @4053 ]
+"5863
+[v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
+"5869
+[v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
 [s S426 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
@@ -602,6 +608,8 @@ Lower 1
 [v _TMR0IE TMR0IE `VEb  1 e 0 @32661 ]
 "7564
 [v _TMR0IF TMR0IF `VEb  1 e 0 @32658 ]
+"7572
+[v _TMR1IE TMR1IE `VEb  1 e 0 @31976 ]
 "7638
 [v _TRISC3 TRISC3 `VEb  1 e 0 @31907 ]
 "7640
@@ -632,8 +640,6 @@ Lower 1
 [v _canType canType `E3123  1 e 1 0 ]
 "18
 [v _first first `i  1 e 2 0 ]
-"19
-[v _sortTimerCounter sortTimerCounter `i  1 e 2 0 ]
 "23
 [v _startTime startTime `[7]i  1 e 14 0 ]
 "24
@@ -682,52 +688,66 @@ Lower 1
 {
 "116
 [v initSortTimer@i i `i  1 a 2 8 ]
-"120
+"135
 } 0
-"150
+"165
 [v _getIR getIR `(v  1 e 1 0 ]
 {
-"154
+"169
 [v getIR@i i `i  1 a 2 22 ]
-"153
+"168
 [v getIR@timeBroken timeBroken `[7]i  1 a 14 8 ]
-"165
+"180
 } 0
 "72
 [v _ID ID `(v  1 e 1 0 ]
 {
 "79
-[v ID@magnetic magnetic `i  1 a 2 7 ]
+[v ID@magnetic magnetic `i  1 a 2 8 ]
 "78
-[v ID@side_conductivity side_conductivity `i  1 a 2 5 ]
+[v ID@side_conductivity side_conductivity `i  1 a 2 6 ]
 "80
-[v ID@top_bottom_conductivity top_bottom_conductivity `i  1 a 2 3 ]
+[v ID@top_bottom_conductivity top_bottom_conductivity `i  1 a 2 4 ]
 "100
 } 0
-"171
+"187
 [v _moveServoBlock moveServoBlock `(v  1 e 1 0 ]
 {
-"173
+[v moveServoBlock@myPosition myPosition `E3130  1 a 1 wreg ]
+"190
+[v moveServoBlock@pwmTimer pwmTimer `i  1 a 2 0 ]
+"187
+[v moveServoBlock@myPosition myPosition `E3130  1 a 1 wreg ]
+"190
+[v moveServoBlock@myPosition myPosition `E3130  1 a 1 2 ]
+"202
 } 0
-"167
+"182
 [v _MAGNETISM_in MAGNETISM_in `(i  1 e 2 0 ]
 {
-"169
+"184
 } 0
 "101
 [v _Distribution Distribution `(v  1 e 1 0 ]
 {
 "110
 } 0
-"175
+"204
 [v _moveServoCup moveServoCup `(v  1 e 1 0 ]
 {
-"178
+[v moveServoCup@myPosition myPosition `E3123  1 a 1 wreg ]
+"209
+[v moveServoCup@pwmTimer pwmTimer `i  1 a 2 1 ]
+"204
+[v moveServoCup@myPosition myPosition `E3123  1 a 1 wreg ]
+"209
+[v moveServoCup@myPosition myPosition `E3123  1 a 1 0 ]
+"233
 } 0
 "13 D:\Users\Tyler\Documents\MPLABX\AER201_code\AER201_project_new.X\MachineConfig.c
 [v _machineConfig machineConfig `(i  1 e 2 0 ]
 {
-"54
+"55
 } 0
 "63 D:\Users\Tyler\Documents\MPLABX\AER201_code\AER201_project_new.X\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -788,29 +808,29 @@ Lower 1
 [v _UI UI `(v  1 e 1 0 ]
 {
 "142
-[v UI@i_655 i `uc  1 a 1 83 ]
+[v UI@i_657 i `uc  1 a 1 83 ]
 "141
-[v UI@i_654 i `uc  1 a 1 82 ]
+[v UI@i_656 i `uc  1 a 1 82 ]
 "133
-[v UI@i_651 i `uc  1 a 1 81 ]
+[v UI@i_653 i `uc  1 a 1 81 ]
 "132
-[v UI@i_650 i `uc  1 a 1 80 ]
+[v UI@i_652 i `uc  1 a 1 80 ]
 "124
-[v UI@i_647 i `uc  1 a 1 79 ]
+[v UI@i_649 i `uc  1 a 1 79 ]
 "123
-[v UI@i_646 i `uc  1 a 1 78 ]
+[v UI@i_648 i `uc  1 a 1 78 ]
 "115
-[v UI@i_643 i `uc  1 a 1 77 ]
+[v UI@i_645 i `uc  1 a 1 77 ]
 "114
-[v UI@i_642 i `uc  1 a 1 76 ]
+[v UI@i_644 i `uc  1 a 1 76 ]
 "106
-[v UI@i_639 i `uc  1 a 1 75 ]
+[v UI@i_641 i `uc  1 a 1 75 ]
 "105
-[v UI@i_638 i `uc  1 a 1 74 ]
+[v UI@i_640 i `uc  1 a 1 74 ]
 "97
-[v UI@i_635 i `uc  1 a 1 73 ]
+[v UI@i_637 i `uc  1 a 1 73 ]
 "96
-[v UI@i_634 i `uc  1 a 1 72 ]
+[v UI@i_636 i `uc  1 a 1 72 ]
 "83
 [v UI@i i `uc  1 a 1 71 ]
 "145
@@ -1004,7 +1024,7 @@ Lower 1
 "492 D:\Users\Tyler\Documents\MPLABX\AER201_code\AER201_project_new.X\UI.c
 [v _handler handler `II(v  1 e 1 0 ]
 {
-"537
+"539
 } 0
 "148
 [v _updateMenu updateMenu `(v  1 e 1 0 ]
@@ -1094,26 +1114,26 @@ Lower 1
 [v dispLogs@myLog myLog `i  1 p 2 0 ]
 "405
 } 0
-"123 D:\Users\Tyler\Documents\MPLABX\AER201_code\AER201_project_new.X\sort.c
+"138 D:\Users\Tyler\Documents\MPLABX\AER201_code\AER201_project_new.X\sort.c
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
 {
-"126
-[v printSortTimer@i i `i  1 a 2 72 ]
-"125
-[v printSortTimer@curTime curTime `[7]i  1 a 14 44 ]
-"131
-[v printSortTimer@timeDiff timeDiff `ui  1 a 2 70 ]
-"142
-[v printSortTimer@sec sec `i  1 a 2 66 ]
 "141
-[v printSortTimer@min min `i  1 a 2 64 ]
+[v printSortTimer@i i `i  1 a 2 72 ]
 "140
+[v printSortTimer@curTime curTime `[7]i  1 a 14 44 ]
+"146
+[v printSortTimer@timeDiff timeDiff `ui  1 a 2 70 ]
+"157
+[v printSortTimer@sec sec `i  1 a 2 66 ]
+"156
+[v printSortTimer@min min `i  1 a 2 64 ]
+"155
 [v printSortTimer@hour hour `i  1 a 2 62 ]
-"130
+"145
 [v printSortTimer@cur_sec cur_sec `ui  1 a 2 60 ]
-"129
+"144
 [v printSortTimer@start_sec start_sec `ui  1 a 2 58 ]
-"148
+"163
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v i2_printf printf `(i  1 e 2 0 ]

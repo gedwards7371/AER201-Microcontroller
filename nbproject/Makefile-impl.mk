@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=AER201_project_new.X
+PROJECTNAME=AER201-Microcontroller
 
 # Active Configuration
 DEFAULTCONF=default

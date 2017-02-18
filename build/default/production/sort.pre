@@ -3866,7 +3866,7 @@ int first=1;
 int sortTimerCounter;
 int PWMTimerCounter;
 int servoSelectFlag;
-int servoSwitch;
+int was_low;
 int startTime[7];
 int total_time;
 
@@ -3959,7 +3959,7 @@ LATAbits.LATA3 = 0;
 
 moveServoBlock(Lower);
 
-f_can_coming_to_distribution;
+f_can_coming_to_distribution = 1;
 moveServoBlock(Raise);
 f_can_coming_to_ID = 0;
 }
@@ -3982,7 +3982,15 @@ getRTC();
 for(int i = 0; i < 7; i++){
 startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 }
-T0CON = 0b11011000;
+
+
+T0CON = 0b00010111;
+
+# 131
+TMR0H = 0b10000101;
+TMR0L = 0b11101110;
+
+T0CON = T0CON | 0b10000000;
 }
 
 
@@ -4034,11 +4042,51 @@ int MAGNETISM_in(void){
 
 }
 
+
 void moveServoBlock(enum blockPositions myPosition){
 
+
+int pwmTimer = 0b0;
+
+switch(myPosition){
+case Raise:
+pwmTimer = 2;
+break;
+case Lower:
+pwmTimer = 1;
+break;
+default:
+break;
+}
 }
 
 void moveServoCup(enum motorPositions myPosition){
+
+
+
+
+int pwmTimer = 0;
+T1CON = 0;
+
+switch(myPosition){
+case Home:
+pwmTimer = 1.5;
+break;
+case popCanNoTab:
+pwmTimer = 1;
+break;
+case popCanWithTab:
+pwmTimer = 1.25;
+break;
+case soupCanNoLabel:
+pwmTimer = 1.75;
+break;
+case soupCanWithLabel:
+pwmTimer = 2;
+break;
+default:
+break;
+}
 
 
 }

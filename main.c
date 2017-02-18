@@ -10,13 +10,15 @@
 #include "main.h"
 #include "sort.h"
 
+// Interrupt handlers are in UI.c
+
 void main(void) {
     machineConfig();
     initLCD();
     initTime(0x42, 0x32, 0x13, 0x04, 0x09, 0x02, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
     initUI();
     
-    // machine_state = Testing_state; // comment me out if you're not testing
+    //machine_state = Testing_state; // comment me out if you're not testing
     
     while(1){
         switch(machine_state){

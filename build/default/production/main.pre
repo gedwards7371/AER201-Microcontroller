@@ -3866,7 +3866,7 @@ int first=1;
 int sortTimerCounter;
 int PWMTimerCounter;
 int servoSelectFlag;
-int servoSwitch;
+int was_low;
 int startTime[7];
 int total_time;
 
@@ -3883,7 +3883,7 @@ initLCD();
 initTime(0x42, 0x32, 0x13, 0x04, 0x09, 0x02, 0x17);
 initUI();
 
-
+machine_state = Testing_state;
 
 while(1){
 switch(machine_state){

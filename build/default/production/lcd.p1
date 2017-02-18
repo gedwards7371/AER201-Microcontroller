@@ -2913,8 +2913,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _servoSelectFlag `i ~T0 @X0 1 e ]
 [; ;sort.h: 21: int servoSelectFlag;
 "22
-[v _servoSwitch `i ~T0 @X0 1 e ]
-[; ;sort.h: 22: int servoSwitch;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 22: int was_low;
 "23
 [v _startTime `i ~T0 @X0 -> 7 `i e ]
 [; ;sort.h: 23: int startTime[7];
