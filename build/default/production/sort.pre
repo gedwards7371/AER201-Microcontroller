@@ -4063,10 +4063,8 @@ break;
 void moveServoCup(enum motorPositions myPosition){
 
 
-
-
-int pwmTimer = 0;
-T1CON = 0;
+int pwmTimer = 0b0;
+T1CON = 0b1011;
 
 switch(myPosition){
 case Home:

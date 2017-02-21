@@ -499,7 +499,7 @@ void interrupt handler(void) {
     }
     
     //** 1 SECOND TIMER THAT CALLS printSortTimer() **
-     if(TMR0IF){
+    if(TMR0IF){
         TMR0IF = 0;
         if(machine_state == Sorting_state){
             printSortTimer();
@@ -514,26 +514,25 @@ void interrupt handler(void) {
     
     //** Timer for servo delays **
     // For  TMR1, we'll want to set it as: 0b00000001
-    /*
     if(TMR1IF){
         TMR1IF = 1; // Clear interrupt flag
         if(machine_state = Sorting_state){
             if(was_low){
                 if(servoSelectFlag == 1){
-                    LATCbits.LATC1 = 1;
+                    SERVOPAN = 1;
                 }
                 if(servoSelectFlag == 2){
-                    LATCbits.LATC2 = 1;
+                    SERVOTILT = 1;
                 }
                 // Set Timer1 to interrupt after appropriate pulse time
                 was_low = 0;
             }
             else{
                 if(servoSelectFlag == 1){
-                    LATCbits.LATC1 = 0;
+                    SERVOPAN = 0;
                 }
                 if(servoSelectFlag == 2){
-                    LATCbits.LATC2 = 0;
+                    SERVOTILT = 0;
                 }
                 // Set Timer1 to interrupt on 20 ms
                 was_low = 1;
@@ -541,5 +540,5 @@ void interrupt handler(void) {
                 
             }
         }
-    }*/
+    }
 }

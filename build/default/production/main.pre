@@ -3876,14 +3876,14 @@ int count_pop_w_tab;
 int count_can_no_lab;
 int count_can_w_lab;
 
-# 13 "main.c"
+# 15 "main.c"
 void main(void) {
 machineConfig();
 initLCD();
 initTime(0x42, 0x32, 0x13, 0x04, 0x09, 0x02, 0x17);
 initUI();
 
-machine_state = Testing_state;
+
 
 while(1){
 switch(machine_state){

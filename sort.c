@@ -39,7 +39,7 @@ void Loading(void){
         first = 0;
         __lcd_clear();
         initSortTimer();
-        LATAbits.LATA5 = 1; //Write to RA5 for DC motors
+        DC = 1; //Write to RA5 for DC motors
     }
     else{
         if(!f_loadingNewCan){ // if a can is not already waiting to go to the ID stage.
@@ -62,11 +62,11 @@ void Loading(void){
         // "If ID stage is ready..."
         else if(f_ID_receive){
                 f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
-                LATAbits.LATA4 = 1; // activate solenoid pusher
+                SOL_05 = 1; // activate solenoid pusher
                 f_can_coming_to_ID = 1;
         }
         //DELAY TIMER SET FOR ABOUT 500 MS DURATION (see? I need a dedicated duration-setting function!)
-        LATAbits.LATA4 = 0; // deactivate solenoid pusher
+        SOL_05 = 0; // deactivate solenoid pusher
     }
 }
 void ID(void){
@@ -83,10 +83,10 @@ void ID(void){
         if(!side_conductivity){
             magnetic = MAGNETISM_in();
             if(!magnetic){
-                LATAbits.LATA3 = 1; //activate solenoids for top/bottom conductivity sensors
+                SOL_1 = 1; //activate solenoids for top/bottom conductivity sensors
                 // characteristic delay of time it takes for solenoids move out
                 top_bottom_conductivity = PORTAbits.RA2;
-                LATAbits.LATA3 = 0;
+                SOL_1 = 0;
             }
         }
         

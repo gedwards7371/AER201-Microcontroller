@@ -3637,9 +3637,6 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 1 "UI.c"
-;
-
 # 4 "D:\Program Files (x86)\Microchip\xc8\v1.40\include\__size_t.h"
 typedef unsigned size_t;
 
@@ -3879,7 +3876,7 @@ int count_pop_w_tab;
 int count_can_no_lab;
 int count_can_w_lab;
 
-# 22 "UI.c"
+# 21 "UI.c"
 char input;
 const char keys[] = "123A456B789C*0#D";
 int up; int down; int enter; int back;
@@ -3889,7 +3886,7 @@ int firstboot;
 int logstate = 0;
 int log;
 
-# 63
+# 62
 void initUI(void){
 (INTCONbits.GIE = 1);
 machine_state = UI_state;
@@ -4343,5 +4340,5 @@ T0CON = T0CON | 0b10000000;
 }
 }
 
-# 539
+# 545
 }

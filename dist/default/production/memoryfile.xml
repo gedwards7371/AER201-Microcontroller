@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/production\AER201_project_new.X.production.hex">
+  <executable name="dist/default/production\AER201-Microcontroller.production.hex">
     <memory name="program">
       <units>bytes</units>
       <length>65536</length>
-      <used>11056</used>
-      <free>54480</free>
+      <used>11050</used>
+      <free>54486</free>
     </memory>
     <memory name="data">
       <units>bytes</units>

@@ -24,7 +24,7 @@
 //Servo motors
 #define SERVOCAM    LATCbits.LATC0 // cam servo for blocker
 #define SERVOPAN    LATCbits.LATC1 // pan servo (sides)
-#define SERVOTILT   LATCbits.LATC3 // tilt servo (up/down)
+#define SERVOTILT   LATCbits.LATC2 // tilt servo (up/down)
 
 //LCD Control Registers
 #define RS          LATDbits.LATD2          

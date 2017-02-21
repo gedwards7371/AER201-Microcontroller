@@ -3535,73 +3535,73 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _moveServoCup ]
 [v _myPosition `E3123 ~T0 @X0 1 r1 ]
 [f ]
-"209
+"207
 [v _pwmTimer `i ~T0 @X0 1 a ]
-[; ;sort.c: 209: int pwmTimer = 0;
+[; ;sort.c: 207: int pwmTimer = 0b0;
 [e = _pwmTimer -> 0 `i ]
-[; ;sort.c: 210: T1CON = 0;
+[; ;sort.c: 208: T1CON = 0b1011;
+"208
+[e = _T1CON -> -> 11 `i `uc ]
+[; ;sort.c: 210: switch(myPosition){
 "210
-[e = _T1CON -> -> 0 `i `uc ]
-[; ;sort.c: 212: switch(myPosition){
-"212
 [e $U 309  ]
 {
-[; ;sort.c: 213: case Home:
-"213
+[; ;sort.c: 211: case Home:
+"211
 [e :U 310 ]
-[; ;sort.c: 214: pwmTimer = 1.5;
-"214
+[; ;sort.c: 212: pwmTimer = 1.5;
+"212
 [e = _pwmTimer -> .1.5 `i ]
-[; ;sort.c: 215: break;
-"215
+[; ;sort.c: 213: break;
+"213
 [e $U 308  ]
-[; ;sort.c: 216: case popCanNoTab:
-"216
+[; ;sort.c: 214: case popCanNoTab:
+"214
 [e :U 311 ]
-[; ;sort.c: 217: pwmTimer = 1;
-"217
+[; ;sort.c: 215: pwmTimer = 1;
+"215
 [e = _pwmTimer -> 1 `i ]
-[; ;sort.c: 218: break;
-"218
+[; ;sort.c: 216: break;
+"216
 [e $U 308  ]
-[; ;sort.c: 219: case popCanWithTab:
-"219
+[; ;sort.c: 217: case popCanWithTab:
+"217
 [e :U 312 ]
-[; ;sort.c: 220: pwmTimer = 1.25;
-"220
+[; ;sort.c: 218: pwmTimer = 1.25;
+"218
 [e = _pwmTimer -> .1.25 `i ]
-[; ;sort.c: 221: break;
-"221
+[; ;sort.c: 219: break;
+"219
 [e $U 308  ]
-[; ;sort.c: 222: case soupCanNoLabel:
-"222
+[; ;sort.c: 220: case soupCanNoLabel:
+"220
 [e :U 313 ]
-[; ;sort.c: 223: pwmTimer = 1.75;
-"223
+[; ;sort.c: 221: pwmTimer = 1.75;
+"221
 [e = _pwmTimer -> .1.75 `i ]
-[; ;sort.c: 224: break;
-"224
+[; ;sort.c: 222: break;
+"222
 [e $U 308  ]
-[; ;sort.c: 225: case soupCanWithLabel:
-"225
+[; ;sort.c: 223: case soupCanWithLabel:
+"223
 [e :U 314 ]
-[; ;sort.c: 226: pwmTimer = 2;
-"226
+[; ;sort.c: 224: pwmTimer = 2;
+"224
 [e = _pwmTimer -> 2 `i ]
+[; ;sort.c: 225: break;
+"225
+[e $U 308  ]
+[; ;sort.c: 226: default:
+"226
+[e :U 315 ]
 [; ;sort.c: 227: break;
 "227
 [e $U 308  ]
-[; ;sort.c: 228: default:
 "228
-[e :U 315 ]
-[; ;sort.c: 229: break;
-"229
-[e $U 308  ]
-"230
 }
-[; ;sort.c: 230: }
+[; ;sort.c: 228: }
 [e $U 308  ]
-"212
+"210
 [e :U 309 ]
 [e [\ _myPosition , $ . `E3123 0 310
  , $ . `E3123 1 311
@@ -3609,10 +3609,10 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ . `E3123 3 313
  , $ . `E3123 4 314
  315 ]
-"230
+"228
 [e :U 308 ]
-[; ;sort.c: 233: }
-"233
+[; ;sort.c: 231: }
+"231
 [e :UE 307 ]
 }
 [p f _printf 8421508 ]
