@@ -537,8 +537,6 @@ void interrupt handler(void) {
                 // Set Timer1 to interrupt on 20 ms
                 was_low = 1;
             }
-                
-            }
         }
     }
 }
