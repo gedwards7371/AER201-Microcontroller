@@ -23,6 +23,11 @@ int was_low; // flag to indicate whether servo is refreshing (20ms low) or not r
 int startTime[7];
 int total_time;
 
+int timer1highbits;
+int timer1lowbits;
+int timer1_20ms_high;
+int timer1_20ms_low;
+
 int count_total;
 int count_pop_no_tab;
 int count_pop_w_tab;

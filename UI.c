@@ -524,8 +524,11 @@ void interrupt handler(void) {
                 if(servoSelectFlag == 2){
                     SERVOTILT = 1;
                 }
-                // Set Timer1 to interrupt after appropriate pulse time
                 was_low = 0;
+                // Set Timer1 to interrupt after appropriate pulse time
+                TMR1H = timer1highbits;
+                TMR1L = timer1lowbits;
+                T1CON = T1CON | 0b00000001;
             }
             else{
                 if(servoSelectFlag == 1){
@@ -534,8 +537,11 @@ void interrupt handler(void) {
                 if(servoSelectFlag == 2){
                     SERVOTILT = 0;
                 }
-                // Set Timer1 to interrupt on 20 ms
                 was_low = 1;
+                // Set Timer1 to interrupt on 20 ms
+                TMR1H = timer1_20ms_high;
+                TMR1L = timer1_20ms_low;
+                T1CON = T1CON | 0b00000001;
             }
         }
     }

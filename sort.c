@@ -187,45 +187,64 @@ int MAGNETISM_in(void){
 void moveServoBlock(enum blockPositions myPosition){
     // lower or raise the block
     
-    int pwmTimer = 0b0; // Pulse time in milliseconds
+    // Load settings for Timer2
+    T1CON = 0b10110000; // idk if bit 6 should be 0 or 1, 1:8 prescale, TMR1 osc off, use INT clock, use FOSC/4, stop TMR1
     
     switch(myPosition){
         case Raise:
-            pwmTimer = 2;
+            timer1highbits = 0b0;
+            timer1lowbits = 0b0;
             break;
         case Lower:
-            pwmTimer = 1;
+            timer1highbits = 0b0;
+            timer1lowbits = 0b0;
             break;
         default:
             break;
     }
+    // Start TMR1
+    TMR1H = timer1highbits;
+    TMR1L = timer1lowbits;
+    T1CON = T1CON | 0b00000001;
 }
 
 void moveServoCup(enum motorPositions myPosition){
     // Hit servo with pulses characteristic to each position
     
-    int pwmTimer = 0b0; // Load settings for Timer2
-    T1CON = 0b1011; // idk if bit 6 should be 0 or 1
+    // Load settings for Timer2
+    T1CON = 0b10110000; // idk if bit 6 should be 0 or 1, 1:8 prescale, TMR1 osc off, use INT clock, use FOSC/4, stop TMR1
     
     switch(myPosition){
         case Home:
-            pwmTimer = 1.5;
+            // 1.5 ms
+            timer1highbits = 0b0;
+            timer1lowbits = 0b0;
             break;
         case popCanNoTab:
-            pwmTimer = 1;
+            // 1 ms
+            timer1highbits = 0b0;
+            timer1lowbits = 0b0;
             break;
         case popCanWithTab:
-            pwmTimer = 1.25;
+            //1.33 ms
+            timer1highbits = 0b0;
+            timer1lowbits = 0b0;
             break;
         case soupCanNoLabel:
-            pwmTimer = 1.75;
+            // 1.66 ms
+            timer1highbits = 0b0;
+            timer1lowbits = 0b0;
             break;
         case soupCanWithLabel:
-            pwmTimer = 2;
+            // 2 ms
+            timer1highbits = 0b0;
+            timer1lowbits = 0b0;
             break;
         default:
             break;
     }
-    
-    
+    // Start TMR1
+    TMR1H = timer1highbits;
+    TMR1L = timer1lowbits;
+    T1CON = T1CON | 0b00000001;
 }
