@@ -11,9 +11,6 @@
 #include "sort.h"
 
 // <editor-fold defaultstate="collapsed" desc="VARIABLE & FLAG DEFINITIONS">
-int IR_in; // AN0 input...this might need to be a function
-int beamTimerCounter; // Counter to see how long IR beam has been broken. Maybe use timer1
-
 // LOADING STAGE FLAGS
 int f_loadingNewCan = 0; // Flag for a new can coming out of trommel
 int f_lastCan = 0; // Flag for 12th can
@@ -174,7 +171,7 @@ void getIR(void){
         timeBroken[i] = __bcd_to_num(time[i]);
     }
     
-    while(!IR_in){
+    while(!IRIN){
         // "if beam is broken for > 500 ms..."
         if (beamTimerCounter > 3125){
             f_loadingNewCan = 1;
@@ -218,7 +215,13 @@ void moveServoCup(enum motorPositions myPosition){
     // Hit servo with pulses characteristic to each position
     
     // Load settings for Timer2
-    T1CON = 0b10110000; // idk if bit 6 should be 0 or 1, 1:8 prescale, TMR1 osc off, use INT clock, use FOSC/4, stop TMR1
+    T1CON = 0b00110000; // <7> write in two 8-bit operations,
+                        // <6> idk if bit 6 should be 0 or 1,
+                        // <5:4> 1:8 prescale, 
+                        // <3> TMR1 osc off, 
+                        // <2> use INT clock, 
+                        // <1> use FOSC/4, 
+                        // <0> stop TMR1
     
     switch(myPosition){
         case Home:
