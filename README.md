@@ -30,8 +30,11 @@ Program for an autonomous can sorting machine. Microcontroller used: PIC18F4620.
 ###ADCFunctionality.c
 - Analog-to-digital conversion functions
 
+###interruptHandler.c
+- Handler timer and keypress interrupts
 
-#.h files
+
+#.h files (noteworthy ones)
 ###macros.h
 - Defines macros for programming convenience
 
