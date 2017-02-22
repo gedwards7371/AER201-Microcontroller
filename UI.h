@@ -2,11 +2,15 @@
 #define	UI_H
 
 void initUI(void);
-void interrupt keypressed(void);
+void interrupt handler(void);
+void updateMenu(void);
 int UIenabled;
 int cur_state;
 int inputHandler(void);
 void dispLogs(int);
+
+char input;
+const char keys[] = "123A456B789C*0#D"; // possible inputs from keypad
 
 /* MENU STATE CHANGE FUNCTIONS */
 void change_state_to_menu_start(void);

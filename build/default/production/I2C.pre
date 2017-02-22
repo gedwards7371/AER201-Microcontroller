@@ -3800,11 +3800,15 @@ unsigned char I2C_Master_Read(unsigned char a);
 
 # 4 "UI.h"
 void initUI(void);
-void interrupt keypressed(void);
+void interrupt handler(void);
+void updateMenu(void);
 int UIenabled;
 int cur_state;
 int inputHandler(void);
 void dispLogs(int);
+
+char input;
+const char keys[] = "123A456B789C*0#D";
 
 
 void change_state_to_menu_start(void);
@@ -3869,6 +3873,11 @@ int servoSelectFlag;
 int was_low;
 int startTime[7];
 int total_time;
+
+int timer1highbits;
+int timer1lowbits;
+int timer1_20ms_high;
+int timer1_20ms_low;
 
 int count_total;
 int count_pop_no_tab;

@@ -13,10 +13,10 @@
 #define CONDUCTIVE  LATAbits.LATA2 // conductivity sensors
 
 //Solenoids (1 cm)
-#define SOL_1       LATAbits.LATA3 // 1 cm solenoids
+#define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
 
 //Solenoid (0.5 cm))
-#define SOL_05      LATAbits.LATA4 // 0.5 cm solenoid
+#define SOL_PUSHER      LATAbits.LATA4 // solenoid for pushing cans off trommel
 
 //DC motors
 #define DC          LATAbits.LATA5 // DC motors

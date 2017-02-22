@@ -10,8 +10,6 @@
 #include "main.h"
 #include "sort.h"
 
-// Interrupt handlers are in UI.c
-
 void main(void) {
     machineConfig();
     initLCD();
@@ -29,14 +27,14 @@ void main(void) {
                 sort();
                 break;
             case DoneSorting_state :
-                stopSignals();
+                stopSignals(); // kill all outputs
                 UI(); // have a check for this state in the UI to display a special screen
                 break;
             case Testing_state :
                 PortTestA5();
                 break;
             case EmergencyStop_state :
-                //disableAll(); // kill all outputs
+                stopSignals(); // kill all outputs
                 // I think we will actually just kill MCLR using an external circuit though
                 while(1){}
             default :

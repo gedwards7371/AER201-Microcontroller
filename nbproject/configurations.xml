@@ -30,6 +30,7 @@
       <itemPath>MachineConfig.c</itemPath>
       <itemPath>RTC.c</itemPath>
       <itemPath>sort.c</itemPath>
+      <itemPath>interruptHandler.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

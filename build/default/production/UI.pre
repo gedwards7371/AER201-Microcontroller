@@ -3800,11 +3800,15 @@ unsigned char I2C_Master_Read(unsigned char a);
 
 # 4 "UI.h"
 void initUI(void);
-void interrupt keypressed(void);
+void interrupt handler(void);
+void updateMenu(void);
 int UIenabled;
 int cur_state;
 int inputHandler(void);
 void dispLogs(int);
+
+char input;
+const char keys[] = "123A456B789C*0#D";
 
 
 void change_state_to_menu_start(void);
@@ -3870,6 +3874,11 @@ int was_low;
 int startTime[7];
 int total_time;
 
+int timer1highbits;
+int timer1lowbits;
+int timer1_20ms_high;
+int timer1_20ms_low;
+
 int count_total;
 int count_pop_no_tab;
 int count_pop_w_tab;
@@ -3877,8 +3886,6 @@ int count_can_no_lab;
 int count_can_w_lab;
 
 # 21 "UI.c"
-char input;
-const char keys[] = "123A456B789C*0#D";
 int up; int down; int enter; int back;
 int cur_state;
 int UIenabled = 0;
@@ -3886,7 +3893,7 @@ int firstboot;
 int logstate = 0;
 int log;
 
-# 62
+# 60
 void initUI(void){
 (INTCONbits.GIE = 1);
 machine_state = UI_state;
@@ -3902,9 +3909,19 @@ void UI(void){
 if(machine_state == DoneSorting_state){
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
-printf("Sort complete");
+printf("!SORT CONCLUDED!");
 lcdInst(0b11000000);;
 printf("Time: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+machine_state = UI_state;
+while(PORTBbits.RB1==0){
+
+}
+if(cur_state==12){
+change_state_to_menu_12();
+}
+else{
+change_state_to_menu_22();
+}
 }
 else if(cur_state == 0){
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};
@@ -4313,32 +4330,4 @@ lcdInst(0b10000000);;
 printf("LOG 3           ");
 lcdInst(0b11000000);;
 printf("LOG 4          <");
-}
-
-
-void interrupt handler(void) {
-
-if(INT1IF){
-INT1IF = 0;
-if(machine_state == UI_state) {
-input = keys[(PORTB & 0xF0) >> 4];
-updateMenu();
-}
-}
-
-
-if(TMR0IF){
-TMR0IF = 0;
-if(machine_state == Sorting_state){
-printSortTimer();
-
-
-T0CON = 0b00010111;
-TMR0H = 0b10000101;
-TMR0L = 0b11101110;
-T0CON = T0CON | 0b10000000;
-}
-}
-
-# 545
 }

@@ -18,8 +18,6 @@
  */
 
 // <editor-fold defaultstate="collapsed" desc="VARIABLE DEFINITIONS">
-char input;
-const char keys[] = "123A456B789C*0#D"; // possible inputs from keypad
 int up; int down; int enter; int back; // correspond to certain inputs to make logic more transparent
 int cur_state;
 int UIenabled = 0; // 1 if enabled, 0 if disabled. This changes whether interrupts will call updateMenu()
@@ -74,9 +72,19 @@ void UI(void){
     if(machine_state == DoneSorting_state){
         __lcd_clear();
         __lcd_home();
-        printf("Sort complete");
+        printf("!SORT CONCLUDED!");
         __lcd_newline();
-         printf("Time: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+        printf("Time: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+        machine_state = UI_state; // Return to UI state
+        while(PORTBbits.RB1==0){
+            // Wait for user to press a key
+        }
+        if(cur_state==12){
+            change_state_to_menu_12();
+        }
+        else{
+            change_state_to_menu_22();
+        }
     }
     else if(cur_state == 0){
         __delay_1s();
@@ -485,64 +493,4 @@ void change_state_to_logs_34(void){
     printf("LOG 3           ");
     __lcd_newline();
     printf("LOG 4          <");
-}
-
-// Interrupt handler
-void interrupt handler(void) {
-    //Interrupt handler for key presses: keypressed updates the menu state
-    if(INT1IF){
-        INT1IF = 0;     //Clear flag bit
-        if(machine_state == UI_state) { // "If we're supposed to be in the UI..."
-            input = keys[(PORTB & 0xF0) >> 4];
-            updateMenu();
-        }
-    }
-    
-    //** 1 SECOND TIMER THAT CALLS printSortTimer() **
-    if(TMR0IF){
-        TMR0IF = 0;
-        if(machine_state == Sorting_state){
-            printSortTimer();
-            
-            // Initialize timer again!
-            T0CON = 0b00010111;
-            TMR0H = 0b10000101;
-            TMR0L = 0b11101110;
-            T0CON = T0CON | 0b10000000;
-        }
-    }
-    
-    //** Timer for servo delays **
-    // For  TMR1, we'll want to set it as: 0b00000001
-    if(TMR1IF){
-        TMR1IF = 1; // Clear interrupt flag
-        if(machine_state = Sorting_state){
-            if(was_low){
-                if(servoSelectFlag == 1){
-                    SERVOPAN = 1;
-                }
-                if(servoSelectFlag == 2){
-                    SERVOTILT = 1;
-                }
-                was_low = 0;
-                // Set Timer1 to interrupt after appropriate pulse time
-                TMR1H = timer1highbits;
-                TMR1L = timer1lowbits;
-                T1CON = T1CON | 0b00000001;
-            }
-            else{
-                if(servoSelectFlag == 1){
-                    SERVOPAN = 0;
-                }
-                if(servoSelectFlag == 2){
-                    SERVOTILT = 0;
-                }
-                was_low = 1;
-                // Set Timer1 to interrupt on 20 ms
-                TMR1H = timer1_20ms_high;
-                TMR1L = timer1_20ms_low;
-                T1CON = T1CON | 0b00000001;
-            }
-        }
-    }
 }

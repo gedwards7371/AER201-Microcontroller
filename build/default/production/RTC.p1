@@ -1,13 +1,13 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "3 main.h
-[c E3112 0 1 2 3 4 .. ]
-[n E3112 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
+[c E3116 0 1 2 3 4 .. ]
+[n E3116 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
 "2 sort.h
-[c E3123 0 1 2 3 4 .. ]
-[n E3123 motorPositions Home popCanNoTab popCanWithTab soupCanNoLabel soupCanWithLabel  ]
+[c E3127 0 1 2 3 4 .. ]
+[n E3127 motorPositions Home popCanNoTab popCanWithTab soupCanNoLabel soupCanWithLabel  ]
 "3
-[c E3130 0 1 .. ]
-[n E3130 blockPositions Raise Lower  ]
+[c E3134 0 1 .. ]
+[n E3134 blockPositions Raise Lower  ]
 "2 I2C.h
 [v _I2C_Master_Init `(v ~T0 @X0 0 ef1`Cul ]
 "6272 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
@@ -2848,37 +2848,65 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;I2C.h: 3: void I2C_Master_Write(unsigned d);
 [; ;I2C.h: 4: unsigned char I2C_Master_Read(unsigned char a);
 [; ;UI.h: 4: void initUI(void);
-[; ;UI.h: 5: void interrupt keypressed(void);
-"6 UI.h
+[; ;UI.h: 5: void interrupt handler(void);
+[; ;UI.h: 6: void updateMenu(void);
+"7 UI.h
 [v _UIenabled `i ~T0 @X0 1 e ]
-[; ;UI.h: 6: int UIenabled;
-"7
+[; ;UI.h: 7: int UIenabled;
+"8
 [v _cur_state `i ~T0 @X0 1 e ]
-[; ;UI.h: 7: int cur_state;
-[; ;UI.h: 8: int inputHandler(void);
-[; ;UI.h: 9: void dispLogs(int);
-[; ;UI.h: 12: void change_state_to_menu_start(void);
-[; ;UI.h: 13: void change_state_to_menu_11(void);
-[; ;UI.h: 14: void change_state_to_menu_12(void);
-[; ;UI.h: 15: void change_state_to_menu_22(void);
-[; ;UI.h: 16: void change_state_to_menu_23(void);
-[; ;UI.h: 17: void change_state_to_logs_11(void);
-[; ;UI.h: 18: void change_state_to_logs_12(void);
-[; ;UI.h: 19: void change_state_to_logs_22(void);
-[; ;UI.h: 20: void change_state_to_logs_23(void);
-[; ;UI.h: 21: void change_state_to_logs_33(void);
-[; ;UI.h: 22: void change_state_to_logs_34(void);
-[; ;UI.h: 24: void print_menu_start(void);
-[; ;UI.h: 25: void print_menu_11(void);
-[; ;UI.h: 26: void print_menu_12(void);
-[; ;UI.h: 27: void print_menu_22(void);
-[; ;UI.h: 28: void print_menu_23(void);
-[; ;UI.h: 29: void print_menu_logs_11(void);
-[; ;UI.h: 30: void print_menu_logs_12(void);
-[; ;UI.h: 31: void print_menu_logs_22(void);
-[; ;UI.h: 32: void print_menu_logs_23(void);
-[; ;UI.h: 33: void print_menu_logs_33(void);
-[; ;UI.h: 34: void print_menu_logs_34(void);
+[; ;UI.h: 8: int cur_state;
+[; ;UI.h: 9: int inputHandler(void);
+[; ;UI.h: 10: void dispLogs(int);
+"12
+[v _input `uc ~T0 @X0 1 e ]
+[; ;UI.h: 12: char input;
+"13
+[v _keys `Cuc ~T0 @X0 -> 0 `x e ]
+[i _keys
+:U ..
+-> 49 `c
+-> 50 `c
+-> 51 `c
+-> 65 `c
+-> 52 `c
+-> 53 `c
+-> 54 `c
+-> 66 `c
+-> 55 `c
+-> 56 `c
+-> 57 `c
+-> 67 `c
+-> 42 `c
+-> 48 `c
+-> 35 `c
+-> 68 `c
+-> 0 `c
+..
+]
+[; ;UI.h: 13: const char keys[] = "123A456B789C*0#D";
+[; ;UI.h: 16: void change_state_to_menu_start(void);
+[; ;UI.h: 17: void change_state_to_menu_11(void);
+[; ;UI.h: 18: void change_state_to_menu_12(void);
+[; ;UI.h: 19: void change_state_to_menu_22(void);
+[; ;UI.h: 20: void change_state_to_menu_23(void);
+[; ;UI.h: 21: void change_state_to_logs_11(void);
+[; ;UI.h: 22: void change_state_to_logs_12(void);
+[; ;UI.h: 23: void change_state_to_logs_22(void);
+[; ;UI.h: 24: void change_state_to_logs_23(void);
+[; ;UI.h: 25: void change_state_to_logs_33(void);
+[; ;UI.h: 26: void change_state_to_logs_34(void);
+[; ;UI.h: 28: void print_menu_start(void);
+[; ;UI.h: 29: void print_menu_11(void);
+[; ;UI.h: 30: void print_menu_12(void);
+[; ;UI.h: 31: void print_menu_22(void);
+[; ;UI.h: 32: void print_menu_23(void);
+[; ;UI.h: 33: void print_menu_logs_11(void);
+[; ;UI.h: 34: void print_menu_logs_12(void);
+[; ;UI.h: 35: void print_menu_logs_22(void);
+[; ;UI.h: 36: void print_menu_logs_23(void);
+[; ;UI.h: 37: void print_menu_logs_33(void);
+[; ;UI.h: 38: void print_menu_logs_34(void);
 "4 RTC.h
 [v _time `uc ~T0 @X0 -> 7 `i e ]
 [; ;RTC.h: 4: unsigned char time[7];
@@ -2889,15 +2917,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 9: void printRTC(void);
 [; ;main.h: 2: enum states {UI_state, Sorting_state, DoneSorting_state, Testing_state, EmergencyStop_state};
 "3 main.h
-[v _machine_state `E3112 ~T0 @X0 1 e ]
+[v _machine_state `E3116 ~T0 @X0 1 e ]
 [; ;main.h: 3: enum states machine_state;
 [; ;main.h: 4: void main(void);
 [; ;main.h: 5: void stopSignals(void);
 "2 sort.h
-[v _canType `E3123 ~T0 @X0 1 e ]
+[v _canType `E3127 ~T0 @X0 1 e ]
 [; ;sort.h: 2: enum motorPositions { Home, popCanNoTab, popCanWithTab, soupCanNoLabel, soupCanWithLabel } canType;
 "3
-[v _block `E3130 ~T0 @X0 1 e ]
+[v _block `E3134 ~T0 @X0 1 e ]
 [; ;sort.h: 3: enum blockPositions { Raise, Lower } block;
 [; ;sort.h: 6: void sort(void);
 [; ;sort.h: 7: void Loading(void);
@@ -2933,20 +2961,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _total_time `i ~T0 @X0 1 e ]
 [; ;sort.h: 24: int total_time;
 "26
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int count_total;
+[v _timer1highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int timer1highbits;
 "27
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 27: int count_pop_no_tab;
+[v _timer1lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 27: int timer1lowbits;
 "28
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 28: int count_pop_w_tab;
+[v _timer1_20ms_high `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int timer1_20ms_high;
 "29
+[v _timer1_20ms_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 29: int timer1_20ms_low;
+"31
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 31: int count_total;
+"32
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 32: int count_pop_no_tab;
+"33
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 33: int count_pop_w_tab;
+"34
 [v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 29: int count_can_no_lab;
-"30
+[; ;sort.h: 34: int count_can_no_lab;
+"35
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int count_can_w_lab;
+[; ;sort.h: 35: int count_can_w_lab;
 [; ;RTC.c: 13: unsigned char time[7];
 "15 RTC.c
 [v _initTime `(v ~T0 @X0 1 ef7`uc`uc`uc`uc`uc`uc`uc ]
@@ -3106,8 +3146,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.c: 62: getRTC();
 "62
 [e ( _getRTC ..  ]
-[v F3177 `uc ~T0 @X0 -> 0 `x s ]
-[i F3177
+[v F3185 `uc ~T0 @X0 -> 0 `x s ]
+[i F3185
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3118,7 +3158,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "63
 [v _month `uc ~T0 @X0 4  a ]
 [; ;RTC.c: 63: char month[] = "MMM";
-[e = _month F3177 ]
+[e = _month F3185 ]
 "64
 [v _INT_time `i ~T0 @X0 -> 7 `i a ]
 [; ;RTC.c: 64: int INT_time[7];

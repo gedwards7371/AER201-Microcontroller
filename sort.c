@@ -30,7 +30,11 @@ int f_can_distributed = 0; // flag to say a can has been put in its appropriate 
 void sort(void){
     if(machine_state == Sorting_state){
         Loading();
+    }
+    if(machine_state == Sorting_state){
         ID();
+    }
+    if(machine_state == Sorting_state){
         Distribution();
     }
 }
@@ -42,11 +46,13 @@ void Loading(void){
         DC = 1; //Write to RA5 for DC motors
     }
     else{
-        if(!f_loadingNewCan){ // if a can is not already waiting to go to the ID stage.
-                            // We want the code to be able to enter straight down
-                            // to check if the ID stage is ready each time it loops
-            getIR();
-                if(!f_loadingNewCan){ // "If no new can is being loaded..."
+        // If a can is not already waiting to go to the ID stage,
+        // we want the code to be able to enter straight down
+        // to check if the ID stage is ready, each time it loops
+        if(!f_loadingNewCan){
+            //getIR();
+                // "If no new can is being loaded..."
+                if(!f_loadingNewCan){ 
                    return; // get out of sort function (i.e. restart it)
                 }
                 else{ // "If a new can is being loaded"
@@ -57,16 +63,14 @@ void Loading(void){
                 }
         }
         // "If a new can has already been loaded but the IR stage was not ready
-        // the last time we executed this chunk.."
-        //
-        // "If ID stage is ready..."
+        // the last time we executed this chunk...and if ID stage is ready..."
         else if(f_ID_receive){
                 f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
-                SOL_05 = 1; // activate solenoid pusher
+                SOL_PUSHER = 1; // activate solenoid pusher
                 f_can_coming_to_ID = 1;
         }
         //DELAY TIMER SET FOR ABOUT 500 MS DURATION (see? I need a dedicated duration-setting function!)
-        SOL_05 = 0; // deactivate solenoid pusher
+        SOL_PUSHER = 0; // deactivate solenoid pusher
     }
 }
 void ID(void){
@@ -83,10 +87,10 @@ void ID(void){
         if(!side_conductivity){
             magnetic = MAGNETISM_in();
             if(!magnetic){
-                SOL_1 = 1; //activate solenoids for top/bottom conductivity sensors
+                SOL_COND_SENSORS = 1; //activate solenoids for top/bottom conductivity sensors
                 // characteristic delay of time it takes for solenoids move out
                 top_bottom_conductivity = PORTAbits.RA2;
-                SOL_1 = 0;
+                SOL_COND_SENSORS = 0;
             }
         }
         
@@ -192,10 +196,12 @@ void moveServoBlock(enum blockPositions myPosition){
     
     switch(myPosition){
         case Raise:
+            // 2 ms pulses
             timer1highbits = 0b0;
             timer1lowbits = 0b0;
             break;
         case Lower:
+            // 1 ms pulses
             timer1highbits = 0b0;
             timer1lowbits = 0b0;
             break;
@@ -216,27 +222,27 @@ void moveServoCup(enum motorPositions myPosition){
     
     switch(myPosition){
         case Home:
-            // 1.5 ms
+            // 1.5 ms pulses
             timer1highbits = 0b0;
             timer1lowbits = 0b0;
             break;
         case popCanNoTab:
-            // 1 ms
+            // 1 ms pulses
             timer1highbits = 0b0;
             timer1lowbits = 0b0;
             break;
         case popCanWithTab:
-            //1.33 ms
+            //1.33 ms pulses
             timer1highbits = 0b0;
             timer1lowbits = 0b0;
             break;
         case soupCanNoLabel:
-            // 1.66 ms
+            // 1.66 ms pulses
             timer1highbits = 0b0;
             timer1lowbits = 0b0;
             break;
         case soupCanWithLabel:
-            // 2 ms
+            // 2 ms pulses
             timer1highbits = 0b0;
             timer1lowbits = 0b0;
             break;
