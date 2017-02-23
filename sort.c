@@ -33,41 +33,51 @@ void sort(void){
     }
     if(machine_state == Sorting_state){
         Distribution();
-    }
+    }  
 }
 void Loading(void){
     if(first){
         first = 0;
         __lcd_clear();
         initSortTimer();
-        DC = 1; //Write to RA5 for DC motors
+        
+        //Write to RA5 for DC motors
+        DC = 1;
+        
+        // Start sending pulses to servos
+        moveServoCup(Home);
+        // moveServoBlock(Raise);
     }
     else{
         // If a can is not already waiting to go to the ID stage,
         // we want the code to be able to enter straight down
         // to check if the ID stage is ready, each time it loops
         if(!f_loadingNewCan){
-            //getIR();
-                // "If no new can is being loaded..."
-                if(!f_loadingNewCan){ 
-                   return; // get out of sort function (i.e. restart it)
+            //getIR(); // updates f_loadingNewCan flag
+            
+            // "If no new can is being loaded..."
+            if(!f_loadingNewCan){
+               return; // get out of sort function (i.e. restart it)
+            }
+            
+            // "If a new can is being loaded"
+            else{ 
+                count_total++;
+                if(count_total == 12){
+                    f_lastCan = 1;
                 }
-                else{ // "If a new can is being loaded"
-                    count_total++;
-                    if(count_total == 12){
-                        f_lastCan = 1;
-                    }
-                }
+            }
         }
         // "If a new can has already been loaded but the IR stage was not ready
         // the last time we executed this chunk...and if ID stage is ready..."
         else if(f_ID_receive){
-                f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
-                SOL_PUSHER = 1; // activate solenoid pusher
-                f_can_coming_to_ID = 1;
+            f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
+            SOL_PUSHER = 1; // activate solenoid pusher
+            f_can_coming_to_ID = 1;
+            
+            //DELAY TIMER SET FOR ABOUT 500 MS DURATION (see? I need a dedicated duration-setting function!)
+            SOL_PUSHER = 0; // deactivate solenoid pusher
         }
-        //DELAY TIMER SET FOR ABOUT 500 MS DURATION (see? I need a dedicated duration-setting function!)
-        SOL_PUSHER = 0; // deactivate solenoid pusher
     }
 }
 void ID(void){
@@ -135,7 +145,6 @@ void initSortTimer(){
     T0CON = T0CON | 0b10000000; // set TMR0ON = 1 (start timer))
 }
 
-// need to figure out the math to get the difference properly
 void printSortTimer(void){ 
     getRTC();
     int curTime[7];
@@ -148,7 +157,7 @@ void printSortTimer(void){
     
     total_time = timeDiff;
     
-    if(timeDiff >= 179){
+    if(timeDiff >= 10){
         machine_state = DoneSorting_state;
         // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
     }
@@ -170,84 +179,81 @@ void getIR(void){
     for(int i = 0; i < 7; i++){
         timeBroken[i] = __bcd_to_num(time[i]);
     }
-    
+            
     while(!IRIN){
         // "if beam is broken for > 500 ms..."
-        if (beamTimerCounter > 3125){
-            f_loadingNewCan = 1;
-            return;
-        }
+            // f_loadingNewCan = 1;
+            // break;
     }
 }
 
 int MAGNETISM_in(void){
-    // gets analog reading from magnetism sensor
+    // gets analog reading from magnetism sensor    
+    return 0;
 }
 
-//pg129 for Timer1
 void moveServoBlock(enum blockPositions myPosition){
     // lower or raise the block
-    
-    // Load settings for Timer2
-    T1CON = 0b10110000; // idk if bit 6 should be 0 or 1, 1:8 prescale, TMR1 osc off, use INT clock, use FOSC/4, stop TMR1
+    // Load settings for Timer3
+    T3CON = 0b10110000;
     
     switch(myPosition){
         case Raise:
             // 2 ms pulses
-            timer1highbits = 0b0;
-            timer1lowbits = 0b0;
+            timer3highbits = 0b11111000;
+            timer3lowbits = 0b00110000;
             break;
         case Lower:
             // 1 ms pulses
-            timer1highbits = 0b0;
-            timer1lowbits = 0b0;
+            timer3highbits = 0b11111100;
+            timer3lowbits = 0b00011000;
             break;
         default:
             break;
     }
     // Start TMR1
-    TMR1H = timer1highbits;
-    TMR1L = timer1lowbits;
-    T1CON = T1CON | 0b00000001;
+    TMR3H = timer3highbits;
+    TMR3L = timer3lowbits;
+    TMR3ON = 1;
+    was_low = 0;
 }
 
 void moveServoCup(enum motorPositions myPosition){
     // Hit servo with pulses characteristic to each position
     
     // Load settings for Timer2
-    T1CON = 0b00110000; // <7> write in two 8-bit operations,
+    T1CON = 0b10110000; // <7> write in one 16-bit operation,
                         // <6> idk if bit 6 should be 0 or 1,
                         // <5:4> 1:8 prescale, 
                         // <3> TMR1 osc off, 
                         // <2> use INT clock, 
                         // <1> use FOSC/4, 
                         // <0> stop TMR1
-    
     switch(myPosition){
         case Home:
             // 1.5 ms pulses
-            timer1highbits = 0b0;
-            timer1lowbits = 0b0;
+            timer1highbits = 0b11111010;
+            timer1lowbits = 0b00100100;
             break;
         case popCanNoTab:
             // 1 ms pulses
-            timer1highbits = 0b0;
-            timer1lowbits = 0b0;
+            timer1highbits = 0b11111100;
+            timer1lowbits = 0b00011000;
             break;
         case popCanWithTab:
             //1.33 ms pulses
-            timer1highbits = 0b0;
-            timer1lowbits = 0b0;
+            timer1highbits = 0b11111010;
+            timer1lowbits = 0b11001011;
             break;
         case soupCanNoLabel:
             // 1.66 ms pulses
-            timer1highbits = 0b0;
-            timer1lowbits = 0b0;
+            timer1highbits = 0b11111001;
+            timer1lowbits = 0b01111101;
             break;
         case soupCanWithLabel:
             // 2 ms pulses
-            timer1highbits = 0b0;
-            timer1lowbits = 0b0;
+            timer1highbits = 0b11111000;
+            timer1lowbits = 0b00110000;
             break;
         default:
             break;
@@ -255,5 +261,6 @@ void moveServoCup(enum motorPositions myPosition){
     // Start TMR1
     TMR1H = timer1highbits;
     TMR1L = timer1lowbits;
-    T1CON = T1CON | 0b00000001;
+    TMR1ON = 1;
+    was_low = 0;
 }

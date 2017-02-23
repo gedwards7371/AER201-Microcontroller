@@ -3794,12 +3794,15 @@ void lcdNibble(char data);
 void initLCD(void);
 
 # 2 "I2C.h"
+void I2C_Master_Start();
+void I2C_Master_Stop();
 void I2C_Master_Init(const unsigned long c);
 void I2C_Master_Write(unsigned d);
 unsigned char I2C_Master_Read(unsigned char a);
 
 # 4 "UI.h"
 void initUI(void);
+void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
 int UIenabled;
@@ -3863,21 +3866,22 @@ void Distribution(void);
 void initSortTimer();
 void printSortTimer(void);
 void getIR(void);
+int MAGNETISM_in(void);
 void moveServoBlock(enum blockPositions block);
 void moveServoCup(enum motorPositions canType);
 
 int first=1;
 int sortTimerCounter;
-int PWMTimerCounter;
-int servoSelectFlag;
 int was_low;
 int startTime[7];
 int total_time;
 
 int timer1highbits;
 int timer1lowbits;
-int timer1_20ms_high;
-int timer1_20ms_low;
+int timer1_20ms_high = 0b10110001;
+int timer1_20ms_low = 0b11100000;
+int timer3highbits;
+int timer3lowbits;
 
 int count_total;
 int count_pop_no_tab;

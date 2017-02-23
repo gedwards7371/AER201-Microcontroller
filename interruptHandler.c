@@ -9,7 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
-
+int q =0;
 // Interrupt handler
 void interrupt handler(void) {
     //** Interrupt handler for key presses: updates the menu state **
@@ -31,39 +31,34 @@ void interrupt handler(void) {
             T0CON = 0b00010111;
             TMR0H = 0b10000101;
             TMR0L = 0b11101110;
-            T0CON = T0CON | 0b10000000;
+            TMR0ON = 1;
         }
     }
     
     //** Timer for servo delays **
     if(TMR1IF){
         TMR1IF = 1; // Clear interrupt flag
-        if(machine_state = Sorting_state){
+        if(machine_state == Sorting_state){
+            TMR1ON = 0;
+            T1CON = 0b10110000;
             if(was_low){
-                if(servoSelectFlag == 1){
-                    SERVOPAN = 1;
-                }
-                if(servoSelectFlag == 2){
-                    SERVOTILT = 1;
-                }
+                SERVOPAN = 1;
+                SERVOTILT = 1;
                 was_low = 0;
+                
                 // Set Timer1 to interrupt after appropriate pulse time
                 TMR1H = timer1highbits;
                 TMR1L = timer1lowbits;
-                T1CON = T1CON | 0b00000001;
+                TMR1ON = 1;
             }
             else{
-                if(servoSelectFlag == 1){
-                    SERVOPAN = 0;
-                }
-                if(servoSelectFlag == 2){
-                    SERVOTILT = 0;
-                }
+                SERVOPAN = 0;
+                SERVOTILT = 0;
                 was_low = 1;
                 // Set Timer1 to interrupt on 20 ms
                 TMR1H = timer1_20ms_high;
                 TMR1L = timer1_20ms_low;
-                T1CON = T1CON | 0b00000001;
+                TMR1ON = 1;
             }
         }
     }

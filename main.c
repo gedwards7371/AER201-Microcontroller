@@ -10,6 +10,9 @@
 #include "main.h"
 #include "sort.h"
 
+void machineConfig(void);
+void PortTestA5(void);
+
 void main(void) {
     machineConfig();
     initLCD();
@@ -17,7 +20,6 @@ void main(void) {
     initUI();
     
     //machine_state = Testing_state; // comment me out if you're not testing
-    
     while(1){
         switch(machine_state){
             case UI_state :

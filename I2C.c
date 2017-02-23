@@ -62,9 +62,3 @@ unsigned char I2C_Master_Read(unsigned char a)
   ACKEN = 1;
   return temp;
 }
-
-void delay_10ms(unsigned char n) { 
-    while (n-- != 0) { 
-        __delay_ms(5); 
-    } 
-}

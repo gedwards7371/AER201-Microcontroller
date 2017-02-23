@@ -2,6 +2,7 @@
 #define	UI_H
 
 void initUI(void);
+void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
 int UIenabled;
