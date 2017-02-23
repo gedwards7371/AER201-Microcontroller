@@ -1,4 +1,4 @@
-nbproject/
-dist/
 build/
 debug/
+dist/
+nbproject/
