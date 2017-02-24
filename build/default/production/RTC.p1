@@ -2936,67 +2936,64 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 9: void Distribution(void);
 [; ;sort.h: 12: void initSortTimer();
 [; ;sort.h: 13: void printSortTimer(void);
-[; ;sort.h: 14: void getIR(void);
-[; ;sort.h: 15: int MAGNETISM_in(void);
-[; ;sort.h: 16: void moveServoBlock(enum blockPositions block);
-[; ;sort.h: 17: void moveServoCup(enum motorPositions canType);
-"19
+[; ;sort.h: 15: void getIR(void);
+[; ;sort.h: 16: int MAGNETISM_in(void);
+[; ;sort.h: 18: void moveServoBlock(enum blockPositions block);
+[; ;sort.h: 19: void moveServoCup(enum motorPositions canType);
+"21
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 19: int first=1;
-"20
-[v _sortTimerCounter `i ~T0 @X0 1 e ]
-[; ;sort.h: 20: int sortTimerCounter;
-"21
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 21: int was_low;
+[; ;sort.h: 21: int first=1;
 "22
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 22: int startTime[7];
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 22: int was_low;
 "23
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 23: int startTime[7];
+"24
 [v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 23: int total_time;
-"25
-[v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 25: int timer1highbits;
+[; ;sort.h: 24: int total_time;
 "26
-[v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int timer1lowbits;
+[v _timer1highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int timer1highbits;
 "27
+[v _timer1lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 27: int timer1lowbits;
+"28
 [v _timer1_20ms_high `i ~T0 @X0 1 e ]
 [i _timer1_20ms_high
 -> 177 `i
 ]
-[; ;sort.h: 27: int timer1_20ms_high = 0b10110001;
-"28
+[; ;sort.h: 28: int timer1_20ms_high = 0b10110001;
+"29
 [v _timer1_20ms_low `i ~T0 @X0 1 e ]
 [i _timer1_20ms_low
 -> 224 `i
 ]
-[; ;sort.h: 28: int timer1_20ms_low = 0b11100000;
-"29
-[v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 29: int timer3highbits;
+[; ;sort.h: 29: int timer1_20ms_low = 0b11100000;
 "30
+[v _timer3highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 30: int timer3highbits;
+"31
 [v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int timer3lowbits;
-"32
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 32: int count_total;
+[; ;sort.h: 31: int timer3lowbits;
 "33
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 33: int count_pop_no_tab;
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 33: int count_total;
 "34
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 34: int count_pop_w_tab;
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 34: int count_pop_no_tab;
 "35
-[v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int count_can_no_lab;
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 35: int count_pop_w_tab;
 "36
+[v _count_can_no_lab `i ~T0 @X0 1 e ]
+[; ;sort.h: 36: int count_can_no_lab;
+"37
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 36: int count_can_w_lab;
+[; ;sort.h: 37: int count_can_w_lab;
 [; ;RTC.c: 13: unsigned char time[7];
 "15 RTC.c
 [v _initTime `(v ~T0 @X0 1 ef7`uc`uc`uc`uc`uc`uc`uc ]
@@ -3156,8 +3153,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.c: 62: getRTC();
 "62
 [e ( _getRTC ..  ]
-[v F3189 `uc ~T0 @X0 -> 0 `x s ]
-[i F3189
+[v F3188 `uc ~T0 @X0 -> 0 `x s ]
+[i F3188
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3168,7 +3165,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "63
 [v _month `uc ~T0 @X0 4  a ]
 [; ;RTC.c: 63: char month[] = "MMM";
-[e = _month F3189 ]
+[e = _month F3188 ]
 "64
 [v _INT_time `i ~T0 @X0 -> 7 `i a ]
 [; ;RTC.c: 64: int INT_time[7];

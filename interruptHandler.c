@@ -9,7 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
-int q =0;
+
 // Interrupt handler
 void interrupt handler(void) {
     //** Interrupt handler for key presses: updates the menu state **
@@ -44,8 +44,7 @@ void interrupt handler(void) {
             if(was_low){
                 SERVOPAN = 1;
                 SERVOTILT = 1;
-                was_low = 0;
-                
+                was_low = 0;              
                 // Set Timer1 to interrupt after appropriate pulse time
                 TMR1H = timer1highbits;
                 TMR1L = timer1lowbits;

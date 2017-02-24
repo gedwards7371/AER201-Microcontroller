@@ -3865,13 +3865,14 @@ void Distribution(void);
 
 void initSortTimer();
 void printSortTimer(void);
+
 void getIR(void);
 int MAGNETISM_in(void);
+
 void moveServoBlock(enum blockPositions block);
 void moveServoCup(enum motorPositions canType);
 
 int first=1;
-int sortTimerCounter;
 int was_low;
 int startTime[7];
 int total_time;

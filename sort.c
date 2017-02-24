@@ -11,6 +11,7 @@
 #include "sort.h"
 
 // <editor-fold defaultstate="collapsed" desc="VARIABLE & FLAG DEFINITIONS">
+
 // LOADING STAGE FLAGS
 int f_loadingNewCan = 0; // Flag for a new can coming out of trommel
 int f_lastCan = 0; // Flag for 12th can
@@ -33,8 +34,9 @@ void sort(void){
     }
     if(machine_state == Sorting_state){
         Distribution();
-    }  
+    }
 }
+
 void Loading(void){
     if(first){
         first = 0;
@@ -45,7 +47,7 @@ void Loading(void){
         DC = 1;
         
         // Start sending pulses to servos
-        moveServoCup(Home);
+        //moveServoCup(Home);
         // moveServoBlock(Raise);
     }
     else{
@@ -101,7 +103,7 @@ void ID(void){
             }
         }
         
-        // use the local variable that we just initialized from the sensors to determine the can type
+        // use the local variables that we just initialized from the sensors to determine the can type
         moveServoBlock(Lower);
         // characteristic delay
         f_can_coming_to_distribution = 1;
@@ -122,15 +124,12 @@ void Distribution(void){
 
 void initSortTimer(){
     // 1 second timer to generate interrupts
-    // Handled by handler in UI.c
     getRTC();
     for(int i = 0; i < 7; i++){
         startTime[i] = __bcd_to_num(time[i]); // store the start time of the sort operation
     }
-    //T0CON = 0b11011000;
     // Configure 16-bit timer with 1:256 prescaler
     T0CON = 0b00010111;
-    
     // Load timer with value such that only 1 interrupt needs to occur to get to 1s
     // 32000000 CPU cycles per second
     // * 0.25 instructions per CPU cycle
@@ -141,10 +140,8 @@ void initSortTimer(){
     // d'34286 = 0b1000010111101110
     TMR0H = 0b10000101;
     TMR0L = 0b11101110;
-    
-    T0CON = T0CON | 0b10000000; // set TMR0ON = 1 (start timer))
+    TMR0ON = 1;
 }
-
 void printSortTimer(void){ 
     getRTC();
     int curTime[7];
@@ -178,15 +175,13 @@ void getIR(void){
     int timeBroken[7];
     for(int i = 0; i < 7; i++){
         timeBroken[i] = __bcd_to_num(time[i]);
-    }
-            
+    }      
     while(!IRIN){
         // "if beam is broken for > 500 ms..."
             // f_loadingNewCan = 1;
             // break;
     }
 }
-
 int MAGNETISM_in(void){
     // gets analog reading from magnetism sensor    
     return 0;
@@ -194,9 +189,7 @@ int MAGNETISM_in(void){
 
 void moveServoBlock(enum blockPositions myPosition){
     // lower or raise the block
-    // Load settings for Timer3
     T3CON = 0b10110000;
-    
     switch(myPosition){
         case Raise:
             // 2 ms pulses
@@ -217,18 +210,9 @@ void moveServoBlock(enum blockPositions myPosition){
     TMR3ON = 1;
     was_low = 0;
 }
-
 void moveServoCup(enum motorPositions myPosition){
     // Hit servo with pulses characteristic to each position
-    
-    // Load settings for Timer2
-    T1CON = 0b10110000; // <7> write in one 16-bit operation,
-                        // <6> idk if bit 6 should be 0 or 1,
-                        // <5:4> 1:8 prescale, 
-                        // <3> TMR1 osc off, 
-                        // <2> use INT clock, 
-                        // <1> use FOSC/4, 
-                        // <0> stop TMR1
+    T1CON = 0b10110000; 
     switch(myPosition){
         case Home:
             // 1.5 ms pulses

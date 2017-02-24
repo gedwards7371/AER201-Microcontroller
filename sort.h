@@ -11,13 +11,14 @@ void Distribution(void);
 // Helper functions
 void initSortTimer();
 void printSortTimer(void);
+
 void getIR(void);
 int MAGNETISM_in(void);
+
 void moveServoBlock(enum blockPositions block);
 void moveServoCup(enum motorPositions canType);
 
 int first=1;//flag for first entry
-int sortTimerCounter;
 int was_low; // flag to indicate whether servo is refreshing (20ms low) or not refreshing (sending high signal)
 int startTime[7];
 int total_time;
