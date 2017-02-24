@@ -3925,7 +3925,7 @@ initSortTimer();
 LATAbits.LATA5 = 1;
 
 
-
+moveServoCup(Home);
 
 }
 else{

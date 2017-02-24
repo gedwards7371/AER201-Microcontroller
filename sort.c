@@ -47,7 +47,7 @@ void Loading(void){
         DC = 1;
         
         // Start sending pulses to servos
-        //moveServoCup(Home);
+        moveServoCup(Home);
         // moveServoBlock(Raise);
     }
     else{
@@ -212,7 +212,7 @@ void moveServoBlock(enum blockPositions myPosition){
 }
 void moveServoCup(enum motorPositions myPosition){
     // Hit servo with pulses characteristic to each position
-    T1CON = 0b10110000; 
+    T1CON = 0b10110000;
     switch(myPosition){
         case Home:
             // 1.5 ms pulses

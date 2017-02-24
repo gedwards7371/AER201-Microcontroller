@@ -33,7 +33,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S37 . . . ]
 "899
 [v _LATAbits `VS37 ~T0 @X0 0 e@3977 ]
-"55
+"19 sort.h
+[v _moveServoCup `(v ~T0 @X0 0 ef1`E3131 ]
+"55 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [s S2 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S2 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
 "65
@@ -66,8 +68,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _MAGNETISM_in `(i ~T0 @X0 0 ef ]
 "18
 [v _moveServoBlock `(v ~T0 @X0 0 ef1`E3138 ]
-"19
-[v _moveServoCup `(v ~T0 @X0 0 ef1`E3131 ]
 "8 RTC.h
 [v _getRTC `(v ~T0 @X0 0 ef ]
 "5781 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
@@ -3154,6 +3154,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 47: LATAbits.LATA5 = 1;
 "47
 [e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
+[; ;sort.c: 50: moveServoCup(Home);
+"50
+[e ( _moveServoCup (1 . `E3131 0 ]
 "52
 }
 [; ;sort.c: 52: }

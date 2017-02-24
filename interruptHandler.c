@@ -37,28 +37,27 @@ void interrupt handler(void) {
     
     //** Timer for servo delays **
     if(TMR1IF){
-        TMR1IF = 1; // Clear interrupt flag
+        TMR1IF = 0; // Clear interrupt flag
+        TMR1ON = 0;
         if(machine_state == Sorting_state){
-            TMR1ON = 0;
             T1CON = 0b10110000;
             if(was_low){
-                SERVOPAN = 1;
-                SERVOTILT = 1;
+                LATCbits.LATC1 = 1;
+                LATCbits.LATC2 = 1;
                 was_low = 0;              
                 // Set Timer1 to interrupt after appropriate pulse time
                 TMR1H = timer1highbits;
                 TMR1L = timer1lowbits;
-                TMR1ON = 1;
             }
             else{
-                SERVOPAN = 0;
-                SERVOTILT = 0;
+                LATCbits.LATC1 = 0;
+                LATCbits.LATC2 = 0;
                 was_low = 1;
                 // Set Timer1 to interrupt on 20 ms
                 TMR1H = timer1_20ms_high;
                 TMR1L = timer1_20ms_low;
-                TMR1ON = 1;
             }
+            TMR1ON = 1;
         }
     }
 }
