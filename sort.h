@@ -9,11 +9,13 @@ void ID(void);
 void Distribution(void);
 
 // Helper functions
-void initSortTimer();
+void initFlags(void);
+void initSortTimer(void);
 void printSortTimer(void);
 
 void getIR(void);
-int MAGNETISM_in(void);
+int IR_signal;
+int MAG_signal;
 
 void moveServoBlock(enum blockPositions block);
 void moveServoCup(enum motorPositions canType);
@@ -25,8 +27,11 @@ int total_time;
 
 int timer1highbits;
 int timer1lowbits;
-int timer1_20ms_high = 0b10110001;
-int timer1_20ms_low = 0b11100000;
+//int timer1_20ms_high = 0b10110001;
+//int timer1_20ms_low = 0b11100000;
+
+int timer1_20ms_high = 0b10110111;
+int timer1_20ms_low = 0b10111100;
 int timer3highbits;
 int timer3lowbits;
 
@@ -35,3 +40,15 @@ int count_pop_no_tab;
 int count_pop_w_tab;
 int count_can_no_lab;
 int count_can_w_lab;
+
+// LOADING STAGE FLAGS
+int f_loadingNewCan = 0; // Flag for a new can coming out of trommel
+int f_lastCan = 0; // Flag for 12th can
+int f_ID_receive = 1; // flag if ID stage is ready to receive
+int f_can_coming_to_ID = 0; //flag to tell ID stage that a can is coming (response flag to the one above))
+
+// ID STAGE FLAGS
+int f_can_coming_to_distribution = 0;
+
+// DISTRIBUTION STAGE FLAGS
+int f_can_distributed = 0; // flag to say a can has been put in its appropriate bin

@@ -3863,10 +3863,12 @@ void ID(void);
 void Distribution(void);
 
 
-void initSortTimer();
+void initFlags(void);
+void initSortTimer(void);
 void printSortTimer(void);
 
 void getIR(void);
+int IR_signal;
 int MAGNETISM_in(void);
 
 void moveServoBlock(enum blockPositions block);
@@ -3879,8 +3881,11 @@ int total_time;
 
 int timer1highbits;
 int timer1lowbits;
-int timer1_20ms_high = 0b10110001;
-int timer1_20ms_low = 0b11100000;
+
+
+
+int timer1_20ms_high = 0b10110111;
+int timer1_20ms_low = 0b10111100;
 int timer3highbits;
 int timer3lowbits;
 
@@ -3890,7 +3895,27 @@ int count_pop_w_tab;
 int count_can_no_lab;
 int count_can_w_lab;
 
-# 13 "MachineConfig.c"
+
+int f_loadingNewCan = 0;
+int f_lastCan = 0;
+int f_ID_receive = 1;
+int f_can_coming_to_ID = 0;
+
+
+int f_can_coming_to_distribution = 0;
+
+
+int f_can_distributed = 0;
+
+# 2 "ADCFunctionality.h"
+void readADC(char channel);
+void readIR(void);
+void readMAG(void);
+
+unsigned char THIR = 0x00FF;
+unsigned char THMAG = 0x00FF;
+
+# 14 "MachineConfig.c"
 void machineConfig(void) {
 
 OSCCON = 0b11110000;
@@ -3924,16 +3949,22 @@ ADCON0 = 0x00;
 ADCON1 = 0x0D;
 
 
+VCFG1 = 0;
+VCFG0 = 0;
 CVRCON = 0x00;
 CMCONbits.CIS = 0;
 ADFM = 1;
+nRBPU = 0;
 
 
 INT1IE = 1;
+
 TMR0IE = 1;
 TMR1IE = 1;
 TMR2IE = 1;
 TMR3IE = 1;
 PEIE = 1;
+
+ADIE = 1;
 (INTCONbits.GIE = 0);
 }

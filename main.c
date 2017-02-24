@@ -9,7 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
-
+#include "ADCFunctionality.h"
 void machineConfig(void);
 void PortTestA5(void);
 
@@ -30,6 +30,7 @@ void main(void) {
                 break;
             case DoneSorting_state :
                 stopSignals(); // kill all outputs
+                first = 1; // Permit the sort operation to be re-initialized
                 UI(); // have a check for this state in the UI to display a special screen
                 break;
             case Testing_state :

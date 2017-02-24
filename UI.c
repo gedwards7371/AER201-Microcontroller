@@ -9,6 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
+#include "ADCFunctionality.h"
 
 /* This file contains all the UI functionality outside the main loop
  * To add a new state:

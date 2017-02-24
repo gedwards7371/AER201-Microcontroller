@@ -9,6 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
+#include "ADCFunctionality.h"
 
 void machineConfig(void) {
     //**OSCILLATOR**//
@@ -38,21 +39,27 @@ void machineConfig(void) {
     LATD = 0x00; // output low
     LATE = 0x00; // output low
     
-    //**ANALOG AND DIGITAL**//
+    //**A/D Converter Module**//
     ADCON0 = 0x00;  //Disable ADC
     ADCON1 = 0x0D;  // bits 0-3 set pins with ADC capabilities as either analog  or digital. Here, we set AN0 and  AN1 as analog inputs and the rest as digital
                     // bits 4-5 determine whether to use external voltage references or VDD and VSS
                     // Reference: pg. 7- 158
+    VCFG1 = 0; // use VSS for Vref-
+    VCFG0 = 0; // use VDD for Vref+
     CVRCON = 0x00; // Disable comparator voltage reference (pg. 239 of datasheet)
     CMCONbits.CIS = 0; // Connect C1 Vin and C2 Vin to RA0/AN0 and RA1/AN1 (pg. 233 datasheet)
     ADFM = 1; // Right justify A/D result
+    nRBPU = 0; // Enable PORTB's pull-up resistors??
     
     //**INTERRUPTS**//
     INT1IE = 1; // Enable external interrupts on INT1/RB1 (for keypad!)
+    
     TMR0IE = 1; // Enable Timer0 interrupts
     TMR1IE = 1; // Enable Timer1 interrupts
     TMR2IE = 1; // Enable Timer2 interrupts
     TMR3IE = 1; // Enable Timer3 interrupts
     PEIE = 1; // Enable peripheral interrupts
+    
+    ADIE = 1; // Enable A/D Conversion interrupts
     di(); // Disable all interrupts for now
 }

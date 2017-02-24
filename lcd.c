@@ -9,6 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
+#include "ADCFunctionality.h"
 
 void lcdInst(char data) {
     RS = 0; // register select is 0 so that the LCD knows to interpret the data as commands, not characters

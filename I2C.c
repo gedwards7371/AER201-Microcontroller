@@ -9,6 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
+#include "ADCFunctionality.h"
 
 void I2C_Master_Init(const unsigned long c)
 {

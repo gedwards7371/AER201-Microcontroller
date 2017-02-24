@@ -9,21 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
-
-// <editor-fold defaultstate="collapsed" desc="VARIABLE & FLAG DEFINITIONS">
-
-// LOADING STAGE FLAGS
-int f_loadingNewCan = 0; // Flag for a new can coming out of trommel
-int f_lastCan = 0; // Flag for 12th can
-int f_ID_receive = 1; // flag if ID stage is ready to receive
-int f_can_coming_to_ID = 0; //flag to tell ID stage that a can is coming (response flag to the one above))
-
-// ID STAGE FLAGS
-int f_can_coming_to_distribution = 0;
-
-// DISTRIBUTION STAGE FLAGS
-int f_can_distributed = 0; // flag to say a can has been put in its appropriate bin
-// </editor-fold>
+#include "ADCFunctionality.h"
 
 void sort(void){
     if(machine_state == Sorting_state){
@@ -40,6 +26,7 @@ void sort(void){
 void Loading(void){
     if(first){
         first = 0;
+        initFlags();
         __lcd_clear();
         initSortTimer();
         
@@ -51,17 +38,15 @@ void Loading(void){
         // moveServoBlock(Raise);
     }
     else{
-        // If a can is not already waiting to go to the ID stage,
-        // we want the code to be able to enter straight down
-        // to check if the ID stage is ready, each time it loops
+        // If a can is not already waiting to go to the ID stage, we want the
+        // code to be able to enter straight down to check if the ID stage is ready
         if(!f_loadingNewCan){
-            //getIR(); // updates f_loadingNewCan flag
-            
+            // update f_loadingNewCan flag
+            getIR(); 
             // "If no new can is being loaded..."
             if(!f_loadingNewCan){
                return; // get out of sort function (i.e. restart it)
             }
-            
             // "If a new can is being loaded"
             else{ 
                 count_total++;
@@ -94,7 +79,7 @@ void ID(void){
         
         side_conductivity = PORTAbits.RA2; // note that this is a local variable because we don't want to use an old result ever
         if(!side_conductivity){
-            magnetic = MAGNETISM_in();
+            magnetic = readMAG();
             if(!magnetic){
                 SOL_COND_SENSORS = 1; //activate solenoids for top/bottom conductivity sensors
                 // characteristic delay of time it takes for solenoids move out
@@ -122,7 +107,15 @@ void Distribution(void){
     }
 }
 
-void initSortTimer(){
+void initFlags(void){
+    f_loadingNewCan = 0;
+    f_lastCan = 0;
+    f_ID_receive = 1;
+    f_can_coming_to_ID = 0;
+    f_can_coming_to_distribution = 0;
+    f_can_distributed = 0;
+}
+void initSortTimer(void){
     // 1 second timer to generate interrupts
     getRTC();
     for(int i = 0; i < 7; i++){
@@ -170,21 +163,22 @@ void printSortTimer(void){
 }
 
 void getIR(void){
-    // store the start time of the beam break in timeBroken
-    getRTC();
-    int timeBroken[7];
-    for(int i = 0; i < 7; i++){
-        timeBroken[i] = __bcd_to_num(time[i]);
-    }      
-    while(!IRIN){
-        // "if beam is broken for > 500 ms..."
-            // f_loadingNewCan = 1;
-            // break;
+    readIR();
+    if(IR_signal==1){
+        T2CON = 0b01111011; // 1:16 postscale (not taken into account for comp. with PR2), 16x prescaler
+        PR2 = 0xFF;
+        TMR2ON = 1;
     }
-}
-int MAGNETISM_in(void){
-    // gets analog reading from magnetism sensor    
-    return 0;
+    while(IR_signal && TMR2IF){
+        // Wait for the duration Timer2 was set, as a maximum
+    }
+    // If IR beam was broken for longer than Timer2 elapsed
+    if(TMR2IF==1){
+        f_loadingNewCan = 1;
+    }
+    else{
+        f_loadingNewCan = 0;
+    }
 }
 
 void moveServoBlock(enum blockPositions myPosition){

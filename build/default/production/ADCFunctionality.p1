@@ -45,6 +45,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "159 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18.h
 [v __delay `JF2878 ~T0 @X0 0 e ]
 [p i __delay ]
+"4604 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
+"4598
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2941,84 +2945,139 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 7: void Loading(void);
 [; ;sort.h: 8: void ID(void);
 [; ;sort.h: 9: void Distribution(void);
-[; ;sort.h: 12: void initSortTimer();
-[; ;sort.h: 13: void printSortTimer(void);
-[; ;sort.h: 15: void getIR(void);
-[; ;sort.h: 16: int MAGNETISM_in(void);
-[; ;sort.h: 18: void moveServoBlock(enum blockPositions block);
-[; ;sort.h: 19: void moveServoCup(enum motorPositions canType);
-"21
+[; ;sort.h: 12: void initFlags(void);
+[; ;sort.h: 13: void initSortTimer(void);
+[; ;sort.h: 14: void printSortTimer(void);
+[; ;sort.h: 16: void getIR(void);
+"17
+[v _IR_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 17: int IR_signal;
+[; ;sort.h: 18: int MAGNETISM_in(void);
+[; ;sort.h: 20: void moveServoBlock(enum blockPositions block);
+[; ;sort.h: 21: void moveServoCup(enum motorPositions canType);
+"23
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 21: int first=1;
-"22
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 22: int was_low;
-"23
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 23: int startTime[7];
+[; ;sort.h: 23: int first=1;
 "24
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 24: int total_time;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 24: int was_low;
+"25
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 25: int startTime[7];
 "26
-[v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int timer1highbits;
-"27
-[v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 27: int timer1lowbits;
+[v _total_time `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int total_time;
 "28
+[v _timer1highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int timer1highbits;
+"29
+[v _timer1lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 29: int timer1lowbits;
+"33
 [v _timer1_20ms_high `i ~T0 @X0 1 e ]
 [i _timer1_20ms_high
--> 177 `i
+-> 183 `i
 ]
-[; ;sort.h: 28: int timer1_20ms_high = 0b10110001;
-"29
+[; ;sort.h: 33: int timer1_20ms_high = 0b10110111;
+"34
 [v _timer1_20ms_low `i ~T0 @X0 1 e ]
 [i _timer1_20ms_low
--> 224 `i
+-> 188 `i
 ]
-[; ;sort.h: 29: int timer1_20ms_low = 0b11100000;
-"30
-[v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int timer3highbits;
-"31
-[v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 31: int timer3lowbits;
-"33
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 33: int count_total;
-"34
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 34: int count_pop_no_tab;
+[; ;sort.h: 34: int timer1_20ms_low = 0b10111100;
 "35
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int count_pop_w_tab;
+[v _timer3highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 35: int timer3highbits;
 "36
+[v _timer3lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 36: int timer3lowbits;
+"38
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 38: int count_total;
+"39
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 39: int count_pop_no_tab;
+"40
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 40: int count_pop_w_tab;
+"41
 [v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 36: int count_can_no_lab;
-"37
+[; ;sort.h: 41: int count_can_no_lab;
+"42
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 37: int count_can_w_lab;
-"13 ADCFunctionality.c
+[; ;sort.h: 42: int count_can_w_lab;
+"45
+[v _f_loadingNewCan `i ~T0 @X0 1 e ]
+[i _f_loadingNewCan
+-> 0 `i
+]
+[; ;sort.h: 45: int f_loadingNewCan = 0;
+"46
+[v _f_lastCan `i ~T0 @X0 1 e ]
+[i _f_lastCan
+-> 0 `i
+]
+[; ;sort.h: 46: int f_lastCan = 0;
+"47
+[v _f_ID_receive `i ~T0 @X0 1 e ]
+[i _f_ID_receive
+-> 1 `i
+]
+[; ;sort.h: 47: int f_ID_receive = 1;
+"48
+[v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_ID
+-> 0 `i
+]
+[; ;sort.h: 48: int f_can_coming_to_ID = 0;
+"51
+[v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_distribution
+-> 0 `i
+]
+[; ;sort.h: 51: int f_can_coming_to_distribution = 0;
+"54
+[v _f_can_distributed `i ~T0 @X0 1 e ]
+[i _f_can_distributed
+-> 0 `i
+]
+[; ;sort.h: 54: int f_can_distributed = 0;
+[; ;ADCFunctionality.h: 2: void readADC(char channel);
+[; ;ADCFunctionality.h: 3: void readIR(void);
+[; ;ADCFunctionality.h: 4: void readMAG(void);
+"6 ADCFunctionality.h
+[v _THIR `uc ~T0 @X0 1 e ]
+[i _THIR
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 6: unsigned char THIR = 0x00FF;
+"7
+[v _THMAG `uc ~T0 @X0 1 e ]
+[i _THMAG
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 7: unsigned char THMAG = 0x00FF;
+"14 ADCFunctionality.c
 [v _readADC `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;ADCFunctionality.c: 13: void readADC(char channel){
+[; ;ADCFunctionality.c: 14: void readADC(char channel){
 [e :U _readADC ]
 [v _channel `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADCFunctionality.c: 15: ADCON0 = ((channel <<2));
-"15
-[e = _ADCON0 -> << -> _channel `i -> 2 `i `uc ]
-[; ;ADCFunctionality.c: 16: ADON = 1;
+[; ;ADCFunctionality.c: 16: ADCON0 = ((channel <<2));
 "16
-[e = _ADON -> -> 1 `i `b ]
-[; ;ADCFunctionality.c: 17: ADCON0bits.GO = 1;
+[e = _ADCON0 -> << -> _channel `i -> 2 `i `uc ]
+[; ;ADCFunctionality.c: 17: ADON = 1;
 "17
-[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-[; ;ADCFunctionality.c: 18: while(ADCON0bits.GO_NOT_DONE){_delay((unsigned long)((5)*(32000000/4000.0)));}
+[e = _ADON -> -> 1 `i `b ]
+[; ;ADCFunctionality.c: 18: ADCON0bits.GO = 1;
 "18
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;ADCFunctionality.c: 19: while(ADCON0bits.GO_NOT_DONE){_delay((unsigned long)((5)*(32000000/4000.0)));}
+"19
 [e $U 267  ]
 [e :U 268 ]
 {
@@ -3027,7 +3086,47 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 267 ]
 [e $ != -> . . _ADCON0bits 0 1 `i -> -> -> 0 `i `Vuc `i 268  ]
 [e :U 269 ]
-[; ;ADCFunctionality.c: 19: }
-"19
+[; ;ADCFunctionality.c: 20: }
+"20
 [e :UE 266 ]
+}
+"22
+[v _readIR `(v ~T0 @X0 1 ef ]
+{
+[; ;ADCFunctionality.c: 22: void readIR(void){
+[e :U _readIR ]
+[f ]
+[; ;ADCFunctionality.c: 23: readADC(0);
+"23
+[e ( _readADC (1 -> -> 0 `i `uc ]
+"24
+[v _res `uc ~T0 @X0 1 a ]
+[; ;ADCFunctionality.c: 24: unsigned char res = ADRESH<<8 | ADRESL;
+[e = _res -> | << -> _ADRESH `i -> 8 `i -> _ADRESL `i `uc ]
+[; ;ADCFunctionality.c: 25: IR_signal = (res > THIR) ? 1 : 0;
+"25
+[e = _IR_signal ? > -> _res `i -> _THIR `i : -> 1 `i -> 0 `i ]
+[; ;ADCFunctionality.c: 26: }
+"26
+[e :UE 270 ]
+}
+"28
+[v _readMAG `(v ~T0 @X0 1 ef ]
+{
+[; ;ADCFunctionality.c: 28: void readMAG(void){
+[e :U _readMAG ]
+[f ]
+[; ;ADCFunctionality.c: 29: readADC(1);
+"29
+[e ( _readADC (1 -> -> 1 `i `uc ]
+"30
+[v _res `uc ~T0 @X0 1 a ]
+[; ;ADCFunctionality.c: 30: unsigned char res = ADRESH<<8 | ADRESL;
+[e = _res -> | << -> _ADRESH `i -> 8 `i -> _ADRESL `i `uc ]
+[; ;ADCFunctionality.c: 31: IR_signal = (res > THMAG) ? 1 : 0;
+"31
+[e = _IR_signal ? > -> _res `i -> _THMAG `i : -> 1 `i -> 0 `i ]
+[; ;ADCFunctionality.c: 32: }
+"32
+[e :UE 271 ]
 }

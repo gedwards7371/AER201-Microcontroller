@@ -3863,10 +3863,12 @@ void ID(void);
 void Distribution(void);
 
 
-void initSortTimer();
+void initFlags(void);
+void initSortTimer(void);
 void printSortTimer(void);
 
 void getIR(void);
+int IR_signal;
 int MAGNETISM_in(void);
 
 void moveServoBlock(enum blockPositions block);
@@ -3879,8 +3881,11 @@ int total_time;
 
 int timer1highbits;
 int timer1lowbits;
-int timer1_20ms_high = 0b10110001;
-int timer1_20ms_low = 0b11100000;
+
+
+
+int timer1_20ms_high = 0b10110111;
+int timer1_20ms_low = 0b10111100;
 int timer3highbits;
 int timer3lowbits;
 
@@ -3890,7 +3895,7 @@ int count_pop_w_tab;
 int count_can_no_lab;
 int count_can_w_lab;
 
-# 16 "sort.c"
+
 int f_loadingNewCan = 0;
 int f_lastCan = 0;
 int f_ID_receive = 1;
@@ -3902,7 +3907,15 @@ int f_can_coming_to_distribution = 0;
 
 int f_can_distributed = 0;
 
+# 2 "ADCFunctionality.h"
+void readADC(char channel);
+void readIR(void);
+void readMAG(void);
 
+unsigned char THIR = 0x00FF;
+unsigned char THMAG = 0x00FF;
+
+# 14 "sort.c"
 void sort(void){
 if(machine_state == Sorting_state){
 Loading();
@@ -3918,6 +3931,7 @@ Distribution();
 void Loading(void){
 if(first){
 first = 0;
+initFlags();
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 initSortTimer();
 
@@ -3931,15 +3945,13 @@ moveServoCup(Home);
 else{
 
 
-
 if(!f_loadingNewCan){
 
-
+getIR();
 
 if(!f_loadingNewCan){
 return;
 }
-
 
 else{
 count_total++;
@@ -4000,7 +4012,15 @@ f_can_distributed = 1;
 }
 }
 
-void initSortTimer(){
+void initFlags(void){
+f_loadingNewCan = 0;
+f_lastCan = 0;
+f_ID_receive = 1;
+f_can_coming_to_ID = 0;
+f_can_coming_to_distribution = 0;
+f_can_distributed = 0;
+}
+void initSortTimer(void){
 
 getRTC();
 for(int i = 0; i < 7; i++){
@@ -4009,7 +4029,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 141
+# 134
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4042,16 +4062,21 @@ printf("Time: %02d:%02d:%02d", hour, min, sec);
 }
 
 void getIR(void){
-
-getRTC();
-int timeBroken[7];
-for(int i = 0; i < 7; i++){
-timeBroken[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
+readIR();
+if(IR_signal==1){
+T2CON = 0b01111011;
+PR2 = 0xFF;
+TMR2ON = 1;
 }
-while(!PORTAbits.RA0){
+while(IR_signal && TMR2IF){
 
+}
 
-
+if(TMR2IF==1){
+f_loadingNewCan = 1;
+}
+else{
+f_loadingNewCan = 0;
 }
 }
 int MAGNETISM_in(void){

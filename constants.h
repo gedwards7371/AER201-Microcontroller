@@ -2,13 +2,6 @@
 #ifndef CONSTANTS_H
 #define	CONSTANTS_H //Prevent multiple inclusion 
 
-//IR sensor
-#define IRIN        PORTAbits.RA0 // input from IR sensor
-#define IROUT       LATAbits.LATA6 // output to IR sensor
-
-//Magnetism sensor
-#define MAGNETIC    LATAbits.LATA1 // magnetism sensor
-
 //Conductivity sensor
 #define CONDUCTIVE  LATAbits.LATA2 // conductivity sensors
 

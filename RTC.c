@@ -9,6 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
+#include "ADCFunctionality.h"
 
 unsigned char time[7];
 //sec = 42, min = 09, hour = 07, weekday = Sunday, weekday(#) = the 5th, month = February, year = 2017

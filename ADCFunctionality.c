@@ -9,6 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
+#include "ADCFunctionality.h"
 
 void readADC(char channel){
     // Select A2D channel to read
@@ -16,4 +17,16 @@ void readADC(char channel){
     ADON = 1;
     ADCON0bits.GO = 1;
    while(ADCON0bits.GO_NOT_DONE){__delay_ms(5);}
+}
+
+void readIR(void){
+    readADC(0);
+    unsigned char res = ADRESH<<8 | ADRESL;
+    IR_signal = (res > THIR) ? 1 : 0;
+}
+
+void readMAG(void){
+    readADC(1);
+    unsigned char res = ADRESH<<8 | ADRESL;
+    MAG_signal = (res > THMAG) ? 1 : 0;
 }

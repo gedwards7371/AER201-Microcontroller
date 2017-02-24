@@ -9,4 +9,5 @@ macros.h  \
 constants.h  \
 UI.h  \
 configBits.h  \
-sort.h 
+sort.h  \
+ADCFunctionality.h 

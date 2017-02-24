@@ -9,6 +9,7 @@
 #include "RTC.h"
 #include "main.h"
 #include "sort.h"
+#include "ADCFunctionality.h"
 
 // Interrupt handler
 void interrupt handler(void) {
@@ -42,16 +43,16 @@ void interrupt handler(void) {
         if(machine_state == Sorting_state){
             T1CON = 0b10110000;
             if(was_low){
-                LATCbits.LATC1 = 1;
-                LATCbits.LATC2 = 1;
+                //SERVOPAN = 1;
+                SERVOTILT = 1;
                 was_low = 0;              
                 // Set Timer1 to interrupt after appropriate pulse time
                 TMR1H = timer1highbits;
                 TMR1L = timer1lowbits;
             }
             else{
-                LATCbits.LATC1 = 0;
-                LATCbits.LATC2 = 0;
+                //SERVOPAN = 0;
+                SERVOTILT = 0;
                 was_low = 1;
                 // Set Timer1 to interrupt on 20 ms
                 TMR1H = timer1_20ms_high;
@@ -59,5 +60,11 @@ void interrupt handler(void) {
             }
             TMR1ON = 1;
         }
+    }
+    
+    //** Timer for IR sensor beam break
+    if(TMR2IF){
+        TMR2IF = 0;
+        TMR2ON = 0;
     }
 }

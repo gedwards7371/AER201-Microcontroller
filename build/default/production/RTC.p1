@@ -2934,132 +2934,187 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 7: void Loading(void);
 [; ;sort.h: 8: void ID(void);
 [; ;sort.h: 9: void Distribution(void);
-[; ;sort.h: 12: void initSortTimer();
-[; ;sort.h: 13: void printSortTimer(void);
-[; ;sort.h: 15: void getIR(void);
-[; ;sort.h: 16: int MAGNETISM_in(void);
-[; ;sort.h: 18: void moveServoBlock(enum blockPositions block);
-[; ;sort.h: 19: void moveServoCup(enum motorPositions canType);
-"21
+[; ;sort.h: 12: void initFlags(void);
+[; ;sort.h: 13: void initSortTimer(void);
+[; ;sort.h: 14: void printSortTimer(void);
+[; ;sort.h: 16: void getIR(void);
+"17
+[v _IR_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 17: int IR_signal;
+[; ;sort.h: 18: int MAGNETISM_in(void);
+[; ;sort.h: 20: void moveServoBlock(enum blockPositions block);
+[; ;sort.h: 21: void moveServoCup(enum motorPositions canType);
+"23
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 21: int first=1;
-"22
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 22: int was_low;
-"23
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 23: int startTime[7];
+[; ;sort.h: 23: int first=1;
 "24
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 24: int total_time;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 24: int was_low;
+"25
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 25: int startTime[7];
 "26
-[v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int timer1highbits;
-"27
-[v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 27: int timer1lowbits;
+[v _total_time `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int total_time;
 "28
+[v _timer1highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int timer1highbits;
+"29
+[v _timer1lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 29: int timer1lowbits;
+"33
 [v _timer1_20ms_high `i ~T0 @X0 1 e ]
 [i _timer1_20ms_high
--> 177 `i
+-> 183 `i
 ]
-[; ;sort.h: 28: int timer1_20ms_high = 0b10110001;
-"29
+[; ;sort.h: 33: int timer1_20ms_high = 0b10110111;
+"34
 [v _timer1_20ms_low `i ~T0 @X0 1 e ]
 [i _timer1_20ms_low
--> 224 `i
+-> 188 `i
 ]
-[; ;sort.h: 29: int timer1_20ms_low = 0b11100000;
-"30
-[v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int timer3highbits;
-"31
-[v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 31: int timer3lowbits;
-"33
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 33: int count_total;
-"34
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 34: int count_pop_no_tab;
+[; ;sort.h: 34: int timer1_20ms_low = 0b10111100;
 "35
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int count_pop_w_tab;
+[v _timer3highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 35: int timer3highbits;
 "36
+[v _timer3lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 36: int timer3lowbits;
+"38
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 38: int count_total;
+"39
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 39: int count_pop_no_tab;
+"40
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 40: int count_pop_w_tab;
+"41
 [v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 36: int count_can_no_lab;
-"37
+[; ;sort.h: 41: int count_can_no_lab;
+"42
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 37: int count_can_w_lab;
-[; ;RTC.c: 13: unsigned char time[7];
-"15 RTC.c
+[; ;sort.h: 42: int count_can_w_lab;
+"45
+[v _f_loadingNewCan `i ~T0 @X0 1 e ]
+[i _f_loadingNewCan
+-> 0 `i
+]
+[; ;sort.h: 45: int f_loadingNewCan = 0;
+"46
+[v _f_lastCan `i ~T0 @X0 1 e ]
+[i _f_lastCan
+-> 0 `i
+]
+[; ;sort.h: 46: int f_lastCan = 0;
+"47
+[v _f_ID_receive `i ~T0 @X0 1 e ]
+[i _f_ID_receive
+-> 1 `i
+]
+[; ;sort.h: 47: int f_ID_receive = 1;
+"48
+[v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_ID
+-> 0 `i
+]
+[; ;sort.h: 48: int f_can_coming_to_ID = 0;
+"51
+[v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_distribution
+-> 0 `i
+]
+[; ;sort.h: 51: int f_can_coming_to_distribution = 0;
+"54
+[v _f_can_distributed `i ~T0 @X0 1 e ]
+[i _f_can_distributed
+-> 0 `i
+]
+[; ;sort.h: 54: int f_can_distributed = 0;
+[; ;ADCFunctionality.h: 2: void readADC(char channel);
+[; ;ADCFunctionality.h: 3: void readIR(void);
+[; ;ADCFunctionality.h: 4: void readMAG(void);
+"6 ADCFunctionality.h
+[v _THIR `uc ~T0 @X0 1 e ]
+[i _THIR
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 6: unsigned char THIR = 0x00FF;
+"7
+[v _THMAG `uc ~T0 @X0 1 e ]
+[i _THMAG
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 7: unsigned char THMAG = 0x00FF;
+[; ;RTC.c: 14: unsigned char time[7];
+"16 RTC.c
 [v _initTime `(v ~T0 @X0 1 ef7`uc`uc`uc`uc`uc`uc`uc ]
-"16
+"17
 {
-[; ;RTC.c: 15: void initTime(unsigned char s, unsigned char m, unsigned char h,unsigned char w,
-[; ;RTC.c: 16: unsigned char DD, unsigned char MM, unsigned char YY){
+[; ;RTC.c: 16: void initTime(unsigned char s, unsigned char m, unsigned char h,unsigned char w,
+[; ;RTC.c: 17: unsigned char DD, unsigned char MM, unsigned char YY){
 [e :U _initTime ]
-"15
+"16
 [v _s `uc ~T0 @X0 1 r1 ]
 [v _m `uc ~T0 @X0 1 r2 ]
 [v _h `uc ~T0 @X0 1 r3 ]
 [v _w `uc ~T0 @X0 1 r4 ]
-"16
+"17
 [v _DD `uc ~T0 @X0 1 r5 ]
 [v _MM `uc ~T0 @X0 1 r6 ]
 [v _YY `uc ~T0 @X0 1 r7 ]
 [f ]
-[; ;RTC.c: 17: time[0] = s;
-"17
-[e = *U + &U _time * -> -> -> 0 `i `ui `ux -> -> # *U &U _time `ui `ux _s ]
-[; ;RTC.c: 18: time[1] = m;
+[; ;RTC.c: 18: time[0] = s;
 "18
-[e = *U + &U _time * -> -> -> 1 `i `ui `ux -> -> # *U &U _time `ui `ux _m ]
-[; ;RTC.c: 19: time[2] = h;
+[e = *U + &U _time * -> -> -> 0 `i `ui `ux -> -> # *U &U _time `ui `ux _s ]
+[; ;RTC.c: 19: time[1] = m;
 "19
-[e = *U + &U _time * -> -> -> 2 `i `ui `ux -> -> # *U &U _time `ui `ux _h ]
-[; ;RTC.c: 20: time[3] = w;
+[e = *U + &U _time * -> -> -> 1 `i `ui `ux -> -> # *U &U _time `ui `ux _m ]
+[; ;RTC.c: 20: time[2] = h;
 "20
-[e = *U + &U _time * -> -> -> 3 `i `ui `ux -> -> # *U &U _time `ui `ux _w ]
-[; ;RTC.c: 21: time[4] = DD;
+[e = *U + &U _time * -> -> -> 2 `i `ui `ux -> -> # *U &U _time `ui `ux _h ]
+[; ;RTC.c: 21: time[3] = w;
 "21
-[e = *U + &U _time * -> -> -> 4 `i `ui `ux -> -> # *U &U _time `ui `ux _DD ]
-[; ;RTC.c: 22: time[5] = MM;
+[e = *U + &U _time * -> -> -> 3 `i `ui `ux -> -> # *U &U _time `ui `ux _w ]
+[; ;RTC.c: 22: time[4] = DD;
 "22
-[e = *U + &U _time * -> -> -> 5 `i `ui `ux -> -> # *U &U _time `ui `ux _MM ]
-[; ;RTC.c: 23: time[6] = YY;
+[e = *U + &U _time * -> -> -> 4 `i `ui `ux -> -> # *U &U _time `ui `ux _DD ]
+[; ;RTC.c: 23: time[5] = MM;
 "23
-[e = *U + &U _time * -> -> -> 6 `i `ui `ux -> -> # *U &U _time `ui `ux _YY ]
-[; ;RTC.c: 24: }
+[e = *U + &U _time * -> -> -> 5 `i `ui `ux -> -> # *U &U _time `ui `ux _MM ]
+[; ;RTC.c: 24: time[6] = YY;
 "24
+[e = *U + &U _time * -> -> -> 6 `i `ui `ux -> -> # *U &U _time `ui `ux _YY ]
+[; ;RTC.c: 25: }
+"25
 [e :UE 266 ]
 }
-"26
+"27
 [v _loadRTC `(v ~T0 @X0 1 ef ]
 {
-[; ;RTC.c: 26: void loadRTC(){
+[; ;RTC.c: 27: void loadRTC(){
 [e :U _loadRTC ]
 [f ]
-[; ;RTC.c: 28: I2C_Master_Init(10000);
-"28
+[; ;RTC.c: 29: I2C_Master_Init(10000);
+"29
 [e ( _I2C_Master_Init (1 -> -> -> 10000 `i `l `ul ]
-[; ;RTC.c: 30: (INTCONbits.GIE = 0);
-"30
+[; ;RTC.c: 31: (INTCONbits.GIE = 0);
+"31
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;RTC.c: 32: I2C_Master_Start();
-"32
-[e ( _I2C_Master_Start ..  ]
-[; ;RTC.c: 33: I2C_Master_Write(0b11010000);
+[; ;RTC.c: 33: I2C_Master_Start();
 "33
-[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
-[; ;RTC.c: 34: I2C_Master_Write(0x00);
+[e ( _I2C_Master_Start ..  ]
+[; ;RTC.c: 34: I2C_Master_Write(0b11010000);
 "34
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
-[; ;RTC.c: 35: for(int i = 0; i<7; i++){
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
+[; ;RTC.c: 35: I2C_Master_Write(0x00);
 "35
+[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+[; ;RTC.c: 36: for(int i = 0; i<7; i++){
+"36
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3067,54 +3122,54 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 269  ]
 [e :U 268 ]
 {
-[; ;RTC.c: 36: I2C_Master_Write(time[i]);
-"36
-[e ( _I2C_Master_Write (1 -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `ui ]
+[; ;RTC.c: 37: I2C_Master_Write(time[i]);
 "37
+[e ( _I2C_Master_Write (1 -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `ui ]
+"38
 }
-"35
+"36
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 7 `i 268  ]
 [e :U 269 ]
-"37
-}
-[; ;RTC.c: 37: }
-[; ;RTC.c: 38: I2C_Master_Stop();
 "38
-[e ( _I2C_Master_Stop ..  ]
-[; ;RTC.c: 39: (INTCONbits.GIE = 1);
+}
+[; ;RTC.c: 38: }
+[; ;RTC.c: 39: I2C_Master_Stop();
 "39
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;RTC.c: 40: }
+[e ( _I2C_Master_Stop ..  ]
+[; ;RTC.c: 40: (INTCONbits.GIE = 1);
 "40
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;RTC.c: 41: }
+"41
 [e :UE 267 ]
 }
-"42
+"43
 [v _getRTC `(v ~T0 @X0 1 ef ]
 {
-[; ;RTC.c: 42: void getRTC(void){
+[; ;RTC.c: 43: void getRTC(void){
 [e :U _getRTC ]
 [f ]
-[; ;RTC.c: 46: I2C_Master_Start();
-"46
-[e ( _I2C_Master_Start ..  ]
-[; ;RTC.c: 47: I2C_Master_Write(0b11010000);
+[; ;RTC.c: 47: I2C_Master_Start();
 "47
-[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
-[; ;RTC.c: 48: I2C_Master_Write(0x00);
-"48
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
-[; ;RTC.c: 49: I2C_Master_Stop();
-"49
-[e ( _I2C_Master_Stop ..  ]
-[; ;RTC.c: 52: I2C_Master_Start();
-"52
 [e ( _I2C_Master_Start ..  ]
-[; ;RTC.c: 53: I2C_Master_Write(0b11010001);
+[; ;RTC.c: 48: I2C_Master_Write(0b11010000);
+"48
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
+[; ;RTC.c: 49: I2C_Master_Write(0x00);
+"49
+[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+[; ;RTC.c: 50: I2C_Master_Stop();
+"50
+[e ( _I2C_Master_Stop ..  ]
+[; ;RTC.c: 53: I2C_Master_Start();
 "53
-[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
-[; ;RTC.c: 54: for(int i = 0; i < 6; i++){
+[e ( _I2C_Master_Start ..  ]
+[; ;RTC.c: 54: I2C_Master_Write(0b11010001);
 "54
+[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
+[; ;RTC.c: 55: for(int i = 0; i < 6; i++){
+"55
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3122,39 +3177,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 273  ]
 [e :U 272 ]
 {
-[; ;RTC.c: 55: time[i] = I2C_Master_Read(1);
-"55
-[e = *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux ( _I2C_Master_Read (1 -> -> 1 `i `uc ]
+[; ;RTC.c: 56: time[i] = I2C_Master_Read(1);
 "56
+[e = *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux ( _I2C_Master_Read (1 -> -> 1 `i `uc ]
+"57
 }
-"54
+"55
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 6 `i 272  ]
 [e :U 273 ]
-"56
-}
-[; ;RTC.c: 56: }
-[; ;RTC.c: 57: time[6] = I2C_Master_Read(0);
 "57
-[e = *U + &U _time * -> -> -> 6 `i `ui `ux -> -> # *U &U _time `ui `ux ( _I2C_Master_Read (1 -> -> 0 `i `uc ]
-[; ;RTC.c: 58: I2C_Master_Stop();
+}
+[; ;RTC.c: 57: }
+[; ;RTC.c: 58: time[6] = I2C_Master_Read(0);
 "58
-[e ( _I2C_Master_Stop ..  ]
-[; ;RTC.c: 59: }
+[e = *U + &U _time * -> -> -> 6 `i `ui `ux -> -> # *U &U _time `ui `ux ( _I2C_Master_Read (1 -> -> 0 `i `uc ]
+[; ;RTC.c: 59: I2C_Master_Stop();
 "59
+[e ( _I2C_Master_Stop ..  ]
+[; ;RTC.c: 60: }
+"60
 [e :UE 271 ]
 }
-"61
+"62
 [v _printRTC `(v ~T0 @X0 1 ef ]
 {
-[; ;RTC.c: 61: void printRTC(void){
+[; ;RTC.c: 62: void printRTC(void){
 [e :U _printRTC ]
 [f ]
-[; ;RTC.c: 62: getRTC();
-"62
+[; ;RTC.c: 63: getRTC();
+"63
 [e ( _getRTC ..  ]
-[v F3188 `uc ~T0 @X0 -> 0 `x s ]
-[i F3188
+[v F3206 `uc ~T0 @X0 -> 0 `x s ]
+[i F3206
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3162,15 +3217,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"63
-[v _month `uc ~T0 @X0 4  a ]
-[; ;RTC.c: 63: char month[] = "MMM";
-[e = _month F3188 ]
 "64
-[v _INT_time `i ~T0 @X0 -> 7 `i a ]
-[; ;RTC.c: 64: int INT_time[7];
-[; ;RTC.c: 65: for(int i = 0; i < 7; i++){
+[v _month `uc ~T0 @X0 4  a ]
+[; ;RTC.c: 64: char month[] = "MMM";
+[e = _month F3206 ]
 "65
+[v _INT_time `i ~T0 @X0 -> 7 `i a ]
+[; ;RTC.c: 65: int INT_time[7];
+[; ;RTC.c: 66: for(int i = 0; i < 7; i++){
+"66
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3178,139 +3233,139 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 277  ]
 [e :U 276 ]
 {
-[; ;RTC.c: 66: INT_time[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
-"66
-[e = *U + &U _INT_time * -> -> _i `ui `ux -> -> # *U &U _INT_time `ui `ux + & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 15 `i * >> & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 240 `i -> 4 `i -> 10 `i ]
+[; ;RTC.c: 67: INT_time[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 "67
+[e = *U + &U _INT_time * -> -> _i `ui `ux -> -> # *U &U _INT_time `ui `ux + & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 15 `i * >> & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 240 `i -> 4 `i -> 10 `i ]
+"68
 }
-"65
+"66
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 7 `i 276  ]
 [e :U 277 ]
-"67
-}
 "68
-[v _RTC_month `i ~T0 @X0 1 a ]
-[; ;RTC.c: 67: }
-[; ;RTC.c: 68: int RTC_month = INT_time[5];
-[e = _RTC_month *U + &U _INT_time * -> -> -> 5 `i `ui `ux -> -> # *U &U _INT_time `ui `ux ]
-[; ;RTC.c: 69: switch(RTC_month){
+}
 "69
+[v _RTC_month `i ~T0 @X0 1 a ]
+[; ;RTC.c: 68: }
+[; ;RTC.c: 69: int RTC_month = INT_time[5];
+[e = _RTC_month *U + &U _INT_time * -> -> -> 5 `i `ui `ux -> -> # *U &U _INT_time `ui `ux ]
+[; ;RTC.c: 70: switch(RTC_month){
+"70
 [e $U 280  ]
 {
-[; ;RTC.c: 70: case 1 :
-"70
-[e :U 281 ]
-[; ;RTC.c: 71: strcpy(month, "Jan");
+[; ;RTC.c: 71: case 1 :
 "71
-[e ( _strcpy (2 , &U _month :s 1C ]
-[; ;RTC.c: 72: break;
+[e :U 281 ]
+[; ;RTC.c: 72: strcpy(month, "Jan");
 "72
-[e $U 279  ]
-[; ;RTC.c: 73: case 2:
+[e ( _strcpy (2 , &U _month :s 1C ]
+[; ;RTC.c: 73: break;
 "73
-[e :U 282 ]
-[; ;RTC.c: 74: strcpy(month, "Feb");
+[e $U 279  ]
+[; ;RTC.c: 74: case 2:
 "74
-[e ( _strcpy (2 , &U _month :s 2C ]
-[; ;RTC.c: 75: break;
+[e :U 282 ]
+[; ;RTC.c: 75: strcpy(month, "Feb");
 "75
-[e $U 279  ]
-[; ;RTC.c: 76: case 3:
+[e ( _strcpy (2 , &U _month :s 2C ]
+[; ;RTC.c: 76: break;
 "76
-[e :U 283 ]
-[; ;RTC.c: 77: strcpy(month, "Mar");
+[e $U 279  ]
+[; ;RTC.c: 77: case 3:
 "77
-[e ( _strcpy (2 , &U _month :s 3C ]
-[; ;RTC.c: 78: break;
+[e :U 283 ]
+[; ;RTC.c: 78: strcpy(month, "Mar");
 "78
-[e $U 279  ]
-[; ;RTC.c: 79: case 4:
+[e ( _strcpy (2 , &U _month :s 3C ]
+[; ;RTC.c: 79: break;
 "79
-[e :U 284 ]
-[; ;RTC.c: 80: strcpy(month, "Apr");
+[e $U 279  ]
+[; ;RTC.c: 80: case 4:
 "80
-[e ( _strcpy (2 , &U _month :s 4C ]
-[; ;RTC.c: 81: break;
+[e :U 284 ]
+[; ;RTC.c: 81: strcpy(month, "Apr");
 "81
-[e $U 279  ]
-[; ;RTC.c: 82: case 5:
+[e ( _strcpy (2 , &U _month :s 4C ]
+[; ;RTC.c: 82: break;
 "82
-[e :U 285 ]
-[; ;RTC.c: 83: strcpy(month, "May");
+[e $U 279  ]
+[; ;RTC.c: 83: case 5:
 "83
-[e ( _strcpy (2 , &U _month :s 5C ]
-[; ;RTC.c: 84: break;
+[e :U 285 ]
+[; ;RTC.c: 84: strcpy(month, "May");
 "84
-[e $U 279  ]
-[; ;RTC.c: 85: case 6:
+[e ( _strcpy (2 , &U _month :s 5C ]
+[; ;RTC.c: 85: break;
 "85
-[e :U 286 ]
-[; ;RTC.c: 86: strcpy(month, "Jun");
+[e $U 279  ]
+[; ;RTC.c: 86: case 6:
 "86
-[e ( _strcpy (2 , &U _month :s 6C ]
-[; ;RTC.c: 87: break;
+[e :U 286 ]
+[; ;RTC.c: 87: strcpy(month, "Jun");
 "87
-[e $U 279  ]
-[; ;RTC.c: 88: case 7:
+[e ( _strcpy (2 , &U _month :s 6C ]
+[; ;RTC.c: 88: break;
 "88
-[e :U 287 ]
-[; ;RTC.c: 89: strcpy(month, "Jul");
+[e $U 279  ]
+[; ;RTC.c: 89: case 7:
 "89
-[e ( _strcpy (2 , &U _month :s 7C ]
-[; ;RTC.c: 90: break;
+[e :U 287 ]
+[; ;RTC.c: 90: strcpy(month, "Jul");
 "90
-[e $U 279  ]
-[; ;RTC.c: 91: case 8:
+[e ( _strcpy (2 , &U _month :s 7C ]
+[; ;RTC.c: 91: break;
 "91
-[e :U 288 ]
-[; ;RTC.c: 92: strcpy(month, "Aug");
+[e $U 279  ]
+[; ;RTC.c: 92: case 8:
 "92
-[e ( _strcpy (2 , &U _month :s 8C ]
-[; ;RTC.c: 93: break;
+[e :U 288 ]
+[; ;RTC.c: 93: strcpy(month, "Aug");
 "93
-[e $U 279  ]
-[; ;RTC.c: 94: case 9:
+[e ( _strcpy (2 , &U _month :s 8C ]
+[; ;RTC.c: 94: break;
 "94
-[e :U 289 ]
-[; ;RTC.c: 95: strcpy(month, "Sep");
+[e $U 279  ]
+[; ;RTC.c: 95: case 9:
 "95
-[e ( _strcpy (2 , &U _month :s 9C ]
-[; ;RTC.c: 96: break;
+[e :U 289 ]
+[; ;RTC.c: 96: strcpy(month, "Sep");
 "96
-[e $U 279  ]
-[; ;RTC.c: 97: case 10:
+[e ( _strcpy (2 , &U _month :s 9C ]
+[; ;RTC.c: 97: break;
 "97
-[e :U 290 ]
-[; ;RTC.c: 98: strcpy(month, "Oct");
+[e $U 279  ]
+[; ;RTC.c: 98: case 10:
 "98
-[e ( _strcpy (2 , &U _month :s 10C ]
-[; ;RTC.c: 99: break;
+[e :U 290 ]
+[; ;RTC.c: 99: strcpy(month, "Oct");
 "99
-[e $U 279  ]
-[; ;RTC.c: 100: case 11:
+[e ( _strcpy (2 , &U _month :s 10C ]
+[; ;RTC.c: 100: break;
 "100
-[e :U 291 ]
-[; ;RTC.c: 101: strcpy(month, "Nov");
+[e $U 279  ]
+[; ;RTC.c: 101: case 11:
 "101
-[e ( _strcpy (2 , &U _month :s 11C ]
-[; ;RTC.c: 102: break;
+[e :U 291 ]
+[; ;RTC.c: 102: strcpy(month, "Nov");
 "102
-[e $U 279  ]
-[; ;RTC.c: 103: case 12:
+[e ( _strcpy (2 , &U _month :s 11C ]
+[; ;RTC.c: 103: break;
 "103
-[e :U 292 ]
-[; ;RTC.c: 104: strcpy(month, "Dec");
+[e $U 279  ]
+[; ;RTC.c: 104: case 12:
 "104
-[e ( _strcpy (2 , &U _month :s 12C ]
-[; ;RTC.c: 105: break;
+[e :U 292 ]
+[; ;RTC.c: 105: strcpy(month, "Dec");
 "105
-[e $U 279  ]
+[e ( _strcpy (2 , &U _month :s 12C ]
+[; ;RTC.c: 106: break;
 "106
-}
-[; ;RTC.c: 106: }
 [e $U 279  ]
-"69
+"107
+}
+[; ;RTC.c: 107: }
+[e $U 279  ]
+"70
 [e :U 280 ]
 [e [\ _RTC_month , $ -> 1 `i 281
  , $ -> 2 `i 282
@@ -3325,16 +3380,16 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> 11 `i 291
  , $ -> 12 `i 292
  279 ]
-"106
-[e :U 279 ]
-[; ;RTC.c: 107: lcdInst(0b10000000);;
 "107
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;RTC.c: 108: printf("%02d%s | %02d:%02d:%02d", INT_time[4],month,INT_time[2],INT_time[1],INT_time[0]);
+[e :U 279 ]
+[; ;RTC.c: 108: lcdInst(0b10000000);;
 "108
-[e ( _printf , , , , , (. :s 13C *U + &U _INT_time * -> -> -> 4 `i `ui `ux -> -> # *U &U _INT_time `ui `ux -> &U _month `*Cuc *U + &U _INT_time * -> -> -> 2 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 1 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 0 `i `ui `ux -> -> # *U &U _INT_time `ui `ux ]
-[; ;RTC.c: 109: }
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;RTC.c: 109: printf("%02d%s | %02d:%02d:%02d", INT_time[4],month,INT_time[2],INT_time[1],INT_time[0]);
 "109
+[e ( _printf , , , , , (. :s 13C *U + &U _INT_time * -> -> -> 4 `i `ui `ux -> -> # *U &U _INT_time `ui `ux -> &U _month `*Cuc *U + &U _INT_time * -> -> -> 2 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 1 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 0 `i `ui `ux -> -> # *U &U _INT_time `ui `ux ]
+[; ;RTC.c: 110: }
+"110
 [e :UE 275 ]
 }
 [p f _printf 8683652 ]

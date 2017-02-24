@@ -2946,155 +2946,210 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 7: void Loading(void);
 [; ;sort.h: 8: void ID(void);
 [; ;sort.h: 9: void Distribution(void);
-[; ;sort.h: 12: void initSortTimer();
-[; ;sort.h: 13: void printSortTimer(void);
-[; ;sort.h: 15: void getIR(void);
-[; ;sort.h: 16: int MAGNETISM_in(void);
-[; ;sort.h: 18: void moveServoBlock(enum blockPositions block);
-[; ;sort.h: 19: void moveServoCup(enum motorPositions canType);
-"21
+[; ;sort.h: 12: void initFlags(void);
+[; ;sort.h: 13: void initSortTimer(void);
+[; ;sort.h: 14: void printSortTimer(void);
+[; ;sort.h: 16: void getIR(void);
+"17
+[v _IR_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 17: int IR_signal;
+[; ;sort.h: 18: int MAGNETISM_in(void);
+[; ;sort.h: 20: void moveServoBlock(enum blockPositions block);
+[; ;sort.h: 21: void moveServoCup(enum motorPositions canType);
+"23
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 21: int first=1;
-"22
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 22: int was_low;
-"23
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 23: int startTime[7];
+[; ;sort.h: 23: int first=1;
 "24
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 24: int total_time;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 24: int was_low;
+"25
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 25: int startTime[7];
 "26
-[v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int timer1highbits;
-"27
-[v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 27: int timer1lowbits;
+[v _total_time `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int total_time;
 "28
+[v _timer1highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int timer1highbits;
+"29
+[v _timer1lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 29: int timer1lowbits;
+"33
 [v _timer1_20ms_high `i ~T0 @X0 1 e ]
 [i _timer1_20ms_high
--> 177 `i
+-> 183 `i
 ]
-[; ;sort.h: 28: int timer1_20ms_high = 0b10110001;
-"29
+[; ;sort.h: 33: int timer1_20ms_high = 0b10110111;
+"34
 [v _timer1_20ms_low `i ~T0 @X0 1 e ]
 [i _timer1_20ms_low
--> 224 `i
+-> 188 `i
 ]
-[; ;sort.h: 29: int timer1_20ms_low = 0b11100000;
-"30
-[v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int timer3highbits;
-"31
-[v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 31: int timer3lowbits;
-"33
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 33: int count_total;
-"34
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 34: int count_pop_no_tab;
+[; ;sort.h: 34: int timer1_20ms_low = 0b10111100;
 "35
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int count_pop_w_tab;
+[v _timer3highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 35: int timer3highbits;
 "36
+[v _timer3lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 36: int timer3lowbits;
+"38
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 38: int count_total;
+"39
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 39: int count_pop_no_tab;
+"40
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 40: int count_pop_w_tab;
+"41
 [v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 36: int count_can_no_lab;
-"37
+[; ;sort.h: 41: int count_can_no_lab;
+"42
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 37: int count_can_w_lab;
-"13 PortHigh.c
+[; ;sort.h: 42: int count_can_w_lab;
+"45
+[v _f_loadingNewCan `i ~T0 @X0 1 e ]
+[i _f_loadingNewCan
+-> 0 `i
+]
+[; ;sort.h: 45: int f_loadingNewCan = 0;
+"46
+[v _f_lastCan `i ~T0 @X0 1 e ]
+[i _f_lastCan
+-> 0 `i
+]
+[; ;sort.h: 46: int f_lastCan = 0;
+"47
+[v _f_ID_receive `i ~T0 @X0 1 e ]
+[i _f_ID_receive
+-> 1 `i
+]
+[; ;sort.h: 47: int f_ID_receive = 1;
+"48
+[v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_ID
+-> 0 `i
+]
+[; ;sort.h: 48: int f_can_coming_to_ID = 0;
+"51
+[v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_distribution
+-> 0 `i
+]
+[; ;sort.h: 51: int f_can_coming_to_distribution = 0;
+"54
+[v _f_can_distributed `i ~T0 @X0 1 e ]
+[i _f_can_distributed
+-> 0 `i
+]
+[; ;sort.h: 54: int f_can_distributed = 0;
+[; ;ADCFunctionality.h: 2: void readADC(char channel);
+[; ;ADCFunctionality.h: 3: void readIR(void);
+[; ;ADCFunctionality.h: 4: void readMAG(void);
+"6 ADCFunctionality.h
+[v _THIR `uc ~T0 @X0 1 e ]
+[i _THIR
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 6: unsigned char THIR = 0x00FF;
+"7
+[v _THMAG `uc ~T0 @X0 1 e ]
+[i _THMAG
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 7: unsigned char THMAG = 0x00FF;
+"14 PortHigh.c
 [v _PortTestD0 `(v ~T0 @X0 1 ef ]
 {
-[; ;PortHigh.c: 13: void PortTestD0(void){
+[; ;PortHigh.c: 14: void PortTestD0(void){
 [e :U _PortTestD0 ]
 [f ]
-[; ;PortHigh.c: 14: while(PORTBbits.RB1 == 0){
-"14
+[; ;PortHigh.c: 15: while(PORTBbits.RB1 == 0){
+"15
 [e $U 267  ]
 [e :U 268 ]
 {
-"17
+"18
 }
 [e :U 267 ]
-"14
+"15
 [e $ == -> . . _PORTBbits 0 1 `i -> 0 `i 268  ]
 [e :U 269 ]
-[; ;PortHigh.c: 17: }
-[; ;PortHigh.c: 18: LATDbits.LATD0 = 1;
-"18
-[e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
-[; ;PortHigh.c: 19: while(PORTBbits.RB1 == 1){
+[; ;PortHigh.c: 18: }
+[; ;PortHigh.c: 19: LATDbits.LATD0 = 1;
 "19
+[e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
+[; ;PortHigh.c: 20: while(PORTBbits.RB1 == 1){
+"20
 [e $U 270  ]
 [e :U 271 ]
 {
-"21
+"22
 }
 [e :U 270 ]
-"19
+"20
 [e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 271  ]
 [e :U 272 ]
-[; ;PortHigh.c: 21: }
-[; ;PortHigh.c: 22: __nop();
-"22
-[e ( ___nop ..  ]
+[; ;PortHigh.c: 22: }
 [; ;PortHigh.c: 23: __nop();
 "23
 [e ( ___nop ..  ]
-[; ;PortHigh.c: 24: LATDbits.LATD0 = 0;
+[; ;PortHigh.c: 24: __nop();
 "24
-[e = . . _LATDbits 0 0 -> -> 0 `i `uc ]
-[; ;PortHigh.c: 25: }
+[e ( ___nop ..  ]
+[; ;PortHigh.c: 25: LATDbits.LATD0 = 0;
 "25
+[e = . . _LATDbits 0 0 -> -> 0 `i `uc ]
+[; ;PortHigh.c: 26: }
+"26
 [e :UE 266 ]
 }
-"27
+"28
 [v _PortTestA5 `(v ~T0 @X0 1 ef ]
 {
-[; ;PortHigh.c: 27: void PortTestA5(void){
+[; ;PortHigh.c: 28: void PortTestA5(void){
 [e :U _PortTestA5 ]
 [f ]
-[; ;PortHigh.c: 28: while(PORTBbits.RB1 == 0){
-"28
+[; ;PortHigh.c: 29: while(PORTBbits.RB1 == 0){
+"29
 [e $U 274  ]
 [e :U 275 ]
 {
-"31
+"32
 }
 [e :U 274 ]
-"28
+"29
 [e $ == -> . . _PORTBbits 0 1 `i -> 0 `i 275  ]
 [e :U 276 ]
-[; ;PortHigh.c: 31: }
-[; ;PortHigh.c: 32: LATAbits.LATA5 = 1;
-"32
-[e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
-[; ;PortHigh.c: 33: while(PORTBbits.RB1 == 1){
+[; ;PortHigh.c: 32: }
+[; ;PortHigh.c: 33: LATAbits.LATA5 = 1;
 "33
+[e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
+[; ;PortHigh.c: 34: while(PORTBbits.RB1 == 1){
+"34
 [e $U 277  ]
 [e :U 278 ]
 {
-"35
+"36
 }
 [e :U 277 ]
-"33
+"34
 [e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 278  ]
 [e :U 279 ]
-[; ;PortHigh.c: 35: }
-[; ;PortHigh.c: 36: __nop();
-"36
-[e ( ___nop ..  ]
+[; ;PortHigh.c: 36: }
 [; ;PortHigh.c: 37: __nop();
 "37
 [e ( ___nop ..  ]
-[; ;PortHigh.c: 38: LATAbits.LATA5 = 0;
+[; ;PortHigh.c: 38: __nop();
 "38
-[e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
-[; ;PortHigh.c: 39: }
+[e ( ___nop ..  ]
+[; ;PortHigh.c: 39: LATAbits.LATA5 = 0;
 "39
+[e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
+[; ;PortHigh.c: 40: }
+"40
 [e :UE 273 ]
 }

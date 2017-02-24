@@ -45,6 +45,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
 "4390
 [v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
+"7724
+[v _VCFG1 `Vb ~T0 @X0 0 e@32269 ]
+"7720
+[v _VCFG0 `Vb ~T0 @X0 0 e@32268 ]
 "3711
 [v _CVRCON `Vuc ~T0 @X0 0 e@4021 ]
 "3628
@@ -63,6 +67,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _CMCONbits `VS136 ~T0 @X0 0 e@4020 ]
 "6626
 [v _ADFM `Vb ~T0 @X0 0 e@32263 ]
+"7772
+[v _nRBPU `Vb ~T0 @X0 0 e@32655 ]
 "6896
 [v _INT1IE `Vb ~T0 @X0 0 e@32643 ]
 "7562
@@ -75,6 +81,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3IE `Vb ~T0 @X0 0 e@32001 ]
 "7216
 [v _PEIE `Vb ~T0 @X0 0 e@32662 ]
+"6628
+[v _ADIE `Vb ~T0 @X0 0 e@31982 ]
 "6272
 [s S258 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S258 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
@@ -2985,145 +2993,212 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 7: void Loading(void);
 [; ;sort.h: 8: void ID(void);
 [; ;sort.h: 9: void Distribution(void);
-[; ;sort.h: 12: void initSortTimer();
-[; ;sort.h: 13: void printSortTimer(void);
-[; ;sort.h: 15: void getIR(void);
-[; ;sort.h: 16: int MAGNETISM_in(void);
-[; ;sort.h: 18: void moveServoBlock(enum blockPositions block);
-[; ;sort.h: 19: void moveServoCup(enum motorPositions canType);
-"21
+[; ;sort.h: 12: void initFlags(void);
+[; ;sort.h: 13: void initSortTimer(void);
+[; ;sort.h: 14: void printSortTimer(void);
+[; ;sort.h: 16: void getIR(void);
+"17
+[v _IR_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 17: int IR_signal;
+[; ;sort.h: 18: int MAGNETISM_in(void);
+[; ;sort.h: 20: void moveServoBlock(enum blockPositions block);
+[; ;sort.h: 21: void moveServoCup(enum motorPositions canType);
+"23
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 21: int first=1;
-"22
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 22: int was_low;
-"23
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 23: int startTime[7];
+[; ;sort.h: 23: int first=1;
 "24
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 24: int total_time;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 24: int was_low;
+"25
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 25: int startTime[7];
 "26
-[v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int timer1highbits;
-"27
-[v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 27: int timer1lowbits;
+[v _total_time `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int total_time;
 "28
+[v _timer1highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int timer1highbits;
+"29
+[v _timer1lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 29: int timer1lowbits;
+"33
 [v _timer1_20ms_high `i ~T0 @X0 1 e ]
 [i _timer1_20ms_high
--> 177 `i
+-> 183 `i
 ]
-[; ;sort.h: 28: int timer1_20ms_high = 0b10110001;
-"29
+[; ;sort.h: 33: int timer1_20ms_high = 0b10110111;
+"34
 [v _timer1_20ms_low `i ~T0 @X0 1 e ]
 [i _timer1_20ms_low
--> 224 `i
+-> 188 `i
 ]
-[; ;sort.h: 29: int timer1_20ms_low = 0b11100000;
-"30
-[v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int timer3highbits;
-"31
-[v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 31: int timer3lowbits;
-"33
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 33: int count_total;
-"34
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 34: int count_pop_no_tab;
+[; ;sort.h: 34: int timer1_20ms_low = 0b10111100;
 "35
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int count_pop_w_tab;
+[v _timer3highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 35: int timer3highbits;
 "36
+[v _timer3lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 36: int timer3lowbits;
+"38
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 38: int count_total;
+"39
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 39: int count_pop_no_tab;
+"40
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 40: int count_pop_w_tab;
+"41
 [v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 36: int count_can_no_lab;
-"37
+[; ;sort.h: 41: int count_can_no_lab;
+"42
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 37: int count_can_w_lab;
-"13 MachineConfig.c
+[; ;sort.h: 42: int count_can_w_lab;
+"45
+[v _f_loadingNewCan `i ~T0 @X0 1 e ]
+[i _f_loadingNewCan
+-> 0 `i
+]
+[; ;sort.h: 45: int f_loadingNewCan = 0;
+"46
+[v _f_lastCan `i ~T0 @X0 1 e ]
+[i _f_lastCan
+-> 0 `i
+]
+[; ;sort.h: 46: int f_lastCan = 0;
+"47
+[v _f_ID_receive `i ~T0 @X0 1 e ]
+[i _f_ID_receive
+-> 1 `i
+]
+[; ;sort.h: 47: int f_ID_receive = 1;
+"48
+[v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_ID
+-> 0 `i
+]
+[; ;sort.h: 48: int f_can_coming_to_ID = 0;
+"51
+[v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_distribution
+-> 0 `i
+]
+[; ;sort.h: 51: int f_can_coming_to_distribution = 0;
+"54
+[v _f_can_distributed `i ~T0 @X0 1 e ]
+[i _f_can_distributed
+-> 0 `i
+]
+[; ;sort.h: 54: int f_can_distributed = 0;
+[; ;ADCFunctionality.h: 2: void readADC(char channel);
+[; ;ADCFunctionality.h: 3: void readIR(void);
+[; ;ADCFunctionality.h: 4: void readMAG(void);
+"6 ADCFunctionality.h
+[v _THIR `uc ~T0 @X0 1 e ]
+[i _THIR
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 6: unsigned char THIR = 0x00FF;
+"7
+[v _THMAG `uc ~T0 @X0 1 e ]
+[i _THMAG
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 7: unsigned char THMAG = 0x00FF;
+"14 MachineConfig.c
 [v _machineConfig `(v ~T0 @X0 1 ef ]
 {
-[; ;MachineConfig.c: 13: void machineConfig(void) {
+[; ;MachineConfig.c: 14: void machineConfig(void) {
 [e :U _machineConfig ]
 [f ]
-[; ;MachineConfig.c: 15: OSCCON = 0b11110000;
-"15
-[e = _OSCCON -> -> 240 `i `uc ]
-[; ;MachineConfig.c: 16: OSCTUNEbits.PLLEN = 1;
+[; ;MachineConfig.c: 16: OSCCON = 0b11110000;
 "16
+[e = _OSCCON -> -> 240 `i `uc ]
+[; ;MachineConfig.c: 17: OSCTUNEbits.PLLEN = 1;
+"17
 [e = . . _OSCTUNEbits 0 2 -> -> 1 `i `uc ]
-[; ;MachineConfig.c: 20: TRISA = 0b01000111;
-"20
+[; ;MachineConfig.c: 21: TRISA = 0b01000111;
+"21
 [e = _TRISA -> -> 71 `i `uc ]
-[; ;MachineConfig.c: 22: TRISB = 0b11110010;
-"22
+[; ;MachineConfig.c: 23: TRISB = 0b11110010;
+"23
 [e = _TRISB -> -> 242 `i `uc ]
-[; ;MachineConfig.c: 25: TRISC = 0x00;
-"25
+[; ;MachineConfig.c: 26: TRISC = 0x00;
+"26
 [e = _TRISC -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 29: TRISD = 0x00;
-"29
+[; ;MachineConfig.c: 30: TRISD = 0x00;
+"30
 [e = _TRISD -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 32: TRISE = 0x00;
-"32
+[; ;MachineConfig.c: 33: TRISE = 0x00;
+"33
 [e = _TRISE -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 35: LATA = 0x00;
-"35
-[e = _LATA -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 36: LATB = 0x00;
+[; ;MachineConfig.c: 36: LATA = 0x00;
 "36
-[e = _LATB -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 37: LATC = 0x00;
+[e = _LATA -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 37: LATB = 0x00;
 "37
-[e = _LATC -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 38: LATD = 0x00;
+[e = _LATB -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 38: LATC = 0x00;
 "38
-[e = _LATD -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 39: LATE = 0x00;
+[e = _LATC -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 39: LATD = 0x00;
 "39
+[e = _LATD -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 40: LATE = 0x00;
+"40
 [e = _LATE -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 42: ADCON0 = 0x00;
-"42
-[e = _ADCON0 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 43: ADCON1 = 0x0D;
+[; ;MachineConfig.c: 43: ADCON0 = 0x00;
 "43
+[e = _ADCON0 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 44: ADCON1 = 0x0D;
+"44
 [e = _ADCON1 -> -> 13 `i `uc ]
-[; ;MachineConfig.c: 46: CVRCON = 0x00;
-"46
-[e = _CVRCON -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 47: CMCONbits.CIS = 0;
+[; ;MachineConfig.c: 47: VCFG1 = 0;
 "47
-[e = . . _CMCONbits 0 1 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 48: ADFM = 1;
+[e = _VCFG1 -> -> 0 `i `b ]
+[; ;MachineConfig.c: 48: VCFG0 = 0;
 "48
-[e = _ADFM -> -> 1 `i `b ]
-[; ;MachineConfig.c: 51: INT1IE = 1;
+[e = _VCFG0 -> -> 0 `i `b ]
+[; ;MachineConfig.c: 49: CVRCON = 0x00;
+"49
+[e = _CVRCON -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 50: CMCONbits.CIS = 0;
+"50
+[e = . . _CMCONbits 0 1 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 51: ADFM = 1;
 "51
-[e = _INT1IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 52: TMR0IE = 1;
+[e = _ADFM -> -> 1 `i `b ]
+[; ;MachineConfig.c: 52: nRBPU = 0;
 "52
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 53: TMR1IE = 1;
-"53
-[e = _TMR1IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 54: TMR2IE = 1;
-"54
-[e = _TMR2IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 55: TMR3IE = 1;
+[e = _nRBPU -> -> 0 `i `b ]
+[; ;MachineConfig.c: 55: INT1IE = 1;
 "55
-[e = _TMR3IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 56: PEIE = 1;
-"56
-[e = _PEIE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 57: (INTCONbits.GIE = 0);
+[e = _INT1IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 57: TMR0IE = 1;
 "57
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 58: }
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 58: TMR1IE = 1;
 "58
+[e = _TMR1IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 59: TMR2IE = 1;
+"59
+[e = _TMR2IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 60: TMR3IE = 1;
+"60
+[e = _TMR3IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 61: PEIE = 1;
+"61
+[e = _PEIE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 63: ADIE = 1;
+"63
+[e = _ADIE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 64: (INTCONbits.GIE = 0);
+"64
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 65: }
+"65
 [e :UE 266 ]
 }

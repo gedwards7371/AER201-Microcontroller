@@ -2923,188 +2923,243 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 7: void Loading(void);
 [; ;sort.h: 8: void ID(void);
 [; ;sort.h: 9: void Distribution(void);
-[; ;sort.h: 12: void initSortTimer();
-[; ;sort.h: 13: void printSortTimer(void);
-[; ;sort.h: 15: void getIR(void);
-[; ;sort.h: 16: int MAGNETISM_in(void);
-[; ;sort.h: 18: void moveServoBlock(enum blockPositions block);
-[; ;sort.h: 19: void moveServoCup(enum motorPositions canType);
-"21
+[; ;sort.h: 12: void initFlags(void);
+[; ;sort.h: 13: void initSortTimer(void);
+[; ;sort.h: 14: void printSortTimer(void);
+[; ;sort.h: 16: void getIR(void);
+"17
+[v _IR_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 17: int IR_signal;
+[; ;sort.h: 18: int MAGNETISM_in(void);
+[; ;sort.h: 20: void moveServoBlock(enum blockPositions block);
+[; ;sort.h: 21: void moveServoCup(enum motorPositions canType);
+"23
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 21: int first=1;
-"22
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 22: int was_low;
-"23
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 23: int startTime[7];
+[; ;sort.h: 23: int first=1;
 "24
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 24: int total_time;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 24: int was_low;
+"25
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 25: int startTime[7];
 "26
-[v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int timer1highbits;
-"27
-[v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 27: int timer1lowbits;
+[v _total_time `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int total_time;
 "28
+[v _timer1highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int timer1highbits;
+"29
+[v _timer1lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 29: int timer1lowbits;
+"33
 [v _timer1_20ms_high `i ~T0 @X0 1 e ]
 [i _timer1_20ms_high
--> 177 `i
+-> 183 `i
 ]
-[; ;sort.h: 28: int timer1_20ms_high = 0b10110001;
-"29
+[; ;sort.h: 33: int timer1_20ms_high = 0b10110111;
+"34
 [v _timer1_20ms_low `i ~T0 @X0 1 e ]
 [i _timer1_20ms_low
--> 224 `i
+-> 188 `i
 ]
-[; ;sort.h: 29: int timer1_20ms_low = 0b11100000;
-"30
-[v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int timer3highbits;
-"31
-[v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 31: int timer3lowbits;
-"33
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 33: int count_total;
-"34
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 34: int count_pop_no_tab;
+[; ;sort.h: 34: int timer1_20ms_low = 0b10111100;
 "35
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int count_pop_w_tab;
+[v _timer3highbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 35: int timer3highbits;
 "36
+[v _timer3lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 36: int timer3lowbits;
+"38
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 38: int count_total;
+"39
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 39: int count_pop_no_tab;
+"40
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 40: int count_pop_w_tab;
+"41
 [v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 36: int count_can_no_lab;
-"37
+[; ;sort.h: 41: int count_can_no_lab;
+"42
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 37: int count_can_w_lab;
-"13 lcd.c
+[; ;sort.h: 42: int count_can_w_lab;
+"45
+[v _f_loadingNewCan `i ~T0 @X0 1 e ]
+[i _f_loadingNewCan
+-> 0 `i
+]
+[; ;sort.h: 45: int f_loadingNewCan = 0;
+"46
+[v _f_lastCan `i ~T0 @X0 1 e ]
+[i _f_lastCan
+-> 0 `i
+]
+[; ;sort.h: 46: int f_lastCan = 0;
+"47
+[v _f_ID_receive `i ~T0 @X0 1 e ]
+[i _f_ID_receive
+-> 1 `i
+]
+[; ;sort.h: 47: int f_ID_receive = 1;
+"48
+[v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_ID
+-> 0 `i
+]
+[; ;sort.h: 48: int f_can_coming_to_ID = 0;
+"51
+[v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
+[i _f_can_coming_to_distribution
+-> 0 `i
+]
+[; ;sort.h: 51: int f_can_coming_to_distribution = 0;
+"54
+[v _f_can_distributed `i ~T0 @X0 1 e ]
+[i _f_can_distributed
+-> 0 `i
+]
+[; ;sort.h: 54: int f_can_distributed = 0;
+[; ;ADCFunctionality.h: 2: void readADC(char channel);
+[; ;ADCFunctionality.h: 3: void readIR(void);
+[; ;ADCFunctionality.h: 4: void readMAG(void);
+"6 ADCFunctionality.h
+[v _THIR `uc ~T0 @X0 1 e ]
+[i _THIR
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 6: unsigned char THIR = 0x00FF;
+"7
+[v _THMAG `uc ~T0 @X0 1 e ]
+[i _THMAG
+-> -> 255 `i `uc
+]
+[; ;ADCFunctionality.h: 7: unsigned char THMAG = 0x00FF;
+"14 lcd.c
 [v _lcdInst `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;lcd.c: 13: void lcdInst(char data) {
+[; ;lcd.c: 14: void lcdInst(char data) {
 [e :U _lcdInst ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;lcd.c: 14: LATDbits.LATD2 = 0;
-"14
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-[; ;lcd.c: 15: lcdNibble(data);
+[; ;lcd.c: 15: LATDbits.LATD2 = 0;
 "15
-[e ( _lcdNibble (1 _data ]
-[; ;lcd.c: 16: }
+[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
+[; ;lcd.c: 16: lcdNibble(data);
 "16
+[e ( _lcdNibble (1 _data ]
+[; ;lcd.c: 17: }
+"17
 [e :UE 266 ]
 }
-"18
+"19
 [v _putch `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;lcd.c: 18: void putch(char data){
+[; ;lcd.c: 19: void putch(char data){
 [e :U _putch ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;lcd.c: 19: LATDbits.LATD2 = 1;
-"19
-[e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-[; ;lcd.c: 20: lcdNibble(data);
+[; ;lcd.c: 20: LATDbits.LATD2 = 1;
 "20
-[e ( _lcdNibble (1 _data ]
-[; ;lcd.c: 21: }
+[e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
+[; ;lcd.c: 21: lcdNibble(data);
 "21
+[e ( _lcdNibble (1 _data ]
+[; ;lcd.c: 22: }
+"22
 [e :UE 267 ]
 }
-"23
+"24
 [v _lcdNibble `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;lcd.c: 23: void lcdNibble(char data){
+[; ;lcd.c: 24: void lcdNibble(char data){
 [e :U _lcdNibble ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-"25
-[v _temp `uc ~T0 @X0 1 a ]
-[; ;lcd.c: 25: char temp = data & 0xF0;
-[e = _temp -> & -> _data `i -> 240 `i `uc ]
-[; ;lcd.c: 26: LATD = LATD & 0x0F;
 "26
-[e = _LATD -> & -> _LATD `i -> 15 `i `uc ]
-[; ;lcd.c: 27: LATD = temp | LATD;
-"27
-[e = _LATD -> | -> _temp `i -> _LATD `i `uc ]
-[; ;lcd.c: 29: LATDbits.LATD3 = 1;
-"29
-[e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
-[; ;lcd.c: 30: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"30
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 31: LATDbits.LATD3 = 0;
-"31
-[e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
-[; ;lcd.c: 32: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"32
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 34: data = data << 4;
-"34
-[e = _data -> << -> _data `i -> 4 `i `uc ]
-[; ;lcd.c: 36: temp = data & 0xF0;
-"36
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;lcd.c: 26: char temp = data & 0xF0;
 [e = _temp -> & -> _data `i -> 240 `i `uc ]
-[; ;lcd.c: 37: LATD = LATD & 0x0F;
-"37
+[; ;lcd.c: 27: LATD = LATD & 0x0F;
+"27
 [e = _LATD -> & -> _LATD `i -> 15 `i `uc ]
-[; ;lcd.c: 38: LATD = temp | LATD;
-"38
+[; ;lcd.c: 28: LATD = temp | LATD;
+"28
 [e = _LATD -> | -> _temp `i -> _LATD `i `uc ]
-[; ;lcd.c: 40: LATDbits.LATD3 = 1;
-"40
+[; ;lcd.c: 30: LATDbits.LATD3 = 1;
+"30
 [e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
-[; ;lcd.c: 41: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"41
+[; ;lcd.c: 31: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"31
 [e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 42: LATDbits.LATD3 = 0;
-"42
+[; ;lcd.c: 32: LATDbits.LATD3 = 0;
+"32
 [e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
-[; ;lcd.c: 43: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"43
+[; ;lcd.c: 33: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"33
 [e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 44: }
+[; ;lcd.c: 35: data = data << 4;
+"35
+[e = _data -> << -> _data `i -> 4 `i `uc ]
+[; ;lcd.c: 37: temp = data & 0xF0;
+"37
+[e = _temp -> & -> _data `i -> 240 `i `uc ]
+[; ;lcd.c: 38: LATD = LATD & 0x0F;
+"38
+[e = _LATD -> & -> _LATD `i -> 15 `i `uc ]
+[; ;lcd.c: 39: LATD = temp | LATD;
+"39
+[e = _LATD -> | -> _temp `i -> _LATD `i `uc ]
+[; ;lcd.c: 41: LATDbits.LATD3 = 1;
+"41
+[e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
+[; ;lcd.c: 42: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"42
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;lcd.c: 43: LATDbits.LATD3 = 0;
+"43
+[e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
+[; ;lcd.c: 44: _delay((unsigned long)((25)*(32000000/4000000.0)));
 "44
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;lcd.c: 45: }
+"45
 [e :UE 268 ]
 }
-"46
+"47
 [v _initLCD `(v ~T0 @X0 1 ef ]
 {
-[; ;lcd.c: 46: void initLCD(void) {
+[; ;lcd.c: 47: void initLCD(void) {
 [e :U _initLCD ]
 [f ]
-[; ;lcd.c: 47: _delay((unsigned long)((15)*(32000000/4000.0)));
-"47
-[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;lcd.c: 48: lcdInst(0b00110011);
+[; ;lcd.c: 48: _delay((unsigned long)((15)*(32000000/4000.0)));
 "48
-[e ( _lcdInst (1 -> -> 51 `i `uc ]
-[; ;lcd.c: 49: lcdInst(0b00110010);
-"49
-[e ( _lcdInst (1 -> -> 50 `i `uc ]
-[; ;lcd.c: 51: lcdInst(0b00101000);
-"51
-[e ( _lcdInst (1 -> -> 40 `i `uc ]
-[; ;lcd.c: 52: lcdInst(0b00001100);
-"52
-[e ( _lcdInst (1 -> -> 12 `i `uc ]
-[; ;lcd.c: 53: lcdInst(0b00000110);
-"53
-[e ( _lcdInst (1 -> -> 6 `i `uc ]
-[; ;lcd.c: 54: lcdInst(0b00000001);
-"54
-[e ( _lcdInst (1 -> -> 1 `i `uc ]
-[; ;lcd.c: 55: _delay((unsigned long)((15)*(32000000/4000.0)));
-"55
 [e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;lcd.c: 56: }
+[; ;lcd.c: 49: lcdInst(0b00110011);
+"49
+[e ( _lcdInst (1 -> -> 51 `i `uc ]
+[; ;lcd.c: 50: lcdInst(0b00110010);
+"50
+[e ( _lcdInst (1 -> -> 50 `i `uc ]
+[; ;lcd.c: 52: lcdInst(0b00101000);
+"52
+[e ( _lcdInst (1 -> -> 40 `i `uc ]
+[; ;lcd.c: 53: lcdInst(0b00001100);
+"53
+[e ( _lcdInst (1 -> -> 12 `i `uc ]
+[; ;lcd.c: 54: lcdInst(0b00000110);
+"54
+[e ( _lcdInst (1 -> -> 6 `i `uc ]
+[; ;lcd.c: 55: lcdInst(0b00000001);
+"55
+[e ( _lcdInst (1 -> -> 1 `i `uc ]
+[; ;lcd.c: 56: _delay((unsigned long)((15)*(32000000/4000.0)));
 "56
+[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 57: }
+"57
 [e :UE 269 ]
 }
