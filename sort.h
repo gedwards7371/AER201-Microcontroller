@@ -1,7 +1,3 @@
-
-enum motorPositions { Home, popCanNoTab, popCanWithTab, soupCanNoLabel, soupCanWithLabel } canType;
-enum blockPositions { Raise, Lower } block;
-
 // Primary routines
 void sort(void);
 void Loading(void);
@@ -11,6 +7,8 @@ void Distribution(void);
 // Helper functions
 void initFlags(void);
 void initSortTimer(void);
+void initServos(void);
+
 void printSortTimer(void);
 
 void getIR(void);
@@ -19,18 +17,13 @@ int TMR3counter=0;
 int TMR3CF=0;
 int MAG_signal;
 
-void moveServoBlock(enum blockPositions block);
-void moveServoCup(enum motorPositions canType);
-
 int first=1;//flag for first entry
 int was_low; // flag to indicate whether servo is refreshing (20ms low) or not refreshing (sending high signal)
 int startTime[7];
 int total_time;
 
-void set_timer1(int time_us);
-int ServoTimes[2];
-int timer3highbits;
-int timer3lowbits;
+void updateServoPosition(int time_us, int timer);
+int servoTimes[4]; // [0]=TMR1H, [1]=TMR1L, [2]=TMR3H, [3]=TMR3L
 
 int count_total;
 int count_pop_no_tab;

@@ -18,6 +18,13 @@
 #define SERVOCAM    LATCbits.LATC0 // cam servo for blocker
 #define SERVOPAN    LATCbits.LATC1 // pan servo (sides)
 #define SERVOTILT   LATCbits.LATC2 // tilt servo (up/down)
+#define PAN_R       1000
+#define PAN_RMID    1333
+#define PAN_MID     1500
+#define PAN_LMID    1666
+#define PAN_L       2000
+#define TILT_UP     1000
+#define TILT_DOWN   1500
 
 //LCD Control Registers
 #define RS          LATDbits.LATD2          

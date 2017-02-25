@@ -34,7 +34,16 @@ void Loading(void){
         DC = 1;
         
         // Start sending pulses to servos
-        moveServoCup(popCanNoTab);
+        initServos();
+        __delay_1s();__delay_1s();
+        updateServoPosition(PAN_R, 1);
+        __delay_1s();__delay_1s();
+        updateServoPosition(TILT_DOWN, 3);
+        __delay_1s();__delay_1s();
+        updateServoPosition(TILT_UP, 3);
+        updateServoPosition(PAN_MID, 1);
+        __delay_1s();__delay_1s();
+        
         // moveServoBlock(Raise);
     }
     else{
@@ -90,19 +99,19 @@ void ID(void){
         }
         
         // use the local variables that we just initialized from the sensors to determine the can type
-        moveServoBlock(Lower);
+        //####moveServoBlock(Lower);
         // characteristic delay
         f_can_coming_to_distribution = 1;
-        moveServoBlock(Raise);
+        //####moveServoBlock(Raise);
         f_can_coming_to_ID = 0; // clear ID flag to allow another can to come
     }
 }
 void Distribution(void){
     if(f_can_coming_to_distribution){
         // delay characteristic of the time it takes a can to roll to the distribution cup from the ID stage
-        moveServoCup(canType);
+        //#####moveServoCup(canType);
         // delay characteristic of the time it takes a can to roll to the distribution cup from the ID stage
-        moveServoCup(Home);
+        //####moveServoCup(Home);
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
     }
@@ -135,6 +144,12 @@ void initSortTimer(void){
     TMR0H = 0b10000101;
     TMR0L = 0b11101110;
     TMR0ON = 1;
+}
+void initServos(void){
+        updateServoPosition(PAN_MID, 1);
+        updateServoPosition(TILT_UP, 3);
+        TMR1ON = 1;
+        TMR3ON = 1;
 }
 void printSortTimer(void){ 
     getRTC();
@@ -186,58 +201,14 @@ void getIR(void){
     }
 }
 
-void moveServoBlock(enum blockPositions myPosition){
-    // lower or raise the block
-    int pulse;
-    switch(myPosition){
-        case Raise:
-            // 2 ms pulses
-            pulse = 2000;
-            break;
-        case Lower:
-            // 1 ms pulses
-            pulse = 1000;
-            break;
-        default:
-            break;
-    }
-    // Start TMR1 (MERGE THIS FUNC WITH THE BOTTOM ONE)
-    was_low = 0;
-}
-void moveServos(enum motorPositions myPosition){
-    // Hit servo with pulses characteristic to each position
-    int pulse;
-    switch(myPosition){
-        case Home:
-            pulse = 1500;
-            break;
-        case popCanNoTab:
-            // 1 ms pulses
-            pulse = 1000;
-            break;
-        case popCanWithTab:
-            //1.33 ms pulses
-            pulse = 1333;
-            break;
-        case soupCanNoLabel:
-            // 1.66 ms pulses
-            pulse = 1666;
-            break;
-        case soupCanWithLabel:
-            // 2 ms pulses
-            pulse = 2000;
-            break;
-        default:
-            break;
-    }
-    // Start TMR1
-    set_timer1(pulse);
-    was_low = 0;
-}
-
-void set_timer1(int time_us){
+void updateServoPosition(int time_us, int timer){
     unsigned int my_time = 65535 - time_us;
-    TMR1H = my_time >> 8;
-    TMR1L = my_time & 0xFF;
-    TMR1ON = 1;
+    switch(timer){
+        case 1:
+            servoTimes[0] = my_time >> 8;
+            servoTimes[1] = my_time & 0xFF;
+        case 3:
+            servoTimes[2] = my_time >> 8;
+            servoTimes[3] = my_time & 0xFF;
+    }
 }

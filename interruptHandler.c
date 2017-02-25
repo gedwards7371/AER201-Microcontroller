@@ -41,21 +41,41 @@ void interrupt handler(void) {
         if(machine_state == Sorting_state){
             if(was_low){
                 SERVOPAN = 1;
-                SERVOTILT = 1;
-                was_low = 0;              
-                // Set Timer1 to interrupt after appropriate pulse time
-                set_timer1(1500);
+                was_low = 0;
+                TMR1H = servoTimes[0];
+                TMR1L = servoTimes[1];
             }
             else{
                 SERVOPAN = 0;
-                SERVOTILT = 0;
                 was_low = 1;
-                // Set Timer1 to interrupt on 20 ms
-                set_timer1(20000);
+                TMR1H = 20000 - servoTimes[0];
+                TMR1L = 20000 - servoTimes[1];
             }
+            TMR1ON = 1;
         }
     }
     
+    if(TMR3IF){
+        TMR3IF = 0; // Clear interrupt flag
+        TMR3ON = 0;
+        if(machine_state == Sorting_state){
+            if(was_low){
+                SERVOTILT = 1;
+                was_low = 0;
+                TMR3H = servoTimes[2];
+                TMR3L = servoTimes[3];
+            }
+            else{
+                SERVOTILT = 0;
+                was_low = 1;
+                TMR3H = 20000 - servoTimes[2];
+                TMR3L = 20000 - servoTimes[3];
+            }
+            TMR3ON = 1;
+        }
+    }
+    
+    /*
     //** Timer for IR sensor beam break
     if(TMR3IF){
         TMR3IF = 0;
@@ -71,4 +91,5 @@ void interrupt handler(void) {
             TMR3ON = 1;
         }
     }
+    */
 }
