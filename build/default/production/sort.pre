@@ -3881,13 +3881,7 @@ int was_low;
 int startTime[7];
 int total_time;
 
-int timer1highbits;
-int timer1lowbits;
-
-
-
-int timer1_20ms_high = 0b10110111;
-int timer1_20ms_low = 0b10111100;
+void set_timer1(int time_us);
 int timer3highbits;
 int timer3lowbits;
 
@@ -3941,7 +3935,7 @@ initSortTimer();
 LATAbits.LATA5 = 1;
 
 
-moveServoCup(Home);
+moveServoCup(popCanNoTab);
 
 }
 else{
@@ -3949,7 +3943,7 @@ else{
 
 if(!f_loadingNewCan){
 
-getIR();
+
 
 if(!f_loadingNewCan){
 return;
@@ -4089,16 +4083,15 @@ f_loadingNewCan = 0;
 
 void moveServoBlock(enum blockPositions myPosition){
 
+int pulse;
 switch(myPosition){
 case Raise:
 
-timer3highbits = 0b11111000;
-timer3lowbits = 0b00110000;
+pulse = 2000;
 break;
 case Lower:
 
-timer3highbits = 0b11111100;
-timer3lowbits = 0b00011000;
+pulse = 1000;
 break;
 default:
 break;
@@ -4108,39 +4101,38 @@ was_low = 0;
 }
 void moveServoCup(enum motorPositions myPosition){
 
-T1CON = 0b10110000;
+int pulse;
 switch(myPosition){
 case Home:
-
-timer1highbits = 0b11111010;
-timer1lowbits = 0b00100100;
+pulse = 1500;
 break;
 case popCanNoTab:
 
-timer1highbits = 0b11111100;
-timer1lowbits = 0b00011000;
+pulse = 1000;
 break;
 case popCanWithTab:
 
-timer1highbits = 0b11111010;
-timer1lowbits = 0b11001011;
+pulse = 1333;
 break;
 case soupCanNoLabel:
 
-timer1highbits = 0b11111001;
-timer1lowbits = 0b01111101;
+pulse = 1666;
 break;
 case soupCanWithLabel:
 
-timer1highbits = 0b11111000;
-timer1lowbits = 0b00110000;
+pulse = 2000;
 break;
 default:
 break;
 }
 
-TMR1H = timer1highbits;
-TMR1L = timer1lowbits;
-TMR1ON = 1;
+set_timer1(pulse);
 was_low = 0;
+}
+
+void set_timer1(int time_us){
+unsigned int my_time = 65535 - time_us;
+TMR1H = my_time >> 8;
+TMR1L = my_time & 0xFF;
+TMR1ON = 1;
 }

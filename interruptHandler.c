@@ -40,22 +40,19 @@ void interrupt handler(void) {
         TMR1ON = 0;
         if(machine_state == Sorting_state){
             if(was_low){
-                //SERVOPAN = 1;
+                SERVOPAN = 1;
                 SERVOTILT = 1;
                 was_low = 0;              
                 // Set Timer1 to interrupt after appropriate pulse time
-                TMR1H = timer1highbits;
-                TMR1L = timer1lowbits;
+                set_timer1(1500);
             }
             else{
-                //SERVOPAN = 0;
+                SERVOPAN = 0;
                 SERVOTILT = 0;
                 was_low = 1;
                 // Set Timer1 to interrupt on 20 ms
-                TMR1H = timer1_20ms_high;
-                TMR1L = timer1_20ms_low;
+                set_timer1(20000);
             }
-            TMR1ON = 1;
         }
     }
     

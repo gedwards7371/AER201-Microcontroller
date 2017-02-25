@@ -3881,13 +3881,7 @@ int was_low;
 int startTime[7];
 int total_time;
 
-int timer1highbits;
-int timer1lowbits;
-
-
-
-int timer1_20ms_high = 0b10110111;
-int timer1_20ms_low = 0b10111100;
+void set_timer1(int time_us);
 int timer3highbits;
 int timer3lowbits;
 
@@ -3920,7 +3914,7 @@ int THMAG = 255;
 # 14 "MachineConfig.c"
 void machineConfig(void) {
 
-OSCCON = 0b11110000;
+OSCCON = 0xF0;
 OSCTUNEbits.PLLEN = 1;
 
 
@@ -3963,6 +3957,7 @@ INT1IE = 1;
 
 TMR0IE = 1;
 TMR1IE = 1;
+T1CON = 0b10110000;
 TMR2IE = 1;
 TMR3IE = 1;
 PEIE = 1;

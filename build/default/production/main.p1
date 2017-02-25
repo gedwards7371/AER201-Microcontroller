@@ -2970,81 +2970,64 @@ Version 3.2 HI-TECH Software Intermediate Code
 "28
 [v _total_time `i ~T0 @X0 1 e ]
 [; ;sort.h: 28: int total_time;
-"30
-[v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int timer1highbits;
+[; ;sort.h: 30: void set_timer1(int time_us);
 "31
-[v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 31: int timer1lowbits;
-"35
-[v _timer1_20ms_high `i ~T0 @X0 1 e ]
-[i _timer1_20ms_high
--> 183 `i
-]
-[; ;sort.h: 35: int timer1_20ms_high = 0b10110111;
-"36
-[v _timer1_20ms_low `i ~T0 @X0 1 e ]
-[i _timer1_20ms_low
--> 188 `i
-]
-[; ;sort.h: 36: int timer1_20ms_low = 0b10111100;
-"37
 [v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 37: int timer3highbits;
-"38
+[; ;sort.h: 31: int timer3highbits;
+"32
 [v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 38: int timer3lowbits;
-"40
+[; ;sort.h: 32: int timer3lowbits;
+"34
 [v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 40: int count_total;
-"41
+[; ;sort.h: 34: int count_total;
+"35
 [v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 41: int count_pop_no_tab;
-"42
+[; ;sort.h: 35: int count_pop_no_tab;
+"36
 [v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 42: int count_pop_w_tab;
-"43
+[; ;sort.h: 36: int count_pop_w_tab;
+"37
 [v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 43: int count_can_no_lab;
-"44
+[; ;sort.h: 37: int count_can_no_lab;
+"38
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 44: int count_can_w_lab;
-"47
+[; ;sort.h: 38: int count_can_w_lab;
+"41
 [v _f_loadingNewCan `i ~T0 @X0 1 e ]
 [i _f_loadingNewCan
 -> 0 `i
 ]
-[; ;sort.h: 47: int f_loadingNewCan = 0;
-"48
+[; ;sort.h: 41: int f_loadingNewCan = 0;
+"42
 [v _f_lastCan `i ~T0 @X0 1 e ]
 [i _f_lastCan
 -> 0 `i
 ]
-[; ;sort.h: 48: int f_lastCan = 0;
-"49
+[; ;sort.h: 42: int f_lastCan = 0;
+"43
 [v _f_ID_receive `i ~T0 @X0 1 e ]
 [i _f_ID_receive
 -> 1 `i
 ]
-[; ;sort.h: 49: int f_ID_receive = 1;
-"50
+[; ;sort.h: 43: int f_ID_receive = 1;
+"44
 [v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
 [i _f_can_coming_to_ID
 -> 0 `i
 ]
-[; ;sort.h: 50: int f_can_coming_to_ID = 0;
-"53
+[; ;sort.h: 44: int f_can_coming_to_ID = 0;
+"47
 [v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
 [i _f_can_coming_to_distribution
 -> 0 `i
 ]
-[; ;sort.h: 53: int f_can_coming_to_distribution = 0;
-"56
+[; ;sort.h: 47: int f_can_coming_to_distribution = 0;
+"50
 [v _f_can_distributed `i ~T0 @X0 1 e ]
 [i _f_can_distributed
 -> 0 `i
 ]
-[; ;sort.h: 56: int f_can_distributed = 0;
+[; ;sort.h: 50: int f_can_distributed = 0;
 [; ;ADCFunctionality.h: 2: void readADC(char channel);
 [; ;ADCFunctionality.h: 3: void readIR(void);
 [; ;ADCFunctionality.h: 4: void readMAG(void);

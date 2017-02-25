@@ -325,12 +325,13 @@ Lower 1
 [v _initSortTimer initSortTimer `(v  1 e 1 0 ]
 "139
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
-"166
-[v _getIR getIR `(v  1 e 1 0 ]
 "189
 [v _moveServoBlock moveServoBlock `(v  1 e 1 0 ]
-"208
+"207
 [v _moveServoCup moveServoCup `(v  1 e 1 0 ]
+"238
+[v _set_timer1 set_timer1 `(v  1 e 1 0 ]
+[v i2_set_timer1 set_timer1 `(v  1 e 1 0 ]
 "61 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
 "72
@@ -370,7 +371,7 @@ Lower 1
 [v _THIR THIR `i  1 e 2 0 ]
 "7
 [v _THMAG THMAG `i  1 e 2 0 ]
-[s S1276 . 1 `uc 1 RA0 1 0 :1:0 
+[s S1241 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -380,34 +381,34 @@ Lower 1
 `uc 1 RA7 1 0 :1:7 
 ]
 "96 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
-[s S1285 . 1 `uc 1 . 1 0 :4:0 
+[s S1250 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 T0CKI 1 0 :1:4 
 `uc 1 AN4 1 0 :1:5 
 ]
-[s S1289 . 1 `uc 1 . 1 0 :5:0 
+[s S1254 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SS 1 0 :1:5 
 ]
-[s S1292 . 1 `uc 1 . 1 0 :5:0 
+[s S1257 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_SS 1 0 :1:5 
 ]
-[s S1295 . 1 `uc 1 . 1 0 :5:0 
+[s S1260 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 nSS 1 0 :1:5 
 ]
-[s S1298 . 1 `uc 1 . 1 0 :5:0 
+[s S1263 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 LVDIN 1 0 :1:5 
 ]
-[s S1301 . 1 `uc 1 . 1 0 :5:0 
+[s S1266 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 HLVDIN 1 0 :1:5 
 ]
-[s S1304 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+[s S1269 . 1 `uc 1 ULPWUIN 1 0 :1:0 
 `uc 1 . 1 0 :6:1 
 `uc 1 RJPU 1 0 :1:7 
 ]
-[u S1308 . 1 `S1276 1 . 1 0 `S1285 1 . 1 0 `S1289 1 . 1 0 `S1292 1 . 1 0 `S1295 1 . 1 0 `S1298 1 . 1 0 `S1301 1 . 1 0 `S1304 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES1308  1 e 1 @3968 ]
+[u S1273 . 1 `S1241 1 . 1 0 `S1250 1 . 1 0 `S1254 1 . 1 0 `S1257 1 . 1 0 `S1260 1 . 1 0 `S1263 1 . 1 0 `S1266 1 . 1 0 `S1269 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES1273  1 e 1 @3968 ]
 "185
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
-[s S254 . 1 `uc 1 RB0 1 0 :1:0 
+[s S246 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -417,7 +418,7 @@ Lower 1
 `uc 1 RB7 1 0 :1:7 
 ]
 "226
-[s S263 . 1 `uc 1 INT0 1 0 :1:0 
+[s S255 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 CCP2 1 0 :1:3 
@@ -426,7 +427,7 @@ Lower 1
 `uc 1 KBI2 1 0 :1:6 
 `uc 1 KBI3 1 0 :1:7 
 ]
-[s S272 . 1 `uc 1 AN12 1 0 :1:0 
+[s S264 . 1 `uc 1 AN12 1 0 :1:0 
 `uc 1 AN10 1 0 :1:1 
 `uc 1 AN8 1 0 :1:2 
 `uc 1 AN9 1 0 :1:3 
@@ -435,14 +436,14 @@ Lower 1
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S281 . 1 `uc 1 . 1 0 :3:0 
+[s S273 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S284 . 1 `S254 1 . 1 0 `S263 1 . 1 0 `S272 1 . 1 0 `S281 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES284  1 e 1 @3969 ]
+[u S276 . 1 `S246 1 . 1 0 `S255 1 . 1 0 `S264 1 . 1 0 `S273 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES276  1 e 1 @3969 ]
 "872
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
-[s S320 . 1 `uc 1 LATA0 1 0 :1:0 
+[s S312 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -452,7 +453,7 @@ Lower 1
 `uc 1 LATA7 1 0 :1:7 
 ]
 "899
-[s S329 . 1 `uc 1 LA0 1 0 :1:0 
+[s S321 . 1 `uc 1 LA0 1 0 :1:0 
 `uc 1 LA1 1 0 :1:1 
 `uc 1 LA2 1 0 :1:2 
 `uc 1 LA3 1 0 :1:3 
@@ -461,13 +462,13 @@ Lower 1
 `uc 1 LA6 1 0 :1:6 
 `uc 1 LA7 1 0 :1:7 
 ]
-[u S338 . 1 `S320 1 . 1 0 `S329 1 . 1 0 ]
-[v _LATAbits LATAbits `VES338  1 e 1 @3977 ]
+[u S330 . 1 `S312 1 . 1 0 `S321 1 . 1 0 ]
+[v _LATAbits LATAbits `VES330  1 e 1 @3977 ]
 "983
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
 "1094
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S1468 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S1438 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -477,7 +478,7 @@ Lower 1
 `uc 1 LATC7 1 0 :1:7 
 ]
 "1121
-[s S1477 . 1 `uc 1 LC0 1 0 :1:0 
+[s S1447 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 LC3 1 0 :1:3 
@@ -486,11 +487,11 @@ Lower 1
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S1486 . 1 `S1468 1 . 1 0 `S1477 1 . 1 0 ]
-[v _LATCbits LATCbits `VES1486  1 e 1 @3979 ]
+[u S1456 . 1 `S1438 1 . 1 0 `S1447 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1456  1 e 1 @3979 ]
 "1205
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
-[s S719 . 1 `uc 1 LATD0 1 0 :1:0 
+[s S703 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
 `uc 1 LATD3 1 0 :1:3 
@@ -500,7 +501,7 @@ Lower 1
 `uc 1 LATD7 1 0 :1:7 
 ]
 "1232
-[s S728 . 1 `uc 1 LD0 1 0 :1:0 
+[s S712 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
 `uc 1 LD3 1 0 :1:3 
@@ -509,8 +510,8 @@ Lower 1
 `uc 1 LD6 1 0 :1:6 
 `uc 1 LD7 1 0 :1:7 
 ]
-[u S737 . 1 `S719 1 . 1 0 `S728 1 . 1 0 ]
-[v _LATDbits LATDbits `VES737  1 e 1 @3980 ]
+[u S721 . 1 `S703 1 . 1 0 `S712 1 . 1 0 ]
+[v _LATDbits LATDbits `VES721  1 e 1 @3980 ]
 "1316
 [v _LATE LATE `VEuc  1 e 1 @3981 ]
 "1367
@@ -523,27 +524,27 @@ Lower 1
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 "2251
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S922 . 1 `uc 1 TUN 1 0 :5:0 
+[s S898 . 1 `uc 1 TUN 1 0 :5:0 
 `uc 1 . 1 0 :1:5 
 `uc 1 PLLEN 1 0 :1:6 
 `uc 1 INTSRC 1 0 :1:7 
 ]
 "2434
-[s S927 . 1 `uc 1 TUN0 1 0 :1:0 
+[s S903 . 1 `uc 1 TUN0 1 0 :1:0 
 `uc 1 TUN1 1 0 :1:1 
 `uc 1 TUN2 1 0 :1:2 
 `uc 1 TUN3 1 0 :1:3 
 `uc 1 TUN4 1 0 :1:4 
 ]
-[u S933 . 1 `S922 1 . 1 0 `S927 1 . 1 0 ]
-[v _OSCTUNEbits OSCTUNEbits `VES933  1 e 1 @3995 ]
+[u S909 . 1 `S898 1 . 1 0 `S903 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES909  1 e 1 @3995 ]
 "3493
 [v _T3CON T3CON `VEuc  1 e 1 @4017 ]
 "3610
 [v _TMR3L TMR3L `VEuc  1 e 1 @4018 ]
 "3616
 [v _TMR3H TMR3H `VEuc  1 e 1 @4019 ]
-[s S963 . 1 `uc 1 CM 1 0 :3:0 
+[s S939 . 1 `uc 1 CM 1 0 :3:0 
 `uc 1 CIS 1 0 :1:3 
 `uc 1 C1INV 1 0 :1:4 
 `uc 1 C2INV 1 0 :1:5 
@@ -551,16 +552,16 @@ Lower 1
 `uc 1 C2OUT 1 0 :1:7 
 ]
 "3647
-[s S970 . 1 `uc 1 CM0 1 0 :1:0 
+[s S946 . 1 `uc 1 CM0 1 0 :1:0 
 `uc 1 CM1 1 0 :1:1 
 `uc 1 CM2 1 0 :1:2 
 ]
-[s S974 . 1 `uc 1 CMEN0 1 0 :1:0 
+[s S950 . 1 `uc 1 CMEN0 1 0 :1:0 
 `uc 1 CMEN1 1 0 :1:1 
 `uc 1 CMEN2 1 0 :1:2 
 ]
-[u S978 . 1 `S963 1 . 1 0 `S970 1 . 1 0 `S974 1 . 1 0 ]
-[v _CMCONbits CMCONbits `VES978  1 e 1 @4020 ]
+[u S954 . 1 `S939 1 . 1 0 `S946 1 . 1 0 `S950 1 . 1 0 ]
+[v _CMCONbits CMCONbits `VES954  1 e 1 @4020 ]
 "3711
 [v _CVRCON CVRCON `VEuc  1 e 1 @4021 ]
 "4390
@@ -627,7 +628,7 @@ Lower 1
 [v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
 "5869
 [v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
-[s S431 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S419 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -637,7 +638,7 @@ Lower 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6298
-[s S440 . 1 `uc 1 . 1 0 :1:0 
+[s S428 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -646,12 +647,12 @@ Lower 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S449 . 1 `uc 1 . 1 0 :6:0 
+[s S437 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S453 . 1 `S431 1 . 1 0 `S440 1 . 1 0 `S449 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES453  1 e 1 @4082 ]
+[u S441 . 1 `S419 1 . 1 0 `S428 1 . 1 0 `S437 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES441  1 e 1 @4082 ]
 "6604
 [v _ACKDT ACKDT `VEb  1 e 0 @32301 ]
 "6606
@@ -730,31 +731,19 @@ Lower 1
 [v _startTime startTime `[7]i  1 e 14 0 ]
 "28
 [v _total_time total_time `i  1 e 2 0 ]
-"30
-[v _timer1highbits timer1highbits `i  1 e 2 0 ]
-"31
-[v _timer1lowbits timer1lowbits `i  1 e 2 0 ]
-"35
-[v _timer1_20ms_high timer1_20ms_high `i  1 e 2 0 ]
-"36
-[v _timer1_20ms_low timer1_20ms_low `i  1 e 2 0 ]
-"37
-[v _timer3highbits timer3highbits `i  1 e 2 0 ]
-"38
-[v _timer3lowbits timer3lowbits `i  1 e 2 0 ]
-"40
+"34
 [v _count_total count_total `i  1 e 2 0 ]
-"47
+"41
 [v _f_loadingNewCan f_loadingNewCan `i  1 e 2 0 ]
-"48
+"42
 [v _f_lastCan f_lastCan `i  1 e 2 0 ]
-"49
+"43
 [v _f_ID_receive f_ID_receive `i  1 e 2 0 ]
-"50
+"44
 [v _f_can_coming_to_ID f_can_coming_to_ID `i  1 e 2 0 ]
-"53
+"47
 [v _f_can_coming_to_distribution f_can_coming_to_distribution `i  1 e 2 0 ]
-"56
+"50
 [v _f_can_distributed f_can_distributed `i  1 e 2 0 ]
 "22 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _up up `i  1 e 2 0 ]
@@ -805,19 +794,7 @@ Lower 1
 {
 "118
 } 0
-"166
-[v _getIR getIR `(v  1 e 1 0 ]
-{
-"187
-} 0
-"22 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
-[v _readIR readIR `(v  1 e 1 0 ]
-{
-"24
-[v readIR@res res `i  1 a 2 4 ]
-"26
-} 0
-"70 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"70
 [v _ID ID `(v  1 e 1 0 ]
 {
 "76
@@ -848,28 +825,42 @@ Lower 1
 [v _moveServoBlock moveServoBlock `(v  1 e 1 0 ]
 {
 [v moveServoBlock@myPosition myPosition `E3138  1 a 1 wreg ]
+"191
+[v moveServoBlock@pulse pulse `i  1 a 2 0 ]
+"189
 [v moveServoBlock@myPosition myPosition `E3138  1 a 1 wreg ]
-[v moveServoBlock@myPosition myPosition `E3138  1 a 1 0 ]
-"207
+[v moveServoBlock@myPosition myPosition `E3138  1 a 1 2 ]
+"206
 } 0
 "100
 [v _Distribution Distribution `(v  1 e 1 0 ]
 {
 "109
 } 0
-"208
+"207
 [v _moveServoCup moveServoCup `(v  1 e 1 0 ]
 {
 [v moveServoCup@myPosition myPosition `E3131  1 a 1 wreg ]
+"209
+[v moveServoCup@pulse pulse `i  1 a 2 7 ]
+"207
 [v moveServoCup@myPosition myPosition `E3131  1 a 1 wreg ]
-"210
-[v moveServoCup@myPosition myPosition `E3131  1 a 1 0 ]
-"245
+[v moveServoCup@myPosition myPosition `E3131  1 a 1 6 ]
+"236
+} 0
+"238
+[v _set_timer1 set_timer1 `(v  1 e 1 0 ]
+{
+"239
+[v set_timer1@my_time my_time `ui  1 a 2 4 ]
+"238
+[v set_timer1@time_us time_us `i  1 p 2 0 ]
+"243
 } 0
 "14 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\MachineConfig.c
 [v _machineConfig machineConfig `(v  1 e 1 0 ]
 {
-"65
+"66
 } 0
 "61 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -930,29 +921,29 @@ Lower 1
 [v _UI UI `(v  1 e 1 0 ]
 {
 "150
-[v UI@i_667 i `uc  1 a 1 83 ]
+[v UI@i_651 i `uc  1 a 1 83 ]
 "149
-[v UI@i_666 i `uc  1 a 1 82 ]
+[v UI@i_650 i `uc  1 a 1 82 ]
 "141
-[v UI@i_663 i `uc  1 a 1 81 ]
+[v UI@i_647 i `uc  1 a 1 81 ]
 "140
-[v UI@i_662 i `uc  1 a 1 80 ]
+[v UI@i_646 i `uc  1 a 1 80 ]
 "132
-[v UI@i_659 i `uc  1 a 1 79 ]
+[v UI@i_643 i `uc  1 a 1 79 ]
 "131
-[v UI@i_658 i `uc  1 a 1 78 ]
+[v UI@i_642 i `uc  1 a 1 78 ]
 "123
-[v UI@i_655 i `uc  1 a 1 77 ]
+[v UI@i_639 i `uc  1 a 1 77 ]
 "122
-[v UI@i_654 i `uc  1 a 1 76 ]
+[v UI@i_638 i `uc  1 a 1 76 ]
 "114
-[v UI@i_651 i `uc  1 a 1 75 ]
+[v UI@i_635 i `uc  1 a 1 75 ]
 "113
-[v UI@i_650 i `uc  1 a 1 74 ]
+[v UI@i_634 i `uc  1 a 1 74 ]
 "105
-[v UI@i_647 i `uc  1 a 1 73 ]
+[v UI@i_631 i `uc  1 a 1 73 ]
 "104
-[v UI@i_646 i `uc  1 a 1 72 ]
+[v UI@i_630 i `uc  1 a 1 72 ]
 "91
 [v UI@i i `uc  1 a 1 71 ]
 "153
@@ -969,7 +960,7 @@ Lower 1
 "69
 [v printRTC@RTC_month RTC_month `i  1 a 2 60 ]
 "63
-[v printRTC@F3207 F3207 `[4]uc  1 s 4 F3207 ]
+[v printRTC@F3205 F3205 `[4]uc  1 s 4 F3205 ]
 "110
 } 0
 "8 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\strcpy.c
@@ -1156,7 +1147,14 @@ Lower 1
 "15 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\interruptHandler.c
 [v _handler handler `II(v  1 e 1 0 ]
 {
-"77
+"74
+} 0
+"238 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+[v i2_set_timer1 set_timer1 `(v  1 e 1 0 ]
+{
+[v i2set_timer1@my_time set_timer1 `ui  1 a 2 4 ]
+[v i2set_timer1@time_us time_us `i  1 p 2 0 ]
+"243
 } 0
 "156 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _updateMenu updateMenu `(v  1 e 1 0 ]

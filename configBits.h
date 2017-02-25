@@ -61,4 +61,3 @@
 #include <string.h>
 
 #define _XTAL_FREQ 32000000    // Define osc freq for use in delay macros 
-#define TMR2PRESCALE 16        // Define Timer2 prescale value for use in PWM

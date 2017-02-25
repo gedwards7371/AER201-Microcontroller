@@ -27,13 +27,8 @@ int was_low; // flag to indicate whether servo is refreshing (20ms low) or not r
 int startTime[7];
 int total_time;
 
-int timer1highbits;
-int timer1lowbits;
-//int timer1_20ms_high = 0b10110001;
-//int timer1_20ms_low = 0b11100000;
-
-int timer1_20ms_high = 0b10110111;
-int timer1_20ms_low = 0b10111100;
+void set_timer1(int time_us);
+int ServoTimes[2];
 int timer3highbits;
 int timer3lowbits;
 

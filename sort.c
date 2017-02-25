@@ -34,7 +34,7 @@ void Loading(void){
         DC = 1;
         
         // Start sending pulses to servos
-        moveServoCup(Home);
+        moveServoCup(popCanNoTab);
         // moveServoBlock(Raise);
     }
     else{
@@ -42,7 +42,7 @@ void Loading(void){
         // code to be able to enter straight down to check if the ID stage is ready
         if(!f_loadingNewCan){
             // update f_loadingNewCan flag
-            getIR(); 
+            //getIR(); 
             // "If no new can is being loaded..."
             if(!f_loadingNewCan){
                return; // get out of sort function (i.e. restart it)
@@ -188,16 +188,15 @@ void getIR(void){
 
 void moveServoBlock(enum blockPositions myPosition){
     // lower or raise the block
+    int pulse;
     switch(myPosition){
         case Raise:
             // 2 ms pulses
-            timer3highbits = 0b11111000;
-            timer3lowbits = 0b00110000;
+            pulse = 2000;
             break;
         case Lower:
             // 1 ms pulses
-            timer3highbits = 0b11111100;
-            timer3lowbits = 0b00011000;
+            pulse = 1000;
             break;
         default:
             break;
@@ -205,41 +204,40 @@ void moveServoBlock(enum blockPositions myPosition){
     // Start TMR1 (MERGE THIS FUNC WITH THE BOTTOM ONE)
     was_low = 0;
 }
-void moveServoCup(enum motorPositions myPosition){
+void moveServos(enum motorPositions myPosition){
     // Hit servo with pulses characteristic to each position
-    T1CON = 0b10110000;
+    int pulse;
     switch(myPosition){
         case Home:
-            // 1.5 ms pulses
-            timer1highbits = 0b11111010;
-            timer1lowbits = 0b00100100;
+            pulse = 1500;
             break;
         case popCanNoTab:
             // 1 ms pulses
-            timer1highbits = 0b11111100;
-            timer1lowbits = 0b00011000;
+            pulse = 1000;
             break;
         case popCanWithTab:
             //1.33 ms pulses
-            timer1highbits = 0b11111010;
-            timer1lowbits = 0b11001011;
+            pulse = 1333;
             break;
         case soupCanNoLabel:
             // 1.66 ms pulses
-            timer1highbits = 0b11111001;
-            timer1lowbits = 0b01111101;
+            pulse = 1666;
             break;
         case soupCanWithLabel:
             // 2 ms pulses
-            timer1highbits = 0b11111000;
-            timer1lowbits = 0b00110000;
+            pulse = 2000;
             break;
         default:
             break;
     }
     // Start TMR1
-    TMR1H = timer1highbits;
-    TMR1L = timer1lowbits;
-    TMR1ON = 1;
+    set_timer1(pulse);
     was_low = 0;
+}
+
+void set_timer1(int time_us){
+    unsigned int my_time = 65535 - time_us;
+    TMR1H = my_time >> 8;
+    TMR1L = my_time & 0xFF;
+    TMR1ON = 1;
 }
