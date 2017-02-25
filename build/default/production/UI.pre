@@ -3702,7 +3702,7 @@ extern int printf(const char *, ...);
 
 
 # 3 "configBits.h"
-#pragma config OSC = 1000;
+#pragma config OSC = INTIO67
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
 
@@ -3869,7 +3869,9 @@ void printSortTimer(void);
 
 void getIR(void);
 int IR_signal;
-int MAGNETISM_in(void);
+int TMR3counter=0;
+int TMR3CF=0;
+int MAG_signal;
 
 void moveServoBlock(enum blockPositions block);
 void moveServoCup(enum motorPositions canType);
@@ -3912,8 +3914,8 @@ void readADC(char channel);
 void readIR(void);
 void readMAG(void);
 
-unsigned char THIR = 0x00FF;
-unsigned char THMAG = 0x00FF;
+int THIR = 255;
+int THMAG = 255;
 
 # 22 "UI.c"
 int up; int down; int enter; int back;

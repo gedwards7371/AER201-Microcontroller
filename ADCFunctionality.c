@@ -21,12 +21,12 @@ void readADC(char channel){
 
 void readIR(void){
     readADC(0);
-    unsigned char res = ADRESH<<8 | ADRESL;
-    IR_signal = (res > THIR) ? 1 : 0;
+    int res = ADRESH<<8 | ADRESL;
+    IR_signal = (res < THIR) ? 1 : 0;
 }
 
 void readMAG(void){
     readADC(1);
-    unsigned char res = ADRESH<<8 | ADRESL;
-    MAG_signal = (res > THMAG) ? 1 : 0;
+    int res = ADRESH<<8 | ADRESL;
+    MAG_signal = (res < THMAG) ? 1 : 0;
 }

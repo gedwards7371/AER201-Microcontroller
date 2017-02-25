@@ -69,20 +69,21 @@ void Loading(void){
 }
 void ID(void){
     if(f_can_coming_to_ID){
-        //characteristic delay based on time it takes can to be transported here
-        
-        // Read conductivity sensor circuit. Because the solenoids are pushed in
-        // right now, this will tell us side of can conductivity
+        //**characteristic delay based on time it takes can to be transported here
+        __delay_ms(500); // IDK...& we could use Timer2 for this
+        // Read conductivity sensor circuit. Because the solenoids are pushed in right now, this will tell us side of can conductivity
         int side_conductivity = 0;
         int magnetic = 0;
         int top_bottom_conductivity = 0;
         
-        side_conductivity = PORTAbits.RA2; // note that this is a local variable because we don't want to use an old result ever
+        side_conductivity = PORTAbits.RA2; // note that this is a local variable because we don't want to use an old result, ever!
         if(!side_conductivity){
-            magnetic = readMAG();
+            readMAG();
+            magnetic = MAG_signal;
             if(!magnetic){
                 SOL_COND_SENSORS = 1; //activate solenoids for top/bottom conductivity sensors
-                // characteristic delay of time it takes for solenoids move out
+                // characteristic delay for time it takes for solenoids move out
+                __delay_ms(100); // IDK
                 top_bottom_conductivity = PORTAbits.RA2;
                 SOL_COND_SENSORS = 0;
             }
@@ -165,15 +166,19 @@ void printSortTimer(void){
 void getIR(void){
     readIR();
     if(IR_signal==1){
-        T2CON = 0b01111011; // 1:16 postscale (not taken into account for comp. with PR2), 16x prescaler
-        PR2 = 0xFF;
-        TMR2ON = 1;
+        // load Timer3 with 50 ms delay
+        T3CON = 0b10110000;
+        TMR3H = 0b00111100;
+        TMR3L = 0b10110000;
+        TMR3ON = 1;
     }
-    while(IR_signal && TMR2IF){
-        // Wait for the duration Timer2 was set, as a maximum
+    while(IR_signal && !TMR3CF){
+        // Check IR signal for the duration Timer3 was set, as a maximum
+        readIR();
     }
-    // If IR beam was broken for longer than Timer2 elapsed
-    if(TMR2IF==1){
+    // If IR beam was broken for longer than Timer3 elapsed
+    TMR3CF = 0;
+    if(TMR3IF==1){
         f_loadingNewCan = 1;
     }
     else{
@@ -183,7 +188,6 @@ void getIR(void){
 
 void moveServoBlock(enum blockPositions myPosition){
     // lower or raise the block
-    T3CON = 0b10110000;
     switch(myPosition){
         case Raise:
             // 2 ms pulses
@@ -198,10 +202,7 @@ void moveServoBlock(enum blockPositions myPosition){
         default:
             break;
     }
-    // Start TMR1
-    TMR3H = timer3highbits;
-    TMR3L = timer3lowbits;
-    TMR3ON = 1;
+    // Start TMR1 (MERGE THIS FUNC WITH THE BOTTOM ONE)
     was_low = 0;
 }
 void moveServoCup(enum motorPositions myPosition){

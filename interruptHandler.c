@@ -27,9 +27,7 @@ void interrupt handler(void) {
         TMR0IF = 0;
         if(machine_state == Sorting_state){
             printSortTimer();
-            
             // Initialize timer again!
-            T0CON = 0b00010111;
             TMR0H = 0b10000101;
             TMR0L = 0b11101110;
             TMR0ON = 1;
@@ -41,7 +39,6 @@ void interrupt handler(void) {
         TMR1IF = 0; // Clear interrupt flag
         TMR1ON = 0;
         if(machine_state == Sorting_state){
-            T1CON = 0b10110000;
             if(was_low){
                 //SERVOPAN = 1;
                 SERVOTILT = 1;
@@ -63,8 +60,18 @@ void interrupt handler(void) {
     }
     
     //** Timer for IR sensor beam break
-    if(TMR2IF){
-        TMR2IF = 0;
-        TMR2ON = 0;
+    if(TMR3IF){
+        TMR3IF = 0;
+        TMR3ON = 0;
+        TMR3counter++;
+        if(TMR3counter==10){
+            TMR3counter=0;
+            TMR3CF = 1;
+        }
+        else{
+            TMR3H = 0b00111100;
+            TMR3L = 0b10110000;
+            TMR3ON = 1;
+        }
     }
 }

@@ -15,6 +15,8 @@ void printSortTimer(void);
 
 void getIR(void);
 int IR_signal;
+int TMR3counter=0;
+int TMR3CF=0;
 int MAG_signal;
 
 void moveServoBlock(enum blockPositions block);

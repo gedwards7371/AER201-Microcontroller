@@ -25,21 +25,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S10 . . . . . ]
 "226
 [v _PORTBbits `VS10 ~T0 @X0 0 e@3969 ]
-"1211
-[s S47 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S47 . LATD0 LATD1 LATD2 LATD3 LATD4 LATD5 LATD6 LATD7 ]
-"1221
-[s S48 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S48 . LD0 LD1 LD2 LD3 LD4 LD5 LD6 LD7 ]
-"1210
-[u S46 `S47 1 `S48 1 ]
-[n S46 . . . ]
-"1232
-[v _LATDbits `VS46 ~T0 @X0 0 e@3980 ]
-"43 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
-"878 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
+"878
 [s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S38 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
 "888
@@ -50,6 +36,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S37 . . . ]
 "899
 [v _LATAbits `VS37 ~T0 @X0 0 e@3977 ]
+"43 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18.h
+[v ___nop `(v ~T0 @X0 0 ef ]
+[p i ___nop ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2953,119 +2942,133 @@ Version 3.2 HI-TECH Software Intermediate Code
 "17
 [v _IR_signal `i ~T0 @X0 1 e ]
 [; ;sort.h: 17: int IR_signal;
-[; ;sort.h: 18: int MAGNETISM_in(void);
-[; ;sort.h: 20: void moveServoBlock(enum blockPositions block);
-[; ;sort.h: 21: void moveServoCup(enum motorPositions canType);
-"23
+"18
+[v _TMR3counter `i ~T0 @X0 1 e ]
+[i _TMR3counter
+-> 0 `i
+]
+[; ;sort.h: 18: int TMR3counter=0;
+"19
+[v _TMR3CF `i ~T0 @X0 1 e ]
+[i _TMR3CF
+-> 0 `i
+]
+[; ;sort.h: 19: int TMR3CF=0;
+"20
+[v _MAG_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 20: int MAG_signal;
+[; ;sort.h: 22: void moveServoBlock(enum blockPositions block);
+[; ;sort.h: 23: void moveServoCup(enum motorPositions canType);
+"25
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 23: int first=1;
-"24
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 24: int was_low;
-"25
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 25: int startTime[7];
+[; ;sort.h: 25: int first=1;
 "26
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 26: int total_time;
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 26: int was_low;
+"27
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 27: int startTime[7];
 "28
+[v _total_time `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int total_time;
+"30
 [v _timer1highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 28: int timer1highbits;
-"29
+[; ;sort.h: 30: int timer1highbits;
+"31
 [v _timer1lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 29: int timer1lowbits;
-"33
+[; ;sort.h: 31: int timer1lowbits;
+"35
 [v _timer1_20ms_high `i ~T0 @X0 1 e ]
 [i _timer1_20ms_high
 -> 183 `i
 ]
-[; ;sort.h: 33: int timer1_20ms_high = 0b10110111;
-"34
+[; ;sort.h: 35: int timer1_20ms_high = 0b10110111;
+"36
 [v _timer1_20ms_low `i ~T0 @X0 1 e ]
 [i _timer1_20ms_low
 -> 188 `i
 ]
-[; ;sort.h: 34: int timer1_20ms_low = 0b10111100;
-"35
+[; ;sort.h: 36: int timer1_20ms_low = 0b10111100;
+"37
 [v _timer3highbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int timer3highbits;
-"36
-[v _timer3lowbits `i ~T0 @X0 1 e ]
-[; ;sort.h: 36: int timer3lowbits;
+[; ;sort.h: 37: int timer3highbits;
 "38
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 38: int count_total;
-"39
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 39: int count_pop_no_tab;
+[v _timer3lowbits `i ~T0 @X0 1 e ]
+[; ;sort.h: 38: int timer3lowbits;
 "40
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 40: int count_pop_w_tab;
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 40: int count_total;
 "41
-[v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 41: int count_can_no_lab;
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 41: int count_pop_no_tab;
 "42
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 42: int count_pop_w_tab;
+"43
+[v _count_can_no_lab `i ~T0 @X0 1 e ]
+[; ;sort.h: 43: int count_can_no_lab;
+"44
 [v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 42: int count_can_w_lab;
-"45
+[; ;sort.h: 44: int count_can_w_lab;
+"47
 [v _f_loadingNewCan `i ~T0 @X0 1 e ]
 [i _f_loadingNewCan
 -> 0 `i
 ]
-[; ;sort.h: 45: int f_loadingNewCan = 0;
-"46
+[; ;sort.h: 47: int f_loadingNewCan = 0;
+"48
 [v _f_lastCan `i ~T0 @X0 1 e ]
 [i _f_lastCan
 -> 0 `i
 ]
-[; ;sort.h: 46: int f_lastCan = 0;
-"47
+[; ;sort.h: 48: int f_lastCan = 0;
+"49
 [v _f_ID_receive `i ~T0 @X0 1 e ]
 [i _f_ID_receive
 -> 1 `i
 ]
-[; ;sort.h: 47: int f_ID_receive = 1;
-"48
+[; ;sort.h: 49: int f_ID_receive = 1;
+"50
 [v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
 [i _f_can_coming_to_ID
 -> 0 `i
 ]
-[; ;sort.h: 48: int f_can_coming_to_ID = 0;
-"51
+[; ;sort.h: 50: int f_can_coming_to_ID = 0;
+"53
 [v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
 [i _f_can_coming_to_distribution
 -> 0 `i
 ]
-[; ;sort.h: 51: int f_can_coming_to_distribution = 0;
-"54
+[; ;sort.h: 53: int f_can_coming_to_distribution = 0;
+"56
 [v _f_can_distributed `i ~T0 @X0 1 e ]
 [i _f_can_distributed
 -> 0 `i
 ]
-[; ;sort.h: 54: int f_can_distributed = 0;
+[; ;sort.h: 56: int f_can_distributed = 0;
 [; ;ADCFunctionality.h: 2: void readADC(char channel);
 [; ;ADCFunctionality.h: 3: void readIR(void);
 [; ;ADCFunctionality.h: 4: void readMAG(void);
 "6 ADCFunctionality.h
-[v _THIR `uc ~T0 @X0 1 e ]
+[v _THIR `i ~T0 @X0 1 e ]
 [i _THIR
--> -> 255 `i `uc
+-> 255 `i
 ]
-[; ;ADCFunctionality.h: 6: unsigned char THIR = 0x00FF;
+[; ;ADCFunctionality.h: 6: int THIR = 255;
 "7
-[v _THMAG `uc ~T0 @X0 1 e ]
+[v _THMAG `i ~T0 @X0 1 e ]
 [i _THMAG
--> -> 255 `i `uc
+-> 255 `i
 ]
-[; ;ADCFunctionality.h: 7: unsigned char THMAG = 0x00FF;
+[; ;ADCFunctionality.h: 7: int THMAG = 255;
 "14 PortHigh.c
-[v _PortTestD0 `(v ~T0 @X0 1 ef ]
+[v _PortTestA5 `(v ~T0 @X0 1 ef ]
 {
-[; ;PortHigh.c: 14: void PortTestD0(void){
-[e :U _PortTestD0 ]
+[; ;PortHigh.c: 14: void PortTestA5(void){
+[e :U _PortTestA5 ]
 [f ]
 [; ;PortHigh.c: 15: while(PORTBbits.RB1 == 0){
 "15
@@ -3079,9 +3082,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $ == -> . . _PORTBbits 0 1 `i -> 0 `i 268  ]
 [e :U 269 ]
 [; ;PortHigh.c: 18: }
-[; ;PortHigh.c: 19: LATDbits.LATD0 = 1;
+[; ;PortHigh.c: 19: LATAbits.LATA5 = 1;
 "19
-[e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
+[e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
 [; ;PortHigh.c: 20: while(PORTBbits.RB1 == 1){
 "20
 [e $U 270  ]
@@ -3100,56 +3103,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;PortHigh.c: 24: __nop();
 "24
 [e ( ___nop ..  ]
-[; ;PortHigh.c: 25: LATDbits.LATD0 = 0;
+[; ;PortHigh.c: 25: LATAbits.LATA5 = 0;
 "25
-[e = . . _LATDbits 0 0 -> -> 0 `i `uc ]
+[e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
 [; ;PortHigh.c: 26: }
 "26
 [e :UE 266 ]
-}
-"28
-[v _PortTestA5 `(v ~T0 @X0 1 ef ]
-{
-[; ;PortHigh.c: 28: void PortTestA5(void){
-[e :U _PortTestA5 ]
-[f ]
-[; ;PortHigh.c: 29: while(PORTBbits.RB1 == 0){
-"29
-[e $U 274  ]
-[e :U 275 ]
-{
-"32
-}
-[e :U 274 ]
-"29
-[e $ == -> . . _PORTBbits 0 1 `i -> 0 `i 275  ]
-[e :U 276 ]
-[; ;PortHigh.c: 32: }
-[; ;PortHigh.c: 33: LATAbits.LATA5 = 1;
-"33
-[e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
-[; ;PortHigh.c: 34: while(PORTBbits.RB1 == 1){
-"34
-[e $U 277  ]
-[e :U 278 ]
-{
-"36
-}
-[e :U 277 ]
-"34
-[e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 278  ]
-[e :U 279 ]
-[; ;PortHigh.c: 36: }
-[; ;PortHigh.c: 37: __nop();
-"37
-[e ( ___nop ..  ]
-[; ;PortHigh.c: 38: __nop();
-"38
-[e ( ___nop ..  ]
-[; ;PortHigh.c: 39: LATAbits.LATA5 = 0;
-"39
-[e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
-[; ;PortHigh.c: 40: }
-"40
-[e :UE 273 ]
 }

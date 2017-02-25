@@ -1,6 +1,6 @@
 
 // CONFIG1H
-#pragma config OSC = 1000;  // Oscillator Selection bits (internal clock; RA6 and RA7 freed))
+#pragma config OSC = INTIO67  // Oscillator Selection bits (internal clock; RA6 and RA7 freed))
 #pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor disabled)
 #pragma config IESO = OFF       // Internal/External Oscillator Switchover bit (Oscillator Switchover mode disabled)
 

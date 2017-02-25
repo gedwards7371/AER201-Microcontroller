@@ -16,7 +16,7 @@ void PortTestA5(void);
 void main(void) {
     machineConfig();
     initLCD();
-    initTime(0x42, 0x32, 0x13, 0x04, 0x09, 0x02, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
+    initTime(0x42, 0x44, 0x19, 0x06, 0x24, 0x02, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
     initUI();
     
     //machine_state = Testing_state; // comment me out if you're not testing

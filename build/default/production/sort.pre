@@ -3702,7 +3702,7 @@ extern int printf(const char *, ...);
 
 
 # 3 "configBits.h"
-#pragma config OSC = 1000;
+#pragma config OSC = INTIO67
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
 
@@ -3869,7 +3869,9 @@ void printSortTimer(void);
 
 void getIR(void);
 int IR_signal;
-int MAGNETISM_in(void);
+int TMR3counter=0;
+int TMR3CF=0;
+int MAG_signal;
 
 void moveServoBlock(enum blockPositions block);
 void moveServoCup(enum motorPositions canType);
@@ -3912,8 +3914,8 @@ void readADC(char channel);
 void readIR(void);
 void readMAG(void);
 
-unsigned char THIR = 0x00FF;
-unsigned char THMAG = 0x00FF;
+int THIR = 255;
+int THMAG = 255;
 
 # 14 "sort.c"
 void sort(void){
@@ -3975,8 +3977,7 @@ LATAbits.LATA4 = 0;
 void ID(void){
 if(f_can_coming_to_ID){
 
-
-
+_delay((unsigned long)((500)*(32000000/4000.0)));
 
 int side_conductivity = 0;
 int magnetic = 0;
@@ -3984,10 +3985,12 @@ int top_bottom_conductivity = 0;
 
 side_conductivity = PORTAbits.RA2;
 if(!side_conductivity){
-magnetic = MAGNETISM_in();
+readMAG();
+magnetic = MAG_signal;
 if(!magnetic){
 LATAbits.LATA3 = 1;
 
+_delay((unsigned long)((100)*(32000000/4000.0)));
 top_bottom_conductivity = PORTAbits.RA2;
 LATAbits.LATA3 = 0;
 }
@@ -4029,7 +4032,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 134
+# 135
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4064,29 +4067,28 @@ printf("Time: %02d:%02d:%02d", hour, min, sec);
 void getIR(void){
 readIR();
 if(IR_signal==1){
-T2CON = 0b01111011;
-PR2 = 0xFF;
-TMR2ON = 1;
-}
-while(IR_signal && TMR2IF){
 
+T3CON = 0b10110000;
+TMR3H = 0b00111100;
+TMR3L = 0b10110000;
+TMR3ON = 1;
+}
+while(IR_signal && !TMR3CF){
+
+readIR();
 }
 
-if(TMR2IF==1){
+TMR3CF = 0;
+if(TMR3IF==1){
 f_loadingNewCan = 1;
 }
 else{
 f_loadingNewCan = 0;
 }
 }
-int MAGNETISM_in(void){
-
-return 0;
-}
 
 void moveServoBlock(enum blockPositions myPosition){
 
-T3CON = 0b10110000;
 switch(myPosition){
 case Raise:
 
@@ -4102,9 +4104,6 @@ default:
 break;
 }
 
-TMR3H = timer3highbits;
-TMR3L = timer3lowbits;
-TMR3ON = 1;
 was_low = 0;
 }
 void moveServoCup(enum motorPositions myPosition){
