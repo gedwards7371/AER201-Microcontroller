@@ -3853,39 +3853,18 @@ void main(void);
 void stopSignals(void);
 
 # 2 "sort.h"
+void initFlags(void);
+void initSortTimer(void);
+void initServos(void);
+
+
 void sort(void);
 void Loading(void);
 void ID(void);
 void Distribution(void);
 
 
-void initFlags(void);
-void initSortTimer(void);
-void initServos(void);
-
-void printSortTimer(void);
-
-void getIR(void);
-int IR_signal;
-int TMR3counter=0;
-int TMR3CF=0;
-int MAG_signal;
-
 int first=1;
-int was_low;
-int startTime[7];
-int total_time;
-
-void updateServoPosition(int time_us, int timer);
-int servoTimes[4];
-
-int count_total;
-int count_pop_no_tab;
-int count_pop_w_tab;
-int count_can_no_lab;
-int count_can_w_lab;
-
-
 int f_loadingNewCan = 0;
 int f_lastCan = 0;
 int f_ID_receive = 1;
@@ -3896,6 +3875,31 @@ int f_can_coming_to_distribution = 0;
 
 
 int f_can_distributed = 0;
+
+
+void printSortTimer(void);
+int startTime[7];
+int total_time;
+
+
+void getIR(void);
+int IR_signal;
+int TMR3counter=0;
+int TMR3CF=0;
+int MAG_signal;
+
+
+void updateServoPosition(int time_us, int timer);
+int servoTimes[4];
+int was_low;
+
+
+int count_total;
+int count_pop_no_tab;
+int count_pop_w_tab;
+int count_can_w_lab;
+int count_can_no_lab;
+int cur_can;
 
 # 2 "ADCFunctionality.h"
 void readADC(char channel);

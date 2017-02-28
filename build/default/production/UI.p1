@@ -2957,103 +2957,106 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.h: 3: enum states machine_state;
 [; ;main.h: 4: void main(void);
 [; ;main.h: 5: void stopSignals(void);
-[; ;sort.h: 2: void sort(void);
-[; ;sort.h: 3: void Loading(void);
-[; ;sort.h: 4: void ID(void);
-[; ;sort.h: 5: void Distribution(void);
-[; ;sort.h: 8: void initFlags(void);
-[; ;sort.h: 9: void initSortTimer(void);
-[; ;sort.h: 10: void initServos(void);
-[; ;sort.h: 12: void printSortTimer(void);
-[; ;sort.h: 14: void getIR(void);
-"15 sort.h
-[v _IR_signal `i ~T0 @X0 1 e ]
-[; ;sort.h: 15: int IR_signal;
-"16
-[v _TMR3counter `i ~T0 @X0 1 e ]
-[i _TMR3counter
--> 0 `i
-]
-[; ;sort.h: 16: int TMR3counter=0;
-"17
-[v _TMR3CF `i ~T0 @X0 1 e ]
-[i _TMR3CF
--> 0 `i
-]
-[; ;sort.h: 17: int TMR3CF=0;
-"18
-[v _MAG_signal `i ~T0 @X0 1 e ]
-[; ;sort.h: 18: int MAG_signal;
-"20
+[; ;sort.h: 2: void initFlags(void);
+[; ;sort.h: 3: void initSortTimer(void);
+[; ;sort.h: 4: void initServos(void);
+[; ;sort.h: 7: void sort(void);
+[; ;sort.h: 8: void Loading(void);
+[; ;sort.h: 9: void ID(void);
+[; ;sort.h: 10: void Distribution(void);
+"13 sort.h
 [v _first `i ~T0 @X0 1 e ]
 [i _first
 -> 1 `i
 ]
-[; ;sort.h: 20: int first=1;
-"21
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 21: int was_low;
-"22
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 22: int startTime[7];
-"23
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 23: int total_time;
-[; ;sort.h: 25: void updateServoPosition(int time_us, int timer);
-"26
-[v _servoTimes `i ~T0 @X0 -> 4 `i e ]
-[; ;sort.h: 26: int servoTimes[4];
-"28
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 28: int count_total;
-"29
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 29: int count_pop_no_tab;
-"30
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 30: int count_pop_w_tab;
-"31
-[v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 31: int count_can_no_lab;
-"32
-[v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 32: int count_can_w_lab;
-"35
+[; ;sort.h: 13: int first=1;
+"14
 [v _f_loadingNewCan `i ~T0 @X0 1 e ]
 [i _f_loadingNewCan
 -> 0 `i
 ]
-[; ;sort.h: 35: int f_loadingNewCan = 0;
-"36
+[; ;sort.h: 14: int f_loadingNewCan = 0;
+"15
 [v _f_lastCan `i ~T0 @X0 1 e ]
 [i _f_lastCan
 -> 0 `i
 ]
-[; ;sort.h: 36: int f_lastCan = 0;
-"37
+[; ;sort.h: 15: int f_lastCan = 0;
+"16
 [v _f_ID_receive `i ~T0 @X0 1 e ]
 [i _f_ID_receive
 -> 1 `i
 ]
-[; ;sort.h: 37: int f_ID_receive = 1;
-"38
+[; ;sort.h: 16: int f_ID_receive = 1;
+"17
 [v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
 [i _f_can_coming_to_ID
 -> 0 `i
 ]
-[; ;sort.h: 38: int f_can_coming_to_ID = 0;
-"41
+[; ;sort.h: 17: int f_can_coming_to_ID = 0;
+"20
 [v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
 [i _f_can_coming_to_distribution
 -> 0 `i
 ]
-[; ;sort.h: 41: int f_can_coming_to_distribution = 0;
-"44
+[; ;sort.h: 20: int f_can_coming_to_distribution = 0;
+"23
 [v _f_can_distributed `i ~T0 @X0 1 e ]
 [i _f_can_distributed
 -> 0 `i
 ]
-[; ;sort.h: 44: int f_can_distributed = 0;
+[; ;sort.h: 23: int f_can_distributed = 0;
+[; ;sort.h: 26: void printSortTimer(void);
+"27
+[v _startTime `i ~T0 @X0 -> 7 `i e ]
+[; ;sort.h: 27: int startTime[7];
+"28
+[v _total_time `i ~T0 @X0 1 e ]
+[; ;sort.h: 28: int total_time;
+[; ;sort.h: 31: void getIR(void);
+"32
+[v _IR_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 32: int IR_signal;
+"33
+[v _TMR3counter `i ~T0 @X0 1 e ]
+[i _TMR3counter
+-> 0 `i
+]
+[; ;sort.h: 33: int TMR3counter=0;
+"34
+[v _TMR3CF `i ~T0 @X0 1 e ]
+[i _TMR3CF
+-> 0 `i
+]
+[; ;sort.h: 34: int TMR3CF=0;
+"35
+[v _MAG_signal `i ~T0 @X0 1 e ]
+[; ;sort.h: 35: int MAG_signal;
+[; ;sort.h: 38: void updateServoPosition(int time_us, int timer);
+"39
+[v _servoTimes `i ~T0 @X0 -> 4 `i e ]
+[; ;sort.h: 39: int servoTimes[4];
+"40
+[v _was_low `i ~T0 @X0 1 e ]
+[; ;sort.h: 40: int was_low;
+"43
+[v _count_total `i ~T0 @X0 1 e ]
+[; ;sort.h: 43: int count_total;
+"44
+[v _count_pop_no_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 44: int count_pop_no_tab;
+"45
+[v _count_pop_w_tab `i ~T0 @X0 1 e ]
+[; ;sort.h: 45: int count_pop_w_tab;
+"46
+[v _count_can_w_lab `i ~T0 @X0 1 e ]
+[; ;sort.h: 46: int count_can_w_lab;
+"47
+[v _count_can_no_lab `i ~T0 @X0 1 e ]
+[; ;sort.h: 47: int count_can_no_lab;
+"48
+[v _cur_can `i ~T0 @X0 1 e ]
+[; ;sort.h: 48: int cur_can;
 [; ;ADCFunctionality.h: 2: void readADC(char channel);
 [; ;ADCFunctionality.h: 3: void readIR(void);
 [; ;ADCFunctionality.h: 4: void readMAG(void);

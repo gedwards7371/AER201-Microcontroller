@@ -127,16 +127,16 @@ void Distribution(void){
         // Set pan servo position
         switch(cur_can){
             case 0:
-                updateServoPosition(PAN_R);
+                updateServoPosition(PAN_R, 1);
                 break;
             case 1:
-                updateServoPosition(PAN_RMID);
+                updateServoPosition(PAN_RMID, 1);
                 break;
             case 2:
-                updateServoPosition(PAN_LMID);
+                updateServoPosition(PAN_LMID, 1);
                 break;
             case 3:
-                updateServoPosition(PAN_L);
+                updateServoPosition(PAN_L, 1);
                 break;
             default:
                 break;
@@ -144,12 +144,12 @@ void Distribution(void){
         __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
         
         // Tilt to drop can into bin
-        updateServoPosition(TILT_DOWN);
+        updateServoPosition(TILT_DOWN, 3);
         __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
         
         // Reset the distribution stage
-        updateServoPosition(PAN_MID);
-        updateServoPosition(TILT_UP);
+        updateServoPosition(PAN_MID, 1);
+        updateServoPosition(TILT_UP, 3);
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
     }
