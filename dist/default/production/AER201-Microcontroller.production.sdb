@@ -188,7 +188,7 @@ EmergencyStop_state 4
 [v _initServos initServos `(v  1 e 1 0 ]
 "154
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
-"204
+"194
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
 "61 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -326,7 +326,7 @@ EmergencyStop_state 4
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
 "1094
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S1318 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S1314 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -336,7 +336,7 @@ EmergencyStop_state 4
 `uc 1 LATC7 1 0 :1:7 
 ]
 "1121
-[s S1327 . 1 `uc 1 LC0 1 0 :1:0 
+[s S1323 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 LC3 1 0 :1:3 
@@ -345,8 +345,8 @@ EmergencyStop_state 4
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S1336 . 1 `S1318 1 . 1 0 `S1327 1 . 1 0 ]
-[v _LATCbits LATCbits `VES1336  1 e 1 @3979 ]
+[u S1332 . 1 `S1314 1 . 1 0 `S1323 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1332  1 e 1 @3979 ]
 "1205
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
 [s S646 . 1 `uc 1 LATD0 1 0 :1:0 
@@ -396,8 +396,6 @@ EmergencyStop_state 4
 ]
 [u S828 . 1 `S817 1 . 1 0 `S822 1 . 1 0 ]
 [v _OSCTUNEbits OSCTUNEbits `VES828  1 e 1 @3995 ]
-"3493
-[v _T3CON T3CON `VEuc  1 e 1 @4017 ]
 "3610
 [v _TMR3L TMR3L `VEuc  1 e 1 @4018 ]
 "3616
@@ -573,8 +571,6 @@ EmergencyStop_state 4
 [v _time time `[7]uc  1 e 7 0 ]
 "15 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.h
 [v _IR_signal IR_signal `i  1 e 2 0 ]
-"17
-[v _TMR3CF TMR3CF `i  1 e 2 0 ]
 "18
 [v _MAG_signal MAG_signal `i  1 e 2 0 ]
 "20
@@ -637,16 +633,16 @@ EmergencyStop_state 4
 [v _Loading Loading `(v  1 e 1 0 ]
 {
 "45
-[v Loading@i_1266 i `uc  1 a 1 18 ]
-[v Loading@i_1265 i `uc  1 a 1 17 ]
+[v Loading@i_1262 i `uc  1 a 1 18 ]
+[v Loading@i_1261 i `uc  1 a 1 17 ]
 "42
-[v Loading@i_1264 i `uc  1 a 1 16 ]
-[v Loading@i_1263 i `uc  1 a 1 15 ]
+[v Loading@i_1260 i `uc  1 a 1 16 ]
+[v Loading@i_1259 i `uc  1 a 1 15 ]
 "40
-[v Loading@i_1262 i `uc  1 a 1 14 ]
-[v Loading@i_1261 i `uc  1 a 1 13 ]
+[v Loading@i_1258 i `uc  1 a 1 14 ]
+[v Loading@i_1257 i `uc  1 a 1 13 ]
 "38
-[v Loading@i_1260 i `uc  1 a 1 12 ]
+[v Loading@i_1256 i `uc  1 a 1 12 ]
 [v Loading@i i `uc  1 a 1 11 ]
 "78
 } 0
@@ -662,15 +658,15 @@ EmergencyStop_state 4
 {
 "153
 } 0
-"204
+"194
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
 {
-"205
+"195
 [v updateServoPosition@my_time my_time `ui  1 a 2 6 ]
-"204
+"194
 [v updateServoPosition@time_us time_us `i  1 p 2 0 ]
 [v updateServoPosition@timer timer `i  1 p 2 2 ]
-"214
+"204
 } 0
 "120
 [v _initFlags initFlags `(v  1 e 1 0 ]

@@ -4070,23 +4070,13 @@ printf("Time: %02d:%02d:%02d", hour, min, sec);
 void getIR(void){
 readIR();
 if(IR_signal==1){
-
-T3CON = 0b10110000;
-TMR3H = 0b00111100;
-TMR3L = 0b10110000;
-TMR3ON = 1;
-}
-while(IR_signal && !TMR3CF){
-
-readIR();
-}
-
-TMR3CF = 0;
-if(TMR3IF==1){
+_delay((unsigned long)((100)*(32000000/4000.0)));
+if(IR_signal==1){
 f_loadingNewCan = 1;
 }
 else{
 f_loadingNewCan = 0;
+}
 }
 }
 

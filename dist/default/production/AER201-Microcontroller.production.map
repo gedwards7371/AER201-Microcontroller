@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=D:\Program Files (x86)\Microchip\xc8\v1.40\dat\en_msgs.txt -cs \
   -h+dist/default/production\AER201-Microcontroller.production.sym \
   --cmf=dist/default/production\AER201-Microcontroller.production.cmf -z \
-  -Q18F4620 -oC:\Users\Tyler\AppData\Local\Temp\s3p8.2 \
+  -Q18F4620 -oC:\Users\Tyler\AppData\Local\Temp\sfso.2 \
   -Mdist/default/production/AER201-Microcontroller.production.map -E1 \
   -ver=XC8 -ASTACK=0112h-0f7fh -pstack=STACK -ACODE=00h-0FFFFh \
   -ACONST=00h-0FFFFh -ASMALLCONST=01000h-010FFhx240 \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Tyler\AppData\Local\Temp\s3p8.obj \
+  C:\Users\Tyler\AppData\Local\Temp\sfso.obj \
   dist/default/production\AER201-Microcontroller.production.obj 
 
 Object code version is 3.11
@@ -39,7 +39,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+C:\Users\Tyler\AppData\Local\Temp\sfso.obj
                 init                                  E        E        4        4       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
@@ -360,13 +360,13 @@ ID@magnetic                            cstackBANK0  00008C
 ID@side_conductivity                   cstackBANK0  00008A
 ID@top_bottom_conductivity             cstackBANK0  000088
 Loading@i                              cstackBANK0  00008B
-Loading@i_1260                         cstackBANK0  00008C
-Loading@i_1261                         cstackBANK0  00008D
-Loading@i_1262                         cstackBANK0  00008E
-Loading@i_1263                         cstackBANK0  00008F
-Loading@i_1264                         cstackBANK0  000090
-Loading@i_1265                         cstackBANK0  000091
-Loading@i_1266                         cstackBANK0  000092
+Loading@i_1256                         cstackBANK0  00008C
+Loading@i_1257                         cstackBANK0  00008D
+Loading@i_1258                         cstackBANK0  00008E
+Loading@i_1259                         cstackBANK0  00008F
+Loading@i_1260                         cstackBANK0  000090
+Loading@i_1261                         cstackBANK0  000091
+Loading@i_1262                         cstackBANK0  000092
 UI@i                                   cstackBANK0  0000C7
 UI@i_582                               cstackBANK0  0000C8
 UI@i_583                               cstackBANK0  0000C9
@@ -432,7 +432,6 @@ _SSPCON2                               (abs)        000FC5
 _SSPSTAT                               (abs)        000FC7
 _T0CON                                 (abs)        000FD5
 _T1CON                                 (abs)        000FCD
-_T3CON                                 (abs)        000FB1
 _THIR                                  dataCOMRAM   00007A
 _THMAG                                 dataBANK0    0000F8
 _TMR0H                                 (abs)        000FD7
@@ -461,7 +460,7 @@ _TRISC4                                (abs)        007CA4
 _TRISD                                 (abs)        000F95
 _TRISE                                 (abs)        000F96
 _UI                                    text20       000012
-_UI$2010                               cstackBANK0  0000C5
+_UI$2006                               cstackBANK0  0000C5
 _UIenabled                             bssCOMRAM    000061
 _VCFG0                                 (abs)        007E0C
 _VCFG1                                 (abs)        007E0D
@@ -1119,7 +1118,7 @@ _initUI                                text13       002B24
 _input                                 bssCOMRAM    000079
 _inputHandler                          text47       0018BA
 _isdigit                               text33       002A04
-_isdigit$1652                          cstackBANK0  000081
+_isdigit$1648                          cstackBANK0  000081
 _keys                                  mediumconst  00FDB5
 _lcdInst                               text37       002BB0
 _lcdNibble                             text38       002316
@@ -1132,7 +1131,7 @@ _main                                  text0        002022
 _nRBPU                                 (abs)        007F8F
 _printRTC                              text21       000CC6
 _printSortTimer                        text59       0016C0
-_printSortTimer$2125                   cstackCOMRAM 000045
+_printSortTimer$2121                   cstackCOMRAM 000045
 _printf                                text31       000576
 _putch                                 text32       002BA0
 _readADC                               text10       0029AC
@@ -1178,7 +1177,7 @@ i2_change_state_to_menu_22             text48       0027A0
 i2_change_state_to_menu_start          text44       002A2E
 i2_getRTC                              text68       0022A4
 i2_isdigit                             text62       002B06
-i2_isdigit$1652                        cstackCOMRAM 000002
+i2_isdigit$1648                        cstackCOMRAM 000002
 i2_lcdInst                             text66       002BCC
 i2_lcdNibble                           text67       0024F0
 i2_printRTC                            text45       00148A
@@ -1466,7 +1465,7 @@ Total ram usage:        0 bytes
 
  *************** function _updateServoPosition *****************
  Defined at:
-		line 204 in file "sort.c"
+		line 194 in file "sort.c"
  Parameters:    Size  Location     Type
   time_us         2    0[BANK0 ] int 
   timer           2    2[BANK0 ] int 

@@ -43,8 +43,7 @@ void Loading(void){
         updateServoPosition(TILT_UP, 3);
         updateServoPosition(PAN_MID, 1);
         __delay_1s();__delay_1s();
-        
-        // moveServoBlock(Raise);
+       
     }
     else{
         // If a can is not already waiting to go to the ID stage, we want the
@@ -70,48 +69,96 @@ void Loading(void){
             f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
             SOL_PUSHER = 1; // activate solenoid pusher
             f_can_coming_to_ID = 1;
-            
-            //DELAY TIMER SET FOR ABOUT 500 MS DURATION (see? I need a dedicated duration-setting function!)
-            SOL_PUSHER = 0; // deactivate solenoid pusher
+            __delay_ms(TIME_SOLENOID_MOTION); 
+            SOL_PUSHER = 0; // deactivate solenoid pusher (could do this in ID since we have a delay there anyway)
         }
     }
 }
 void ID(void){
     if(f_can_coming_to_ID){
-        //**characteristic delay based on time it takes can to be transported here
-        __delay_ms(500); // IDK...& we could use Timer2 for this
-        // Read conductivity sensor circuit. Because the solenoids are pushed in right now, this will tell us side of can conductivity
-        int side_conductivity = 0;
-        int magnetic = 0;
-        int top_bottom_conductivity = 0;
+        // Characteristic delay based on time it takes can to be transported here
+        __delay_ms(TIME_LOADING_TO_ID);
         
-        side_conductivity = PORTAbits.RA2; // note that this is a local variable because we don't want to use an old result, ever!
-        if(!side_conductivity){
-            readMAG();
-            magnetic = MAG_signal;
-            if(!magnetic){
+        // Create array to identify can type.
+        // [0] = side conductivity, [1] = magnetism, [2] = top/bottom conductivity
+        // Note that this is a local variable because we don't want to use an old result, ever!
+        int sensor_outputs[3];
+        
+        // Read conductivity sensor circuit. Because the solenoids are pushed in
+        // right now, this will tell us side of can conductivity
+        sensor_outputs[0] = COND_SENSORS; 
+        
+        if(!sensor_outputs[0]){
+            readMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
+            sensor_outputs[1] = MAG_signal;
+            if(!sensor_outputs[1]){
                 SOL_COND_SENSORS = 1; //activate solenoids for top/bottom conductivity sensors
-                // characteristic delay for time it takes for solenoids move out
-                __delay_ms(100); // IDK
-                top_bottom_conductivity = PORTAbits.RA2;
+                // characteristic delay for time it takes solenoids move out
+                __delay_ms(TIME_SOLENOID_MOTION); // IDK
+                sensor_outputs[2] = COND_SENSORS;
                 SOL_COND_SENSORS = 0;
             }
         }
         
-        // use the local variables that we just initialized from the sensors to determine the can type
-        //####moveServoBlock(Lower);
-        // characteristic delay
+        // Identify can type
+        if(!sensor_outputs[0]){
+            if(!sensor_outputs[1]){
+                if(!sensor_outputs[2]){
+                    count_pop_no_tab++;
+                    cur_can = 0;
+                }
+                else{
+                    count_pop_w_tab++;
+                    cur_can = 1;
+                }
+            }
+            else{
+                count_can_w_lab++;
+                cur_can = 2;
+            }
+        }
+        else{
+            count_can_no_lab++;
+            cur_can = 3;
+        }
+        
+        SERVOCAM = 0; // Lower block
         f_can_coming_to_distribution = 1;
-        //####moveServoBlock(Raise);
+        __delay_ms(TIME_ID_TO_DISTRIBUTION);
+        SERVOCAM = 1; // Raise block
+        
         f_can_coming_to_ID = 0; // clear ID flag to allow another can to come
     }
 }
 void Distribution(void){
     if(f_can_coming_to_distribution){
-        // delay characteristic of the time it takes a can to roll to the distribution cup from the ID stage
-        //#####moveServoCup(canType);
-        // delay characteristic of the time it takes a can to roll to the distribution cup from the ID stage
-        //####moveServoCup(Home);
+        
+        // Set pan servo position
+        switch(cur_can){
+            case 0:
+                updateServoPosition(PAN_R);
+                break;
+            case 1:
+                updateServoPosition(PAN_RMID);
+                break;
+            case 2:
+                updateServoPosition(PAN_LMID);
+                break;
+            case 3:
+                updateServoPosition(PAN_L);
+                break;
+            default:
+                break;
+        }
+        __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
+        
+        // Tilt to drop can into bin
+        updateServoPosition(TILT_DOWN);
+        __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
+        
+        // Reset the distribution stage
+        updateServoPosition(PAN_MID);
+        updateServoPosition(TILT_UP);
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
     }
@@ -150,6 +197,7 @@ void initServos(void){
         updateServoPosition(TILT_UP, 3);
         TMR1ON = 1;
         TMR3ON = 1;
+        SERVOCAM = 1; // Raise block between ID and distribution stages
 }
 void printSortTimer(void){ 
     getRTC();
@@ -181,23 +229,13 @@ void printSortTimer(void){
 void getIR(void){
     readIR();
     if(IR_signal==1){
-        // load Timer3 with 50 ms delay
-        T3CON = 0b10110000;
-        TMR3H = 0b00111100;
-        TMR3L = 0b10110000;
-        TMR3ON = 1;
-    }
-    while(IR_signal && !TMR3CF){
-        // Check IR signal for the duration Timer3 was set, as a maximum
-        readIR();
-    }
-    // If IR beam was broken for longer than Timer3 elapsed
-    TMR3CF = 0;
-    if(TMR3IF==1){
-        f_loadingNewCan = 1;
-    }
-    else{
-        f_loadingNewCan = 0;
+        __delay_ms(100);
+        if(IR_signal==1){
+            f_loadingNewCan = 1;
+        }
+        else{
+            f_loadingNewCan = 0;
+        }
     }
 }
 

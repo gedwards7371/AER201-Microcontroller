@@ -101,7 +101,7 @@ dataBANK1 BANK1 1 10E 10E 4 1
 dataCOMRAM COMRAM 1 7A 7A 2 1
 bssCOMRAM COMRAM 1 5B 5B 1F 1
 mediumconst MEDIUMCONST 0 FDB4 FDB4 24C 1
-$C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+$C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 idloc IDLOC 0 200000 200000 8 1
 init CODE 0 E E 4 1
 reset_vec CODE 0 0 0 4 1
@@ -1149,16 +1149,16 @@ FE text20 CODE >90:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 2648 text7 CODE >125:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 2652 text7 CODE >126:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 265A text7 CODE >127:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-222E text6 CODE >204:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-222E text6 CODE >205:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-2254 text6 CODE >206:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-2256 text6 CODE >208:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-2260 text6 CODE >209:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-226A text6 CODE >210:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-226A text6 CODE >211:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-2274 text6 CODE >212:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-227E text6 CODE >213:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
-2280 text6 CODE >206:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+222E text6 CODE >194:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+222E text6 CODE >195:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+2254 text6 CODE >196:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+2256 text6 CODE >198:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+2260 text6 CODE >199:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+226A text6 CODE >200:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+226A text6 CODE >201:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+2274 text6 CODE >202:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+227E text6 CODE >203:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+2280 text6 CODE >196:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 26CC text5 CODE >148:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 26CC text5 CODE >149:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 26E4 text5 CODE >150:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
@@ -1237,70 +1237,70 @@ FE text20 CODE >90:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 2084 text0 CODE >42:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\main.c
 2086 text0 CODE >24:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\main.c
 20A8 text0 CODE >23:D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\main.c
-20AA cinit CODE >3886:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20AA cinit CODE >3888:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20AA cinit CODE >3891:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20AA cinit CODE >4038:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20AC cinit CODE >4039:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20AE cinit CODE >4040:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20B0 cinit CODE >4041:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20B2 cinit CODE >4042:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20B4 cinit CODE >4043:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20B6 cinit CODE >4044:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20BA cinit CODE >4045:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20BE cinit CODE >4046:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20BE cinit CODE >4047:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20C0 cinit CODE >4048:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20C4 cinit CODE >4049:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20C6 cinit CODE >4050:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20C8 cinit CODE >4051:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20CA cinit CODE >4055:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20CC cinit CODE >4056:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20CE cinit CODE >4057:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20D0 cinit CODE >4058:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20D2 cinit CODE >4059:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20D4 cinit CODE >4060:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20D6 cinit CODE >4061:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20DA cinit CODE >4062:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20DE cinit CODE >4063:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20DE cinit CODE >4064:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20E0 cinit CODE >4065:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20E4 cinit CODE >4066:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20E6 cinit CODE >4067:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20E8 cinit CODE >4068:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20EA cinit CODE >4072:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20EC cinit CODE >4073:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20EE cinit CODE >4074:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20F0 cinit CODE >4075:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20F2 cinit CODE >4076:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20F4 cinit CODE >4077:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20F6 cinit CODE >4078:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20F8 cinit CODE >4079:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20FC cinit CODE >4080:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-20FE cinit CODE >4081:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2102 cinit CODE >4085:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2106 cinit CODE >4086:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2108 cinit CODE >4087:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2108 cinit CODE >4088:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-210A cinit CODE >4089:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-210C cinit CODE >4090:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-210E cinit CODE >4093:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2112 cinit CODE >4094:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2114 cinit CODE >4095:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2114 cinit CODE >4096:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2116 cinit CODE >4097:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2118 cinit CODE >4098:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-211A cinit CODE >4101:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-211E cinit CODE >4102:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2120 cinit CODE >4103:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2120 cinit CODE >4104:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2122 cinit CODE >4105:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2124 cinit CODE >4106:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2126 cinit CODE >4112:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2126 cinit CODE >4114:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-2128 cinit CODE >4115:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-212A cinit CODE >4116:C:\Users\Tyler\AppData\Local\Temp\s3p8.
-212C cinit CODE >4117:C:\Users\Tyler\AppData\Local\Temp\s3p8.
+20AA cinit CODE >3883:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20AA cinit CODE >3885:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20AA cinit CODE >3888:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20AA cinit CODE >4036:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20AC cinit CODE >4037:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20AE cinit CODE >4038:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20B0 cinit CODE >4039:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20B2 cinit CODE >4040:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20B4 cinit CODE >4041:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20B6 cinit CODE >4042:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20BA cinit CODE >4043:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20BE cinit CODE >4044:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20BE cinit CODE >4045:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20C0 cinit CODE >4046:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20C4 cinit CODE >4047:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20C6 cinit CODE >4048:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20C8 cinit CODE >4049:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20CA cinit CODE >4053:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20CC cinit CODE >4054:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20CE cinit CODE >4055:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20D0 cinit CODE >4056:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20D2 cinit CODE >4057:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20D4 cinit CODE >4058:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20D6 cinit CODE >4059:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20DA cinit CODE >4060:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20DE cinit CODE >4061:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20DE cinit CODE >4062:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20E0 cinit CODE >4063:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20E4 cinit CODE >4064:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20E6 cinit CODE >4065:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20E8 cinit CODE >4066:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20EA cinit CODE >4070:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20EC cinit CODE >4071:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20EE cinit CODE >4072:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20F0 cinit CODE >4073:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20F2 cinit CODE >4074:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20F4 cinit CODE >4075:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20F6 cinit CODE >4076:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20F8 cinit CODE >4077:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20FC cinit CODE >4078:C:\Users\Tyler\AppData\Local\Temp\sfso.
+20FE cinit CODE >4079:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2102 cinit CODE >4083:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2106 cinit CODE >4084:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2108 cinit CODE >4085:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2108 cinit CODE >4086:C:\Users\Tyler\AppData\Local\Temp\sfso.
+210A cinit CODE >4087:C:\Users\Tyler\AppData\Local\Temp\sfso.
+210C cinit CODE >4088:C:\Users\Tyler\AppData\Local\Temp\sfso.
+210E cinit CODE >4091:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2112 cinit CODE >4092:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2114 cinit CODE >4093:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2114 cinit CODE >4094:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2116 cinit CODE >4095:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2118 cinit CODE >4096:C:\Users\Tyler\AppData\Local\Temp\sfso.
+211A cinit CODE >4099:C:\Users\Tyler\AppData\Local\Temp\sfso.
+211E cinit CODE >4100:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2120 cinit CODE >4101:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2120 cinit CODE >4102:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2122 cinit CODE >4103:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2124 cinit CODE >4104:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2126 cinit CODE >4110:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2126 cinit CODE >4112:C:\Users\Tyler\AppData\Local\Temp\sfso.
+2128 cinit CODE >4113:C:\Users\Tyler\AppData\Local\Temp\sfso.
+212A cinit CODE >4114:C:\Users\Tyler\AppData\Local\Temp\sfso.
+212C cinit CODE >4115:C:\Users\Tyler\AppData\Local\Temp\sfso.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -1334,7 +1334,7 @@ __end_of_readMAG 24F0 0 CODE 0 text9 dist/default/production\AER201-Microcontrol
 _f_can_distributed 71 0 COMRAM 1 bssCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 _lcdNibble 2316 0 CODE 0 text38 dist/default/production\AER201-Microcontroller.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\AER201-Microcontroller.production.obj
-__mediumconst FDB4 0 MEDIUMCONST 0 mediumconst C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+__mediumconst FDB4 0 MEDIUMCONST 0 mediumconst C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 I2C_Master_Init@c 8D 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\AER201-Microcontroller.production.obj
 __end_of_updateServoPosition 22A4 0 CODE 0 text6 dist/default/production\AER201-Microcontroller.production.obj
@@ -1361,7 +1361,7 @@ _PEIE 7F96 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.o
 _RCEN 7E2B 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 _RSEN 7E29 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 _THIR 7A 0 COMRAM 1 dataCOMRAM dist/default/production\AER201-Microcontroller.production.obj
-___sp 0 0 STACK 2 stack C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+___sp 0 0 STACK 2 stack C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 _back 63 0 COMRAM 1 bssCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 _down 6D 0 COMRAM 1 bssCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 _keys FDB5 0 MEDIUMCONST 0 mediumconst dist/default/production\AER201-Microcontroller.production.obj
@@ -1370,7 +1370,7 @@ _sort 2AA2 0 CODE 0 text2 dist/default/production\AER201-Microcontroller.product
 _time DC 0 BANK0 1 bssBANK0 dist/default/production\AER201-Microcontroller.production.obj
 btemp 7C 0 COMRAM 1 temp dist/default/production\AER201-Microcontroller.production.obj
 _PortTestA5 2B7C 0 CODE 0 text41 dist/default/production\AER201-Microcontroller.production.obj
-start E 0 CODE 0 init C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+start E 0 CODE 0 init C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 i2___lwdiv@quotient A 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 _stopSignals 2B3E 0 CODE 0 text1 dist/default/production\AER201-Microcontroller.production.obj
 _f_can_coming_to_distribution EB 0 BANK0 1 bssBANK0 dist/default/production\AER201-Microcontroller.production.obj
@@ -1409,11 +1409,11 @@ printRTC@month BE 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcont
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 i2getRTC@i 4 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 __size_of_initServos 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
-__accesstop 80 0 ABS 0 - C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
-intlevel0 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
-intlevel1 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
-intlevel2 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
-intlevel3 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+__accesstop 80 0 ABS 0 - C:\Users\Tyler\AppData\Local\Temp\sfso.obj
+intlevel0 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\sfso.obj
+intlevel1 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\sfso.obj
+intlevel2 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\sfso.obj
+intlevel3 0 0 CODE 0 text C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 _f_loadingNewCan EF 0 BANK0 1 bssBANK0 dist/default/production\AER201-Microcontroller.production.obj
 _initTime 2AC4 0 CODE 0 text18 dist/default/production\AER201-Microcontroller.production.obj
@@ -1456,9 +1456,9 @@ i2___wmul@multiplier 1 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Mi
 __end_of_PortTestA5 2B8E 0 CODE 0 text41 dist/default/production\AER201-Microcontroller.production.obj
 __end_of_lcdInst 2BC0 0 CODE 0 text37 dist/default/production\AER201-Microcontroller.production.obj
 ___awdiv@dividend 86 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 printf@width A9 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 __size_ofi2___wmul 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 __size_of_updateMenu 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\AER201-Microcontroller.production.obj
@@ -1471,7 +1471,7 @@ __end_ofi2_I2C_Master_Write 2BEC 0 CODE 0 text69 dist/default/production\AER201-
 printRTC@RTC_month BC 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
 __end_of___wmul 276E 0 CODE 0 text34 dist/default/production\AER201-Microcontroller.production.obj
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\AER201-Microcontroller.production.obj
-_printSortTimer$2125 45 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Microcontroller.production.obj
+_printSortTimer$2121 45 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 _printSortTimer 16C0 0 CODE 0 text59 dist/default/production\AER201-Microcontroller.production.obj
 __Hmediumconst 10000 0 MEDIUMCONST 0 mediumconst dist/default/production\AER201-Microcontroller.production.obj
 ?_printf 8E 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
@@ -1565,7 +1565,7 @@ _change_state_to_logs_34 2860 0 CODE 0 text52 dist/default/production\AER201-Mic
 _readADC 29AC 0 CODE 0 text10 dist/default/production\AER201-Microcontroller.production.obj
 _readMAG 249A 0 CODE 0 text9 dist/default/production\AER201-Microcontroller.production.obj
 _firstboot 73 0 COMRAM 1 bssCOMRAM dist/default/production\AER201-Microcontroller.production.obj
-_UI$2010 C5 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+_UI$2006 C5 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
 __size_ofi2_strcpy 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 __end_of_change_state_to_logs_11 2950 0 CODE 0 text57 dist/default/production\AER201-Microcontroller.production.obj
 __end_of_change_state_to_logs_12 2920 0 CODE 0 text56 dist/default/production\AER201-Microcontroller.production.obj
@@ -1615,7 +1615,7 @@ __Hbank14 0 0 ABS 0 bank14 dist/default/production\AER201-Microcontroller.produc
 __Hbank15 0 0 ABS 0 bank15 dist/default/production\AER201-Microcontroller.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\AER201-Microcontroller.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\AER201-Microcontroller.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 __end_ofi2_getRTC 2316 0 CODE 0 text68 dist/default/production\AER201-Microcontroller.production.obj
 __Hcomram 0 0 ABS 0 comram dist/default/production\AER201-Microcontroller.production.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/production\AER201-Microcontroller.production.obj
@@ -1907,7 +1907,7 @@ loadRTC@i 96 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontrolle
 __Lcomram 0 0 ABS 0 comram dist/default/production\AER201-Microcontroller.production.obj
 __Lconfig 300000 0 CONFIG 0 config dist/default/production\AER201-Microcontroller.production.obj
 _printf 576 0 CODE 0 text31 dist/default/production\AER201-Microcontroller.production.obj
-i2_isdigit$1652 2 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Microcontroller.production.obj
+i2_isdigit$1648 2 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 ___wmul@multiplier 80 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
 __end_ofi2_lcdInst 2BD8 0 CODE 0 text66 dist/default/production\AER201-Microcontroller.production.obj
 _LATAbits F89 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
@@ -1926,8 +1926,8 @@ _loadRTC 1F96 0 CODE 0 text14 dist/default/production\AER201-Microcontroller.pro
 __size_of_initUI 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 i2I2C_Master_Read@temp 3 0 COMRAM 1 cstackCOMRAM dist/default/production\AER201-Microcontroller.production.obj
 _TMR3counter 5F 0 COMRAM 1 bssCOMRAM dist/default/production\AER201-Microcontroller.production.obj
-stackhi F7F 0 ABS 0 - C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
-stacklo 112 0 ABS 0 - C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+stackhi F7F 0 ABS 0 - C:\Users\Tyler\AppData\Local\Temp\sfso.obj
+stacklo 112 0 ABS 0 - C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 __size_of_printRTC 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/production\AER201-Microcontroller.production.obj
 __end_of_Loading 148A 0 CODE 0 text3 dist/default/production\AER201-Microcontroller.production.obj
@@ -1940,13 +1940,13 @@ __end_of_I2C_Master_Stop 2BF4 0 CODE 0 text25 dist/default/production\AER201-Mic
 __end_of_I2C_Master_Wait 2B68 0 CODE 0 text28 dist/default/production\AER201-Microcontroller.production.obj
 __Lirdata 0 0 CODE 0 irdata dist/default/production\AER201-Microcontroller.production.obj
 _ADCON0bits FC2 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
-Loading@i_1260 8C 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-Loading@i_1261 8D 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-Loading@i_1262 8E 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-Loading@i_1263 8F 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-Loading@i_1264 90 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-Loading@i_1265 91 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
-Loading@i_1266 92 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+Loading@i_1256 8C 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+Loading@i_1257 8D 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+Loading@i_1258 8E 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+Loading@i_1259 8F 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+Loading@i_1260 90 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+Loading@i_1261 91 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+Loading@i_1262 92 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
 __CFG_LVP$OFF 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 strcpy@from 82 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
 i2_lcdInst 2BCC 0 CODE 0 text66 dist/default/production\AER201-Microcontroller.production.obj
@@ -2083,7 +2083,7 @@ __Ltext71 0 0 ABS 0 text71 dist/default/production\AER201-Microcontroller.produc
 __Ltext72 0 0 ABS 0 text72 dist/default/production\AER201-Microcontroller.production.obj
 __Ltext73 0 0 ABS 0 text73 dist/default/production\AER201-Microcontroller.production.obj
 __size_of_printSortTimer 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
-__ramtop 1000 0 RAM 0 ramtop C:\Users\Tyler\AppData\Local\Temp\s3p8.obj
+__ramtop 1000 0 RAM 0 ramtop C:\Users\Tyler\AppData\Local\Temp\sfso.obj
 __size_of_handler 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 __Lpowerup E 0 CODE 0 powerup dist/default/production\AER201-Microcontroller.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\AER201-Microcontroller.production.obj
@@ -2159,12 +2159,11 @@ printf@val A3 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroll
 _ACKDT 7E2D 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 _ACKEN 7E2C 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 __end_of_dpowers FDD0 0 MEDIUMCONST 0 mediumconst dist/default/production\AER201-Microcontroller.production.obj
-_isdigit$1652 81 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
+_isdigit$1648 81 0 BANK0 1 cstackBANK0 dist/default/production\AER201-Microcontroller.production.obj
 _PORTB F81 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 __size_of_initSortTimer 0 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 _T0CON FD5 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 _T1CON FCD 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
-_T3CON FB1 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 _THMAG F8 0 BANK0 1 dataBANK0 dist/default/production\AER201-Microcontroller.production.obj
 _TMR0H FD7 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj
 _TMR0L FD6 0 ABS 0 - dist/default/production\AER201-Microcontroller.production.obj

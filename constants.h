@@ -2,8 +2,8 @@
 #ifndef CONSTANTS_H
 #define	CONSTANTS_H //Prevent multiple inclusion 
 
-//Conductivity sensor
-#define CONDUCTIVE  LATAbits.LATA2 // conductivity sensors
+//Conductivity sensors
+#define COND_SENSORS  PORTAbits.RA2 // conductivity sensors
 
 //Solenoids (1 cm)
 #define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
@@ -25,6 +25,12 @@
 #define PAN_L       2000
 #define TILT_UP     1000
 #define TILT_DOWN   1500
+
+// Characteristic travel times in milliseconds
+#define TIME_LOADING_TO_ID      500
+#define TIME_ID_TO_DISTRIBUTION 500
+#define TIME_SOLENOID_MOTION    100
+#define TIME_SERVO_MOTION       500
 
 //LCD Control Registers
 #define RS          LATDbits.LATD2          
