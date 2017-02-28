@@ -34,16 +34,7 @@ void Loading(void){
         DC = 1;
         
         // Start sending pulses to servos
-        initServos();
-        __delay_1s();__delay_1s();
-        updateServoPosition(PAN_R, 1);
-        __delay_1s();__delay_1s();
-        updateServoPosition(TILT_DOWN, 3);
-        __delay_1s();__delay_1s();
-        updateServoPosition(TILT_UP, 3);
-        updateServoPosition(PAN_MID, 1);
-        __delay_1s();__delay_1s();
-       
+        initServos();       
     }
     else{
         // If a can is not already waiting to go to the ID stage, we want the
