@@ -10,14 +10,14 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
-void machineConfig(void);
-void PortTestA5(void);
+#include "EEPROM.h"
 
 void main(void) {
     machineConfig();
     initLCD();
     initTime(0x42, 0x44, 0x19, 0x06, 0x24, 0x02, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
     initUI();
+    first = 1;
     
     //machine_state = Testing_state; // comment me out if you're not testing
     while(1){
@@ -30,6 +30,7 @@ void main(void) {
                 break;
             case DoneSorting_state :
                 stopSignals(); // kill all outputs
+                logRun();
                 first = 1; // Permit the sort operation to be re-initialized
                 UI(); // have a check for this state in the UI to display a special screen
                 break;

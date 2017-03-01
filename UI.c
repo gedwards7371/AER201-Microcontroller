@@ -10,6 +10,7 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
+#include "EEPROM.h"
 
 /* This file contains all the UI functionality outside the main loop
  * To add a new state:
@@ -21,10 +22,10 @@
 // <editor-fold defaultstate="collapsed" desc="VARIABLE DEFINITIONS">
 int up; int down; int enter; int back; // correspond to certain inputs to make logic more transparent
 int cur_state;
-int UIenabled = 0; // 1 if enabled, 0 if disabled. This changes whether interrupts will call updateMenu()
 int firstboot; // flag to tell input handler to handle events for the first boot
-int logstate = 0; // flag to tell input handler if the UI is in a log (for pause/back purposes)
+int logstate; // flag to tell input handler if the UI is in a log (for pause/back purposes)
 int log; // index for log of interest
+volatile char input;
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="STATE TABLE">
@@ -61,6 +62,7 @@ int log; // index for log of interest
 void initUI(void){ 
     ei(); // enable interrupts
     machine_state = UI_state;
+    logstate = 0;
     
     loadRTC(); // Load RTC with the date and time from main
             

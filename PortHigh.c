@@ -10,6 +10,7 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
+#include "EEPROM.h"
 
 void PortTestA5(void){
         while(PORTBbits.RB1 == 0){ 

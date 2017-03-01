@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "3 main.h
-[c E3120 0 1 2 3 4 .. ]
-[n E3120 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
+[c E3119 0 1 2 3 4 .. ]
+[n E3119 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
 "191 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S11 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
@@ -2839,27 +2839,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 4: void lcdInst(char data);
 [; ;lcd.h: 5: void lcdNibble(char data);
 [; ;lcd.h: 6: void initLCD(void);
-[; ;I2C.h: 2: void I2C_Master_Start();
-[; ;I2C.h: 3: void I2C_Master_Stop();
-[; ;I2C.h: 4: void I2C_Master_Init(const unsigned long c);
-[; ;I2C.h: 5: void I2C_Master_Write(unsigned d);
-[; ;I2C.h: 6: unsigned char I2C_Master_Read(unsigned char a);
+[; ;I2C.h: 1: void I2C_Master_Start();
+[; ;I2C.h: 2: void I2C_Master_Stop();
+[; ;I2C.h: 3: void I2C_Master_Init(const unsigned long c);
+[; ;I2C.h: 4: void I2C_Master_Write(unsigned d);
+[; ;I2C.h: 5: unsigned char I2C_Master_Read(unsigned char a);
 [; ;UI.h: 4: void initUI(void);
 [; ;UI.h: 5: void UI(void);
 [; ;UI.h: 6: void interrupt handler(void);
 [; ;UI.h: 7: void updateMenu(void);
-"8 UI.h
-[v _UIenabled `i ~T0 @X0 1 e ]
-[; ;UI.h: 8: int UIenabled;
-"9
-[v _cur_state `i ~T0 @X0 1 e ]
-[; ;UI.h: 9: int cur_state;
-[; ;UI.h: 10: int inputHandler(void);
-[; ;UI.h: 11: void dispLogs(int);
-"13
-[v _input `uc ~T0 @X0 1 e ]
-[; ;UI.h: 13: char input;
-"14
+[; ;UI.h: 8: extern int cur_state;
+[; ;UI.h: 9: int inputHandler(void);
+[; ;UI.h: 10: void dispLogs(int);
+[; ;UI.h: 12: volatile extern char input;
+"13 UI.h
 [v _keys `Cuc ~T0 @X0 -> 0 `x e ]
 [i _keys
 :U ..
@@ -2882,32 +2875,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[; ;UI.h: 14: const char keys[] = "123A456B789C*0#D";
-[; ;UI.h: 17: void change_state_to_menu_start(void);
-[; ;UI.h: 18: void change_state_to_menu_11(void);
-[; ;UI.h: 19: void change_state_to_menu_12(void);
-[; ;UI.h: 20: void change_state_to_menu_22(void);
-[; ;UI.h: 21: void change_state_to_menu_23(void);
-[; ;UI.h: 22: void change_state_to_logs_11(void);
-[; ;UI.h: 23: void change_state_to_logs_12(void);
-[; ;UI.h: 24: void change_state_to_logs_22(void);
-[; ;UI.h: 25: void change_state_to_logs_23(void);
-[; ;UI.h: 26: void change_state_to_logs_33(void);
-[; ;UI.h: 27: void change_state_to_logs_34(void);
-[; ;UI.h: 29: void print_menu_start(void);
-[; ;UI.h: 30: void print_menu_11(void);
-[; ;UI.h: 31: void print_menu_12(void);
-[; ;UI.h: 32: void print_menu_22(void);
-[; ;UI.h: 33: void print_menu_23(void);
-[; ;UI.h: 34: void print_menu_logs_11(void);
-[; ;UI.h: 35: void print_menu_logs_12(void);
-[; ;UI.h: 36: void print_menu_logs_22(void);
-[; ;UI.h: 37: void print_menu_logs_23(void);
-[; ;UI.h: 38: void print_menu_logs_33(void);
-[; ;UI.h: 39: void print_menu_logs_34(void);
-"4 RTC.h
-[v _time `uc ~T0 @X0 -> 7 `i e ]
-[; ;RTC.h: 4: unsigned char time[7];
+[; ;UI.h: 13: const char keys[] = "123A456B789C*0#D";
+[; ;UI.h: 16: void change_state_to_menu_start(void);
+[; ;UI.h: 17: void change_state_to_menu_11(void);
+[; ;UI.h: 18: void change_state_to_menu_12(void);
+[; ;UI.h: 19: void change_state_to_menu_22(void);
+[; ;UI.h: 20: void change_state_to_menu_23(void);
+[; ;UI.h: 21: void change_state_to_logs_11(void);
+[; ;UI.h: 22: void change_state_to_logs_12(void);
+[; ;UI.h: 23: void change_state_to_logs_22(void);
+[; ;UI.h: 24: void change_state_to_logs_23(void);
+[; ;UI.h: 25: void change_state_to_logs_33(void);
+[; ;UI.h: 26: void change_state_to_logs_34(void);
+[; ;UI.h: 28: void print_menu_start(void);
+[; ;UI.h: 29: void print_menu_11(void);
+[; ;UI.h: 30: void print_menu_12(void);
+[; ;UI.h: 31: void print_menu_22(void);
+[; ;UI.h: 32: void print_menu_23(void);
+[; ;UI.h: 33: void print_menu_logs_11(void);
+[; ;UI.h: 34: void print_menu_logs_12(void);
+[; ;UI.h: 35: void print_menu_logs_22(void);
+[; ;UI.h: 36: void print_menu_logs_23(void);
+[; ;UI.h: 37: void print_menu_logs_33(void);
+[; ;UI.h: 38: void print_menu_logs_34(void);
+[; ;RTC.h: 4: extern unsigned char time[7];
 [; ;RTC.h: 5: void initTime(unsigned char s, unsigned char m, unsigned char h,unsigned char w,
 [; ;RTC.h: 6: unsigned char DD, unsigned char MM, unsigned char YY);
 [; ;RTC.h: 7: void loadRTC();
@@ -2915,168 +2906,101 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 9: void printRTC(void);
 [; ;main.h: 2: enum states {UI_state, Sorting_state, DoneSorting_state, Testing_state, EmergencyStop_state};
 "3 main.h
-[v _machine_state `E3120 ~T0 @X0 1 e ]
+[v _machine_state `E3119 ~T0 @X0 1 e ]
 [; ;main.h: 3: enum states machine_state;
 [; ;main.h: 4: void main(void);
 [; ;main.h: 5: void stopSignals(void);
-[; ;sort.h: 2: void initFlags(void);
+[; ;main.h: 8: void machineConfig(void);
+[; ;main.h: 9: void PortTestA5(void);
+[; ;sort.h: 2: void initGlobalVars(void);
 [; ;sort.h: 3: void initSortTimer(void);
 [; ;sort.h: 4: void initServos(void);
 [; ;sort.h: 7: void sort(void);
 [; ;sort.h: 8: void Loading(void);
 [; ;sort.h: 9: void ID(void);
 [; ;sort.h: 10: void Distribution(void);
-"13 sort.h
-[v _first `i ~T0 @X0 1 e ]
-[i _first
--> 1 `i
-]
-[; ;sort.h: 13: int first=1;
-"14
-[v _f_loadingNewCan `i ~T0 @X0 1 e ]
-[i _f_loadingNewCan
--> 0 `i
-]
-[; ;sort.h: 14: int f_loadingNewCan = 0;
-"15
-[v _f_lastCan `i ~T0 @X0 1 e ]
-[i _f_lastCan
--> 0 `i
-]
-[; ;sort.h: 15: int f_lastCan = 0;
-"16
-[v _f_ID_receive `i ~T0 @X0 1 e ]
-[i _f_ID_receive
--> 1 `i
-]
-[; ;sort.h: 16: int f_ID_receive = 1;
-"17
-[v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
-[i _f_can_coming_to_ID
--> 0 `i
-]
-[; ;sort.h: 17: int f_can_coming_to_ID = 0;
-"20
-[v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
-[i _f_can_coming_to_distribution
--> 0 `i
-]
-[; ;sort.h: 20: int f_can_coming_to_distribution = 0;
-"23
-[v _f_can_distributed `i ~T0 @X0 1 e ]
-[i _f_can_distributed
--> 0 `i
-]
-[; ;sort.h: 23: int f_can_distributed = 0;
+[; ;sort.h: 13: extern int first;
+[; ;sort.h: 14: extern int f_loadingNewCan;
+[; ;sort.h: 15: extern int f_lastCan;
+[; ;sort.h: 16: extern int f_ID_receive;
+[; ;sort.h: 17: extern int f_can_coming_to_ID;
+[; ;sort.h: 20: extern int f_can_coming_to_distribution;
+[; ;sort.h: 23: extern int f_can_distributed;
 [; ;sort.h: 26: void printSortTimer(void);
-"27
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 27: int startTime[7];
-"28
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 28: int total_time;
+[; ;sort.h: 27: extern int startTime[7];
+[; ;sort.h: 28: extern int total_time;
 [; ;sort.h: 31: void getIR(void);
-"32
-[v _IR_signal `i ~T0 @X0 1 e ]
-[; ;sort.h: 32: int IR_signal;
-"33
-[v _TMR3counter `i ~T0 @X0 1 e ]
-[i _TMR3counter
--> 0 `i
-]
-[; ;sort.h: 33: int TMR3counter=0;
-"34
-[v _TMR3CF `i ~T0 @X0 1 e ]
-[i _TMR3CF
--> 0 `i
-]
-[; ;sort.h: 34: int TMR3CF=0;
-"35
-[v _MAG_signal `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int MAG_signal;
-[; ;sort.h: 38: void updateServoPosition(int time_us, int timer);
-"39
-[v _servoTimes `i ~T0 @X0 -> 4 `i e ]
-[; ;sort.h: 39: int servoTimes[4];
-"40
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 40: int was_low;
-"43
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 43: int count_total;
-"44
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 44: int count_pop_no_tab;
-"45
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 45: int count_pop_w_tab;
-"46
-[v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 46: int count_can_w_lab;
-"47
-[v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 47: int count_can_no_lab;
-"48
-[v _cur_can `i ~T0 @X0 1 e ]
-[; ;sort.h: 48: int cur_can;
-[; ;ADCFunctionality.h: 2: void readADC(char channel);
-[; ;ADCFunctionality.h: 3: void readIR(void);
-[; ;ADCFunctionality.h: 4: void readMAG(void);
-"6 ADCFunctionality.h
-[v _THIR `i ~T0 @X0 1 e ]
-[i _THIR
--> 255 `i
-]
-[; ;ADCFunctionality.h: 6: int THIR = 255;
-"7
-[v _THMAG `i ~T0 @X0 1 e ]
-[i _THMAG
--> 255 `i
-]
-[; ;ADCFunctionality.h: 7: int THMAG = 255;
-"14 PortHigh.c
+[; ;sort.h: 32: extern int IR_signal;
+[; ;sort.h: 33: extern int MAG_signal;
+[; ;sort.h: 36: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 37: extern unsigned int servoTimes[4];
+[; ;sort.h: 38: volatile extern int was_low_1;
+[; ;sort.h: 39: volatile extern int was_low_3;
+[; ;sort.h: 42: extern int count_total;
+[; ;sort.h: 43: extern int count_pop_no_tab;
+[; ;sort.h: 44: extern int count_pop_w_tab;
+[; ;sort.h: 45: extern int count_can_w_lab;
+[; ;sort.h: 46: extern int count_can_no_lab;
+[; ;sort.h: 47: extern int cur_can;
+[; ;ADCFunctionality.h: 1: void readADC(char channel);
+[; ;ADCFunctionality.h: 2: void readIR(void);
+[; ;ADCFunctionality.h: 3: void readMAG(void);
+[; ;EEPROM.h: 1: void EEPROM_write(unsigned short address, unsigned char data);
+[; ;EEPROM.h: 2: unsigned char EEPROM_read(unsigned short address);
+[; ;EEPROM.h: 3: void logRun(void);
+[; ;EEPROM.h: 4: void retrieveLog(int logNum);
+[; ;EEPROM.h: 7: extern unsigned char sel;
+[; ;EEPROM.h: 11: extern int log_completion;
+[; ;EEPROM.h: 12: extern int log_count_total;
+[; ;EEPROM.h: 14: extern int log_count_pop_no_tab;
+[; ;EEPROM.h: 15: extern int log_count_pop_w_tab;
+[; ;EEPROM.h: 17: extern int log_count_can_w_lab;
+[; ;EEPROM.h: 18: extern int log_count_can_no_lab;
+[; ;EEPROM.h: 20: extern int log_startTime[7];
+[; ;EEPROM.h: 22: extern int log_total_time;
+"15 PortHigh.c
 [v _PortTestA5 `(v ~T0 @X0 1 ef ]
 {
-[; ;PortHigh.c: 14: void PortTestA5(void){
+[; ;PortHigh.c: 15: void PortTestA5(void){
 [e :U _PortTestA5 ]
 [f ]
-[; ;PortHigh.c: 15: while(PORTBbits.RB1 == 0){
-"15
+[; ;PortHigh.c: 16: while(PORTBbits.RB1 == 0){
+"16
 [e $U 267  ]
 [e :U 268 ]
 {
-"18
+"19
 }
 [e :U 267 ]
-"15
+"16
 [e $ == -> . . _PORTBbits 0 1 `i -> 0 `i 268  ]
 [e :U 269 ]
-[; ;PortHigh.c: 18: }
-[; ;PortHigh.c: 19: LATAbits.LATA5 = 1;
-"19
-[e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
-[; ;PortHigh.c: 20: while(PORTBbits.RB1 == 1){
+[; ;PortHigh.c: 19: }
+[; ;PortHigh.c: 20: LATAbits.LATA5 = 1;
 "20
+[e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
+[; ;PortHigh.c: 21: while(PORTBbits.RB1 == 1){
+"21
 [e $U 270  ]
 [e :U 271 ]
 {
-"22
+"23
 }
 [e :U 270 ]
-"20
+"21
 [e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 271  ]
 [e :U 272 ]
-[; ;PortHigh.c: 22: }
-[; ;PortHigh.c: 23: __nop();
-"23
-[e ( ___nop ..  ]
+[; ;PortHigh.c: 23: }
 [; ;PortHigh.c: 24: __nop();
 "24
 [e ( ___nop ..  ]
-[; ;PortHigh.c: 25: LATAbits.LATA5 = 0;
+[; ;PortHigh.c: 25: __nop();
 "25
-[e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
-[; ;PortHigh.c: 26: }
+[e ( ___nop ..  ]
+[; ;PortHigh.c: 26: LATAbits.LATA5 = 0;
 "26
+[e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
+[; ;PortHigh.c: 27: }
+"27
 [e :UE 266 ]
 }

@@ -10,6 +10,47 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
+#include "EEPROM.h"
+
+// <editor-fold defaultstate="collapsed" desc="VARIABLE DECLARATIONS">
+int first;
+
+// Flags
+int f_loadingNewCan;
+int f_lastCan;
+int f_ID_receive;
+int f_can_coming_to_ID;
+int f_can_coming_to_distribution;
+int f_can_distributed;
+
+// Count variables
+int count_total;
+int count_pop_no_tab;
+int count_pop_w_tab;
+int count_can_w_lab;
+int count_can_no_lab;
+
+// Time trackers
+int startTime[7];
+int total_time;
+
+// Sensors
+int IR_signal;
+int MAG_signal;
+
+// Servo control
+unsigned int servoTimes[4];
+volatile int was_low_1;
+volatile int was_low_3;
+
+// Can type trackers
+int count_total;
+int count_pop_no_tab;
+int count_pop_w_tab;
+int count_can_w_lab;
+int count_can_no_lab;
+int cur_can;
+// </editor-fold>
 
 void sort(void){
     if(machine_state == Sorting_state){
@@ -25,8 +66,7 @@ void sort(void){
 
 void Loading(void){
     if(first){
-        first = 0;
-        initFlags();
+        initGlobalVars();
         __lcd_clear();
         initSortTimer();
         
@@ -40,7 +80,7 @@ void Loading(void){
         // If a can is not already waiting to go to the ID stage, we want the
         // code to be able to enter straight down to check if the ID stage is ready
         if(!f_loadingNewCan){
-            // update f_loadingNewCan flag
+            // Call getIR to update f_loadingNewCan flag
             //getIR(); 
             // "If no new can is being loaded..."
             if(!f_loadingNewCan){
@@ -113,10 +153,10 @@ void ID(void){
             cur_can = 3;
         }
         
-        SERVOCAM = 0; // Lower block
+        SERVOCAM = 1; // Lower block
         f_can_coming_to_distribution = 1;
         __delay_ms(TIME_ID_TO_DISTRIBUTION);
-        SERVOCAM = 1; // Raise block
+        SERVOCAM = 0; // Raise block
         
         f_can_coming_to_ID = 0; // clear ID flag to allow another can to come
     }
@@ -155,13 +195,24 @@ void Distribution(void){
     }
 }
 
-void initFlags(void){
+void initGlobalVars(void){
+    // Clear flag for first entry
+    first = 0;
+    
+    // Flags
     f_loadingNewCan = 0;
     f_lastCan = 0;
     f_ID_receive = 1;
     f_can_coming_to_ID = 0;
     f_can_coming_to_distribution = 0;
     f_can_distributed = 0;
+    
+    // Count variables
+    count_total = 0;
+    count_pop_no_tab = 0;
+    count_pop_w_tab = 0;
+    count_can_w_lab = 0;
+    count_can_no_lab = 0;
 }
 void initSortTimer(void){
     // 1 second timer to generate interrupts
@@ -184,11 +235,11 @@ void initSortTimer(void){
     TMR0ON = 1;
 }
 void initServos(void){
-        updateServoPosition(PAN_MID, 1);
-        updateServoPosition(TILT_UP, 3);
+        updateServoPosition(PAN_L, 1);
+        //updateServoPosition(TILT_UP, 3);
         TMR1ON = 1;
-        TMR3ON = 1;
-        SERVOCAM = 1; // Raise block between ID and distribution stages
+        //TMR3ON = 1;
+        SERVOCAM = 0; // Raise block between ID and distribution stages
 }
 void printSortTimer(void){ 
     getRTC();

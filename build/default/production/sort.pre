@@ -3793,7 +3793,7 @@ void lcdInst(char data);
 void lcdNibble(char data);
 void initLCD(void);
 
-# 2 "I2C.h"
+# 1 "I2C.h"
 void I2C_Master_Start();
 void I2C_Master_Stop();
 void I2C_Master_Init(const unsigned long c);
@@ -3805,12 +3805,11 @@ void initUI(void);
 void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
-int UIenabled;
-int cur_state;
+extern int cur_state;
 int inputHandler(void);
 void dispLogs(int);
 
-char input;
+volatile extern char input;
 const char keys[] = "123A456B789C*0#D";
 
 
@@ -3839,7 +3838,7 @@ void print_menu_logs_33(void);
 void print_menu_logs_34(void);
 
 # 4 "RTC.h"
-unsigned char time[7];
+extern unsigned char time[7];
 void initTime(unsigned char s, unsigned char m, unsigned char h,unsigned char w,
 unsigned char DD, unsigned char MM, unsigned char YY);
 void loadRTC();
@@ -3852,8 +3851,12 @@ enum states machine_state;
 void main(void);
 void stopSignals(void);
 
+
+void machineConfig(void);
+void PortTestA5(void);
+
 # 2 "sort.h"
-void initFlags(void);
+void initGlobalVars(void);
 void initSortTimer(void);
 void initServos(void);
 
@@ -3864,34 +3867,101 @@ void ID(void);
 void Distribution(void);
 
 
-int first=1;
-int f_loadingNewCan = 0;
-int f_lastCan = 0;
-int f_ID_receive = 1;
-int f_can_coming_to_ID = 0;
+extern int first;
+extern int f_loadingNewCan;
+extern int f_lastCan;
+extern int f_ID_receive;
+extern int f_can_coming_to_ID;
 
 
-int f_can_coming_to_distribution = 0;
+extern int f_can_coming_to_distribution;
 
 
-int f_can_distributed = 0;
+extern int f_can_distributed;
 
 
 void printSortTimer(void);
+extern int startTime[7];
+extern int total_time;
+
+
+void getIR(void);
+extern int IR_signal;
+extern int MAG_signal;
+
+
+void updateServoPosition(int time_us, int timer);
+extern unsigned int servoTimes[4];
+volatile extern int was_low_1;
+volatile extern int was_low_3;
+
+
+extern int count_total;
+extern int count_pop_no_tab;
+extern int count_pop_w_tab;
+extern int count_can_w_lab;
+extern int count_can_no_lab;
+extern int cur_can;
+
+# 1 "ADCFunctionality.h"
+void readADC(char channel);
+void readIR(void);
+void readMAG(void);
+
+# 1 "EEPROM.h"
+void EEPROM_write(unsigned short address, unsigned char data);
+unsigned char EEPROM_read(unsigned short address);
+void logRun(void);
+void retrieveLog(int logNum);
+
+
+extern unsigned char sel;
+
+
+
+extern int log_completion;
+extern int log_count_total;
+
+extern int log_count_pop_no_tab;
+extern int log_count_pop_w_tab;
+
+extern int log_count_can_w_lab;
+extern int log_count_can_no_lab;
+
+extern int log_startTime[7];
+
+extern int log_total_time;
+
+# 16 "sort.c"
+int first;
+
+
+int f_loadingNewCan;
+int f_lastCan;
+int f_ID_receive;
+int f_can_coming_to_ID;
+int f_can_coming_to_distribution;
+int f_can_distributed;
+
+
+int count_total;
+int count_pop_no_tab;
+int count_pop_w_tab;
+int count_can_w_lab;
+int count_can_no_lab;
+
+
 int startTime[7];
 int total_time;
 
 
-void getIR(void);
 int IR_signal;
-int TMR3counter=0;
-int TMR3CF=0;
 int MAG_signal;
 
 
-void updateServoPosition(int time_us, int timer);
-int servoTimes[4];
-int was_low;
+unsigned int servoTimes[4];
+volatile int was_low_1;
+volatile int was_low_3;
 
 
 int count_total;
@@ -3901,15 +3971,7 @@ int count_can_w_lab;
 int count_can_no_lab;
 int cur_can;
 
-# 2 "ADCFunctionality.h"
-void readADC(char channel);
-void readIR(void);
-void readMAG(void);
 
-int THIR = 255;
-int THMAG = 255;
-
-# 14 "sort.c"
 void sort(void){
 if(machine_state == Sorting_state){
 Loading();
@@ -3924,8 +3986,7 @@ Distribution();
 
 void Loading(void){
 if(first){
-first = 0;
-initFlags();
+initGlobalVars();
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 initSortTimer();
 
@@ -4012,10 +4073,10 @@ count_can_no_lab++;
 cur_can = 3;
 }
 
-LATCbits.LATC0 = 0;
+LATCbits.LATC0 = 1;
 f_can_coming_to_distribution = 1;
 _delay((unsigned long)((500)*(32000000/4000.0)));
-LATCbits.LATC0 = 1;
+LATCbits.LATC0 = 0;
 
 f_can_coming_to_ID = 0;
 }
@@ -4054,13 +4115,24 @@ f_can_distributed = 1;
 }
 }
 
-void initFlags(void){
+void initGlobalVars(void){
+
+first = 0;
+
+
 f_loadingNewCan = 0;
 f_lastCan = 0;
 f_ID_receive = 1;
 f_can_coming_to_ID = 0;
 f_can_coming_to_distribution = 0;
 f_can_distributed = 0;
+
+
+count_total = 0;
+count_pop_no_tab = 0;
+count_pop_w_tab = 0;
+count_can_w_lab = 0;
+count_can_no_lab = 0;
 }
 void initSortTimer(void){
 
@@ -4071,17 +4143,17 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 182
+# 233
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
 }
 void initServos(void){
-updateServoPosition(1500, 1);
-updateServoPosition(1000, 3);
+updateServoPosition(2000, 1);
+
 TMR1ON = 1;
-TMR3ON = 1;
-LATCbits.LATC0 = 1;
+
+LATCbits.LATC0 = 0;
 }
 void printSortTimer(void){
 getRTC();

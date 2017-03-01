@@ -10,6 +10,7 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
+#include "EEPROM.h"
 
 void I2C_Master_Init(const unsigned long c)
 {

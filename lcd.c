@@ -10,6 +10,7 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
+#include "EEPROM.h"
 
 void lcdInst(char data) {
     RS = 0; // register select is 0 so that the LCD knows to interpret the data as commands, not characters

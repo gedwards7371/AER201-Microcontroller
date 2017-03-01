@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "3 main.h
-[c E3120 0 1 2 3 4 .. ]
-[n E3120 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
+[c E3119 0 1 2 3 4 .. ]
+[n E3119 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
 "1211 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [s S47 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S47 . LATD0 LATD1 LATD2 LATD3 LATD4 LATD5 LATD6 LATD7 ]
@@ -2827,27 +2827,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 4: void lcdInst(char data);
 [; ;lcd.h: 5: void lcdNibble(char data);
 [; ;lcd.h: 6: void initLCD(void);
-[; ;I2C.h: 2: void I2C_Master_Start();
-[; ;I2C.h: 3: void I2C_Master_Stop();
-[; ;I2C.h: 4: void I2C_Master_Init(const unsigned long c);
-[; ;I2C.h: 5: void I2C_Master_Write(unsigned d);
-[; ;I2C.h: 6: unsigned char I2C_Master_Read(unsigned char a);
+[; ;I2C.h: 1: void I2C_Master_Start();
+[; ;I2C.h: 2: void I2C_Master_Stop();
+[; ;I2C.h: 3: void I2C_Master_Init(const unsigned long c);
+[; ;I2C.h: 4: void I2C_Master_Write(unsigned d);
+[; ;I2C.h: 5: unsigned char I2C_Master_Read(unsigned char a);
 [; ;UI.h: 4: void initUI(void);
 [; ;UI.h: 5: void UI(void);
 [; ;UI.h: 6: void interrupt handler(void);
 [; ;UI.h: 7: void updateMenu(void);
-"8 UI.h
-[v _UIenabled `i ~T0 @X0 1 e ]
-[; ;UI.h: 8: int UIenabled;
-"9
-[v _cur_state `i ~T0 @X0 1 e ]
-[; ;UI.h: 9: int cur_state;
-[; ;UI.h: 10: int inputHandler(void);
-[; ;UI.h: 11: void dispLogs(int);
-"13
-[v _input `uc ~T0 @X0 1 e ]
-[; ;UI.h: 13: char input;
-"14
+[; ;UI.h: 8: extern int cur_state;
+[; ;UI.h: 9: int inputHandler(void);
+[; ;UI.h: 10: void dispLogs(int);
+[; ;UI.h: 12: volatile extern char input;
+"13 UI.h
 [v _keys `Cuc ~T0 @X0 -> 0 `x e ]
 [i _keys
 :U ..
@@ -2870,32 +2863,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[; ;UI.h: 14: const char keys[] = "123A456B789C*0#D";
-[; ;UI.h: 17: void change_state_to_menu_start(void);
-[; ;UI.h: 18: void change_state_to_menu_11(void);
-[; ;UI.h: 19: void change_state_to_menu_12(void);
-[; ;UI.h: 20: void change_state_to_menu_22(void);
-[; ;UI.h: 21: void change_state_to_menu_23(void);
-[; ;UI.h: 22: void change_state_to_logs_11(void);
-[; ;UI.h: 23: void change_state_to_logs_12(void);
-[; ;UI.h: 24: void change_state_to_logs_22(void);
-[; ;UI.h: 25: void change_state_to_logs_23(void);
-[; ;UI.h: 26: void change_state_to_logs_33(void);
-[; ;UI.h: 27: void change_state_to_logs_34(void);
-[; ;UI.h: 29: void print_menu_start(void);
-[; ;UI.h: 30: void print_menu_11(void);
-[; ;UI.h: 31: void print_menu_12(void);
-[; ;UI.h: 32: void print_menu_22(void);
-[; ;UI.h: 33: void print_menu_23(void);
-[; ;UI.h: 34: void print_menu_logs_11(void);
-[; ;UI.h: 35: void print_menu_logs_12(void);
-[; ;UI.h: 36: void print_menu_logs_22(void);
-[; ;UI.h: 37: void print_menu_logs_23(void);
-[; ;UI.h: 38: void print_menu_logs_33(void);
-[; ;UI.h: 39: void print_menu_logs_34(void);
-"4 RTC.h
-[v _time `uc ~T0 @X0 -> 7 `i e ]
-[; ;RTC.h: 4: unsigned char time[7];
+[; ;UI.h: 13: const char keys[] = "123A456B789C*0#D";
+[; ;UI.h: 16: void change_state_to_menu_start(void);
+[; ;UI.h: 17: void change_state_to_menu_11(void);
+[; ;UI.h: 18: void change_state_to_menu_12(void);
+[; ;UI.h: 19: void change_state_to_menu_22(void);
+[; ;UI.h: 20: void change_state_to_menu_23(void);
+[; ;UI.h: 21: void change_state_to_logs_11(void);
+[; ;UI.h: 22: void change_state_to_logs_12(void);
+[; ;UI.h: 23: void change_state_to_logs_22(void);
+[; ;UI.h: 24: void change_state_to_logs_23(void);
+[; ;UI.h: 25: void change_state_to_logs_33(void);
+[; ;UI.h: 26: void change_state_to_logs_34(void);
+[; ;UI.h: 28: void print_menu_start(void);
+[; ;UI.h: 29: void print_menu_11(void);
+[; ;UI.h: 30: void print_menu_12(void);
+[; ;UI.h: 31: void print_menu_22(void);
+[; ;UI.h: 32: void print_menu_23(void);
+[; ;UI.h: 33: void print_menu_logs_11(void);
+[; ;UI.h: 34: void print_menu_logs_12(void);
+[; ;UI.h: 35: void print_menu_logs_22(void);
+[; ;UI.h: 36: void print_menu_logs_23(void);
+[; ;UI.h: 37: void print_menu_logs_33(void);
+[; ;UI.h: 38: void print_menu_logs_34(void);
+[; ;RTC.h: 4: extern unsigned char time[7];
 [; ;RTC.h: 5: void initTime(unsigned char s, unsigned char m, unsigned char h,unsigned char w,
 [; ;RTC.h: 6: unsigned char DD, unsigned char MM, unsigned char YY);
 [; ;RTC.h: 7: void loadRTC();
@@ -2903,247 +2894,180 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 9: void printRTC(void);
 [; ;main.h: 2: enum states {UI_state, Sorting_state, DoneSorting_state, Testing_state, EmergencyStop_state};
 "3 main.h
-[v _machine_state `E3120 ~T0 @X0 1 e ]
+[v _machine_state `E3119 ~T0 @X0 1 e ]
 [; ;main.h: 3: enum states machine_state;
 [; ;main.h: 4: void main(void);
 [; ;main.h: 5: void stopSignals(void);
-[; ;sort.h: 2: void initFlags(void);
+[; ;main.h: 8: void machineConfig(void);
+[; ;main.h: 9: void PortTestA5(void);
+[; ;sort.h: 2: void initGlobalVars(void);
 [; ;sort.h: 3: void initSortTimer(void);
 [; ;sort.h: 4: void initServos(void);
 [; ;sort.h: 7: void sort(void);
 [; ;sort.h: 8: void Loading(void);
 [; ;sort.h: 9: void ID(void);
 [; ;sort.h: 10: void Distribution(void);
-"13 sort.h
-[v _first `i ~T0 @X0 1 e ]
-[i _first
--> 1 `i
-]
-[; ;sort.h: 13: int first=1;
-"14
-[v _f_loadingNewCan `i ~T0 @X0 1 e ]
-[i _f_loadingNewCan
--> 0 `i
-]
-[; ;sort.h: 14: int f_loadingNewCan = 0;
-"15
-[v _f_lastCan `i ~T0 @X0 1 e ]
-[i _f_lastCan
--> 0 `i
-]
-[; ;sort.h: 15: int f_lastCan = 0;
-"16
-[v _f_ID_receive `i ~T0 @X0 1 e ]
-[i _f_ID_receive
--> 1 `i
-]
-[; ;sort.h: 16: int f_ID_receive = 1;
-"17
-[v _f_can_coming_to_ID `i ~T0 @X0 1 e ]
-[i _f_can_coming_to_ID
--> 0 `i
-]
-[; ;sort.h: 17: int f_can_coming_to_ID = 0;
-"20
-[v _f_can_coming_to_distribution `i ~T0 @X0 1 e ]
-[i _f_can_coming_to_distribution
--> 0 `i
-]
-[; ;sort.h: 20: int f_can_coming_to_distribution = 0;
-"23
-[v _f_can_distributed `i ~T0 @X0 1 e ]
-[i _f_can_distributed
--> 0 `i
-]
-[; ;sort.h: 23: int f_can_distributed = 0;
+[; ;sort.h: 13: extern int first;
+[; ;sort.h: 14: extern int f_loadingNewCan;
+[; ;sort.h: 15: extern int f_lastCan;
+[; ;sort.h: 16: extern int f_ID_receive;
+[; ;sort.h: 17: extern int f_can_coming_to_ID;
+[; ;sort.h: 20: extern int f_can_coming_to_distribution;
+[; ;sort.h: 23: extern int f_can_distributed;
 [; ;sort.h: 26: void printSortTimer(void);
-"27
-[v _startTime `i ~T0 @X0 -> 7 `i e ]
-[; ;sort.h: 27: int startTime[7];
-"28
-[v _total_time `i ~T0 @X0 1 e ]
-[; ;sort.h: 28: int total_time;
+[; ;sort.h: 27: extern int startTime[7];
+[; ;sort.h: 28: extern int total_time;
 [; ;sort.h: 31: void getIR(void);
-"32
-[v _IR_signal `i ~T0 @X0 1 e ]
-[; ;sort.h: 32: int IR_signal;
-"33
-[v _TMR3counter `i ~T0 @X0 1 e ]
-[i _TMR3counter
--> 0 `i
-]
-[; ;sort.h: 33: int TMR3counter=0;
-"34
-[v _TMR3CF `i ~T0 @X0 1 e ]
-[i _TMR3CF
--> 0 `i
-]
-[; ;sort.h: 34: int TMR3CF=0;
-"35
-[v _MAG_signal `i ~T0 @X0 1 e ]
-[; ;sort.h: 35: int MAG_signal;
-[; ;sort.h: 38: void updateServoPosition(int time_us, int timer);
-"39
-[v _servoTimes `i ~T0 @X0 -> 4 `i e ]
-[; ;sort.h: 39: int servoTimes[4];
-"40
-[v _was_low `i ~T0 @X0 1 e ]
-[; ;sort.h: 40: int was_low;
-"43
-[v _count_total `i ~T0 @X0 1 e ]
-[; ;sort.h: 43: int count_total;
-"44
-[v _count_pop_no_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 44: int count_pop_no_tab;
-"45
-[v _count_pop_w_tab `i ~T0 @X0 1 e ]
-[; ;sort.h: 45: int count_pop_w_tab;
-"46
-[v _count_can_w_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 46: int count_can_w_lab;
-"47
-[v _count_can_no_lab `i ~T0 @X0 1 e ]
-[; ;sort.h: 47: int count_can_no_lab;
-"48
-[v _cur_can `i ~T0 @X0 1 e ]
-[; ;sort.h: 48: int cur_can;
-[; ;ADCFunctionality.h: 2: void readADC(char channel);
-[; ;ADCFunctionality.h: 3: void readIR(void);
-[; ;ADCFunctionality.h: 4: void readMAG(void);
-"6 ADCFunctionality.h
-[v _THIR `i ~T0 @X0 1 e ]
-[i _THIR
--> 255 `i
-]
-[; ;ADCFunctionality.h: 6: int THIR = 255;
-"7
-[v _THMAG `i ~T0 @X0 1 e ]
-[i _THMAG
--> 255 `i
-]
-[; ;ADCFunctionality.h: 7: int THMAG = 255;
-"14 lcd.c
+[; ;sort.h: 32: extern int IR_signal;
+[; ;sort.h: 33: extern int MAG_signal;
+[; ;sort.h: 36: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 37: extern unsigned int servoTimes[4];
+[; ;sort.h: 38: volatile extern int was_low_1;
+[; ;sort.h: 39: volatile extern int was_low_3;
+[; ;sort.h: 42: extern int count_total;
+[; ;sort.h: 43: extern int count_pop_no_tab;
+[; ;sort.h: 44: extern int count_pop_w_tab;
+[; ;sort.h: 45: extern int count_can_w_lab;
+[; ;sort.h: 46: extern int count_can_no_lab;
+[; ;sort.h: 47: extern int cur_can;
+[; ;ADCFunctionality.h: 1: void readADC(char channel);
+[; ;ADCFunctionality.h: 2: void readIR(void);
+[; ;ADCFunctionality.h: 3: void readMAG(void);
+[; ;EEPROM.h: 1: void EEPROM_write(unsigned short address, unsigned char data);
+[; ;EEPROM.h: 2: unsigned char EEPROM_read(unsigned short address);
+[; ;EEPROM.h: 3: void logRun(void);
+[; ;EEPROM.h: 4: void retrieveLog(int logNum);
+[; ;EEPROM.h: 7: extern unsigned char sel;
+[; ;EEPROM.h: 11: extern int log_completion;
+[; ;EEPROM.h: 12: extern int log_count_total;
+[; ;EEPROM.h: 14: extern int log_count_pop_no_tab;
+[; ;EEPROM.h: 15: extern int log_count_pop_w_tab;
+[; ;EEPROM.h: 17: extern int log_count_can_w_lab;
+[; ;EEPROM.h: 18: extern int log_count_can_no_lab;
+[; ;EEPROM.h: 20: extern int log_startTime[7];
+[; ;EEPROM.h: 22: extern int log_total_time;
+"15 lcd.c
 [v _lcdInst `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;lcd.c: 14: void lcdInst(char data) {
+[; ;lcd.c: 15: void lcdInst(char data) {
 [e :U _lcdInst ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;lcd.c: 15: LATDbits.LATD2 = 0;
-"15
-[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
-[; ;lcd.c: 16: lcdNibble(data);
+[; ;lcd.c: 16: LATDbits.LATD2 = 0;
 "16
-[e ( _lcdNibble (1 _data ]
-[; ;lcd.c: 17: }
+[e = . . _LATDbits 0 2 -> -> 0 `i `uc ]
+[; ;lcd.c: 17: lcdNibble(data);
 "17
+[e ( _lcdNibble (1 _data ]
+[; ;lcd.c: 18: }
+"18
 [e :UE 266 ]
 }
-"19
+"20
 [v _putch `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;lcd.c: 19: void putch(char data){
+[; ;lcd.c: 20: void putch(char data){
 [e :U _putch ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;lcd.c: 20: LATDbits.LATD2 = 1;
-"20
-[e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
-[; ;lcd.c: 21: lcdNibble(data);
+[; ;lcd.c: 21: LATDbits.LATD2 = 1;
 "21
-[e ( _lcdNibble (1 _data ]
-[; ;lcd.c: 22: }
+[e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
+[; ;lcd.c: 22: lcdNibble(data);
 "22
+[e ( _lcdNibble (1 _data ]
+[; ;lcd.c: 23: }
+"23
 [e :UE 267 ]
 }
-"24
+"25
 [v _lcdNibble `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;lcd.c: 24: void lcdNibble(char data){
+[; ;lcd.c: 25: void lcdNibble(char data){
 [e :U _lcdNibble ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-"26
-[v _temp `uc ~T0 @X0 1 a ]
-[; ;lcd.c: 26: char temp = data & 0xF0;
-[e = _temp -> & -> _data `i -> 240 `i `uc ]
-[; ;lcd.c: 27: LATD = LATD & 0x0F;
 "27
-[e = _LATD -> & -> _LATD `i -> 15 `i `uc ]
-[; ;lcd.c: 28: LATD = temp | LATD;
-"28
-[e = _LATD -> | -> _temp `i -> _LATD `i `uc ]
-[; ;lcd.c: 30: LATDbits.LATD3 = 1;
-"30
-[e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
-[; ;lcd.c: 31: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"31
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 32: LATDbits.LATD3 = 0;
-"32
-[e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
-[; ;lcd.c: 33: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"33
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 35: data = data << 4;
-"35
-[e = _data -> << -> _data `i -> 4 `i `uc ]
-[; ;lcd.c: 37: temp = data & 0xF0;
-"37
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;lcd.c: 27: char temp = data & 0xF0;
 [e = _temp -> & -> _data `i -> 240 `i `uc ]
-[; ;lcd.c: 38: LATD = LATD & 0x0F;
-"38
+[; ;lcd.c: 28: LATD = LATD & 0x0F;
+"28
 [e = _LATD -> & -> _LATD `i -> 15 `i `uc ]
-[; ;lcd.c: 39: LATD = temp | LATD;
-"39
+[; ;lcd.c: 29: LATD = temp | LATD;
+"29
 [e = _LATD -> | -> _temp `i -> _LATD `i `uc ]
-[; ;lcd.c: 41: LATDbits.LATD3 = 1;
-"41
+[; ;lcd.c: 31: LATDbits.LATD3 = 1;
+"31
 [e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
-[; ;lcd.c: 42: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"42
+[; ;lcd.c: 32: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"32
 [e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 43: LATDbits.LATD3 = 0;
-"43
+[; ;lcd.c: 33: LATDbits.LATD3 = 0;
+"33
 [e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
-[; ;lcd.c: 44: _delay((unsigned long)((25)*(32000000/4000000.0)));
-"44
+[; ;lcd.c: 34: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"34
 [e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;lcd.c: 45: }
+[; ;lcd.c: 36: data = data << 4;
+"36
+[e = _data -> << -> _data `i -> 4 `i `uc ]
+[; ;lcd.c: 38: temp = data & 0xF0;
+"38
+[e = _temp -> & -> _data `i -> 240 `i `uc ]
+[; ;lcd.c: 39: LATD = LATD & 0x0F;
+"39
+[e = _LATD -> & -> _LATD `i -> 15 `i `uc ]
+[; ;lcd.c: 40: LATD = temp | LATD;
+"40
+[e = _LATD -> | -> _temp `i -> _LATD `i `uc ]
+[; ;lcd.c: 42: LATDbits.LATD3 = 1;
+"42
+[e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
+[; ;lcd.c: 43: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"43
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;lcd.c: 44: LATDbits.LATD3 = 0;
+"44
+[e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
+[; ;lcd.c: 45: _delay((unsigned long)((25)*(32000000/4000000.0)));
 "45
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;lcd.c: 46: }
+"46
 [e :UE 268 ]
 }
-"47
+"48
 [v _initLCD `(v ~T0 @X0 1 ef ]
 {
-[; ;lcd.c: 47: void initLCD(void) {
+[; ;lcd.c: 48: void initLCD(void) {
 [e :U _initLCD ]
 [f ]
-[; ;lcd.c: 48: _delay((unsigned long)((15)*(32000000/4000.0)));
-"48
-[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;lcd.c: 49: lcdInst(0b00110011);
+[; ;lcd.c: 49: _delay((unsigned long)((15)*(32000000/4000.0)));
 "49
-[e ( _lcdInst (1 -> -> 51 `i `uc ]
-[; ;lcd.c: 50: lcdInst(0b00110010);
-"50
-[e ( _lcdInst (1 -> -> 50 `i `uc ]
-[; ;lcd.c: 52: lcdInst(0b00101000);
-"52
-[e ( _lcdInst (1 -> -> 40 `i `uc ]
-[; ;lcd.c: 53: lcdInst(0b00001100);
-"53
-[e ( _lcdInst (1 -> -> 12 `i `uc ]
-[; ;lcd.c: 54: lcdInst(0b00000110);
-"54
-[e ( _lcdInst (1 -> -> 6 `i `uc ]
-[; ;lcd.c: 55: lcdInst(0b00000001);
-"55
-[e ( _lcdInst (1 -> -> 1 `i `uc ]
-[; ;lcd.c: 56: _delay((unsigned long)((15)*(32000000/4000.0)));
-"56
 [e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;lcd.c: 57: }
+[; ;lcd.c: 50: lcdInst(0b00110011);
+"50
+[e ( _lcdInst (1 -> -> 51 `i `uc ]
+[; ;lcd.c: 51: lcdInst(0b00110010);
+"51
+[e ( _lcdInst (1 -> -> 50 `i `uc ]
+[; ;lcd.c: 53: lcdInst(0b00101000);
+"53
+[e ( _lcdInst (1 -> -> 40 `i `uc ]
+[; ;lcd.c: 54: lcdInst(0b00001100);
+"54
+[e ( _lcdInst (1 -> -> 12 `i `uc ]
+[; ;lcd.c: 55: lcdInst(0b00000110);
+"55
+[e ( _lcdInst (1 -> -> 6 `i `uc ]
+[; ;lcd.c: 56: lcdInst(0b00000001);
+"56
+[e ( _lcdInst (1 -> -> 1 `i `uc ]
+[; ;lcd.c: 57: _delay((unsigned long)((15)*(32000000/4000.0)));
 "57
+[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 58: }
+"58
 [e :UE 269 ]
 }

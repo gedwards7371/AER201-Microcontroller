@@ -1,4 +1,3 @@
-
 void I2C_Master_Start();
 void I2C_Master_Stop();
 void I2C_Master_Init(const unsigned long c);

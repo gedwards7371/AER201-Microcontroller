@@ -32,6 +32,10 @@
 #define TIME_SOLENOID_MOTION    100
 #define TIME_SERVO_MOTION       500
 
+// IR sensor thresholds
+#define THIR    255
+#define THMAG   255
+
 //LCD Control Registers
 #define RS          LATDbits.LATD2          
 #define E           LATDbits.LATD3

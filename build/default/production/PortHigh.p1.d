@@ -5,6 +5,7 @@ I2C.h  \
 main.h  \
 RTC.h  \
 lcd.h  \
+EEPROM.h  \
 macros.h  \
 constants.h  \
 UI.h  \

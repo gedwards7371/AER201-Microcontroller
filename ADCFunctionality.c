@@ -10,6 +10,7 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
+#include "EEPROM.h"
 
 void readADC(char channel){
     // Select A2D channel to read

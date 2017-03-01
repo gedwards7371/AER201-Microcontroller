@@ -10,11 +10,24 @@
 #include "main.h"
 #include "sort.h"
 #include "ADCFunctionality.h"
+#include "EEPROM.h"
 
 void machineConfig(void) {
     //**OSCILLATOR**//
     OSCCON = 0xF0; // Force internal oscillator operation at 8 MHz (pg. 7-39)
     OSCTUNEbits.PLLEN = 1; // set  OSCTUNE<6> to enable PLL (4x  phase-lock-loop) thereby setting internal oscillator frequency to 32 MHz
+    
+     //**A/D Converter Module**//
+    ADCON0 = 0x00;  //Disable ADC
+    ADCON1 = 0x0D;  // bits 0-3 set pins with ADC capabilities as either analog  or digital. Here, we set AN0 and  AN1 as analog inputs and the rest as digital
+                    // bits 4-5 determine whether to use external voltage references or VDD and VSS
+                    // Reference: pg. 7- 158
+    VCFG1 = 0; // use VSS for Vref-
+    VCFG0 = 0; // use VDD for Vref+
+    CVRCON = 0x00; // Disable comparator voltage reference (pg. 239 of datasheet)
+    CMCONbits.CIS = 0; // Connect C1 Vin and C2 Vin to RA0/AN0 and RA1/AN1 (pg. 233 datasheet)
+    ADFM = 1; // Right justify A/D result
+    nRBPU = 0; // Enable PORTB's pull-up resistors
     
     //**PIN I/O**//
     //TRIS SETS DATA DIRECTION: 0  = output; 1 = input. Default is  0
@@ -38,18 +51,6 @@ void machineConfig(void) {
     LATC = 0x00; // output low
     LATD = 0x00; // output low
     LATE = 0x00; // output low
-    
-    //**A/D Converter Module**//
-    ADCON0 = 0x00;  //Disable ADC
-    ADCON1 = 0x0D;  // bits 0-3 set pins with ADC capabilities as either analog  or digital. Here, we set AN0 and  AN1 as analog inputs and the rest as digital
-                    // bits 4-5 determine whether to use external voltage references or VDD and VSS
-                    // Reference: pg. 7- 158
-    VCFG1 = 0; // use VSS for Vref-
-    VCFG0 = 0; // use VDD for Vref+
-    CVRCON = 0x00; // Disable comparator voltage reference (pg. 239 of datasheet)
-    CMCONbits.CIS = 0; // Connect C1 Vin and C2 Vin to RA0/AN0 and RA1/AN1 (pg. 233 datasheet)
-    ADFM = 1; // Right justify A/D result
-    nRBPU = 0; // Enable PORTB's pull-up resistors
     
     //**INTERRUPTS**//
     INT1IE = 1; // Enable external interrupts on INT1/RB1 (for keypad!)
