@@ -263,9 +263,9 @@ void printSortTimer(void){
     int sec = (timeDiff % 3600) % 60;
     
     __lcd_home();
-    printf("Sorting...");
+    printf("SORTING...");
     __lcd_newline();
-    printf("Time: %02d:%02d:%02d", hour, min, sec);
+    printf("TIME %02d:%02d:%02d", hour, min, sec);
 }
 
 void getIR(void){

@@ -70,40 +70,40 @@ void printRTC(void){
     int RTC_month = INT_time[5];
     switch(RTC_month){
         case 1 :
-            strcpy(month, "Jan");
+            strcpy(month, "JAN");
             break;
         case 2:
-            strcpy(month, "Feb");
+            strcpy(month, "FEB");
             break;
         case 3:
-            strcpy(month, "Mar");
+            strcpy(month, "MAR");
             break;
         case 4:
-            strcpy(month, "Apr");
+            strcpy(month, "APR");
             break;
         case 5:
-            strcpy(month, "May");
+            strcpy(month, "MAY");
             break;
         case 6:
-            strcpy(month, "Jun");
+            strcpy(month, "JUN");
             break;    
         case 7:
-            strcpy(month, "Jul");
+            strcpy(month, "JUL");
             break;  
         case 8:
-            strcpy(month, "Aug");
+            strcpy(month, "AUG");
             break;    
         case 9:
-            strcpy(month, "Sep");
+            strcpy(month, "SEP");
             break;    
         case 10:
-            strcpy(month, "Oct");
+            strcpy(month, "OCT");
             break;    
         case 11:
-            strcpy(month, "Nov");
+            strcpy(month, "NOV");
             break;    
         case 12:
-            strcpy(month, "Dec");
+            strcpy(month, "DEC");
             break;
     }
     __lcd_home();

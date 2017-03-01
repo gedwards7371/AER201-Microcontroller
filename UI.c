@@ -77,7 +77,7 @@ void UI(void){
         __lcd_home();
         printf("!SORT CONCLUDED!");
         __lcd_newline();
-        printf("Time: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+        printf("TIME: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
         machine_state = UI_state; // Return to UI state
         while(PORTBbits.RB1==0){
             // Wait for user to press a key
@@ -97,59 +97,107 @@ void UI(void){
     }
     while(logstate){
         // <editor-fold defaultstate="collapsed" desc="PRINT STATEMENTS FOR LOGS">
-        __lcd_clear();
-        __lcd_home();
-        printf("-- Log %2d here--", log);
-        __lcd_newline();
-        printf("Pause:< | Back:>");
+        if(!log_completion){
+            __lcd_clear();
+            __lcd_home();
+            printf("-- LOG %2d HERE--", log);
+            __lcd_newline();
+            printf("DIDN'T COMPLETE");
+        }
+        else{
+            __lcd_clear();
+            __lcd_home();
+            printf("-- LOG %2d HERE--", log);
+            __lcd_newline();
+            printf("PAUSE < | BACK >");
 
-        __delay_1s();if(!logstate){break;}
-        __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
 
-        __lcd_clear();
-        __lcd_home();
-        printf("Start:");
-        __lcd_newline();
-        printf("06Feb | 01:08:56");
+            __lcd_clear();
+            __lcd_home();
+            printf("START:");
+            __lcd_newline();
+            char month[] = "MMM";
+            switch(log_startTime[5]){
+                case 1 :
+                    strcpy(month, "JAN");
+                    break;
+                case 2:
+                    strcpy(month, "FEB");
+                    break;
+                case 3:
+                    strcpy(month, "MAR");
+                    break;
+                case 4:
+                    strcpy(month, "APR");
+                    break;
+                case 5:
+                    strcpy(month, "MAY");
+                    break;
+                case 6:
+                    strcpy(month, "JUN");
+                    break;    
+                case 7:
+                    strcpy(month, "JUL");
+                    break;  
+                case 8:
+                    strcpy(month, "AUG");
+                    break;    
+                case 9:
+                    strcpy(month, "SEP");
+                    break;    
+                case 10:
+                    strcpy(month, "OCT");
+                    break;    
+                case 11:
+                    strcpy(month, "NOV");
+                    break;    
+                case 12:
+                    strcpy(month, "DEC");
+                    break;
+            }
+            printf("%02d%s | %02d:%02d:%02d", log_startTime[4],month,log_startTime[2],log_startTime[1],log_startTime[0]);
 
-        __delay_1s();if(!logstate){break;}
-        __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
 
-        __lcd_clear();
-        __lcd_home();
-        printf("Duration:");
-        __lcd_newline();
-        printf("%d min(s) %d secs", 2, 42);
+            __lcd_clear();
+            __lcd_home();
+            printf("DURATION:");
+            __lcd_newline();
+            printf("%d MIN %d SEC", (log_total_time % 3600) / 60, (log_total_time % 3600) % 60);
 
-        __delay_1s();if(!logstate){break;}
-        __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
 
-        __lcd_clear();
-        __lcd_home();
-        printf(" -- Pop  can -- ");
-        __lcd_newline();
-        printf("No tab: 9|Tab: 1");
+            __lcd_clear();
+            __lcd_home();
+            printf(" -- POP  CAN -- ");
+            __lcd_newline();
+            printf("NO TAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
 
-        __delay_1s();if(!logstate){break;}
-        __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
 
-        __lcd_clear();
-        __lcd_home();
-        printf(" -- Soup can -- ");
-        __lcd_newline();
-        printf("No lbl: 1|lbl: 1");
+            __lcd_clear();
+            __lcd_home();
+            printf(" -- SOUP CAN -- ");
+            __lcd_newline();
+            printf("NO LAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
 
-        __delay_1s();if(!logstate){break;}
-        __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
 
-        __lcd_clear();
-        __lcd_home();
-        printf("-- Total cans --");
-        __lcd_newline();
-        printf("12");
+            __lcd_clear();
+            __lcd_home();
+            printf("-- TOTAL CANS --");
+            __lcd_newline();
+            printf("%d", log_count_total);
 
-        __delay_1s();if(!logstate){break;}
-        __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
+            __delay_1s();if(!logstate){break;}
+        }
         // </editor-fold>
     }
 }
@@ -411,7 +459,7 @@ int inputHandler(void){
 
 void dispLogs(int myLog){
     logstate = 1;
-    log = myLog;
+    retrieveLog(myLog);
 }
 
 /* STATE CHANGE HANDLERS */
