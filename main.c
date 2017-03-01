@@ -21,8 +21,13 @@ void main(void) {
     initUI();
     first = 1;
     
-    machine_state = Testing_state; // comment me out if you're not testing
-    // debug = 1; // comment me out if you're not debugging
+    machine_state = Testing_state; // comment this out if you're not testing.
+                                   // This will make the machine enter a
+                                   // function that tests/demonstrates the
+                                   // functional units of this program.
+    // debug = 1; // comment this out if you're not debugging. This will trigger
+                  // print statements at various locations throughout the
+                  // program.
     
     while(1){
         switch(machine_state){

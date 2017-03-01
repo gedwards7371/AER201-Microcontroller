@@ -3947,7 +3947,7 @@ first = 1;
 
 machine_state = Testing_state;
 
-
+# 32
 while(1){
 switch(machine_state){
 case UI_state :
