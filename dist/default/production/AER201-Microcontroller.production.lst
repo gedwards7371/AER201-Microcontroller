@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.40 build -251452761 
-                                                                                               Wed Mar 01 17:16:19 2017
+                                                                                               Wed Mar 01 17:57:56 2017
 
 Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010151
      1                           	processor	18F4620
@@ -12245,14 +12245,14 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  11961  00370E  D7FE               	goto	l1132
  11962                           
  11963                           ;Test.c: 339: }
- 11964                           ;Test.c: 340: LATAbits.LATA5 = 0;
+ 11964                           ;Test.c: 349: LATAbits.LATA5 = 0;
  11965  003710  9A89               	bcf	3977,5,c	;volatile
  11966  003712  D7F4               	goto	l1126
  11967  003714                     l1130:
  11968                           
- 11969                           ;Test.c: 341: }
- 11970                           ;Test.c: 342: }
- 11971                           ;Test.c: 343: (INTCONbits.GIE = 1);
+ 11969                           ;Test.c: 350: }
+ 11970                           ;Test.c: 351: }
+ 11971                           ;Test.c: 352: (INTCONbits.GIE = 1);
  11972  003714  8EF2               	bsf	intcon,7,c	;volatile
  11973  003716  0012               	return		;funcret
  11974  003718                     __end_of_PortTestA5:
@@ -13982,7 +13982,7 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  13657                           
  13658 ;; *************** function _EEPROMTest *****************
  13659 ;; Defined at:
- 13660 ;;		line 346 in file "Test.c"
+ 13660 ;;		line 355 in file "Test.c"
  13661 ;; Parameters:    Size  Location     Type
  13662 ;;		None
  13663 ;; Auto vars:     Size  Location     Type
@@ -21423,7 +21423,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.40 build -251452761 
-Symbol Table                                                                                   Wed Mar 01 17:16:19 2017
+Symbol Table                                                                                   Wed Mar 01 17:57:56 2017
 
                                     _i 00E4                     i2_I2C_Master_Start 4080  
                    i2_I2C_Master_Write 4056                                     l66 3FEE  

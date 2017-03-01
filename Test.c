@@ -337,6 +337,17 @@ void PortTestA5(void){
             while(PORTBbits.RB1 == 1){
                 // Wait until the key has been released
             }
+            
+            /* PWM to make the CAM servo work with Twesh's circuit
+            for(i=0;i<10000;i++)
+            {
+                LATAbits.LATA5 = 0;
+                __delay_us(10);
+                LATAbits.LATA5 = 0;
+                __delay_us(90);
+            }    
+            */
+            
             LATAbits.LATA5 = 0;
         }
     }
