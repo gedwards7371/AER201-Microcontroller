@@ -3854,7 +3854,6 @@ void stopSignals(void);
 
 
 void machineConfig(void);
-void PortTestA5(void);
 
 
 extern int debug;
@@ -3936,7 +3935,179 @@ extern int log_startTime[7];
 
 extern int log_total_time;
 
-# 15 "main.c"
+
+# 3 "configBits.h"
+#pragma config OSC = INTIO67
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
+
+
+#pragma config PWRT = OFF
+#pragma config BOREN = SBORDIS
+#pragma config BORV = 3
+
+
+#pragma config WDT = OFF
+#pragma config WDTPS = 32768
+
+
+#pragma config CCP2MX = PORTC
+#pragma config PBADEN = ON
+#pragma config LPT1OSC = OFF
+#pragma config MCLRE = ON
+
+
+#pragma config STVREN = ON
+#pragma config LVP = OFF
+#pragma config XINST = OFF
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
+
+# 1 "I2C.h"
+void I2C_Master_Start();
+void I2C_Master_Stop();
+void I2C_Master_Init(const unsigned long c);
+void I2C_Master_Write(unsigned d);
+unsigned char I2C_Master_Read(unsigned char a);
+
+# 2 "main.h"
+enum states {UI_state, Sorting_state, DoneSorting_state, Testing_state, EmergencyStop_state};
+enum states machine_state;
+void main(void);
+void stopSignals(void);
+
+
+void machineConfig(void);
+
+
+extern int debug;
+
+# 2 "sort.h"
+void initGlobalVars(void);
+void initSortTimer(void);
+void initServos(void);
+
+
+void sort(void);
+void Loading(void);
+void ID(void);
+void Distribution(void);
+
+
+extern int first;
+extern int f_loadingNewCan;
+extern int f_lastCan;
+extern int f_ID_receive;
+extern int f_can_coming_to_ID;
+
+
+extern int f_can_coming_to_distribution;
+
+
+extern int f_can_distributed;
+
+
+void printSortTimer(void);
+extern int startTime[7];
+extern int total_time;
+
+
+void getIR(void);
+extern int IR_signal;
+extern int MAG_signal;
+
+
+void updateServoPosition(int time_us, int timer);
+extern unsigned int servoTimes[4];
+volatile extern int was_low_1;
+volatile extern int was_low_3;
+
+
+extern int count_total;
+extern int count_pop_no_tab;
+extern int count_pop_w_tab;
+extern int count_can_w_lab;
+extern int count_can_no_lab;
+extern int cur_can;
+
+# 1 "ADCFunctionality.h"
+void readADC(char channel);
+void readIR(void);
+void readMAG(void);
+
+# 1 "EEPROM.h"
+void EEPROM_write(unsigned short address, unsigned char data);
+unsigned char EEPROM_read(unsigned short address);
+void logRun(void);
+void retrieveLog(int logNum);
+
+
+extern unsigned char sel;
+
+
+
+extern int log_completion;
+extern int log_count_total;
+
+extern int log_count_pop_no_tab;
+extern int log_count_pop_w_tab;
+
+extern int log_count_can_w_lab;
+extern int log_count_can_no_lab;
+
+extern int log_startTime[7];
+
+extern int log_total_time;
+
+# 15 "Test.c"
+void PortTestA5(void){
+while(PORTBbits.RB1 == 0){
+
+
+}
+LATAbits.LATA5 = 1;
+while(PORTBbits.RB1 == 1){
+
+}
+__nop();
+__nop();
+LATAbits.LATA5 = 0;
+}
+
+void Test(void){
+
+# 40
+}
+
+# 16 "main.c"
 int debug;
 
 void main(void) {
@@ -3964,7 +4135,7 @@ first = 1;
 UI();
 break;
 case Testing_state :
-PortTestA5();
+Test();
 break;
 case EmergencyStop_state :
 stopSignals();

@@ -6,7 +6,6 @@ void stopSignals(void);
 
 // Other functions that it's not worth making individual headers for
 void machineConfig(void);
-void PortTestA5(void);
 
 // Debug flag
 extern int debug;

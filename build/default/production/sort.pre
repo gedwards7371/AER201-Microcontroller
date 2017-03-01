@@ -3854,7 +3854,6 @@ void stopSignals(void);
 
 
 void machineConfig(void);
-void PortTestA5(void);
 
 
 extern int debug;

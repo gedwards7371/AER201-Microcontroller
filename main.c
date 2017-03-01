@@ -11,6 +11,7 @@
 #include "sort.h"
 #include "ADCFunctionality.h"
 #include "EEPROM.h"
+#include "Test.c"
 
 int debug;
 
@@ -39,7 +40,7 @@ void main(void) {
                 UI(); // have a check for this state in the UI to display a special screen
                 break;
             case Testing_state :
-                PortTestA5();
+                Test();
                 break;
             case EmergencyStop_state :
                 stopSignals(); // kill all outputs
