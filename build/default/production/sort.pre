@@ -3806,6 +3806,7 @@ void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
 extern int cur_state;
+extern int log;
 int inputHandler(void);
 void dispLogs(int);
 
@@ -3854,6 +3855,9 @@ void stopSignals(void);
 
 void machineConfig(void);
 void PortTestA5(void);
+
+
+extern int debug;
 
 # 2 "sort.h"
 void initGlobalVars(void);
@@ -4150,9 +4154,10 @@ TMR0ON = 1;
 }
 void initServos(void){
 updateServoPosition(2000, 1);
-
+updateServoPosition(1000, 3);
 TMR1ON = 1;
-
+_delay((unsigned long)((5)*(32000000/4000.0)));
+TMR3ON = 1;
 LATCbits.LATC0 = 0;
 }
 void printSortTimer(void){
@@ -4177,9 +4182,9 @@ int min = (timeDiff % 3600) / 60;
 int sec = (timeDiff % 3600) % 60;
 
 lcdInst(0b10000000);;
-printf("Sorting...");
+printf("SORTING...");
 lcdInst(0b11000000);;
-printf("Time: %02d:%02d:%02d", hour, min, sec);
+printf("TIME %02d:%02d:%02d", hour, min, sec);
 }
 
 void getIR(void){

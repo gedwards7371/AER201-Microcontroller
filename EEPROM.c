@@ -29,8 +29,8 @@ int log_startTime[7];
 int log_total_time;
 // </editor-fold>
 
-void EEPROM_write(unsigned short address, unsigned char data){
-    di(); // Disable interrupts
+void EEPROM_write(unsigned short address, unsigned char data){    
+    EECON1bits.WREN = 1;    // Enable writing of EEPROM
     
     // Set address registers
     EEADRH = (unsigned char)(address >> 8);
@@ -39,25 +39,33 @@ void EEPROM_write(unsigned short address, unsigned char data){
     EEDATA = data;          // Write our data to the SFR
     EECON1bits.EEPGD = 0;   // Select EEPROM data mem. instead of program mem.
     EECON1bits.CFGS = 0;    // Access flash/EEPROM, NOT config. registers
-    EECON1bits.WREN = 1;    // Enable writing of EEPROM
     
+    di(); // Disable interrupts for critical write sequence
     // Mandatory write initialization sequence
     EECON2 = 0x55;
     EECON2 = 0x0AA;
     EECON1bits.WR = 1;
+    ei(); // Enable interrupts
 
     // Poll EEIF for write completion (we could use an ISR for it but we'd run
     // into race conditions anyway when we're writing a bunch of data)
     while(PIR2bits.EEIF == 0) {continue;} 
-    PIR2bits.EEIF = 0;
+    PIR2bits.EEIF = 0; // Clear interrupt after it occurs
     EECON1bits.WREN = 0; // Disable write for data integrity
     
-    ei(); // Enable interrupts
+    // DEBUG
+    if(debug){
+        __lcd_clear();
+        __lcd_home();
+        if(EEPROM_read(address)==data){
+            printf("(data: %u, addr: %u)", data, address);
+            __delay_1s();
+        }
+        else{ printf("FAILED"); __delay_1s(); }
+    }
 }
 
 unsigned char EEPROM_read(unsigned short address){
-    di(); // Disable interrupts
-    
     // Set address registers
     EEADRH = (unsigned char)(address >> 8);
     EEADR = (unsigned char)address;
@@ -70,8 +78,7 @@ unsigned char EEPROM_read(unsigned short address){
     // the RD bit
     while(EECON1bits.RD == 1) {continue;}
 
-    ei(); // Enable interrupts
-    return EEDATA;              // Return data
+    return EEDATA;  // Return data
 }
 
 void logRun(void){

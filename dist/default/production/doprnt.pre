@@ -383,10 +383,18 @@ default:
 # 813
 continue;
 
-# 822
+
+
+case 'u':
+flag |= 0x40;
+break;
+
+
 }
 
-# 1253
+# 1251
+if((flag & 0x40) == 0x00)
+
 {
 
 # 1259
@@ -397,6 +405,17 @@ flag |= 0x03;
 val = -val;
 }
 
+}
+
+else
+
+
+
+
+{
+
+# 1286
+val = (*(unsigned *)__va_arg((*(unsigned **)ap), (unsigned)0));
 }
 
 # 1305

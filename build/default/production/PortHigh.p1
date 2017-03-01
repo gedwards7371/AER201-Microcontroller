@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "3 main.h
-[c E3119 0 1 2 3 4 .. ]
-[n E3119 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
+[c E3120 0 1 2 3 4 .. ]
+[n E3120 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
 "191 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S11 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
@@ -2849,10 +2849,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.h: 6: void interrupt handler(void);
 [; ;UI.h: 7: void updateMenu(void);
 [; ;UI.h: 8: extern int cur_state;
-[; ;UI.h: 9: int inputHandler(void);
-[; ;UI.h: 10: void dispLogs(int);
-[; ;UI.h: 12: volatile extern char input;
-"13 UI.h
+[; ;UI.h: 9: extern int log;
+[; ;UI.h: 10: int inputHandler(void);
+[; ;UI.h: 11: void dispLogs(int);
+[; ;UI.h: 13: volatile extern char input;
+"14 UI.h
 [v _keys `Cuc ~T0 @X0 -> 0 `x e ]
 [i _keys
 :U ..
@@ -2875,29 +2876,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[; ;UI.h: 13: const char keys[] = "123A456B789C*0#D";
-[; ;UI.h: 16: void change_state_to_menu_start(void);
-[; ;UI.h: 17: void change_state_to_menu_11(void);
-[; ;UI.h: 18: void change_state_to_menu_12(void);
-[; ;UI.h: 19: void change_state_to_menu_22(void);
-[; ;UI.h: 20: void change_state_to_menu_23(void);
-[; ;UI.h: 21: void change_state_to_logs_11(void);
-[; ;UI.h: 22: void change_state_to_logs_12(void);
-[; ;UI.h: 23: void change_state_to_logs_22(void);
-[; ;UI.h: 24: void change_state_to_logs_23(void);
-[; ;UI.h: 25: void change_state_to_logs_33(void);
-[; ;UI.h: 26: void change_state_to_logs_34(void);
-[; ;UI.h: 28: void print_menu_start(void);
-[; ;UI.h: 29: void print_menu_11(void);
-[; ;UI.h: 30: void print_menu_12(void);
-[; ;UI.h: 31: void print_menu_22(void);
-[; ;UI.h: 32: void print_menu_23(void);
-[; ;UI.h: 33: void print_menu_logs_11(void);
-[; ;UI.h: 34: void print_menu_logs_12(void);
-[; ;UI.h: 35: void print_menu_logs_22(void);
-[; ;UI.h: 36: void print_menu_logs_23(void);
-[; ;UI.h: 37: void print_menu_logs_33(void);
-[; ;UI.h: 38: void print_menu_logs_34(void);
+[; ;UI.h: 14: const char keys[] = "123A456B789C*0#D";
+[; ;UI.h: 17: void change_state_to_menu_start(void);
+[; ;UI.h: 18: void change_state_to_menu_11(void);
+[; ;UI.h: 19: void change_state_to_menu_12(void);
+[; ;UI.h: 20: void change_state_to_menu_22(void);
+[; ;UI.h: 21: void change_state_to_menu_23(void);
+[; ;UI.h: 22: void change_state_to_logs_11(void);
+[; ;UI.h: 23: void change_state_to_logs_12(void);
+[; ;UI.h: 24: void change_state_to_logs_22(void);
+[; ;UI.h: 25: void change_state_to_logs_23(void);
+[; ;UI.h: 26: void change_state_to_logs_33(void);
+[; ;UI.h: 27: void change_state_to_logs_34(void);
+[; ;UI.h: 29: void print_menu_start(void);
+[; ;UI.h: 30: void print_menu_11(void);
+[; ;UI.h: 31: void print_menu_12(void);
+[; ;UI.h: 32: void print_menu_22(void);
+[; ;UI.h: 33: void print_menu_23(void);
+[; ;UI.h: 34: void print_menu_logs_11(void);
+[; ;UI.h: 35: void print_menu_logs_12(void);
+[; ;UI.h: 36: void print_menu_logs_22(void);
+[; ;UI.h: 37: void print_menu_logs_23(void);
+[; ;UI.h: 38: void print_menu_logs_33(void);
+[; ;UI.h: 39: void print_menu_logs_34(void);
 [; ;RTC.h: 4: extern unsigned char time[7];
 [; ;RTC.h: 5: void initTime(unsigned char s, unsigned char m, unsigned char h,unsigned char w,
 [; ;RTC.h: 6: unsigned char DD, unsigned char MM, unsigned char YY);
@@ -2906,12 +2907,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 9: void printRTC(void);
 [; ;main.h: 2: enum states {UI_state, Sorting_state, DoneSorting_state, Testing_state, EmergencyStop_state};
 "3 main.h
-[v _machine_state `E3119 ~T0 @X0 1 e ]
+[v _machine_state `E3120 ~T0 @X0 1 e ]
 [; ;main.h: 3: enum states machine_state;
 [; ;main.h: 4: void main(void);
 [; ;main.h: 5: void stopSignals(void);
 [; ;main.h: 8: void machineConfig(void);
 [; ;main.h: 9: void PortTestA5(void);
+[; ;main.h: 12: extern int debug;
 [; ;sort.h: 2: void initGlobalVars(void);
 [; ;sort.h: 3: void initSortTimer(void);
 [; ;sort.h: 4: void initServos(void);

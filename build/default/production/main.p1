@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "3 main.h
-[c E3119 0 1 2 3 4 .. ]
-[n E3119 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
+[c E3120 0 1 2 3 4 .. ]
+[n E3120 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
 [p mainexit ]
 "8
 [v _machineConfig `(v ~T0 @X0 0 ef ]
@@ -2849,10 +2849,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.h: 6: void interrupt handler(void);
 [; ;UI.h: 7: void updateMenu(void);
 [; ;UI.h: 8: extern int cur_state;
-[; ;UI.h: 9: int inputHandler(void);
-[; ;UI.h: 10: void dispLogs(int);
-[; ;UI.h: 12: volatile extern char input;
-"13 UI.h
+[; ;UI.h: 9: extern int log;
+[; ;UI.h: 10: int inputHandler(void);
+[; ;UI.h: 11: void dispLogs(int);
+[; ;UI.h: 13: volatile extern char input;
+"14 UI.h
 [v _keys `Cuc ~T0 @X0 -> 0 `x e ]
 [i _keys
 :U ..
@@ -2875,29 +2876,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[; ;UI.h: 13: const char keys[] = "123A456B789C*0#D";
-[; ;UI.h: 16: void change_state_to_menu_start(void);
-[; ;UI.h: 17: void change_state_to_menu_11(void);
-[; ;UI.h: 18: void change_state_to_menu_12(void);
-[; ;UI.h: 19: void change_state_to_menu_22(void);
-[; ;UI.h: 20: void change_state_to_menu_23(void);
-[; ;UI.h: 21: void change_state_to_logs_11(void);
-[; ;UI.h: 22: void change_state_to_logs_12(void);
-[; ;UI.h: 23: void change_state_to_logs_22(void);
-[; ;UI.h: 24: void change_state_to_logs_23(void);
-[; ;UI.h: 25: void change_state_to_logs_33(void);
-[; ;UI.h: 26: void change_state_to_logs_34(void);
-[; ;UI.h: 28: void print_menu_start(void);
-[; ;UI.h: 29: void print_menu_11(void);
-[; ;UI.h: 30: void print_menu_12(void);
-[; ;UI.h: 31: void print_menu_22(void);
-[; ;UI.h: 32: void print_menu_23(void);
-[; ;UI.h: 33: void print_menu_logs_11(void);
-[; ;UI.h: 34: void print_menu_logs_12(void);
-[; ;UI.h: 35: void print_menu_logs_22(void);
-[; ;UI.h: 36: void print_menu_logs_23(void);
-[; ;UI.h: 37: void print_menu_logs_33(void);
-[; ;UI.h: 38: void print_menu_logs_34(void);
+[; ;UI.h: 14: const char keys[] = "123A456B789C*0#D";
+[; ;UI.h: 17: void change_state_to_menu_start(void);
+[; ;UI.h: 18: void change_state_to_menu_11(void);
+[; ;UI.h: 19: void change_state_to_menu_12(void);
+[; ;UI.h: 20: void change_state_to_menu_22(void);
+[; ;UI.h: 21: void change_state_to_menu_23(void);
+[; ;UI.h: 22: void change_state_to_logs_11(void);
+[; ;UI.h: 23: void change_state_to_logs_12(void);
+[; ;UI.h: 24: void change_state_to_logs_22(void);
+[; ;UI.h: 25: void change_state_to_logs_23(void);
+[; ;UI.h: 26: void change_state_to_logs_33(void);
+[; ;UI.h: 27: void change_state_to_logs_34(void);
+[; ;UI.h: 29: void print_menu_start(void);
+[; ;UI.h: 30: void print_menu_11(void);
+[; ;UI.h: 31: void print_menu_12(void);
+[; ;UI.h: 32: void print_menu_22(void);
+[; ;UI.h: 33: void print_menu_23(void);
+[; ;UI.h: 34: void print_menu_logs_11(void);
+[; ;UI.h: 35: void print_menu_logs_12(void);
+[; ;UI.h: 36: void print_menu_logs_22(void);
+[; ;UI.h: 37: void print_menu_logs_23(void);
+[; ;UI.h: 38: void print_menu_logs_33(void);
+[; ;UI.h: 39: void print_menu_logs_34(void);
 [; ;RTC.h: 4: extern unsigned char time[7];
 [; ;RTC.h: 5: void initTime(unsigned char s, unsigned char m, unsigned char h,unsigned char w,
 [; ;RTC.h: 6: unsigned char DD, unsigned char MM, unsigned char YY);
@@ -2906,12 +2907,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 9: void printRTC(void);
 [; ;main.h: 2: enum states {UI_state, Sorting_state, DoneSorting_state, Testing_state, EmergencyStop_state};
 "3 main.h
-[v _machine_state `E3119 ~T0 @X0 1 e ]
+[v _machine_state `E3120 ~T0 @X0 1 e ]
 [; ;main.h: 3: enum states machine_state;
 [; ;main.h: 4: void main(void);
 [; ;main.h: 5: void stopSignals(void);
 [; ;main.h: 8: void machineConfig(void);
 [; ;main.h: 9: void PortTestA5(void);
+[; ;main.h: 12: extern int debug;
 [; ;sort.h: 2: void initGlobalVars(void);
 [; ;sort.h: 3: void initSortTimer(void);
 [; ;sort.h: 4: void initServos(void);
@@ -2959,146 +2961,152 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;EEPROM.h: 20: extern int log_startTime[7];
 [; ;EEPROM.h: 22: extern int log_total_time;
 "15 main.c
+[v _debug `i ~T0 @X0 1 e ]
+[; ;main.c: 15: int debug;
+"17
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 15: void main(void) {
+[; ;main.c: 17: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 16: machineConfig();
-"16
-[e ( _machineConfig ..  ]
-[; ;main.c: 17: initLCD();
-"17
-[e ( _initLCD ..  ]
-[; ;main.c: 18: initTime(0x42, 0x44, 0x19, 0x06, 0x24, 0x02, 0x17);
+[; ;main.c: 18: machineConfig();
 "18
-[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 68 `i `uc -> -> 25 `i `uc -> -> 6 `i `uc -> -> 36 `i `uc -> -> 2 `i `uc -> -> 23 `i `uc ]
-[; ;main.c: 19: initUI();
+[e ( _machineConfig ..  ]
+[; ;main.c: 19: initLCD();
 "19
-[e ( _initUI ..  ]
-[; ;main.c: 20: first = 1;
+[e ( _initLCD ..  ]
+[; ;main.c: 20: initTime(0x42, 0x44, 0x02, 0x04, 0x01, 0x03, 0x17);
 "20
+[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 68 `i `uc -> -> 2 `i `uc -> -> 4 `i `uc -> -> 1 `i `uc -> -> 3 `i `uc -> -> 23 `i `uc ]
+[; ;main.c: 21: initUI();
+"21
+[e ( _initUI ..  ]
+[; ;main.c: 22: first = 1;
+"22
 [e = _first -> 1 `i ]
-[; ;main.c: 23: while(1){
-"23
+[; ;main.c: 25: debug = 1;
+"25
+[e = _debug -> 1 `i ]
+[; ;main.c: 27: while(1){
+"27
 [e :U 268 ]
 {
-[; ;main.c: 24: switch(machine_state){
-"24
+[; ;main.c: 28: switch(machine_state){
+"28
 [e $U 271  ]
 {
-[; ;main.c: 25: case UI_state :
-"25
-[e :U 272 ]
-[; ;main.c: 26: UI();
-"26
-[e ( _UI ..  ]
-[; ;main.c: 27: break;
-"27
-[e $U 270  ]
-[; ;main.c: 28: case Sorting_state :
-"28
-[e :U 273 ]
-[; ;main.c: 29: sort();
+[; ;main.c: 29: case UI_state :
 "29
-[e ( _sort ..  ]
-[; ;main.c: 30: break;
+[e :U 272 ]
+[; ;main.c: 30: UI();
 "30
-[e $U 270  ]
-[; ;main.c: 31: case DoneSorting_state :
-"31
-[e :U 274 ]
-[; ;main.c: 32: stopSignals();
-"32
-[e ( _stopSignals ..  ]
-[; ;main.c: 33: logRun();
-"33
-[e ( _logRun ..  ]
-[; ;main.c: 34: first = 1;
-"34
-[e = _first -> 1 `i ]
-[; ;main.c: 35: UI();
-"35
 [e ( _UI ..  ]
-[; ;main.c: 36: break;
+[; ;main.c: 31: break;
+"31
+[e $U 270  ]
+[; ;main.c: 32: case Sorting_state :
+"32
+[e :U 273 ]
+[; ;main.c: 33: sort();
+"33
+[e ( _sort ..  ]
+[; ;main.c: 34: break;
+"34
+[e $U 270  ]
+[; ;main.c: 35: case DoneSorting_state :
+"35
+[e :U 274 ]
+[; ;main.c: 36: stopSignals();
 "36
-[e $U 270  ]
-[; ;main.c: 37: case Testing_state :
-"37
-[e :U 275 ]
-[; ;main.c: 38: PortTestA5();
-"38
-[e ( _PortTestA5 ..  ]
-[; ;main.c: 39: break;
-"39
-[e $U 270  ]
-[; ;main.c: 40: case EmergencyStop_state :
-"40
-[e :U 276 ]
-[; ;main.c: 41: stopSignals();
-"41
 [e ( _stopSignals ..  ]
-[; ;main.c: 43: while(1){}
+[; ;main.c: 37: logRun();
+"37
+[e ( _logRun ..  ]
+[; ;main.c: 38: first = 1;
+"38
+[e = _first -> 1 `i ]
+[; ;main.c: 39: UI();
+"39
+[e ( _UI ..  ]
+[; ;main.c: 40: break;
+"40
+[e $U 270  ]
+[; ;main.c: 41: case Testing_state :
+"41
+[e :U 275 ]
+[; ;main.c: 42: PortTestA5();
+"42
+[e ( _PortTestA5 ..  ]
+[; ;main.c: 43: break;
 "43
+[e $U 270  ]
+[; ;main.c: 44: case EmergencyStop_state :
+"44
+[e :U 276 ]
+[; ;main.c: 45: stopSignals();
+"45
+[e ( _stopSignals ..  ]
+[; ;main.c: 47: while(1){}
+"47
 [e :U 278 ]
 {
 }
 [e :U 277 ]
 [e $U 278  ]
 [e :U 279 ]
-[; ;main.c: 44: default :
-"44
+[; ;main.c: 48: default :
+"48
 [e :U 280 ]
-[; ;main.c: 45: break;
-"45
+[; ;main.c: 49: break;
+"49
 [e $U 270  ]
-"46
+"50
 }
-[; ;main.c: 46: }
+[; ;main.c: 50: }
 [e $U 270  ]
-"24
+"28
 [e :U 271 ]
-[e [\ _machine_state , $ . `E3119 0 272
- , $ . `E3119 1 273
- , $ . `E3119 2 274
- , $ . `E3119 3 275
- , $ . `E3119 4 276
+[e [\ _machine_state , $ . `E3120 0 272
+ , $ . `E3120 1 273
+ , $ . `E3120 2 274
+ , $ . `E3120 3 275
+ , $ . `E3120 4 276
  280 ]
-"46
+"50
 [e :U 270 ]
-"47
+"51
 }
 [e :U 267 ]
-"23
+"27
 [e $U 268  ]
 [e :U 269 ]
-[; ;main.c: 47: }
-[; ;main.c: 48: }
-"48
+[; ;main.c: 51: }
+[; ;main.c: 52: }
+"52
 [e :UE 266 ]
 }
-"50
+"54
 [v _stopSignals `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 50: void stopSignals(void){
+[; ;main.c: 54: void stopSignals(void){
 [e :U _stopSignals ]
 [f ]
-[; ;main.c: 51: LATA = 0x00;
-"51
-[e = _LATA -> -> 0 `i `uc ]
-[; ;main.c: 52: LATB = 0x00;
-"52
-[e = _LATB -> -> 0 `i `uc ]
-[; ;main.c: 53: LATC = 0x00;
-"53
-[e = _LATC -> -> 0 `i `uc ]
-[; ;main.c: 54: LATD = 0x00;
-"54
-[e = _LATD -> -> 0 `i `uc ]
-[; ;main.c: 55: LATE = 0x00;
+[; ;main.c: 55: LATA = 0x00;
 "55
-[e = _LATE -> -> 0 `i `uc ]
-[; ;main.c: 56: }
+[e = _LATA -> -> 0 `i `uc ]
+[; ;main.c: 56: LATB = 0x00;
 "56
+[e = _LATB -> -> 0 `i `uc ]
+[; ;main.c: 57: LATC = 0x00;
+"57
+[e = _LATC -> -> 0 `i `uc ]
+[; ;main.c: 58: LATD = 0x00;
+"58
+[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 59: LATE = 0x00;
+"59
+[e = _LATE -> -> 0 `i `uc ]
+[; ;main.c: 60: }
+"60
 [e :UE 281 ]
 }

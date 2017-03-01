@@ -156,6 +156,9 @@ void UI(void){
                 case 12:
                     strcpy(month, "DEC");
                     break;
+                default:
+                    strcpy(month, "ERR");
+                    break;
             }
             printf("%02d%s | %02d:%02d:%02d", log_startTime[4],month,log_startTime[2],log_startTime[1],log_startTime[0]);
 
@@ -459,7 +462,8 @@ int inputHandler(void){
 
 void dispLogs(int myLog){
     logstate = 1;
-    retrieveLog(myLog);
+    log = myLog;
+    retrieveLog(myLog - 1); // minus 1 because the logs are zero-indexed in memory
 }
 
 /* STATE CHANGE HANDLERS */

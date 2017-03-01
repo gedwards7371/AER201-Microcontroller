@@ -3806,6 +3806,7 @@ void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
 extern int cur_state;
+extern int log;
 int inputHandler(void);
 void dispLogs(int);
 
@@ -3854,6 +3855,9 @@ void stopSignals(void);
 
 void machineConfig(void);
 void PortTestA5(void);
+
+
+extern int debug;
 
 # 2 "sort.h"
 void initGlobalVars(void);
@@ -3933,13 +3937,17 @@ extern int log_startTime[7];
 extern int log_total_time;
 
 # 15 "main.c"
+int debug;
+
 void main(void) {
 machineConfig();
 initLCD();
-initTime(0x42, 0x44, 0x19, 0x06, 0x24, 0x02, 0x17);
+initTime(0x42, 0x44, 0x02, 0x04, 0x01, 0x03, 0x17);
 initUI();
 first = 1;
 
+
+debug = 1;
 
 while(1){
 switch(machine_state){

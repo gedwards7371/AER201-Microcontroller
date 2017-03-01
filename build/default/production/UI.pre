@@ -3806,6 +3806,7 @@ void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
 extern int cur_state;
+extern int log;
 int inputHandler(void);
 void dispLogs(int);
 
@@ -3854,6 +3855,9 @@ void stopSignals(void);
 
 void machineConfig(void);
 void PortTestA5(void);
+
+
+extern int debug;
 
 # 2 "sort.h"
 void initGlobalVars(void);
@@ -3959,7 +3963,7 @@ lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
 printf("!SORT CONCLUDED!");
 lcdInst(0b11000000);;
-printf("Time: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+printf("TIME: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
 machine_state = UI_state;
 while(PORTBbits.RB1==0){
 
@@ -3979,59 +3983,110 @@ printRTC();
 }
 while(logstate){
 
+if(!log_completion){
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
-printf("-- Log %2d here--", log);
+printf("-- LOG %2d HERE--", log);
 lcdInst(0b11000000);;
-printf("Pause:< | Back:>");
-
-for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-
+printf("DIDN'T COMPLETE");
+}
+else{
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
-printf("Start:");
+printf("-- LOG %2d HERE--", log);
 lcdInst(0b11000000);;
-printf("06Feb | 01:08:56");
-
-for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-
-lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
-lcdInst(0b10000000);;
-printf("Duration:");
-lcdInst(0b11000000);;
-printf("%d min(s) %d secs", 2, 42);
+printf("PAUSE < | BACK >");
 
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
-printf(" -- Pop  can -- ");
+printf("START:");
 lcdInst(0b11000000);;
-printf("No tab: 9|Tab: 1");
+char month[] = "MMM";
+switch(log_startTime[5]){
+case 1 :
+strcpy(month, "JAN");
+break;
+case 2:
+strcpy(month, "FEB");
+break;
+case 3:
+strcpy(month, "MAR");
+break;
+case 4:
+strcpy(month, "APR");
+break;
+case 5:
+strcpy(month, "MAY");
+break;
+case 6:
+strcpy(month, "JUN");
+break;
+case 7:
+strcpy(month, "JUL");
+break;
+case 8:
+strcpy(month, "AUG");
+break;
+case 9:
+strcpy(month, "SEP");
+break;
+case 10:
+strcpy(month, "OCT");
+break;
+case 11:
+strcpy(month, "NOV");
+break;
+case 12:
+strcpy(month, "DEC");
+break;
+default:
+strcpy(month, "ERR");
+break;
+}
+printf("%02d%s | %02d:%02d:%02d", log_startTime[4],month,log_startTime[2],log_startTime[1],log_startTime[0]);
 
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
-printf(" -- Soup can -- ");
+printf("DURATION:");
 lcdInst(0b11000000);;
-printf("No lbl: 1|lbl: 1");
+printf("%d MIN %d SEC", (log_total_time % 3600) / 60, (log_total_time % 3600) % 60);
 
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
-printf("-- Total cans --");
+printf(" -- POP  CAN -- ");
 lcdInst(0b11000000);;
-printf("12");
+printf("NO TAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
 
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+
+lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+lcdInst(0b10000000);;
+printf(" -- SOUP CAN -- ");
+lcdInst(0b11000000);;
+printf("NO LAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
+
+for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+
+lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+lcdInst(0b10000000);;
+printf("-- TOTAL CANS --");
+lcdInst(0b11000000);;
+printf("%d", log_count_total);
+
+for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+}
 
 }
 }
@@ -4294,6 +4349,7 @@ return 1;
 void dispLogs(int myLog){
 logstate = 1;
 log = myLog;
+retrieveLog(myLog - 1);
 }
 
 

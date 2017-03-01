@@ -6,6 +6,7 @@ void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
 extern int cur_state;
+extern int log;
 int inputHandler(void);
 void dispLogs(int);
 

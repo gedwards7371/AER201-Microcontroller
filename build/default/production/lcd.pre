@@ -3806,6 +3806,7 @@ void UI(void);
 void interrupt handler(void);
 void updateMenu(void);
 extern int cur_state;
+extern int log;
 int inputHandler(void);
 void dispLogs(int);
 
@@ -3854,6 +3855,9 @@ void stopSignals(void);
 
 void machineConfig(void);
 void PortTestA5(void);
+
+
+extern int debug;
 
 # 2 "sort.h"
 void initGlobalVars(void);

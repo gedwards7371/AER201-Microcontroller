@@ -12,14 +12,18 @@
 #include "ADCFunctionality.h"
 #include "EEPROM.h"
 
+int debug;
+
 void main(void) {
     machineConfig();
     initLCD();
-    initTime(0x42, 0x44, 0x19, 0x06, 0x24, 0x02, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
+    initTime(0x42, 0x44, 0x02, 0x04, 0x01, 0x03, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
     initUI();
     first = 1;
     
-    //machine_state = Testing_state; // comment me out if you're not testing
+    // machine_state = Testing_state; // comment me out if you're not testing
+    // debug = 1; // comment me out if you're not debugging
+    
     while(1){
         switch(machine_state){
             case UI_state :
