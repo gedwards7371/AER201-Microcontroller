@@ -8,7 +8,7 @@
 //Solenoids (1 cm)
 #define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
 #define SOL_PUSHER      LATAbits.LATA4 // solenoid for pushing cans off trommel
-#define SOL_OUT         1 // signal to move solenoids out
+#define SOL_OUT         0 // signal to move solenoids out
 
 //DC motors
 #define DC          LATAbits.LATA5 // DC motors
