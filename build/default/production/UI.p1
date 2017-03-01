@@ -28,6 +28,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p i __delay ]
 "195 D:\Program Files (x86)\Microchip\xc8\v1.40\include\stdio.h
 [v _printf `(i ~T0 @X0 0 ev`*Cuc ]
+"7 EEPROM.h
+[v _sel `uc ~T0 @X0 0 e ]
 "28 sort.h
 [v _total_time `i ~T0 @X0 0 e ]
 "191 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
@@ -3086,15 +3088,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.c: 77: lcdInst(0b10000000);;
 "77
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 78: printf("!SORT CONCLUDED!");
+[; ;UI.c: 78: printf("RESULTS IN LOG %d", sel+1);
 "78
-[e ( _printf :s 1C ]
+[e ( _printf , (. :s 1C + -> _sel `i -> 1 `i ]
 [; ;UI.c: 79: lcdInst(0b11000000);;
 "79
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 80: printf("TIME: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+[; ;UI.c: 80: printf("TIME: %d:%02d", (total_time % 3600) / 60, (total_time % 3600) % 60);
 "80
-[e ( _printf , , , (. :s 2C -> 0 `i / % _total_time -> 3600 `i -> 60 `i % % _total_time -> 3600 `i -> 60 `i ]
+[e ( _printf , , (. :s 2C / % _total_time -> 3600 `i -> 60 `i % % _total_time -> 3600 `i -> 60 `i ]
 [; ;UI.c: 81: machine_state = UI_state;
 "81
 [e = _machine_state . `E3120 0 ]
@@ -4921,7 +4923,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [p f _printf 8683652 ]
 [a 21C 37 48 50 100 37 115 32 124 32 37 48 50 100 58 37 48 50 100 58 37 48 50 100 0 ]
-[a 2C 84 73 77 69 58 32 37 48 50 100 58 37 48 50 100 58 37 48 50 100 0 ]
+[a 2C 84 73 77 69 58 32 37 100 58 37 48 50 100 0 ]
+[a 1C 82 69 83 85 76 84 83 32 73 78 32 76 79 71 32 37 100 0 ]
 [a 25C 78 79 32 84 65 66 58 32 37 100 124 84 65 66 58 32 37 100 0 ]
 [a 27C 78 79 32 76 65 66 58 32 37 100 124 76 65 66 58 32 37 100 0 ]
 [a 29C 37 100 0 ]
@@ -4957,7 +4960,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 3C 45 45 32 76 79 71 32 37 50 100 32 72 69 82 69 45 45 0 ]
 [a 5C 45 45 32 76 79 71 32 37 50 100 32 72 69 82 69 45 45 0 ]
 [a 28C 45 45 32 84 79 84 65 76 32 67 65 78 83 32 45 45 0 ]
-[a 1C 33 83 79 82 84 32 67 79 78 67 76 85 68 69 68 33 0 ]
 [a 26C 32 45 45 32 83 79 85 80 32 67 65 78 32 45 45 32 0 ]
 [a 24C 32 45 45 32 80 79 80 32 32 67 65 78 32 45 45 32 0 ]
 [a 33C 49 46 32 68 65 84 69 47 84 73 77 69 32 32 32 32 0 ]

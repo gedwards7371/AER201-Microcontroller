@@ -4184,7 +4184,7 @@ int sec = (timeDiff % 3600) % 60;
 lcdInst(0b10000000);;
 printf("SORTING...");
 lcdInst(0b11000000);;
-printf("TIME %02d:%02d:%02d", hour, min, sec);
+printf("TIME %d:%02d", min, sec);
 }
 
 void getIR(void){

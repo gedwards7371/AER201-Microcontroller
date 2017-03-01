@@ -3961,9 +3961,9 @@ void UI(void){
 if(machine_state == DoneSorting_state){
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
-printf("!SORT CONCLUDED!");
+printf("RESULTS IN LOG %d", sel+1);
 lcdInst(0b11000000);;
-printf("TIME: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+printf("TIME: %d:%02d", (total_time % 3600) / 60, (total_time % 3600) % 60);
 machine_state = UI_state;
 while(PORTBbits.RB1==0){
 

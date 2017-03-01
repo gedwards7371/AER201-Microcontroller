@@ -93,14 +93,14 @@ void logRun(void){
     //
     // Total is 85 bits, which is 11 writes
     
-    // Check which log space to go to (log spaces are zero-indexed)
+    // Check which log space to go to (log spaces are zero-indexed
     sel = EEPROM_read(0);
     unsigned short addr = 1 + 11 * sel;
     
     // Increment selection bits for the next write (or clear if max value)
     if (sel < 3){
-        sel++;
-        EEPROM_write(0, sel);
+        unsigned char num = sel+1;
+        EEPROM_write(0, num);
     }
     else{
         EEPROM_write(0, 0);

@@ -3684,9 +3684,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 268: lcdInst(0b11000000);;
 "268
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;sort.c: 269: printf("TIME %02d:%02d:%02d", hour, min, sec);
+[; ;sort.c: 269: printf("TIME %d:%02d", min, sec);
 "269
-[e ( _printf , , , (. :s 2C _hour _min _sec ]
+[e ( _printf , , (. :s 2C _min _sec ]
 [; ;sort.c: 270: }
 "270
 [e :UE 304 ]
@@ -3787,5 +3787,5 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 313 ]
 }
 [p f _printf 8421508 ]
-[a 2C 84 73 77 69 32 37 48 50 100 58 37 48 50 100 58 37 48 50 100 0 ]
+[a 2C 84 73 77 69 32 37 100 58 37 48 50 100 0 ]
 [a 1C 83 79 82 84 73 78 71 46 46 46 0 ]

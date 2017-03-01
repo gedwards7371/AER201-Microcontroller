@@ -266,7 +266,7 @@ void printSortTimer(void){
     __lcd_home();
     printf("SORTING...");
     __lcd_newline();
-    printf("TIME %02d:%02d:%02d", hour, min, sec);
+    printf("TIME %d:%02d", min, sec);
 }
 
 void getIR(void){

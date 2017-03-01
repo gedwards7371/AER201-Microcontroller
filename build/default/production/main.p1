@@ -2984,9 +2984,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 22: first = 1;
 "22
 [e = _first -> 1 `i ]
-[; ;main.c: 25: debug = 1;
-"25
-[e = _debug -> 1 `i ]
 [; ;main.c: 27: while(1){
 "27
 [e :U 268 ]

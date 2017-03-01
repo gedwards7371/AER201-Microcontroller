@@ -75,9 +75,9 @@ void UI(void){
     if(machine_state == DoneSorting_state){
         __lcd_clear();
         __lcd_home();
-        printf("!SORT CONCLUDED!");
+        printf("RESULTS IN LOG %d", sel+1);
         __lcd_newline();
-        printf("TIME: %02d:%02d:%02d", 0, (total_time % 3600) / 60, (total_time % 3600) % 60);
+        printf("TIME: %d:%02d", (total_time % 3600) / 60, (total_time % 3600) % 60);
         machine_state = UI_state; // Return to UI state
         while(PORTBbits.RB1==0){
             // Wait for user to press a key
