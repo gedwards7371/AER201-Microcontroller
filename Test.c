@@ -18,31 +18,38 @@ void Test(void);
 void algorithmTest(void);
 void sensorTest(void);
 void actuatorTest(void);
+void PortTests(void);
 void PortTestA5(void);
+void EEPROMTest(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
     while(1){
         __lcd_clear();__lcd_home();
-        printf("1. ALG  2. SNSRS");
+        printf("1.ALG|2.SNR|3.AC");
         __lcd_newline();
-        printf("3. ACTUATORS");
+        printf("4.HI|5.TOG|6.EEP");
         __delay_ms(100);
         while(PORTBbits.RB1 == 0) {continue;}
-        var = PORTB >> 4;
+        var = PORTB >> 4 + 1;
         while(PORTBbits.RB1 == 1) {continue;}
         switch(var){
-            case 0:
+            case 1:
                 algorithmTest();
                 break;
-            case 1:
+            case 2:
                 sensorTest();
                 break;
-            case 2: 
+            case 3: 
                 actuatorTest();
                 break;
-            case 3:
+            case 4:
+                PortTests();
+                break;
+            case 5:
                 PortTestA5();
+            case 6:
+                EEPROMTest();
                 break;
             default:
                 break;
@@ -272,21 +279,78 @@ void actuatorTest(void){
     SERVOCAM = 1;
     printf("CAM DWN |RC0=0");
     __delay_1s();__delay_1s();
+    machine_state = Testing_state;
+}
+
+void PortTests(void){
+    // For circuits member and quick tests
+    while(1){
+        while(PORTBbits.RB1 == 0) {continue;}
+        var = PORTB >> 4;
+        switch(var){
+            case 0:
+                LATEbits.LATE0 = 1;
+                break;
+            case 1:
+                LATEbits.LATE1 = 1;
+                break;
+            case 2:
+                LATDbits.LATD0 = 1;
+                break;
+            case 3:
+                LATAbits.LATA3 = 1;
+                break;
+            case 4:
+                LATAbits.LATA4 = 1;
+                break;
+            case 5:
+                LATAbits.LATA5 = 1;
+                break;
+            default:
+                break;
+        }
+        while(PORTBbits.RB1 == 1) {continue;}
+        Nop();  //Apply breakpoint here because of compiler optimizations
+        Nop();
+        LATA = 0x00;
+        LATE = 0x00;
+        LATD = 0x00;   }
 }
 
 void PortTestA5(void){
-    // For circuits member and quick tests
+    __lcd_clear();__lcd_home();
+    printf("D WILL RETURN    ");
+    __lcd_newline();
+    printf("OTHER SETS RA5   ");
+    
     while(1){
         while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
             // the PIC will wait and do nothing until a key press is signaled
         }
-        LATAbits.LATA5 = 1;
-        while(PORTBbits.RB1 == 1){
-            // Wait until the key has been released
+        if(PORTB >> 4 == 0b1111){
+            break;
         }
-        Nop();  //Apply breakpoint here because of compiler optimizations
-        Nop();
-        LATAbits.LATA5 = 0;
+        else{
+            LATAbits.LATA5 = 1;
+            while(PORTBbits.RB1 == 1){
+                // Wait until the key has been released
+            }
+            Nop();  //Apply breakpoint here because of compiler optimizations
+            Nop();
+            LATAbits.LATA5 = 0;
+        }
     }
+}
+
+void EEPROMTest(void){
+    // Tests EEPROM_write(), EEPROM_read(), and logging cases
+    
+    // EEPROM_write tests
+    // Pass: The print messages displayed to the screen match what you're writing
+    // Justification: 
+    
+    // EEPROM_read tests
+    // Pass: 
+    // Justification: 
 }
