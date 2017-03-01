@@ -41,6 +41,9 @@ void Test(void){
             case 2: 
                 actuatorTest();
                 break;
+            case 3:
+                PortTestA5();
+                break;
             default:
                 break;
         }
@@ -272,15 +275,18 @@ void actuatorTest(void){
 }
 
 void PortTestA5(void){
-    while(PORTBbits.RB1 == 0){ 
-        // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
-        // the PIC will wait and do nothing until a key press is signaled
+    // For circuits member and quick tests
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
+            // the PIC will wait and do nothing until a key press is signaled
+        }
+        LATAbits.LATA5 = 1;
+        while(PORTBbits.RB1 == 1){
+            // Wait until the key has been released
+        }
+        Nop();  //Apply breakpoint here because of compiler optimizations
+        Nop();
+        LATAbits.LATA5 = 0;
     }
-    LATAbits.LATA5 = 1;
-    while(PORTBbits.RB1 == 1){
-        // Wait until the key has been released
-    }
-    Nop();  //Apply breakpoint here because of compiler optimizations
-    Nop();
-    LATAbits.LATA5 = 0;
 }
