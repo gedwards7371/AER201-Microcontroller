@@ -218,7 +218,7 @@ EmergencyStop_state 4
 [v _PortTests PortTests `(v  1 e 1 0 ]
 "321
 [v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
-"347
+"346
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 "62 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -1108,7 +1108,7 @@ EmergencyStop_state 4
 "321
 [v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
 {
-"345
+"344
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v _printf printf `(i  1 e 2 0 ]
@@ -1202,10 +1202,10 @@ EmergencyStop_state 4
 [v lcdNibble@data data `uc  1 a 1 1 ]
 "46
 } 0
-"347 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"346 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 {
-"357
+"356
 } 0
 "16 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\interruptHandler.c
 [v _handler handler `II(v  1 e 1 0 ]

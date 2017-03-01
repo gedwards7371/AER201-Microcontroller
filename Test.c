@@ -323,7 +323,7 @@ void PortTestA5(void){
     printf("D WILL RETURN    ");
     __lcd_newline();
     printf("OTHER SETS RA5   ");
-    
+    di();
     while(1){
         while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
@@ -337,11 +337,10 @@ void PortTestA5(void){
             while(PORTBbits.RB1 == 1){
                 // Wait until the key has been released
             }
-            Nop();  //Apply breakpoint here because of compiler optimizations
-            Nop();
             LATAbits.LATA5 = 0;
         }
     }
+    ei();
 }
 
 void EEPROMTest(void){
