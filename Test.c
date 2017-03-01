@@ -31,13 +31,51 @@ void Test(void){
     
     int i = 0; // counting variable
     /*****Algorithm test cases*****/
-    
+    __lcd_clear();__lcd_home();
 
-    /*****Sensor test cases*****/
     
+    /*****Sensor test cases*****/
+    __lcd_clear();__lcd_home();
+    printf("SENSORS");
+    __lcd_newline();
+    printf("PUSH TO START");
+    while(PORTBbits.RB1 == 0) {continue;}
     __lcd_clear();__lcd_home();
     
+    // IR sensor pair reading
+    // Pass: IR_signal is default low but beam break sets it high
+    // Justification: Since we haven't tested this, this is a placeholder
+    printf("TST: IR SNSR");
+    while(PORTBbits.RB1 == 0){
+        readIR();
+       __lcd_home();
+       __lcd_newline();
+       printf("IR_signal: %d ", IR_signal);
+       __delay_ms(100);
+    }
+    
+    // Magnetism sensor reading
+    // Pass: Presence of soup can sets MAG_signal high at 6mm, and
+    //       presence of pop can sets MAG_signal high at 3mm.
+    // Justification: These were the ranges we determined experimentally.
+    printf("TST: MAGNETISM");
+    while(PORTBbits.RB1 == 0){
+        readMAG();
+       __lcd_home();
+       __lcd_newline();
+       printf("MAG_signal: %d ", MAG_signal);
+       __delay_ms(100);
+    }
+
+    
     /*****Actuator test cases*****/
+    __lcd_clear();__lcd_home();
+    printf("ACTUATORS");
+    __lcd_newline();
+    printf("PUSH TO START");
+    while(PORTBbits.RB1 == 0) {continue;}
+    __lcd_clear();__lcd_home();
+    
     // DC Motor activation
     // Pass: pin RA5 outputs a high voltage
     // Justification: obligatory.
