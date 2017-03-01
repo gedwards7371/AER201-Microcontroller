@@ -3945,8 +3945,6 @@ initTime(0x42, 0x20, 0x13, 0x04, 0x01, 0x03, 0x17);
 initUI();
 first = 1;
 
-machine_state = Testing_state;
-
 # 32
 while(1){
 switch(machine_state){

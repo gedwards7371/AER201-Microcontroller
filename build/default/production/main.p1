@@ -2983,9 +2983,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 22: first = 1;
 "22
 [e = _first -> 1 `i ]
-[; ;main.c: 24: machine_state = Testing_state;
-"24
-[e = _machine_state . `E3120 3 ]
 [; ;main.c: 32: while(1){
 "32
 [e :U 268 ]

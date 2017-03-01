@@ -31,7 +31,8 @@ void Test(void){
         printf("4.HI|5.TOG|6.EEP");
         __delay_ms(100);
         while(PORTBbits.RB1 == 0) {continue;}
-        var = PORTB >> 4 + 1;
+        var = PORTB >> 4;
+        var++;
         while(PORTBbits.RB1 == 1) {continue;}
         switch(var){
             case 1:

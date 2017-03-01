@@ -19,7 +19,13 @@ void interrupt handler(void) {
         INT1IF = 0;     //Clear flag bit
         if(machine_state == UI_state) { // "If we're supposed to be in the UI..."
             input = keys[(PORTB & 0xF0) >> 4];
-            updateMenu();
+            
+            if(input == '*'){
+                machine_state = Testing_state;
+            }
+            else{
+                updateMenu();
+            }
         }
     }
     
