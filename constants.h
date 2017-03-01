@@ -31,9 +31,12 @@
 #define TIME_SOLENOID_MOTION    100
 #define TIME_SERVO_MOTION       500
 
+// Maximum allowed sort time (in seconds) before forced termination
+#define MAX_SORT_TIME           10
+
 // IR sensor thresholds
-#define THIR    255
-#define THMAG   255
+#define THIR    150
+#define THMAG   150
 
 //LCD Control Registers
 #define RS          LATDbits.LATD2          

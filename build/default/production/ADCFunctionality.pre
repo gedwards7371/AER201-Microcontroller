@@ -3938,8 +3938,8 @@ extern int log_total_time;
 # 15 "ADCFunctionality.c"
 void readADC(char channel){
 
-ADCON0 = ((channel <<2));
-ADON = 1;
+ADCON0 = channel << 2;
+ADCON0bits.ADON = 1;
 ADCON0bits.GO = 1;
 while(ADCON0bits.GO_NOT_DONE){_delay((unsigned long)((5)*(32000000/4000.0)));}
 }
@@ -3947,11 +3947,11 @@ while(ADCON0bits.GO_NOT_DONE){_delay((unsigned long)((5)*(32000000/4000.0)));}
 void readIR(void){
 readADC(0);
 int res = ADRESH<<8 | ADRESL;
-IR_signal = (res < 255) ? 1 : 0;
+IR_signal = (res < 150) ? 1 : 0;
 }
 
 void readMAG(void){
 readADC(1);
 int res = ADRESH<<8 | ADRESL;
-MAG_signal = (res < 255) ? 1 : 0;
+MAG_signal = (res < 150) ? 1 : 0;
 }

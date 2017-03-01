@@ -2974,15 +2974,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 19: initLCD();
 "19
 [e ( _initLCD ..  ]
-[; ;main.c: 20: initTime(0x42, 0x44, 0x02, 0x04, 0x01, 0x03, 0x17);
+[; ;main.c: 20: initTime(0x42, 0x20, 0x13, 0x04, 0x01, 0x03, 0x17);
 "20
-[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 68 `i `uc -> -> 2 `i `uc -> -> 4 `i `uc -> -> 1 `i `uc -> -> 3 `i `uc -> -> 23 `i `uc ]
+[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 32 `i `uc -> -> 19 `i `uc -> -> 4 `i `uc -> -> 1 `i `uc -> -> 3 `i `uc -> -> 23 `i `uc ]
 [; ;main.c: 21: initUI();
 "21
 [e ( _initUI ..  ]
 [; ;main.c: 22: first = 1;
 "22
 [e = _first -> 1 `i ]
+[; ;main.c: 24: machine_state = Testing_state;
+"24
+[e = _machine_state . `E3120 3 ]
 [; ;main.c: 27: while(1){
 "27
 [e :U 268 ]

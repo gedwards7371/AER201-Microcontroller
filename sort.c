@@ -89,7 +89,7 @@ void Loading(void){
         // code to be able to enter straight down to check if the ID stage is ready
         if(!f_loadingNewCan){
             // Call getIR to update f_loadingNewCan flag
-            //getIR();
+            getIR();
             // "If no new can is being loaded..."
             if(!f_loadingNewCan){
                return; // get out of sort function (i.e. restart it)
@@ -246,8 +246,10 @@ void initServos(void){
         updateServoPosition(PAN_MID, 1);
         updateServoPosition(TILT_REST, 3);
         TMR1ON = 1;
+        was_low_1 = 0;
         __delay_ms(5); // So that servo ISRs don't race
         TMR3ON = 1;
+        was_low_3 = 0;
         SERVOCAM = 0; // Raise block between ID and distribution stages
 }
 void printSortTimer(void){ 
@@ -262,7 +264,7 @@ void printSortTimer(void){
     
     total_time = timeDiff;
     
-    if(timeDiff >= 10){
+    if(timeDiff >= MAX_SORT_TIME){
         machine_state = DoneSorting_state;
         // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
     }

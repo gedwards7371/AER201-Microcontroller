@@ -3942,18 +3942,6 @@ OSCCON = 0xF0;
 OSCTUNEbits.PLLEN = 1;
 
 
-ADCON0 = 0x00;
-ADCON1 = 0x0D;
-
-
-VCFG1 = 0;
-VCFG0 = 0;
-CVRCON = 0x00;
-CMCONbits.CIS = 0;
-ADFM = 1;
-nRBPU = 0;
-
-
 
 TRISA = 0b01000111;
 
@@ -3976,6 +3964,17 @@ LATC = 0x00;
 LATD = 0x00;
 LATE = 0x00;
 
+nRBPU = 0;
+
+
+ADCON0 = 0x00;
+ADCON1 = 0b00001101;
+
+
+CVRCON = 0x00;
+CMCONbits.CIS = 0;
+ADCON2 = 0b10110001;
+
 
 INT1IE = 1;
 
@@ -3985,7 +3984,6 @@ T1CON = 0b10110000;
 TMR2IE = 1;
 TMR3IE = 1;
 PEIE = 1;
-
-ADIE = 1;
+ADIE = 0;
 (INTCONbits.GIE = 0);
 }

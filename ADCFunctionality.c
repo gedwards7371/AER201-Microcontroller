@@ -14,10 +14,10 @@
 
 void readADC(char channel){
     // Select A2D channel to read
-    ADCON0 = ((channel <<2)); // Shift signal into appropriate data registers
-    ADON = 1;
+    ADCON0 = channel << 2; // Shift signal into appropriate data registers
+    ADCON0bits.ADON = 1;
     ADCON0bits.GO = 1;
-   while(ADCON0bits.GO_NOT_DONE){__delay_ms(5);}
+    while(ADCON0bits.GO_NOT_DONE){__delay_ms(5);}
 }
 
 void readIR(void){

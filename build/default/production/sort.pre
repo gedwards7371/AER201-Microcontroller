@@ -4012,7 +4012,7 @@ else{
 
 if(!f_loadingNewCan){
 
-
+getIR();
 
 if(!f_loadingNewCan){
 return;
@@ -4160,11 +4160,13 @@ TMR0L = 0b11101110;
 TMR0ON = 1;
 }
 void initServos(void){
-updateServoPosition(2000, 1);
+updateServoPosition(1500, 1);
 updateServoPosition(1000, 3);
 TMR1ON = 1;
+was_low_1 = 0;
 _delay((unsigned long)((5)*(32000000/4000.0)));
 TMR3ON = 1;
+was_low_3 = 0;
 LATCbits.LATC0 = 0;
 }
 void printSortTimer(void){

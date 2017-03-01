@@ -4,8 +4,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n E3120 states UI_state Sorting_state DoneSorting_state Testing_state EmergencyStop_state  ]
 "4474 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
-"6634
-[v _ADON `Vb ~T0 @X0 0 e@32272 ]
 "4480
 [s S174 :1 `uc 1 :1 `uc 1 ]
 [n S174 . . GO_NOT_DONE ]
@@ -2980,12 +2978,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _readADC ]
 [v _channel `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADCFunctionality.c: 17: ADCON0 = ((channel <<2));
+[; ;ADCFunctionality.c: 17: ADCON0 = channel << 2;
 "17
 [e = _ADCON0 -> << -> _channel `i -> 2 `i `uc ]
-[; ;ADCFunctionality.c: 18: ADON = 1;
+[; ;ADCFunctionality.c: 18: ADCON0bits.ADON = 1;
 "18
-[e = _ADON -> -> 1 `i `b ]
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
 [; ;ADCFunctionality.c: 19: ADCON0bits.GO = 1;
 "19
 [e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
@@ -3016,9 +3014,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _res `i ~T0 @X0 1 a ]
 [; ;ADCFunctionality.c: 25: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 26: IR_signal = (res < 255) ? 1 : 0;
+[; ;ADCFunctionality.c: 26: IR_signal = (res < 150) ? 1 : 0;
 "26
-[e = _IR_signal ? < _res -> 255 `i : -> 1 `i -> 0 `i ]
+[e = _IR_signal ? < _res -> 150 `i : -> 1 `i -> 0 `i ]
 [; ;ADCFunctionality.c: 27: }
 "27
 [e :UE 270 ]
@@ -3036,9 +3034,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _res `i ~T0 @X0 1 a ]
 [; ;ADCFunctionality.c: 31: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 32: MAG_signal = (res < 255) ? 1 : 0;
+[; ;ADCFunctionality.c: 32: MAG_signal = (res < 150) ? 1 : 0;
 "32
-[e = _MAG_signal ? < _res -> 255 `i : -> 1 `i -> 0 `i ]
+[e = _MAG_signal ? < _res -> 150 `i : -> 1 `i -> 0 `i ]
 [; ;ADCFunctionality.c: 33: }
 "33
 [e :UE 271 ]

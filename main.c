@@ -21,7 +21,7 @@ void main(void) {
     initUI();
     first = 1;
     
-    // machine_state = Testing_state; // comment me out if you're not testing
+    machine_state = Testing_state; // comment me out if you're not testing
     // debug = 1; // comment me out if you're not debugging
     
     while(1){
