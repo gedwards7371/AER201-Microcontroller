@@ -7,9 +7,8 @@
 
 //Solenoids (1 cm)
 #define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
-
-//Solenoid (0.5 cm))
 #define SOL_PUSHER      LATAbits.LATA4 // solenoid for pushing cans off trommel
+#define SOL_OUT         1 // signal to move solenoids out
 
 //DC motors
 #define DC          LATAbits.LATA5 // DC motors
@@ -23,8 +22,8 @@
 #define PAN_MID     1500
 #define PAN_LMID    1666
 #define PAN_L       2000
-#define TILT_UP     1000
-#define TILT_DOWN   1500
+#define TILT_REST   1000
+#define TILT_DROP   1500
 
 // Characteristic travel times in milliseconds
 #define TIME_LOADING_TO_ID      500

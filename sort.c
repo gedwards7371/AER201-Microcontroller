@@ -192,12 +192,12 @@ void Distribution(void){
         __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
         
         // Tilt to drop can into bin
-        updateServoPosition(TILT_DOWN, 3);
+        updateServoPosition(TILT_DROP, 3);
         __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
         
         // Reset the distribution stage
         updateServoPosition(PAN_MID, 1);
-        updateServoPosition(TILT_UP, 3);
+        updateServoPosition(TILT_REST, 3);
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
     }
@@ -243,8 +243,8 @@ void initSortTimer(void){
     TMR0ON = 1;
 }
 void initServos(void){
-        updateServoPosition(PAN_L, 1);
-        updateServoPosition(TILT_UP, 3);
+        updateServoPosition(PAN_MID, 1);
+        updateServoPosition(TILT_REST, 3);
         TMR1ON = 1;
         __delay_ms(5); // So that servo ISRs don't race
         TMR3ON = 1;
