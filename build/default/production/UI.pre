@@ -3988,6 +3988,8 @@ lcdInst(0b10000000);;
 printf("-- LOG %2d HERE--", log);
 lcdInst(0b11000000);;
 printf("DIDN'T COMPLETE");
+while(1) {for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}}
+break;
 }
 else{
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;

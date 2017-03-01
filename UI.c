@@ -103,6 +103,8 @@ void UI(void){
             printf("-- LOG %2d HERE--", log);
             __lcd_newline();
             printf("DIDN'T COMPLETE");
+            while(1) {__delay_1s();if(!logstate){break;}}
+            break;
         }
         else{
             __lcd_clear();

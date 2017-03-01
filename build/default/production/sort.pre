@@ -3994,6 +3994,14 @@ lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 initSortTimer();
 
 
+
+
+sel = EEPROM_read(0);
+unsigned short addr = 1 + 11 * sel;
+unsigned char byte1 = 0b01111111;
+EEPROM_write(addr, byte1);
+
+
 LATAbits.LATA5 = 1;
 
 
@@ -4146,7 +4154,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 233
+# 241
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;

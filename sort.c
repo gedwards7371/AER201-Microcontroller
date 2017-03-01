@@ -70,6 +70,14 @@ void Loading(void){
         __lcd_clear();
         initSortTimer();
         
+        // Write to EEPROM that the sort did not complete. This will be changed
+        // after a successful run, but until then we must assume the run will
+        // not complete.
+        sel = EEPROM_read(0);
+        unsigned short addr = 1 + 11 * sel;
+        unsigned char byte1 = 0b01111111;
+        EEPROM_write(addr, byte1);
+        
         //Write to RA5 for DC motors
         DC = 1;
         

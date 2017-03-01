@@ -93,7 +93,7 @@ void logRun(void){
     //
     // Total is 85 bits, which is 11 writes
     
-    // Check which log space to go to (log spaces are zero-indexed
+    // Check which log space to go to (log spaces are zero-indexed)
     sel = EEPROM_read(0);
     unsigned short addr = 1 + 11 * sel;
     
