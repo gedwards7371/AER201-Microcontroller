@@ -4181,7 +4181,7 @@ unsigned int timeDiff = cur_sec - start_sec;
 
 total_time = timeDiff;
 
-if(timeDiff >= 10){
+if(timeDiff >= 180){
 machine_state = DoneSorting_state;
 
 }

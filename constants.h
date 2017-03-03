@@ -32,7 +32,7 @@
 #define TIME_SERVO_MOTION       500
 
 // Maximum allowed sort time (in seconds) before forced termination
-#define MAX_SORT_TIME           10
+#define MAX_SORT_TIME           180
 
 // IR sensor thresholds
 #define THIR    150

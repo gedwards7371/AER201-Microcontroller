@@ -3682,9 +3682,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 265: total_time = timeDiff;
 "265
 [e = _total_time -> _timeDiff `i ]
-[; ;sort.c: 267: if(timeDiff >= 10){
+[; ;sort.c: 267: if(timeDiff >= 180){
 "267
-[e $ ! >= _timeDiff -> -> 10 `i `ui 308  ]
+[e $ ! >= _timeDiff -> -> 180 `i `ui 308  ]
 {
 [; ;sort.c: 268: machine_state = DoneSorting_state;
 "268
