@@ -21,6 +21,7 @@ void actuatorTest(void);
 void PortTests(void);
 void PortTestA5(void);
 void EEPROMTest(void);
+void ToggleTestA5();
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -44,13 +45,17 @@ void Test(void){
             case 3: 
                 actuatorTest();
                 break;
-            case 4:
-                PortTests();
-                break;
             case 5:
                 PortTestA5();
+                break;
             case 6:
+                ToggleTestA5();
+                break;
+            case 7:
                 EEPROMTest();
+                break;
+            case 8:
+                PortTests();
                 break;
             default:
                 break;
@@ -284,7 +289,7 @@ void actuatorTest(void){
 }
 
 void PortTests(void){
-    // For circuits member and quick tests
+    // Same as PortTestA5 but with multiple keys
     while(1){
         while(PORTBbits.RB1 == 0) {continue;}
         var = PORTB >> 4;
@@ -323,7 +328,6 @@ void PortTestA5(void){
     printf("D WILL RETURN    ");
     __lcd_newline();
     printf("OTHER SETS RA5   ");
-    di();
     while(1){
         while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
@@ -351,7 +355,34 @@ void PortTestA5(void){
             LATAbits.LATA5 = 0;
         }
     }
-    ei();
+}
+
+void ToggleTestA5(void){
+    __lcd_clear();__lcd_home();
+    printf("D WILL RETURN   ");
+    __lcd_newline();
+    printf("ELSE TOGGLES RA5");
+    int on = 0;
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
+            // the PIC will wait and do nothing until a key press is signaled
+        }
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
+        else{
+            if(on == 0){
+                on = 1;
+                LATAbits.LATA5 = 1;
+            }
+            else{
+                on = 0;
+                LATAbits.LATA5  = 0;
+            }
+        }
+        while(PORTBbits.RB1 == 1) {continue;}
+    }
 }
 
 void EEPROMTest(void){
