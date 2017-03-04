@@ -23,8 +23,7 @@ void readADC(char channel){
 void readIR(void){
     readADC(0);
     int res = ADRESH<<8 | ADRESL;
-    IR_signal = res;
-    //IR_signal = (res < THIR) ? 1 : 0;
+    IR_signal = (res > THIR) ? 1 : 0;
 }
 
 void readMAG(void){

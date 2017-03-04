@@ -3014,30 +3014,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _res `i ~T0 @X0 1 a ]
 [; ;ADCFunctionality.c: 25: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 26: IR_signal = res;
+[; ;ADCFunctionality.c: 26: IR_signal = (res > 900) ? 1 : 0;
 "26
-[e = _IR_signal _res ]
-[; ;ADCFunctionality.c: 28: }
-"28
+[e = _IR_signal ? > _res -> 900 `i : -> 1 `i -> 0 `i ]
+[; ;ADCFunctionality.c: 27: }
+"27
 [e :UE 270 ]
 }
-"30
+"29
 [v _readMAG `(v ~T0 @X0 1 ef ]
 {
-[; ;ADCFunctionality.c: 30: void readMAG(void){
+[; ;ADCFunctionality.c: 29: void readMAG(void){
 [e :U _readMAG ]
 [f ]
-[; ;ADCFunctionality.c: 31: readADC(1);
-"31
+[; ;ADCFunctionality.c: 30: readADC(1);
+"30
 [e ( _readADC (1 -> -> 1 `i `uc ]
-"32
+"31
 [v _res `i ~T0 @X0 1 a ]
-[; ;ADCFunctionality.c: 32: int res = ADRESH<<8 | ADRESL;
+[; ;ADCFunctionality.c: 31: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 33: MAG_signal = (res < 150) ? 1 : 0;
-"33
+[; ;ADCFunctionality.c: 32: MAG_signal = (res < 150) ? 1 : 0;
+"32
 [e = _MAG_signal ? < _res -> 150 `i : -> 1 `i -> 0 `i ]
-[; ;ADCFunctionality.c: 34: }
-"34
+[; ;ADCFunctionality.c: 33: }
+"33
 [e :UE 271 ]
 }
