@@ -21,8 +21,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _stopSignals `(v ~T0 @X0 0 ef ]
 "3 EEPROM.h
 [v _logRun `(v ~T0 @X0 0 ef ]
-"47 main.c
-[v _Test `(i ~T0 @X0 0 ef ]
+"1 Test.h
+[v _Test `(v ~T0 @X0 0 ef ]
 "872 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [v _LATA `Vuc ~T0 @X0 0 e@3977 ]
 "983
@@ -2959,108 +2959,109 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;EEPROM.h: 18: extern int log_count_can_no_lab;
 [; ;EEPROM.h: 20: extern int log_startTime[7];
 [; ;EEPROM.h: 22: extern int log_total_time;
-"15 main.c
+[; ;Test.h: 1: void Test(void);
+"16 main.c
 [v _debug `i ~T0 @X0 1 e ]
-[; ;main.c: 15: int debug;
-"17
+[; ;main.c: 16: int debug;
+"18
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 17: void main(void) {
+[; ;main.c: 18: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 18: machineConfig();
-"18
-[e ( _machineConfig ..  ]
-[; ;main.c: 19: initLCD();
+[; ;main.c: 19: machineConfig();
 "19
-[e ( _initLCD ..  ]
-[; ;main.c: 20: initTime(0x42, 0x20, 0x13, 0x04, 0x01, 0x03, 0x17);
+[e ( _machineConfig ..  ]
+[; ;main.c: 20: initLCD();
 "20
-[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 32 `i `uc -> -> 19 `i `uc -> -> 4 `i `uc -> -> 1 `i `uc -> -> 3 `i `uc -> -> 23 `i `uc ]
-[; ;main.c: 21: initUI();
+[e ( _initLCD ..  ]
+[; ;main.c: 21: initTime(0x42, 0x20, 0x13, 0x04, 0x01, 0x03, 0x17);
 "21
-[e ( _initUI ..  ]
-[; ;main.c: 22: first = 1;
+[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 32 `i `uc -> -> 19 `i `uc -> -> 4 `i `uc -> -> 1 `i `uc -> -> 3 `i `uc -> -> 23 `i `uc ]
+[; ;main.c: 22: initUI();
 "22
+[e ( _initUI ..  ]
+[; ;main.c: 23: first = 1;
+"23
 [e = _first -> 1 `i ]
-[; ;main.c: 32: while(1){
-"32
+[; ;main.c: 33: while(1){
+"33
 [e :U 268 ]
 {
-[; ;main.c: 33: switch(machine_state){
-"33
+[; ;main.c: 34: switch(machine_state){
+"34
 [e $U 271  ]
 {
-[; ;main.c: 34: case UI_state :
-"34
-[e :U 272 ]
-[; ;main.c: 35: UI();
+[; ;main.c: 35: case UI_state :
 "35
-[e ( _UI ..  ]
-[; ;main.c: 36: break;
+[e :U 272 ]
+[; ;main.c: 36: UI();
 "36
-[e $U 270  ]
-[; ;main.c: 37: case Sorting_state :
-"37
-[e :U 273 ]
-[; ;main.c: 38: sort();
-"38
-[e ( _sort ..  ]
-[; ;main.c: 39: break;
-"39
-[e $U 270  ]
-[; ;main.c: 40: case DoneSorting_state :
-"40
-[e :U 274 ]
-[; ;main.c: 41: stopSignals();
-"41
-[e ( _stopSignals ..  ]
-[; ;main.c: 42: logRun();
-"42
-[e ( _logRun ..  ]
-[; ;main.c: 43: first = 1;
-"43
-[e = _first -> 1 `i ]
-[; ;main.c: 44: UI();
-"44
 [e ( _UI ..  ]
-[; ;main.c: 45: break;
-"45
+[; ;main.c: 37: break;
+"37
 [e $U 270  ]
-[; ;main.c: 46: case Testing_state :
-"46
-[e :U 275 ]
-[; ;main.c: 47: Test();
-"47
-[e ( _Test ..  ]
-[; ;main.c: 48: break;
-"48
+[; ;main.c: 38: case Sorting_state :
+"38
+[e :U 273 ]
+[; ;main.c: 39: sort();
+"39
+[e ( _sort ..  ]
+[; ;main.c: 40: break;
+"40
 [e $U 270  ]
-[; ;main.c: 49: case EmergencyStop_state :
-"49
-[e :U 276 ]
-[; ;main.c: 50: stopSignals();
-"50
+[; ;main.c: 41: case DoneSorting_state :
+"41
+[e :U 274 ]
+[; ;main.c: 42: stopSignals();
+"42
 [e ( _stopSignals ..  ]
-[; ;main.c: 52: while(1){}
-"52
+[; ;main.c: 43: logRun();
+"43
+[e ( _logRun ..  ]
+[; ;main.c: 44: first = 1;
+"44
+[e = _first -> 1 `i ]
+[; ;main.c: 45: UI();
+"45
+[e ( _UI ..  ]
+[; ;main.c: 46: break;
+"46
+[e $U 270  ]
+[; ;main.c: 47: case Testing_state :
+"47
+[e :U 275 ]
+[; ;main.c: 48: Test();
+"48
+[e ( _Test ..  ]
+[; ;main.c: 49: break;
+"49
+[e $U 270  ]
+[; ;main.c: 50: case EmergencyStop_state :
+"50
+[e :U 276 ]
+[; ;main.c: 51: stopSignals();
+"51
+[e ( _stopSignals ..  ]
+[; ;main.c: 53: while(1){}
+"53
 [e :U 278 ]
 {
 }
 [e :U 277 ]
 [e $U 278  ]
 [e :U 279 ]
-[; ;main.c: 53: default :
-"53
-[e :U 280 ]
-[; ;main.c: 54: break;
+[; ;main.c: 54: default :
 "54
-[e $U 270  ]
+[e :U 280 ]
+[; ;main.c: 55: break;
 "55
-}
-[; ;main.c: 55: }
 [e $U 270  ]
-"33
+"56
+}
+[; ;main.c: 56: }
+[e $U 270  ]
+"34
 [e :U 271 ]
 [e [\ _machine_state , $ . `E3120 0 272
  , $ . `E3120 1 273
@@ -3068,41 +3069,41 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ . `E3120 3 275
  , $ . `E3120 4 276
  280 ]
-"55
-[e :U 270 ]
 "56
+[e :U 270 ]
+"57
 }
 [e :U 267 ]
-"32
+"33
 [e $U 268  ]
 [e :U 269 ]
-[; ;main.c: 56: }
 [; ;main.c: 57: }
-"57
+[; ;main.c: 58: }
+"58
 [e :UE 266 ]
 }
-"59
+"60
 [v _stopSignals `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 59: void stopSignals(void){
+[; ;main.c: 60: void stopSignals(void){
 [e :U _stopSignals ]
 [f ]
-[; ;main.c: 60: LATA = 0x00;
-"60
-[e = _LATA -> -> 0 `i `uc ]
-[; ;main.c: 61: LATB = 0x00;
+[; ;main.c: 61: LATA = 0x00;
 "61
-[e = _LATB -> -> 0 `i `uc ]
-[; ;main.c: 62: LATC = 0x00;
+[e = _LATA -> -> 0 `i `uc ]
+[; ;main.c: 62: LATB = 0x00;
 "62
-[e = _LATC -> -> 0 `i `uc ]
-[; ;main.c: 63: LATD = 0x00;
+[e = _LATB -> -> 0 `i `uc ]
+[; ;main.c: 63: LATC = 0x00;
 "63
-[e = _LATD -> -> 0 `i `uc ]
-[; ;main.c: 64: LATE = 0x00;
+[e = _LATC -> -> 0 `i `uc ]
+[; ;main.c: 64: LATD = 0x00;
 "64
-[e = _LATE -> -> 0 `i `uc ]
-[; ;main.c: 65: }
+[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 65: LATE = 0x00;
 "65
+[e = _LATE -> -> 0 `i `uc ]
+[; ;main.c: 66: }
+"66
 [e :UE 281 ]
 }

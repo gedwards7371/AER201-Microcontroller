@@ -12,7 +12,7 @@
 #include "ADCFunctionality.h"
 #include "EEPROM.h"
 
-int i = 0; // Counting variable
+int i;
 int var; // Holds PORTB
 void Test(void);
 void algorithmTest(void);
@@ -151,6 +151,8 @@ void sensorTest(void){
 
 void actuatorTest(void){    
     /*****Actuator test cases*****/
+    int i = 0;
+    
     ei();
     __lcd_clear();__lcd_home();
     printf("ACTUATORS");
@@ -345,7 +347,7 @@ void PortTestA5(void){
             /* PWM to make the CAM servo work with Twesh's circuit
             for(i=0;i<10000;i++)
             {
-                LATAbits.LATA5 = 0;
+                LATAbits.LATA5 = 1;
                 __delay_us(10);
                 LATAbits.LATA5 = 0;
                 __delay_us(90);

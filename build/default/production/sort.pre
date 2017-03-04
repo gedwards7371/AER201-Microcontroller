@@ -4123,6 +4123,9 @@ updateServoPosition(1500, 1);
 updateServoPosition(1000, 3);
 f_can_coming_to_distribution = 0;
 f_can_distributed = 1;
+if(f_lastCan == 1){
+machine_state = DoneSorting_state;
+}
 }
 }
 
@@ -4154,7 +4157,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 241
+# 244
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;

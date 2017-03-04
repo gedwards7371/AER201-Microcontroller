@@ -31,8 +31,9 @@
 #define TIME_SOLENOID_MOTION    100
 #define TIME_SERVO_MOTION       500
 
-// Maximum allowed sort time (in seconds) before forced termination
+// Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           180
+#define MAX_CANS                12
 
 // IR sensor thresholds
 #define THIR    150

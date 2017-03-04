@@ -15,6 +15,7 @@
       <itemPath>sort.h</itemPath>
       <itemPath>ADCFunctionality.h</itemPath>
       <itemPath>EEPROM.h</itemPath>
+      <itemPath>Test.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

@@ -97,7 +97,7 @@ void Loading(void){
             // "If a new can is being loaded"
             else{ 
                 count_total++;
-                if(count_total == 12){
+                if(count_total == MAX_CANS){
                     f_lastCan = 1;
                 }
             }
@@ -200,6 +200,9 @@ void Distribution(void){
         updateServoPosition(TILT_REST, 3);
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
+        if(f_lastCan == 1){
+            machine_state = DoneSorting_state;
+        }
     }
 }
 

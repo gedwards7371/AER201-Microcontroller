@@ -11,6 +11,7 @@
 #include "sort.h"
 #include "ADCFunctionality.h"
 #include "EEPROM.h"
+#include "Test.h"
 
 int debug;
 

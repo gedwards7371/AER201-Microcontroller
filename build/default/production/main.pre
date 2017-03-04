@@ -3935,7 +3935,10 @@ extern int log_startTime[7];
 
 extern int log_total_time;
 
-# 15 "main.c"
+# 1 "Test.h"
+void Test(void);
+
+# 16 "main.c"
 int debug;
 
 void main(void) {
@@ -3945,7 +3948,7 @@ initTime(0x42, 0x20, 0x13, 0x04, 0x01, 0x03, 0x17);
 initUI();
 first = 1;
 
-# 32
+# 33
 while(1){
 switch(machine_state){
 case UI_state :
