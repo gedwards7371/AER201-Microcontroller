@@ -8,7 +8,7 @@
 //Solenoids (1 cm)
 #define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
 #define SOL_PUSHER      LATAbits.LATA4 // solenoid for pushing cans off trommel
-#define SOL_OUT         0 // signal to move solenoids out
+#define SOL_OUT         1 // signal to move solenoids out
 
 //DC motors
 #define DC          LATAbits.LATA5 // DC motors
@@ -28,7 +28,7 @@
 // Characteristic travel times in milliseconds
 #define TIME_LOADING_TO_ID      500
 #define TIME_ID_TO_DISTRIBUTION 500
-#define TIME_SOLENOID_MOTION    100
+#define TIME_SOLENOID_MOTION    300
 #define TIME_SERVO_MOTION       500
 
 // Maximum operation allowances before forced termination

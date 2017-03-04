@@ -85,7 +85,7 @@ EmergencyStop_state 4
 [v _readADC readADC `(v  1 e 1 0 ]
 "23
 [v _readIR readIR `(v  1 e 1 0 ]
-"29
+"30
 [v _readMAG readMAG `(v  1 e 1 0 ]
 "8 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
@@ -206,21 +206,23 @@ EmergencyStop_state 4
 [v _getIR getIR `(v  1 e 1 0 ]
 "298
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
-"26 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"27 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _Test Test `(v  1 e 1 0 ]
-"66
+"70
 [v _algorithmTest algorithmTest `(v  1 e 1 0 ]
-"110
+"114
 [v _sensorTest sensorTest `(v  1 e 1 0 ]
-"152
+"165
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
-"293
+"306
 [v _PortTests PortTests `(v  1 e 1 0 ]
-"328
+"341
 [v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
-"362
+"375
+[v _SolenoidTestA5 SolenoidTestA5 `(v  1 e 1 0 ]
+"399
 [v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
-"390
+"427
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 "62 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -400,17 +402,17 @@ EmergencyStop_state 4
 [v _LATDbits LATDbits `VES508  1 e 1 @3980 ]
 "1316
 [v _LATE LATE `VEuc  1 e 1 @3981 ]
-[s S1483 . 1 `uc 1 LATE0 1 0 :1:0 
+[s S1487 . 1 `uc 1 LATE0 1 0 :1:0 
 `uc 1 LATE1 1 0 :1:1 
 `uc 1 LATE2 1 0 :1:2 
 ]
 "1333
-[s S1487 . 1 `uc 1 LE0 1 0 :1:0 
+[s S1491 . 1 `uc 1 LE0 1 0 :1:0 
 `uc 1 LE1 1 0 :1:1 
 `uc 1 LE2 1 0 :1:2 
 ]
-[u S1491 . 1 `S1483 1 . 1 0 `S1487 1 . 1 0 ]
-[v _LATEbits LATEbits `VES1491  1 e 1 @3981 ]
+[u S1495 . 1 `S1487 1 . 1 0 `S1491 1 . 1 0 ]
+[v _LATEbits LATEbits `VES1495  1 e 1 @3981 ]
 "1367
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1588
@@ -1012,29 +1014,31 @@ EmergencyStop_state 4
 [v ___awdiv@divisor divisor `i  1 p 2 8 ]
 "42
 } 0
-"26 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"27 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _Test Test `(v  1 e 1 0 ]
 {
-"64
+"68
 } 0
-"110
+"114
 [v _sensorTest sensorTest `(v  1 e 1 0 ]
 {
-"150
+"130
+[v sensorTest@on on `i  1 a 2 45 ]
+"163
 } 0
-"29 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
+"30 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
 [v _readMAG readMAG `(v  1 e 1 0 ]
 {
-"31
+"32
 [v readMAG@res res `i  1 a 2 4 ]
-"33
+"34
 } 0
 "23
 [v _readIR readIR `(v  1 e 1 0 ]
 {
 "25
 [v readIR@res res `i  1 a 2 4 ]
-"27
+"28
 } 0
 "15
 [v _readADC readADC `(v  1 e 1 0 ]
@@ -1045,52 +1049,52 @@ EmergencyStop_state 4
 [v readADC@channel channel `uc  1 a 1 1 ]
 "21
 } 0
-"66 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"70 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _algorithmTest algorithmTest `(v  1 e 1 0 ]
 {
-"108
+"112
 } 0
-"152
+"165
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
 {
-"173
-[v actuatorTest@i_1560 i `uc  1 a 1 45 ]
-"289
-[v actuatorTest@i_1600 i `uc  1 a 1 67 ]
-[v actuatorTest@i_1599 i `uc  1 a 1 66 ]
+"186
+[v actuatorTest@i_1565 i `uc  1 a 1 45 ]
+"302
+[v actuatorTest@i_1605 i `uc  1 a 1 67 ]
+[v actuatorTest@i_1604 i `uc  1 a 1 66 ]
+"298
+[v actuatorTest@i_1602 i `uc  1 a 1 65 ]
+[v actuatorTest@i_1601 i `uc  1 a 1 64 ]
 "285
-[v actuatorTest@i_1597 i `uc  1 a 1 65 ]
-[v actuatorTest@i_1596 i `uc  1 a 1 64 ]
-"272
-[v actuatorTest@i_1593 i `uc  1 a 1 63 ]
-[v actuatorTest@i_1592 i `uc  1 a 1 62 ]
-"267
-[v actuatorTest@i_1590 i `uc  1 a 1 61 ]
-[v actuatorTest@i_1589 i `uc  1 a 1 60 ]
+[v actuatorTest@i_1598 i `uc  1 a 1 63 ]
+[v actuatorTest@i_1597 i `uc  1 a 1 62 ]
+"280
+[v actuatorTest@i_1595 i `uc  1 a 1 61 ]
+[v actuatorTest@i_1594 i `uc  1 a 1 60 ]
+"275
+[v actuatorTest@i_1592 i `uc  1 a 1 59 ]
+[v actuatorTest@i_1591 i `uc  1 a 1 58 ]
 "262
-[v actuatorTest@i_1587 i `uc  1 a 1 59 ]
-[v actuatorTest@i_1586 i `uc  1 a 1 58 ]
-"249
-[v actuatorTest@i_1583 i `uc  1 a 1 57 ]
-[v actuatorTest@i_1582 i `uc  1 a 1 56 ]
-"244
-[v actuatorTest@i_1580 i `uc  1 a 1 55 ]
-[v actuatorTest@i_1579 i `uc  1 a 1 54 ]
-"239
-[v actuatorTest@i_1577 i `uc  1 a 1 53 ]
-[v actuatorTest@i_1576 i `uc  1 a 1 52 ]
-"234
-[v actuatorTest@i_1574 i `uc  1 a 1 51 ]
-[v actuatorTest@i_1573 i `uc  1 a 1 50 ]
-"229
-[v actuatorTest@i_1571 i `uc  1 a 1 49 ]
-[v actuatorTest@i_1570 i `uc  1 a 1 48 ]
-"224
-[v actuatorTest@i_1568 i `uc  1 a 1 47 ]
-[v actuatorTest@i_1567 i `uc  1 a 1 46 ]
-"152
+[v actuatorTest@i_1588 i `uc  1 a 1 57 ]
+[v actuatorTest@i_1587 i `uc  1 a 1 56 ]
+"257
+[v actuatorTest@i_1585 i `uc  1 a 1 55 ]
+[v actuatorTest@i_1584 i `uc  1 a 1 54 ]
+"252
+[v actuatorTest@i_1582 i `uc  1 a 1 53 ]
+[v actuatorTest@i_1581 i `uc  1 a 1 52 ]
+"247
+[v actuatorTest@i_1579 i `uc  1 a 1 51 ]
+[v actuatorTest@i_1578 i `uc  1 a 1 50 ]
+"242
+[v actuatorTest@i_1576 i `uc  1 a 1 49 ]
+[v actuatorTest@i_1575 i `uc  1 a 1 48 ]
+"237
+[v actuatorTest@i_1573 i `uc  1 a 1 47 ]
+[v actuatorTest@i_1572 i `uc  1 a 1 46 ]
+"165
 [v actuatorTest@i i `i  1 a 2 68 ]
-"291
+"304
 } 0
 "298 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
@@ -1102,22 +1106,33 @@ EmergencyStop_state 4
 [v updateServoPosition@timer timer `i  1 p 2 2 ]
 "308
 } 0
-"362 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"399 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
 {
-"367
+"404
 [v ToggleTestA5@on on `i  1 a 2 44 ]
-"388
+"425
 } 0
-"293
+"375
+[v _SolenoidTestA5 SolenoidTestA5 `(v  1 e 1 0 ]
+{
+"387
+[v SolenoidTestA5@i_1616 i `uc  1 a 1 47 ]
+"395
+[v SolenoidTestA5@i_1618 i `uc  1 a 1 48 ]
+"386
+[v SolenoidTestA5@i i `i  1 a 2 45 ]
+"397
+} 0
+"306
 [v _PortTests PortTests `(v  1 e 1 0 ]
 {
-"326
+"339
 } 0
-"328
+"341
 [v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
 {
-"360
+"373
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v _printf printf `(i  1 e 2 0 ]
@@ -1211,10 +1226,10 @@ EmergencyStop_state 4
 [v lcdNibble@data data `uc  1 a 1 1 ]
 "46
 } 0
-"390 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"427 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 {
-"400
+"437
 } 0
 "16 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\interruptHandler.c
 [v _handler handler `II(v  1 e 1 0 ]

@@ -21,7 +21,8 @@ void actuatorTest(void);
 void PortTests(void);
 void PortTestA5(void);
 void EEPROMTest(void);
-void ToggleTestA5();
+void ToggleTestA5(void);
+void SolenoidTestA5(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -55,6 +56,9 @@ void Test(void){
                 EEPROMTest();
                 break;
             case 8:
+                SolenoidTestA5();
+                break;
+            case 9:
                 PortTests();
                 break;
             default:
@@ -123,16 +127,25 @@ void sensorTest(void){
     // Justification: Since we haven't tested this, this is a placeholder.
     printf("TST: IR SNSR");
     __delay_ms(100);
-    while(PORTBbits.RB1 == 0){
-        readIR();
-       __lcd_home();
-       __lcd_newline();
-       printf("IR_signal: %d ", IR_signal);
-       __delay_ms(100);
+    int on = 0;
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            readIR();
+            __lcd_home();
+            __lcd_newline();
+            printf("IR_signal: %d ", IR_signal);
+            __delay_ms(100);
+        }  
+        if(on == 0){
+            on = 1;
+            LATAbits.LATA5 = 1;
+        }
+        else{
+            on = 0;
+            LATAbits.LATA5  = 0;
+        }
+        while(PORTBbits.RB1 == 1) {continue;}
     }
-    __lcd_clear();__lcd_home();
-    
-    while(PORTBbits.RB1 == 1) {continue;}
     
     // Magnetism sensor reading
     // Pass: Presence of soup can sets MAG_signal high at 6mm, and
@@ -356,6 +369,30 @@ void PortTestA5(void){
             
             LATAbits.LATA5 = 0;
         }
+    }
+}
+
+void SolenoidTestA5(void){
+    while(1){
+        __lcd_clear();__lcd_home();
+        printf("SOLENOID TST");
+        __lcd_newline();
+        
+         while(PORTBbits.RB1 == 0){ 
+            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
+            // the PIC will wait and do nothing until a key press is signaled
+        }
+        
+        for(int i = 0; i < 3; i++){
+            __delay_1s();
+            LATAbits.LATA5 = 1;
+            __delay_ms(150);
+            LATAbits.LATA5 = 0;
+        }
+        
+        __lcd_clear();__lcd_home();
+        printf("PUSH DONE");
+        __delay_1s();
     }
 }
 

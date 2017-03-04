@@ -4031,7 +4031,7 @@ else if(f_ID_receive){
 f_loadingNewCan = 0;
 LATAbits.LATA4 = 1;
 f_can_coming_to_ID = 1;
-_delay((unsigned long)((100)*(32000000/4000.0)));
+_delay((unsigned long)((300)*(32000000/4000.0)));
 LATAbits.LATA4 = 0;
 }
 }
@@ -4056,7 +4056,7 @@ sensor_outputs[1] = MAG_signal;
 if(!sensor_outputs[1]){
 LATAbits.LATA3 = 1;
 
-_delay((unsigned long)((100)*(32000000/4000.0)));
+_delay((unsigned long)((300)*(32000000/4000.0)));
 sensor_outputs[2] = PORTAbits.RA2;
 LATAbits.LATA3 = 0;
 }

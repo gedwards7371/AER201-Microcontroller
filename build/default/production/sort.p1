@@ -3243,9 +3243,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 110: f_can_coming_to_ID = 1;
 "110
 [e = _f_can_coming_to_ID -> 1 `i ]
-[; ;sort.c: 111: _delay((unsigned long)((100)*(32000000/4000.0)));
+[; ;sort.c: 111: _delay((unsigned long)((300)*(32000000/4000.0)));
 "111
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [; ;sort.c: 112: LATAbits.LATA4 = 0;
 "112
 [e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
@@ -3298,9 +3298,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 134: LATAbits.LATA3 = 1;
 "134
 [e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
-[; ;sort.c: 136: _delay((unsigned long)((100)*(32000000/4000.0)));
+[; ;sort.c: 136: _delay((unsigned long)((300)*(32000000/4000.0)));
 "136
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [; ;sort.c: 137: sensor_outputs[2] = PORTAbits.RA2;
 "137
 [e = *U + &U _sensor_outputs * -> -> -> 2 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> . . _PORTAbits 0 2 `i ]
