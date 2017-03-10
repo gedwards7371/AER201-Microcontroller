@@ -41,9 +41,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "4598
 [v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
-"32 sort.h
+"35 sort.h
 [v _IR_signal `i ~T0 @X0 0 e ]
-"33
+"36
 [v _MAG_signal `i ~T0 @X0 0 e ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -2942,19 +2942,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 26: void printSortTimer(void);
 [; ;sort.h: 27: extern int startTime[7];
 [; ;sort.h: 28: extern int total_time;
-[; ;sort.h: 31: void getIR(void);
-[; ;sort.h: 32: extern int IR_signal;
-[; ;sort.h: 33: extern int MAG_signal;
-[; ;sort.h: 36: void updateServoPosition(int time_us, int timer);
-[; ;sort.h: 37: extern unsigned int servoTimes[4];
-[; ;sort.h: 38: volatile extern int was_low_1;
-[; ;sort.h: 39: volatile extern int was_low_3;
-[; ;sort.h: 42: extern int count_total;
-[; ;sort.h: 43: extern int count_pop_no_tab;
-[; ;sort.h: 44: extern int count_pop_w_tab;
-[; ;sort.h: 45: extern int count_can_w_lab;
-[; ;sort.h: 46: extern int count_can_no_lab;
-[; ;sort.h: 47: extern int cur_can;
+[; ;sort.h: 31: void delay_ms(unsigned char milliseconds);
+[; ;sort.h: 34: void getIR(void);
+[; ;sort.h: 35: extern int IR_signal;
+[; ;sort.h: 36: extern int MAG_signal;
+[; ;sort.h: 39: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 40: extern unsigned int servoTimes[4];
+[; ;sort.h: 41: volatile extern int was_low_1;
+[; ;sort.h: 42: volatile extern int was_low_3;
+[; ;sort.h: 45: extern int count_total;
+[; ;sort.h: 46: extern int count_pop_no_tab;
+[; ;sort.h: 47: extern int count_pop_w_tab;
+[; ;sort.h: 48: extern int count_can_w_lab;
+[; ;sort.h: 49: extern int count_can_no_lab;
+[; ;sort.h: 50: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(void);
 [; ;ADCFunctionality.h: 3: void readMAG(void);

@@ -11,6 +11,7 @@
 #define SOL_OUT         1 // signal to move solenoids out
 
 //DC motors
+#define DC_RAMP     45
 #define DC          LATAbits.LATA5 // DC motors
 
 //Servo motors
@@ -32,7 +33,7 @@
 #define TIME_SERVO_MOTION       500
 
 // Maximum operation allowances before forced termination
-#define MAX_SORT_TIME           180
+#define MAX_SORT_TIME           10
 #define MAX_CANS                12
 
 // IR sensor thresholds

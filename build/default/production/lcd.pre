@@ -3888,6 +3888,9 @@ extern int startTime[7];
 extern int total_time;
 
 
+void delay_ms(unsigned char milliseconds);
+
+
 void getIR(void);
 extern int IR_signal;
 extern int MAG_signal;

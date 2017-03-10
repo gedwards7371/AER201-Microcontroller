@@ -3888,6 +3888,9 @@ extern int startTime[7];
 extern int total_time;
 
 
+void delay_ms(unsigned char milliseconds);
+
+
 void getIR(void);
 extern int IR_signal;
 extern int MAG_signal;
@@ -4002,6 +4005,11 @@ unsigned char byte1 = 0b01111111;
 EEPROM_write(addr, byte1);
 
 
+LATAbits.LATA5 = 0;
+for(int i=0; i<46; i++){
+LATAbits.LATA5 = !LATAbits.LATA5;
+delay_ms(45-i);
+}
 LATAbits.LATA5 = 1;
 
 
@@ -4012,7 +4020,7 @@ else{
 
 if(!f_loadingNewCan){
 
-getIR();
+
 
 if(!f_loadingNewCan){
 return;
@@ -4157,7 +4165,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 244
+# 249
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4184,7 +4192,7 @@ unsigned int timeDiff = cur_sec - start_sec;
 
 total_time = timeDiff;
 
-if(timeDiff >= 180){
+if(timeDiff >= 10){
 machine_state = DoneSorting_state;
 
 }
@@ -4221,5 +4229,13 @@ servoTimes[1] = my_time & 0xFF;
 case 3:
 servoTimes[2] = my_time >> 8;
 servoTimes[3] = my_time & 0xFF;
+}
+}
+
+void delay_ms(unsigned char milliseconds){
+while(milliseconds > 0)
+{
+milliseconds--;
+_delay((unsigned long)((990)*(32000000/4000000.0)));
 }
 }

@@ -27,6 +27,9 @@ void printSortTimer(void);
 extern int startTime[7];
 extern int total_time;
 
+// DC motor control
+void delay_ms(unsigned char milliseconds);
+
 // Sensor inputs
 void getIR(void);
 extern int IR_signal;

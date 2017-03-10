@@ -78,7 +78,12 @@ void Loading(void){
         unsigned char byte1 = 0b01111111;
         EEPROM_write(addr, byte1);
         
-        //Write to RA5 for DC motors
+        //Write to RA5 for DC motors, ramp up
+        DC = 0;
+        for(int i=0; i<46; i++){
+            DC = !DC;
+            delay_ms(45-i);
+        }
         DC = 1;
         
         // Start sending pulses to servos
@@ -305,4 +310,12 @@ void updateServoPosition(int time_us, int timer){
             servoTimes[2] = my_time >> 8;
             servoTimes[3] = my_time & 0xFF;
     }
+}
+
+void delay_ms(unsigned char milliseconds){
+   while(milliseconds > 0)
+   {
+      milliseconds--;
+       __delay_us(990);
+   }
 }
