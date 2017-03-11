@@ -23,7 +23,7 @@
 #define PAN_MID     1250 // 1500
 #define PAN_LMID    1700
 #define PAN_L       2000
-#define TILT_REST   1000
+#define TILT_REST   1150
 #define TILT_DROP   2000
 
 // Characteristic travel times in milliseconds
