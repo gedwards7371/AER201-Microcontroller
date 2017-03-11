@@ -64,6 +64,7 @@ void Test(void){
                 break;
             case 10:
                 BothServos();
+                break;
             default:
                 break;
         }
