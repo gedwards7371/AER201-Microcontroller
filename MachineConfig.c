@@ -57,6 +57,7 @@ void machineConfig(void) {
     TMR0IE = 1; // Enable Timer0 interrupts
     TMR1IE = 1; // Enable Timer1 interrupts
     T1CON = 0b10110000;
+    T3CON = 0b10110000;
     TMR2IE = 1; // Enable Timer2 interrupts
     TMR3IE = 1; // Enable Timer3 interrupts
     PEIE = 1; // Enable peripheral interrupts

@@ -18,13 +18,13 @@
 #define SERVOCAM    LATCbits.LATC0 // cam servo for blocker
 #define SERVOPAN    LATCbits.LATC1 // pan servo (sides)
 #define SERVOTILT   LATCbits.LATC2 // tilt servo (up/down)
-#define PAN_R       1000
-#define PAN_RMID    1333
-#define PAN_MID     1500
-#define PAN_LMID    1666
+#define PAN_R       500
+#define PAN_RMID    700
+#define PAN_MID     1250 // 1500
+#define PAN_LMID    1700
 #define PAN_L       2000
 #define TILT_REST   1000
-#define TILT_DROP   1500
+#define TILT_DROP   2000
 
 // Characteristic travel times in milliseconds
 #define TIME_LOADING_TO_ID      500
