@@ -4017,31 +4017,31 @@ initServos();
 _delay((unsigned long)((1500)*(32000000/4000.0)));
 
 updateServoPosition(500, 1);
-updateServoPosition(2000, 3);
+updateServoPosition(1350, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 updateServoPosition(1150, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 
 updateServoPosition(700, 1);
-updateServoPosition(2000, 3);
+updateServoPosition(1350, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 updateServoPosition(1150, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 
 updateServoPosition(1250, 1);
-updateServoPosition(2000, 3);
+updateServoPosition(1350, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 updateServoPosition(1150, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 
-updateServoPosition(1700, 1);
-updateServoPosition(2000, 3);
+updateServoPosition(1650, 1);
+updateServoPosition(1350, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 updateServoPosition(1150, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 
 updateServoPosition(2000, 1);
-updateServoPosition(2000, 3);
+updateServoPosition(1350, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 updateServoPosition(1150, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
@@ -4143,7 +4143,7 @@ case 1:
 updateServoPosition(700, 1);
 break;
 case 2:
-updateServoPosition(1700, 1);
+updateServoPosition(1650, 1);
 break;
 case 3:
 updateServoPosition(2000, 1);
@@ -4154,7 +4154,7 @@ break;
 _delay((unsigned long)((500)*(32000000/4000.0)));
 
 
-updateServoPosition(2000, 3);
+updateServoPosition(1350, 3);
 _delay((unsigned long)((500)*(32000000/4000.0)));
 
 

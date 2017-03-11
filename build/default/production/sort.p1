@@ -3213,9 +3213,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 93: updateServoPosition(500, 1);
 "93
 [e ( _updateServoPosition (2 , -> 500 `i -> 1 `i ]
-[; ;sort.c: 94: updateServoPosition(2000, 3);
+[; ;sort.c: 94: updateServoPosition(1350, 3);
 "94
-[e ( _updateServoPosition (2 , -> 2000 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1350 `i -> 3 `i ]
 [; ;sort.c: 95: _delay((unsigned long)((750)*(32000000/4000.0)));
 "95
 [e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
@@ -3228,9 +3228,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 99: updateServoPosition(700, 1);
 "99
 [e ( _updateServoPosition (2 , -> 700 `i -> 1 `i ]
-[; ;sort.c: 100: updateServoPosition(2000, 3);
+[; ;sort.c: 100: updateServoPosition(1350, 3);
 "100
-[e ( _updateServoPosition (2 , -> 2000 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1350 `i -> 3 `i ]
 [; ;sort.c: 101: _delay((unsigned long)((750)*(32000000/4000.0)));
 "101
 [e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
@@ -3243,9 +3243,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 105: updateServoPosition(1250, 1);
 "105
 [e ( _updateServoPosition (2 , -> 1250 `i -> 1 `i ]
-[; ;sort.c: 106: updateServoPosition(2000, 3);
+[; ;sort.c: 106: updateServoPosition(1350, 3);
 "106
-[e ( _updateServoPosition (2 , -> 2000 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1350 `i -> 3 `i ]
 [; ;sort.c: 107: _delay((unsigned long)((750)*(32000000/4000.0)));
 "107
 [e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
@@ -3255,12 +3255,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 109: _delay((unsigned long)((750)*(32000000/4000.0)));
 "109
 [e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 111: updateServoPosition(1700, 1);
+[; ;sort.c: 111: updateServoPosition(1650, 1);
 "111
-[e ( _updateServoPosition (2 , -> 1700 `i -> 1 `i ]
-[; ;sort.c: 112: updateServoPosition(2000, 3);
+[e ( _updateServoPosition (2 , -> 1650 `i -> 1 `i ]
+[; ;sort.c: 112: updateServoPosition(1350, 3);
 "112
-[e ( _updateServoPosition (2 , -> 2000 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1350 `i -> 3 `i ]
 [; ;sort.c: 113: _delay((unsigned long)((750)*(32000000/4000.0)));
 "113
 [e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
@@ -3273,9 +3273,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 117: updateServoPosition(2000, 1);
 "117
 [e ( _updateServoPosition (2 , -> 2000 `i -> 1 `i ]
-[; ;sort.c: 118: updateServoPosition(2000, 3);
+[; ;sort.c: 118: updateServoPosition(1350, 3);
 "118
-[e ( _updateServoPosition (2 , -> 2000 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1350 `i -> 3 `i ]
 [; ;sort.c: 119: _delay((unsigned long)((750)*(32000000/4000.0)));
 "119
 [e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
@@ -3553,9 +3553,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 219: case 2:
 "219
 [e :U 298 ]
-[; ;sort.c: 220: updateServoPosition(1700, 1);
+[; ;sort.c: 220: updateServoPosition(1650, 1);
 "220
-[e ( _updateServoPosition (2 , -> 1700 `i -> 1 `i ]
+[e ( _updateServoPosition (2 , -> 1650 `i -> 1 `i ]
 [; ;sort.c: 221: break;
 "221
 [e $U 294  ]
@@ -3590,9 +3590,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 228: _delay((unsigned long)((500)*(32000000/4000.0)));
 "228
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 231: updateServoPosition(2000, 3);
+[; ;sort.c: 231: updateServoPosition(1350, 3);
 "231
-[e ( _updateServoPosition (2 , -> 2000 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1350 `i -> 3 `i ]
 [; ;sort.c: 232: _delay((unsigned long)((500)*(32000000/4000.0)));
 "232
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]

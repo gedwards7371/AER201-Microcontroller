@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.40 build -251452761 
-                                                                                               Fri Mar 10 21:43:26 2017
+                                                                                               Fri Mar 10 21:59:45 2017
 
 Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010151
      1                           	processor	18F4620
@@ -3159,11 +3159,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3125  001672  6F82               	movwf	updateServoPosition@timer& (0+255),b
   3126  001674  ECDF  F01C         	call	_updateServoPosition	;wreg free
   3127                           
-  3128                           ;sort.c: 94: updateServoPosition(2000, 3);
-  3129  001678  0E07               	movlw	7
+  3128                           ;sort.c: 94: updateServoPosition(1350, 3);
+  3129  001678  0E05               	movlw	5
   3130  00167A  0100               	movlb	0	; () banked
   3131  00167C  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  3132  00167E  0ED0               	movlw	208
+  3132  00167E  0E46               	movlw	70
   3133  001680  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   3134  001682  0E00               	movlw	0
   3135  001684  0100               	movlb	0	; () banked
@@ -3232,11 +3232,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3198  0016F2  6F82               	movwf	updateServoPosition@timer& (0+255),b
   3199  0016F4  ECDF  F01C         	call	_updateServoPosition	;wreg free
   3200                           
-  3201                           ;sort.c: 100: updateServoPosition(2000, 3);
-  3202  0016F8  0E07               	movlw	7
+  3201                           ;sort.c: 100: updateServoPosition(1350, 3);
+  3202  0016F8  0E05               	movlw	5
   3203  0016FA  0100               	movlb	0	; () banked
   3204  0016FC  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  3205  0016FE  0ED0               	movlw	208
+  3205  0016FE  0E46               	movlw	70
   3206  001700  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   3207  001702  0E00               	movlw	0
   3208  001704  0100               	movlb	0	; () banked
@@ -3305,11 +3305,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3271  001772  6F82               	movwf	updateServoPosition@timer& (0+255),b
   3272  001774  ECDF  F01C         	call	_updateServoPosition	;wreg free
   3273                           
-  3274                           ;sort.c: 106: updateServoPosition(2000, 3);
-  3275  001778  0E07               	movlw	7
+  3274                           ;sort.c: 106: updateServoPosition(1350, 3);
+  3275  001778  0E05               	movlw	5
   3276  00177A  0100               	movlb	0	; () banked
   3277  00177C  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  3278  00177E  0ED0               	movlw	208
+  3278  00177E  0E46               	movlw	70
   3279  001780  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   3280  001782  0E00               	movlw	0
   3281  001784  0100               	movlb	0	; () banked
@@ -3365,11 +3365,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3331  0017DC  D7FA               	bra	u6927
   3332  0017DE  F000               	nop	
   3333                           
-  3334                           ;sort.c: 111: updateServoPosition(1700, 1);
+  3334                           ;sort.c: 111: updateServoPosition(1650, 1);
   3335  0017E0  0E06               	movlw	6
   3336  0017E2  0100               	movlb	0	; () banked
   3337  0017E4  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  3338  0017E6  0EA4               	movlw	164
+  3338  0017E6  0E72               	movlw	114
   3339  0017E8  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   3340  0017EA  0E00               	movlw	0
   3341  0017EC  0100               	movlb	0	; () banked
@@ -3378,11 +3378,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3344  0017F2  6F82               	movwf	updateServoPosition@timer& (0+255),b
   3345  0017F4  ECDF  F01C         	call	_updateServoPosition	;wreg free
   3346                           
-  3347                           ;sort.c: 112: updateServoPosition(2000, 3);
-  3348  0017F8  0E07               	movlw	7
+  3347                           ;sort.c: 112: updateServoPosition(1350, 3);
+  3348  0017F8  0E05               	movlw	5
   3349  0017FA  0100               	movlb	0	; () banked
   3350  0017FC  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  3351  0017FE  0ED0               	movlw	208
+  3351  0017FE  0E46               	movlw	70
   3352  001800  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   3353  001802  0E00               	movlw	0
   3354  001804  0100               	movlb	0	; () banked
@@ -3451,11 +3451,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3417  001872  6F82               	movwf	updateServoPosition@timer& (0+255),b
   3418  001874  ECDF  F01C         	call	_updateServoPosition	;wreg free
   3419                           
-  3420                           ;sort.c: 118: updateServoPosition(2000, 3);
-  3421  001878  0E07               	movlw	7
+  3420                           ;sort.c: 118: updateServoPosition(1350, 3);
+  3421  001878  0E05               	movlw	5
   3422  00187A  0100               	movlb	0	; () banked
   3423  00187C  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  3424  00187E  0ED0               	movlw	208
+  3424  00187E  0E46               	movlw	70
   3425  001880  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   3426  001882  0E00               	movlw	0
   3427  001884  0100               	movlb	0	; () banked
@@ -4667,11 +4667,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   4598  002B98  D031               	goto	l6386
   4599  002B9A                     l6378:
   4600                           
-  4601                           ;sort.c: 220: updateServoPosition(1700, 1);
+  4601                           ;sort.c: 220: updateServoPosition(1650, 1);
   4602  002B9A  0E06               	movlw	6
   4603  002B9C  0100               	movlb	0	; () banked
   4604  002B9E  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  4605  002BA0  0EA4               	movlw	164
+  4605  002BA0  0E72               	movlw	114
   4606  002BA2  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   4607  002BA4  0E00               	movlw	0
   4608  002BA6  0100               	movlb	0	; () banked
@@ -4763,11 +4763,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   4693  002C14  D7FA               	bra	u7047
   4694  002C16  F000               	nop	
   4695                           
-  4696                           ;sort.c: 231: updateServoPosition(2000, 3);
-  4697  002C18  0E07               	movlw	7
+  4696                           ;sort.c: 231: updateServoPosition(1350, 3);
+  4697  002C18  0E05               	movlw	5
   4698  002C1A  0100               	movlb	0	; () banked
   4699  002C1C  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  4700  002C1E  0ED0               	movlw	208
+  4700  002C1E  0E46               	movlw	70
   4701  002C20  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   4702  002C22  0E00               	movlw	0
   4703  002C24  0100               	movlb	0	; () banked
@@ -11731,11 +11731,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  11470  000D18  6F8F               	movwf	(printf@f+1)& (0+255),b
  11471  000D1A  EC9C  F008         	call	_printf	;wreg free
  11472                           
- 11473                           ;Test.c: 251: updateServoPosition(1700, 1);
+ 11473                           ;Test.c: 251: updateServoPosition(1650, 1);
  11474  000D1E  0E06               	movlw	6
  11475  000D20  0100               	movlb	0	; () banked
  11476  000D22  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
- 11477  000D24  0EA4               	movlw	164
+ 11477  000D24  0E72               	movlw	114
  11478  000D26  6F80               	movwf	updateServoPosition@time_us& (0+255),b
  11479  000D28  0E00               	movlw	0
  11480  000D2A  0100               	movlb	0	; () banked
@@ -12105,11 +12105,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  11840  000F36  6F8F               	movwf	(printf@f+1)& (0+255),b
  11841  000F38  EC9C  F008         	call	_printf	;wreg free
  11842                           
- 11843                           ;Test.c: 279: updateServoPosition(2000, 3);
- 11844  000F3C  0E07               	movlw	7
+ 11843                           ;Test.c: 279: updateServoPosition(1350, 3);
+ 11844  000F3C  0E05               	movlw	5
  11845  000F3E  0100               	movlb	0	; () banked
  11846  000F40  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
- 11847  000F42  0ED0               	movlw	208
+ 11847  000F42  0E46               	movlw	70
  11848  000F44  6F80               	movwf	updateServoPosition@time_us& (0+255),b
  11849  000F46  0E00               	movlw	0
  11850  000F48  0100               	movlb	0	; () banked
@@ -22594,7 +22594,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.40 build -251452761 
-Symbol Table                                                                                   Fri Mar 10 21:43:26 2017
+Symbol Table                                                                                   Fri Mar 10 21:59:45 2017
 
                                     _i 012B                     i2_I2C_Master_Start 4566  
                    i2_I2C_Master_Write 453C                                     l66 44D4  
