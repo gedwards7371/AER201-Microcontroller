@@ -88,37 +88,6 @@ void Loading(void){
         
         // Start sending pulses to servos
         initServos();    
-        __delay_ms(1500);
-        
-        updateServoPosition(PAN_R, 1);
-        updateServoPosition(TILT_DROP, 3);
-        __delay_ms(750);
-        updateServoPosition(TILT_REST, 3);
-        __delay_ms(750);
-        
-        updateServoPosition(PAN_RMID, 1);
-        updateServoPosition(TILT_DROP, 3);
-        __delay_ms(750);
-        updateServoPosition(TILT_REST, 3);
-        __delay_ms(750);
-        
-        updateServoPosition(PAN_MID, 1);
-        updateServoPosition(TILT_DROP, 3);
-        __delay_ms(750);
-        updateServoPosition(TILT_REST, 3);
-        __delay_ms(750);
-        
-        updateServoPosition(PAN_LMID, 1);
-        updateServoPosition(TILT_DROP, 3);
-        __delay_ms(750);
-        updateServoPosition(TILT_REST, 3);
-        __delay_ms(750);
-        
-        updateServoPosition(PAN_L, 1);
-        updateServoPosition(TILT_DROP, 3);
-        __delay_ms(750);
-        updateServoPosition(TILT_REST, 3);
-        __delay_ms(750);
     }
     else{
         // If a can is not already waiting to go to the ID stage, we want the

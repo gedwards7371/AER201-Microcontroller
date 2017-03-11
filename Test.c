@@ -18,6 +18,7 @@ void Test(void);
 void algorithmTest(void);
 void sensorTest(void);
 void actuatorTest(void);
+void BothServos(void);
 void PortTests(void);
 void PortTestA5(void);
 void EEPROMTest(void);
@@ -61,6 +62,8 @@ void Test(void){
             case 9:
                 PortTests();
                 break;
+            case 10:
+                BothServos();
             default:
                 break;
         }
@@ -283,7 +286,6 @@ void actuatorTest(void){
     printf("LEVEL -- 2s     ");
     updateServoPosition(TILT_REST, 3);
     __delay_1s();__delay_1s();
-    
     TMR3ON = 0;
     di();
     
@@ -303,6 +305,55 @@ void actuatorTest(void){
     machine_state = Testing_state;
 }
 
+void BothServos(void){
+    __lcd_clear();__lcd_home();
+    printf("TST: BOTH SERVOS");
+    TMR1ON =  1;
+    TMR3ON = 1;
+    machine_state = Sorting_state;
+    was_low_1 = 0;
+    was_low_1 = 0;
+    
+        // Combined control over both servos
+    // Pass: (1) Pan servo vists R, RMID, MID, LMID, L
+    //       (2) At each pan position, tilt servo tilts up then goes back down
+    // Justification: tests the full range of motion we need for both servos
+    initServos();
+    __delay_ms(1500);
+    updateServoPosition(PAN_R, 1);
+    updateServoPosition(TILT_DROP, 3);
+    __delay_ms(750);
+    updateServoPosition(TILT_REST, 3);
+    __delay_ms(750);
+
+    updateServoPosition(PAN_RMID, 1);
+    updateServoPosition(TILT_DROP, 3);
+    __delay_ms(750);
+    updateServoPosition(TILT_REST, 3);
+    __delay_ms(750);
+
+    updateServoPosition(PAN_MID, 1);
+    updateServoPosition(TILT_DROP, 3);
+    __delay_ms(750);
+    updateServoPosition(TILT_REST, 3);
+    __delay_ms(750);
+
+    updateServoPosition(PAN_LMID, 1);
+    updateServoPosition(TILT_DROP, 3);
+    __delay_ms(750);
+    updateServoPosition(TILT_REST, 3);
+    __delay_ms(750);
+
+    updateServoPosition(PAN_L, 1);
+    updateServoPosition(TILT_DROP, 3);
+    __delay_ms(750);
+    updateServoPosition(TILT_REST, 3);
+    __delay_ms(750);
+    
+    TMR1ON = 0;
+    TMR3ON = 0;
+    di();
+}
 void PortTests(void){
     // Same as PortTestA5 but with multiple keys
     while(1){
