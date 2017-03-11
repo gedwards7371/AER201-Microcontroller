@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=D:\Program Files (x86)\Microchip\xc8\v1.40\dat\en_msgs.txt -cs \
   -h+dist/default/production\AER201-Microcontroller.production.sym \
   --cmf=dist/default/production\AER201-Microcontroller.production.cmf -z \
-  -Q18F4620 -oC:\Users\Tyler\AppData\Local\Temp\ssrk.2 \
+  -Q18F4620 -oC:\Users\Tyler\AppData\Local\Temp\s8jo.2 \
   -Mdist/default/production/AER201-Microcontroller.production.map -E1 \
   -ver=XC8 -ASTACK=0135h-0f7fh -pstack=STACK -ACODE=00h-0FFFFh \
   -ACONST=00h-0FFFFh -ASMALLCONST=01000h-010FFhx240 \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Tyler\AppData\Local\Temp\ssrk.obj \
+  C:\Users\Tyler\AppData\Local\Temp\s8jo.obj \
   dist/default/production\AER201-Microcontroller.production.obj 
 
 Object code version is 3.11
@@ -39,7 +39,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Tyler\AppData\Local\Temp\ssrk.obj
+C:\Users\Tyler\AppData\Local\Temp\s8jo.obj
                 init                                  E        E        4        4       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
@@ -505,7 +505,7 @@ __CFG_CP1$OFF                          (abs)        000000
 __CFG_CP2$OFF                          (abs)        000000
 __CFG_CP3$OFF                          (abs)        000000
 __CFG_CPB$OFF                          (abs)        000000
-__CFG_CPD$OFF                          (abs)        000000
+__CFG_CPD$ON                           (abs)        000000
 __CFG_EBTR0$OFF                        (abs)        000000
 __CFG_EBTR1$OFF                        (abs)        000000
 __CFG_EBTR2$OFF                        (abs)        000000

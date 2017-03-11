@@ -32,7 +32,7 @@
 
 // CONFIG5H
 #pragma config CPB = OFF        // Boot Block Code Protection bit (Boot block (000000-0007FFh) not code-protected)
-#pragma config CPD = OFF        // Data EEPROM Code Protection bit (Data EEPROM not code-protected)
+#pragma config CPD = ON        // Data EEPROM Code Protection bit (Data EEPROM not code-protected)
 
 // CONFIG6L
 #pragma config WRT0 = OFF       // Write Protection bit (Block 0 (000800-003FFFh) not write-protected)

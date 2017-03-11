@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.40 build -251452761 
-                                                                                               Fri Mar 10 21:59:45 2017
+                                                                                               Fri Mar 10 22:13:37 2017
 
 Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010151
      1                           	processor	18F4620
@@ -22594,23 +22594,23 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.40 build -251452761 
-Symbol Table                                                                                   Fri Mar 10 21:59:45 2017
+Symbol Table                                                                                   Fri Mar 10 22:13:37 2017
 
                                     _i 012B                     i2_I2C_Master_Start 4566  
                    i2_I2C_Master_Write 453C                                     l66 44D4  
-                                   _ID 2DD8                                     _UI 0012  
-                         ___awdiv@sign 008B                                     _up 0077  
-                  ___wmul@multiplicand 0082                     i2___lwdiv@dividend 0006  
-                          __CFG_BORV$3 000000                     EEPROM_read@address 0080  
-                         __CFG_CP0$OFF 000000                           __CFG_CP1$OFF 000000  
-                         __CFG_CP2$OFF 000000                           __CFG_CP3$OFF 000000  
-                                  ?_ID 0001                                    ?_UI 0001  
-                                  UI@i 00C8                                    l177 00E8  
-                                  l478 3702                                    l719 163E  
-                                  l593 1D7C                                    l913 3230  
-                                  l926 44A0                                    l935 2DC2  
-                                  l779 39FA                           __CFG_CPB$OFF 000000  
-                                  _PEN 007E2A                           __CFG_CPD$OFF 000000  
+                                   _ID 2DD8                            __CFG_CPD$ON 000000  
+                                   _UI 0012                           ___awdiv@sign 008B  
+                                   _up 0077                    ___wmul@multiplicand 0082  
+                   i2___lwdiv@dividend 0006                            __CFG_BORV$3 000000  
+                   EEPROM_read@address 0080                           __CFG_CP0$OFF 000000  
+                         __CFG_CP1$OFF 000000                           __CFG_CP2$OFF 000000  
+                         __CFG_CP3$OFF 000000                                    ?_ID 0001  
+                                  ?_UI 0001                                    UI@i 00C8  
+                                  l177 00E8                                    l478 3702  
+                                  l719 163E                                    l593 1D7C  
+                                  l913 3230                                    l926 44A0  
+                                  l935 2DC2                                    l779 39FA  
+                         __CFG_CPB$OFF 000000                                    _PEN 007E2A  
                                   _SEN 007E28                    ?i2_I2C_Master_Start 0001  
                        ?_machineConfig 0001                    ?i2_I2C_Master_Write 0002  
                                   _log 00E6                                    _sel 00FD  

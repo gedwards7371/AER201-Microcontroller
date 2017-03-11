@@ -3734,7 +3734,7 @@ extern int printf(const char *, ...);
 
 
 #pragma config CPB = OFF
-#pragma config CPD = OFF
+#pragma config CPD = ON
 
 
 #pragma config WRT0 = OFF

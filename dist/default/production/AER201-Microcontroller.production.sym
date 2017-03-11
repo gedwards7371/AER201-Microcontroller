@@ -245,6 +245,7 @@ __size_of_change_state_to_menu_start 0 0 ABS 0
 __CFG_OSC$INTIO67 0 0 ABS 0
 __HnvFARRAM 0 0 FARRAM 0
 __LnvFARRAM 0 0 FARRAM 0
+__CFG_CPD$ON 0 0 ABS 0
 _readIR 3EDA 0 CODE 0
 printf@val A5 0 BANK0 1
 _initUI 43E6 0 CODE 0
@@ -1010,7 +1011,6 @@ __CFG_CPB$OFF 0 0 ABS 0
 i2getRTC@i 4 0 COMRAM 1
 __end_of___wmul 408A 0 CODE 0
 printRTC@i C2 0 BANK0 1
-__CFG_CPD$OFF 0 0 ABS 0
 start_initialization 3DF2 0 CODE 0
 __end_of_readADC 4320 0 CODE 0
 ___lldiv@quotient 88 0 BANK0 1
@@ -1075,7 +1075,7 @@ bssBANK1 100 134 BANK1 100 1
 %locals
 dist/default/production\AER201-Microcontroller.production.obj
 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
-C:\Users\Tyler\AppData\Local\Temp\ssrk.
+C:\Users\Tyler\AppData\Local\Temp\s8jo.
 4949 3DF2 0 CODE 0
 4951 3DF2 0 CODE 0
 4954 3DF2 0 CODE 0

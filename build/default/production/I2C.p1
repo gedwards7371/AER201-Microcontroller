@@ -2780,7 +2780,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "34
 [p x CPB=OFF ]
 "35
-[p x CPD=OFF ]
+[p x CPD=ON ]
 "38
 [p x WRT0=OFF ]
 "39
