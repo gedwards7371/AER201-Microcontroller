@@ -131,15 +131,19 @@ void sensorTest(void){
     // Justification: Since we haven't tested this, this is a placeholder.
     printf("TST: IR SNSR");
     __delay_ms(100);
-    LATAbits.LATA6 = 1;
+    IR_EMITTER = 1;
     while(PORTBbits.RB1 == 0){
-         readIR();
-         __lcd_home();
-         __lcd_newline();
-         printf("IR_signal: %d ", IR_signal);
-         __delay_ms(100);
+        readADC(0);
+        int res = ADRESH<<8 | ADRESL;
+        IR_signal = (res > THIR) ? 1 : 0;
+        
+        __lcd_home();
+        printf("IR_signal: %d ", IR_signal);
+        __lcd_newline();
+        printf("%d", res);
+        __delay_ms(100);
      }  
-    LATAbits.LATA6 = 0;
+    IR_EMITTER = 0;
     
     
     // Magnetism sensor reading
@@ -288,6 +292,16 @@ void actuatorTest(void){
     printf("TST: CAM SERVO");
     __lcd_newline();
     printf("CAM UP  |RC0=1");
+    
+    /* PWM to make the CAM servo work with Twesh's circuit
+    for(i=0;i<10000;i++)
+    {
+        LATAbits.LATA5 = 1;
+        __delay_us(10);
+        LATAbits.LATA5 = 0;
+        __delay_us(90);
+    } */
+    
     SERVOCAM = 0;
     __delay_1s();__delay_1s();
     __lcd_home();__lcd_newline();
@@ -314,31 +328,31 @@ void BothServos(void){
     __delay_ms(1500);
     updateServoPosition(PAN_R, 1);
     updateServoPosition(TILT_DROP, 3);
-    __delay_ms(750);
+    __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
 
     updateServoPosition(PAN_RMID, 1);
     updateServoPosition(TILT_DROP, 3);
-    __delay_ms(750);
+    __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
 
     updateServoPosition(PAN_MID, 1);
     updateServoPosition(TILT_DROP, 3);
-    __delay_ms(750);
+    __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
 
     updateServoPosition(PAN_LMID, 1);
     updateServoPosition(TILT_DROP, 3);
-    __delay_ms(750);
+    __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
 
     updateServoPosition(PAN_L, 1);
     updateServoPosition(TILT_DROP, 3);
-    __delay_ms(750);
+    __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
     

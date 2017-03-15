@@ -3995,7 +3995,7 @@ if(first){
 initGlobalVars();
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 initSortTimer();
-LATAbits.LATA6 = 1;
+LATCbits.LATC5 = 1;
 
 
 
@@ -4110,10 +4110,10 @@ case 0:
 updateServoPosition(500, 1);
 break;
 case 1:
-updateServoPosition(700, 1);
+updateServoPosition(750, 1);
 break;
 case 2:
-updateServoPosition(1650, 1);
+updateServoPosition(1700, 1);
 break;
 case 3:
 updateServoPosition(2000, 1);
@@ -4128,8 +4128,8 @@ updateServoPosition(1350, 3);
 _delay((unsigned long)((500)*(32000000/4000.0)));
 
 
-updateServoPosition(1250, 1);
-updateServoPosition(1150, 3);
+updateServoPosition(1200, 1);
+updateServoPosition(1190, 3);
 f_can_coming_to_distribution = 0;
 f_can_distributed = 1;
 if(f_lastCan == 1){
@@ -4172,8 +4172,8 @@ TMR0L = 0b11101110;
 TMR0ON = 1;
 }
 void initServos(void){
-updateServoPosition(1250, 1);
-updateServoPosition(1150, 3);
+updateServoPosition(1200, 1);
+updateServoPosition(1190, 3);
 TMR1ON = 1;
 was_low_1 = 0;
 _delay((unsigned long)((5)*(32000000/4000.0)));

@@ -18,7 +18,7 @@ int debug;
 void main(void) {
     machineConfig();
     initLCD();
-    initTime(0x42, 0x20, 0x13, 0x04, 0x01, 0x03, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
+    initTime(0x42, 0x25, 0x13, 0x04, 0x15, 0x03, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
     initUI();
     first = 1;
     

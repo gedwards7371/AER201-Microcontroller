@@ -6,7 +6,8 @@
 #define COND_SENSORS  PORTAbits.RA2 // conductivity sensors
 
 //IR emitter
-#define IR_EMITTER LATAbits.LATA6
+// #define IR_EMITTER LATAbits.LATA6
+#define IR_EMITTER LATCbits.LATC5
 
 //Solenoids (1 cm)
 #define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
@@ -22,12 +23,13 @@
 #define SERVOPAN    LATCbits.LATC1 // pan servo (sides)
 #define SERVOTILT   LATCbits.LATC2 // tilt servo (up/down)
 #define PAN_R       500
-#define PAN_RMID    700
-#define PAN_MID     1250 // 1500
-#define PAN_LMID    1650
+#define PAN_RMID    750
+#define PAN_MID     1200 // 1500
+#define PAN_LMID    1700
 #define PAN_L       2000
-#define TILT_REST   1150
+#define TILT_REST   1190
 #define TILT_DROP   1350
+#define TILT_DROP_DELAY 1500
 
 // Characteristic travel times in milliseconds
 #define TIME_LOADING_TO_ID      500

@@ -214,19 +214,19 @@ EmergencyStop_state 4
 [v _algorithmTest algorithmTest `(v  1 e 1 0 ]
 "118
 [v _sensorTest sensorTest `(v  1 e 1 0 ]
-"160
+"164
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
-"300
+"314
 [v _BothServos BothServos `(v  1 e 1 0 ]
-"349
+"363
 [v _PortTests PortTests `(v  1 e 1 0 ]
-"384
+"398
 [v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
-"418
+"432
 [v _SolenoidTestA5 SolenoidTestA5 `(v  1 e 1 0 ]
-"442
+"456
 [v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
-"470
+"484
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 "62 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -263,7 +263,7 @@ EmergencyStop_state 4
 [v _change_state_to_logs_33 change_state_to_logs_33 `(v  1 e 1 0 ]
 "547
 [v _change_state_to_logs_34 change_state_to_logs_34 `(v  1 e 1 0 ]
-[s S917 . 1 `uc 1 RA0 1 0 :1:0 
+[s S957 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -273,31 +273,31 @@ EmergencyStop_state 4
 `uc 1 RA7 1 0 :1:7 
 ]
 "96 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
-[s S926 . 1 `uc 1 . 1 0 :4:0 
+[s S966 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 T0CKI 1 0 :1:4 
 `uc 1 AN4 1 0 :1:5 
 ]
-[s S930 . 1 `uc 1 . 1 0 :5:0 
+[s S970 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SS 1 0 :1:5 
 ]
-[s S933 . 1 `uc 1 . 1 0 :5:0 
+[s S973 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_SS 1 0 :1:5 
 ]
-[s S936 . 1 `uc 1 . 1 0 :5:0 
+[s S976 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 nSS 1 0 :1:5 
 ]
-[s S939 . 1 `uc 1 . 1 0 :5:0 
+[s S979 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 LVDIN 1 0 :1:5 
 ]
-[s S942 . 1 `uc 1 . 1 0 :5:0 
+[s S982 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 HLVDIN 1 0 :1:5 
 ]
-[s S945 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+[s S985 . 1 `uc 1 ULPWUIN 1 0 :1:0 
 `uc 1 . 1 0 :6:1 
 `uc 1 RJPU 1 0 :1:7 
 ]
-[u S949 . 1 `S917 1 . 1 0 `S926 1 . 1 0 `S930 1 . 1 0 `S933 1 . 1 0 `S936 1 . 1 0 `S939 1 . 1 0 `S942 1 . 1 0 `S945 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES949  1 e 1 @3968 ]
+[u S989 . 1 `S957 1 . 1 0 `S966 1 . 1 0 `S970 1 . 1 0 `S973 1 . 1 0 `S976 1 . 1 0 `S979 1 . 1 0 `S982 1 . 1 0 `S985 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES989  1 e 1 @3968 ]
 "185
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
 [s S236 . 1 `uc 1 RB0 1 0 :1:0 
@@ -335,7 +335,7 @@ EmergencyStop_state 4
 [v _PORTBbits PORTBbits `VES266  1 e 1 @3969 ]
 "872
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
-[s S852 . 1 `uc 1 LATA0 1 0 :1:0 
+[s S904 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -345,7 +345,7 @@ EmergencyStop_state 4
 `uc 1 LATA7 1 0 :1:7 
 ]
 "899
-[s S861 . 1 `uc 1 LA0 1 0 :1:0 
+[s S913 . 1 `uc 1 LA0 1 0 :1:0 
 `uc 1 LA1 1 0 :1:1 
 `uc 1 LA2 1 0 :1:2 
 `uc 1 LA3 1 0 :1:3 
@@ -354,13 +354,13 @@ EmergencyStop_state 4
 `uc 1 LA6 1 0 :1:6 
 `uc 1 LA7 1 0 :1:7 
 ]
-[u S870 . 1 `S852 1 . 1 0 `S861 1 . 1 0 ]
-[v _LATAbits LATAbits `VES870  1 e 1 @3977 ]
+[u S922 . 1 `S904 1 . 1 0 `S913 1 . 1 0 ]
+[v _LATAbits LATAbits `VES922  1 e 1 @3977 ]
 "983
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
 "1094
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
-[s S992 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S852 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -370,7 +370,7 @@ EmergencyStop_state 4
 `uc 1 LATC7 1 0 :1:7 
 ]
 "1121
-[s S1001 . 1 `uc 1 LC0 1 0 :1:0 
+[s S861 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 LC3 1 0 :1:3 
@@ -379,8 +379,8 @@ EmergencyStop_state 4
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S1010 . 1 `S992 1 . 1 0 `S1001 1 . 1 0 ]
-[v _LATCbits LATCbits `VES1010  1 e 1 @3979 ]
+[u S870 . 1 `S852 1 . 1 0 `S861 1 . 1 0 ]
+[v _LATCbits LATCbits `VES870  1 e 1 @3979 ]
 "1205
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
 [s S490 . 1 `uc 1 LATD0 1 0 :1:0 
@@ -406,17 +406,17 @@ EmergencyStop_state 4
 [v _LATDbits LATDbits `VES508  1 e 1 @3980 ]
 "1316
 [v _LATE LATE `VEuc  1 e 1 @3981 ]
-[s S1501 . 1 `uc 1 LATE0 1 0 :1:0 
+[s S1503 . 1 `uc 1 LATE0 1 0 :1:0 
 `uc 1 LATE1 1 0 :1:1 
 `uc 1 LATE2 1 0 :1:2 
 ]
 "1333
-[s S1505 . 1 `uc 1 LE0 1 0 :1:0 
+[s S1507 . 1 `uc 1 LE0 1 0 :1:0 
 `uc 1 LE1 1 0 :1:1 
 `uc 1 LE2 1 0 :1:2 
 ]
-[u S1509 . 1 `S1501 1 . 1 0 `S1505 1 . 1 0 ]
-[v _LATEbits LATEbits `VES1509  1 e 1 @3981 ]
+[u S1511 . 1 `S1503 1 . 1 0 `S1507 1 . 1 0 ]
+[v _LATEbits LATEbits `VES1511  1 e 1 @3981 ]
 "1367
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1588
@@ -770,7 +770,14 @@ EmergencyStop_state 4
 {
 "302
 } 0
-"316
+"23 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
+[v _readIR readIR `(v  1 e 1 0 ]
+{
+"25
+[v readIR@res res `i  1 a 2 4 ]
+"27
+} 0
+"316 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _delay_ms delay_ms `(v  1 e 1 0 ]
 {
 [v delay_ms@milliseconds milliseconds `uc  1 a 1 wreg ]
@@ -1033,7 +1040,9 @@ EmergencyStop_state 4
 "118
 [v _sensorTest sensorTest `(v  1 e 1 0 ]
 {
-"158
+"137
+[v sensorTest@res res `i  1 a 2 45 ]
+"162
 } 0
 "29 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
 [v _readMAG readMAG `(v  1 e 1 0 ]
@@ -1041,13 +1050,6 @@ EmergencyStop_state 4
 "31
 [v readMAG@res res `i  1 a 2 4 ]
 "33
-} 0
-"23
-[v _readIR readIR `(v  1 e 1 0 ]
-{
-"25
-[v readIR@res res `i  1 a 2 4 ]
-"27
 } 0
 "15
 [v _readADC readADC `(v  1 e 1 0 ]
@@ -1063,85 +1065,85 @@ EmergencyStop_state 4
 {
 "116
 } 0
-"160
+"164
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
 {
-"181
-[v actuatorTest@i_1578 i `uc  1 a 1 45 ]
-"296
-[v actuatorTest@i_1618 i `uc  1 a 1 67 ]
-[v actuatorTest@i_1617 i `uc  1 a 1 66 ]
-"292
-[v actuatorTest@i_1615 i `uc  1 a 1 65 ]
-[v actuatorTest@i_1614 i `uc  1 a 1 64 ]
-"280
-[v actuatorTest@i_1611 i `uc  1 a 1 63 ]
-[v actuatorTest@i_1610 i `uc  1 a 1 62 ]
-"275
-[v actuatorTest@i_1608 i `uc  1 a 1 61 ]
-[v actuatorTest@i_1607 i `uc  1 a 1 60 ]
-"270
-[v actuatorTest@i_1605 i `uc  1 a 1 59 ]
-[v actuatorTest@i_1604 i `uc  1 a 1 58 ]
-"257
-[v actuatorTest@i_1601 i `uc  1 a 1 57 ]
-[v actuatorTest@i_1600 i `uc  1 a 1 56 ]
-"252
-[v actuatorTest@i_1598 i `uc  1 a 1 55 ]
-[v actuatorTest@i_1597 i `uc  1 a 1 54 ]
-"247
-[v actuatorTest@i_1595 i `uc  1 a 1 53 ]
-[v actuatorTest@i_1594 i `uc  1 a 1 52 ]
-"242
-[v actuatorTest@i_1592 i `uc  1 a 1 51 ]
-[v actuatorTest@i_1591 i `uc  1 a 1 50 ]
-"237
-[v actuatorTest@i_1589 i `uc  1 a 1 49 ]
-[v actuatorTest@i_1588 i `uc  1 a 1 48 ]
-"232
-[v actuatorTest@i_1586 i `uc  1 a 1 47 ]
-[v actuatorTest@i_1585 i `uc  1 a 1 46 ]
-"160
+"185
+[v actuatorTest@i_1582 i `uc  1 a 1 45 ]
+"310
+[v actuatorTest@i_1622 i `uc  1 a 1 67 ]
+[v actuatorTest@i_1621 i `uc  1 a 1 66 ]
+"306
+[v actuatorTest@i_1619 i `uc  1 a 1 65 ]
+[v actuatorTest@i_1618 i `uc  1 a 1 64 ]
+"284
+[v actuatorTest@i_1615 i `uc  1 a 1 63 ]
+[v actuatorTest@i_1614 i `uc  1 a 1 62 ]
+"279
+[v actuatorTest@i_1612 i `uc  1 a 1 61 ]
+[v actuatorTest@i_1611 i `uc  1 a 1 60 ]
+"274
+[v actuatorTest@i_1609 i `uc  1 a 1 59 ]
+[v actuatorTest@i_1608 i `uc  1 a 1 58 ]
+"261
+[v actuatorTest@i_1605 i `uc  1 a 1 57 ]
+[v actuatorTest@i_1604 i `uc  1 a 1 56 ]
+"256
+[v actuatorTest@i_1602 i `uc  1 a 1 55 ]
+[v actuatorTest@i_1601 i `uc  1 a 1 54 ]
+"251
+[v actuatorTest@i_1599 i `uc  1 a 1 53 ]
+[v actuatorTest@i_1598 i `uc  1 a 1 52 ]
+"246
+[v actuatorTest@i_1596 i `uc  1 a 1 51 ]
+[v actuatorTest@i_1595 i `uc  1 a 1 50 ]
+"241
+[v actuatorTest@i_1593 i `uc  1 a 1 49 ]
+[v actuatorTest@i_1592 i `uc  1 a 1 48 ]
+"236
+[v actuatorTest@i_1590 i `uc  1 a 1 47 ]
+[v actuatorTest@i_1589 i `uc  1 a 1 46 ]
+"164
 [v actuatorTest@i i `i  1 a 2 68 ]
-"298
+"312
 } 0
-"442
+"456
 [v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
 {
-"447
+"461
 [v ToggleTestA5@on on `i  1 a 2 44 ]
-"468
+"482
 } 0
-"418
+"432
 [v _SolenoidTestA5 SolenoidTestA5 `(v  1 e 1 0 ]
 {
-"430
-[v SolenoidTestA5@i_1631 i `uc  1 a 1 47 ]
-"438
-[v SolenoidTestA5@i_1633 i `uc  1 a 1 48 ]
-"429
+"444
+[v SolenoidTestA5@i_1635 i `uc  1 a 1 47 ]
+"452
+[v SolenoidTestA5@i_1637 i `uc  1 a 1 48 ]
+"443
 [v SolenoidTestA5@i i `i  1 a 2 45 ]
-"440
+"454
 } 0
-"349
+"363
 [v _PortTests PortTests `(v  1 e 1 0 ]
 {
-"382
+"396
 } 0
-"384
+"398
 [v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
 {
-"416
+"430
 } 0
-"470
+"484
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 {
-"480
+"494
 } 0
-"300
+"314
 [v _BothServos BothServos `(v  1 e 1 0 ]
 {
-"348
+"362
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v _printf printf `(i  1 e 2 0 ]

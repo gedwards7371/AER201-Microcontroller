@@ -18,6 +18,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p i __delay ]
 "3 sort.h
 [v _initSortTimer `(v ~T0 @X0 0 ef ]
+"1100 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
+[s S44 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S44 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 LATC6 LATC7 ]
+"1110
+[s S45 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S45 . LC0 LC1 LC2 LC3 LC4 LC5 LC6 LC7 ]
+"1099
+[u S43 `S44 1 `S45 1 ]
+[n S43 . . . ]
+"1121
+[v _LATCbits `VS43 ~T0 @X0 0 e@3979 ]
+"7 EEPROM.h
+[v _sel `uc ~T0 @X0 0 e ]
+"2
+[v _EEPROM_read `(uc ~T0 @X0 0 ef1`us ]
+"1
+[v _EEPROM_write `(v ~T0 @X0 0 ef2`us`uc ]
 "878 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S38 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
@@ -29,12 +46,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S37 . . . ]
 "899
 [v _LATAbits `VS37 ~T0 @X0 0 e@3977 ]
-"7 EEPROM.h
-[v _sel `uc ~T0 @X0 0 e ]
-"2
-[v _EEPROM_read `(uc ~T0 @X0 0 ef1`us ]
-"1
-[v _EEPROM_write `(v ~T0 @X0 0 ef2`us`uc ]
 "31 sort.h
 [v _delay_ms `(v ~T0 @X0 0 ef1`uc ]
 "4
@@ -72,17 +83,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PORTAbits `VS1 ~T0 @X0 0 e@3968 ]
 "3 ADCFunctionality.h
 [v _readMAG `(v ~T0 @X0 0 ef ]
-"1100 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
-[s S44 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S44 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 LATC6 LATC7 ]
-"1110
-[s S45 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S45 . LC0 LC1 LC2 LC3 LC4 LC5 LC6 LC7 ]
-"1099
-[u S43 `S44 1 `S45 1 ]
-[n S43 . . . ]
-"1121
-[v _LATCbits `VS43 ~T0 @X0 0 e@3979 ]
 "39 sort.h
 [v _updateServoPosition `(v ~T0 @X0 0 ef2`i`i ]
 "8 RTC.h
@@ -3160,9 +3160,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 71: initSortTimer();
 "71
 [e ( _initSortTimer ..  ]
-[; ;sort.c: 72: LATAbits.LATA6 = 1;
+[; ;sort.c: 72: LATCbits.LATC5 = 1;
 "72
-[e = . . _LATAbits 0 6 -> -> 1 `i `uc ]
+[e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
 [; ;sort.c: 77: sel = EEPROM_read(0);
 "77
 [e = _sel ( _EEPROM_read (1 -> -> 0 `i `us ]
@@ -3469,18 +3469,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 186: case 1:
 "186
 [e :U 297 ]
-[; ;sort.c: 187: updateServoPosition(700, 1);
+[; ;sort.c: 187: updateServoPosition(750, 1);
 "187
-[e ( _updateServoPosition (2 , -> 700 `i -> 1 `i ]
+[e ( _updateServoPosition (2 , -> 750 `i -> 1 `i ]
 [; ;sort.c: 188: break;
 "188
 [e $U 294  ]
 [; ;sort.c: 189: case 2:
 "189
 [e :U 298 ]
-[; ;sort.c: 190: updateServoPosition(1650, 1);
+[; ;sort.c: 190: updateServoPosition(1700, 1);
 "190
-[e ( _updateServoPosition (2 , -> 1650 `i -> 1 `i ]
+[e ( _updateServoPosition (2 , -> 1700 `i -> 1 `i ]
 [; ;sort.c: 191: break;
 "191
 [e $U 294  ]
@@ -3521,12 +3521,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 202: _delay((unsigned long)((500)*(32000000/4000.0)));
 "202
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 205: updateServoPosition(1250, 1);
+[; ;sort.c: 205: updateServoPosition(1200, 1);
 "205
-[e ( _updateServoPosition (2 , -> 1250 `i -> 1 `i ]
-[; ;sort.c: 206: updateServoPosition(1150, 3);
+[e ( _updateServoPosition (2 , -> 1200 `i -> 1 `i ]
+[; ;sort.c: 206: updateServoPosition(1190, 3);
 "206
-[e ( _updateServoPosition (2 , -> 1150 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1190 `i -> 3 `i ]
 [; ;sort.c: 207: f_can_coming_to_distribution = 0;
 "207
 [e = _f_can_coming_to_distribution -> 0 `i ]
@@ -3650,12 +3650,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 254: void initServos(void){
 [e :U _initServos ]
 [f ]
-[; ;sort.c: 255: updateServoPosition(1250, 1);
+[; ;sort.c: 255: updateServoPosition(1200, 1);
 "255
-[e ( _updateServoPosition (2 , -> 1250 `i -> 1 `i ]
-[; ;sort.c: 256: updateServoPosition(1150, 3);
+[e ( _updateServoPosition (2 , -> 1200 `i -> 1 `i ]
+[; ;sort.c: 256: updateServoPosition(1190, 3);
 "256
-[e ( _updateServoPosition (2 , -> 1150 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1190 `i -> 3 `i ]
 [; ;sort.c: 257: TMR1ON = 1;
 "257
 [e = _TMR1ON -> -> 1 `i `b ]
