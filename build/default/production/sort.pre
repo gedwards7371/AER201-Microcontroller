@@ -3857,6 +3857,7 @@ void machineConfig(void);
 
 
 extern int debug;
+extern int RTCflag;
 
 # 2 "sort.h"
 void initGlobalVars(void);

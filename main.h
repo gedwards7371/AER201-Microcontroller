@@ -9,3 +9,4 @@ void machineConfig(void);
 
 // Debug flag
 extern int debug;
+extern int RTCflag;

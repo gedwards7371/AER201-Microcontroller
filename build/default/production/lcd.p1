@@ -2901,6 +2901,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.h: 5: void stopSignals(void);
 [; ;main.h: 8: void machineConfig(void);
 [; ;main.h: 11: extern int debug;
+[; ;main.h: 12: extern int RTCflag;
 [; ;sort.h: 2: void initGlobalVars(void);
 [; ;sort.h: 3: void initSortTimer(void);
 [; ;sort.h: 4: void initServos(void);

@@ -137,7 +137,7 @@ void sensorTest(void){
         int res = ADRESH<<8 | ADRESL;
         IR_signal = (res > THIR) ? 1 : 0;
         
-        __lcd_home();
+        __lcd_clear();__lcd_home();
         printf("IR_signal: %d ", IR_signal);
         __lcd_newline();
         printf("%d", res);

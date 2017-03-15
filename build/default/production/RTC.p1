@@ -2912,6 +2912,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.h: 5: void stopSignals(void);
 [; ;main.h: 8: void machineConfig(void);
 [; ;main.h: 11: extern int debug;
+[; ;main.h: 12: extern int RTCflag;
 [; ;sort.h: 2: void initGlobalVars(void);
 [; ;sort.h: 3: void initSortTimer(void);
 [; ;sort.h: 4: void initServos(void);
@@ -3120,8 +3121,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.c: 64: getRTC();
 "64
 [e ( _getRTC ..  ]
-[v F3213 `uc ~T0 @X0 -> 0 `x s ]
-[i F3213
+[v F3214 `uc ~T0 @X0 -> 0 `x s ]
+[i F3214
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3132,7 +3133,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "65
 [v _month `uc ~T0 @X0 4  a ]
 [; ;RTC.c: 65: char month[] = "MMM";
-[e = _month F3213 ]
+[e = _month F3214 ]
 "66
 [v _INT_time `i ~T0 @X0 -> 7 `i a ]
 [; ;RTC.c: 66: int INT_time[7];

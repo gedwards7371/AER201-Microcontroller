@@ -3857,6 +3857,7 @@ void machineConfig(void);
 
 
 extern int debug;
+extern int RTCflag;
 
 # 2 "sort.h"
 void initGlobalVars(void);
@@ -3943,15 +3944,22 @@ void Test(void);
 
 # 16 "main.c"
 int debug;
+int RTCflag;
 
 void main(void) {
 machineConfig();
 initLCD();
+
+
+RTCflag = 0;
+if(RTCflag){
 initTime(0x42, 0x25, 0x13, 0x04, 0x15, 0x03, 0x17);
+}
+
 initUI();
 first = 1;
 
-# 33
+# 40
 while(1){
 switch(machine_state){
 case UI_state :
