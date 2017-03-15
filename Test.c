@@ -131,25 +131,16 @@ void sensorTest(void){
     // Justification: Since we haven't tested this, this is a placeholder.
     printf("TST: IR SNSR");
     __delay_ms(100);
-    int on = 0;
-    while(1){
-        while(PORTBbits.RB1 == 0){ 
-            readIR();
-            __lcd_home();
-            __lcd_newline();
-            printf("IR_signal: %d ", IR_signal);
-            __delay_ms(100);
-        }  
-        if(on == 0){
-            on = 1;
-            LATAbits.LATA5 = 1;
-        }
-        else{
-            on = 0;
-            LATAbits.LATA5  = 0;
-        }
-        while(PORTBbits.RB1 == 1) {continue;}
-    }
+    LATAbits.LATA6 = 1;
+    while(PORTBbits.RB1 == 0){
+         readIR();
+         __lcd_home();
+         __lcd_newline();
+         printf("IR_signal: %d ", IR_signal);
+         __delay_ms(100);
+     }  
+    LATAbits.LATA6 = 0;
+    
     
     // Magnetism sensor reading
     // Pass: Presence of soup can sets MAG_signal high at 6mm, and

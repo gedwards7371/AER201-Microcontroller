@@ -5,6 +5,9 @@
 //Conductivity sensors
 #define COND_SENSORS  PORTAbits.RA2 // conductivity sensors
 
+//IR emitter
+#define IR_EMITTER LATAbits.LATA6
+
 //Solenoids (1 cm)
 #define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
 #define SOL_PUSHER      LATAbits.LATA4 // solenoid for pushing cans off trommel

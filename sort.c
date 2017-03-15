@@ -69,6 +69,7 @@ void Loading(void){
         initGlobalVars();
         __lcd_clear();
         initSortTimer();
+        IR_EMITTER = 1;
         
         // Write to EEPROM that the sort did not complete. This will be changed
         // after a successful run, but until then we must assume the run will
