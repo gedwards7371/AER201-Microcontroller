@@ -32,6 +32,7 @@ void delay_ms(unsigned char milliseconds);
 
 // Sensor inputs
 void getIR(void);
+void getMAG(void);
 extern int IR_signal;
 extern int MAG_signal;
 

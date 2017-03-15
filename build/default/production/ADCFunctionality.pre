@@ -3893,6 +3893,7 @@ void delay_ms(unsigned char milliseconds);
 
 
 void getIR(void);
+void getMAG(void);
 extern int IR_signal;
 extern int MAG_signal;
 
@@ -3951,11 +3952,12 @@ while(ADCON0bits.GO_NOT_DONE){_delay((unsigned long)((5)*(32000000/4000.0)));}
 void readIR(void){
 readADC(0);
 int res = ADRESH<<8 | ADRESL;
-IR_signal = (res > 900) ? 1 : 0;
+IR_signal = (res > 800) ? 1 : 0;
 }
 
 void readMAG(void){
 readADC(1);
 int res = ADRESH<<8 | ADRESL;
 MAG_signal = (res < 150) ? 1 : 0;
+
 }

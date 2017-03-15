@@ -2932,18 +2932,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 28: extern int total_time;
 [; ;sort.h: 31: void delay_ms(unsigned char milliseconds);
 [; ;sort.h: 34: void getIR(void);
-[; ;sort.h: 35: extern int IR_signal;
-[; ;sort.h: 36: extern int MAG_signal;
-[; ;sort.h: 39: void updateServoPosition(int time_us, int timer);
-[; ;sort.h: 40: extern unsigned int servoTimes[4];
-[; ;sort.h: 41: volatile extern int was_low_1;
-[; ;sort.h: 42: volatile extern int was_low_3;
-[; ;sort.h: 45: extern int count_total;
-[; ;sort.h: 46: extern int count_pop_no_tab;
-[; ;sort.h: 47: extern int count_pop_w_tab;
-[; ;sort.h: 48: extern int count_can_w_lab;
-[; ;sort.h: 49: extern int count_can_no_lab;
-[; ;sort.h: 50: extern int cur_can;
+[; ;sort.h: 35: void getMAG(void);
+[; ;sort.h: 36: extern int IR_signal;
+[; ;sort.h: 37: extern int MAG_signal;
+[; ;sort.h: 40: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 41: extern unsigned int servoTimes[4];
+[; ;sort.h: 42: volatile extern int was_low_1;
+[; ;sort.h: 43: volatile extern int was_low_3;
+[; ;sort.h: 46: extern int count_total;
+[; ;sort.h: 47: extern int count_pop_no_tab;
+[; ;sort.h: 48: extern int count_pop_w_tab;
+[; ;sort.h: 49: extern int count_can_w_lab;
+[; ;sort.h: 50: extern int count_can_no_lab;
+[; ;sort.h: 51: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(void);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
@@ -3121,8 +3122,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.c: 64: getRTC();
 "64
 [e ( _getRTC ..  ]
-[v F3214 `uc ~T0 @X0 -> 0 `x s ]
-[i F3214
+[v F3216 `uc ~T0 @X0 -> 0 `x s ]
+[i F3216
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3133,7 +3134,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "65
 [v _month `uc ~T0 @X0 4  a ]
 [; ;RTC.c: 65: char month[] = "MMM";
-[e = _month F3214 ]
+[e = _month F3216 ]
 "66
 [v _INT_time `i ~T0 @X0 -> 7 `i a ]
 [; ;RTC.c: 66: int INT_time[7];

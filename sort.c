@@ -89,6 +89,7 @@ void Loading(void){
         
         // Start sending pulses to servos
         initServos();    
+        __delay_ms(5000);
     }
     else{
         // If a can is not already waiting to go to the ID stage, we want the
@@ -112,6 +113,7 @@ void Loading(void){
         // the last time we executed this chunk...and if ID stage is ready..."
         else if(f_ID_receive){
             f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
+            __delay_ms(TIME_OUT_OF_TROMMEL); 
             SOL_PUSHER = 1; // activate solenoid pusher
             f_can_coming_to_ID = 1;
             __delay_ms(TIME_SOLENOID_MOTION); 
@@ -134,18 +136,23 @@ void ID(void){
         sensor_outputs[0] = COND_SENSORS; 
         
         if(!sensor_outputs[0]){
-            readMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
+            getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[1] = MAG_signal;
             if(!sensor_outputs[1]){
                 SOL_COND_SENSORS = 1; //activate solenoids for top/bottom conductivity sensors
                 // characteristic delay for time it takes solenoids move out
-                __delay_ms(TIME_SOLENOID_MOTION); // IDK
+                __delay_ms(TIME_CONDUCTIVITY); // IDK
                 sensor_outputs[2] = COND_SENSORS;
                 SOL_COND_SENSORS = 0;
             }
         }
         
         // Identify can type
+        // cur_can:
+        //  0 - pop can no tab
+        //  1 - pop can with tab
+        //  2 - soup can with label
+        //  3 - soup can no label  
         if(!sensor_outputs[0]){
             if(!sensor_outputs[1]){
                 if(!sensor_outputs[2]){
@@ -176,6 +183,7 @@ void ID(void){
             SERVOCAM = 0;
             __delay_us(90);
         }  
+        SERVOCAM = 0;
         
         f_can_coming_to_distribution = 1;
         __delay_ms(TIME_ID_TO_DISTRIBUTION);
@@ -211,8 +219,9 @@ void Distribution(void){
         __delay_ms(TILT_DROP_DELAY); // Give servo time to move
         
         // Reset the distribution stage
-        updateServoPosition(PAN_MID, 1);
         updateServoPosition(TILT_REST, 3);
+        __delay_ms(750);
+        updateServoPosition(PAN_MID, 1);
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
         if(f_lastCan == 1){
@@ -268,6 +277,7 @@ void initServos(void){
         __delay_ms(5); // So that servo ISRs don't race
         TMR3ON = 1;
         was_low_3 = 0;
+        
         SERVOCAM = 1; // Raise block between ID and distribution stages
 }
 void printSortTimer(void){ 
@@ -299,14 +309,24 @@ void printSortTimer(void){
 
 void getIR(void){
     readIR();
+    
     if(IR_signal==1){
-        __delay_ms(100);
+        __delay_ms(500);
+        readIR();
         if(IR_signal==1){
             f_loadingNewCan = 1;
         }
         else{
             f_loadingNewCan = 0;
         }
+    }
+}
+void getMAG(void){
+    readMAG();
+    
+    if(MAG_signal==1){
+        __delay_ms(500);
+        readMAG();
     }
 }
 
