@@ -214,19 +214,19 @@ EmergencyStop_state 4
 [v _algorithmTest algorithmTest `(v  1 e 1 0 ]
 "118
 [v _sensorTest sensorTest `(v  1 e 1 0 ]
-"164
+"192
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
-"313
+"341
 [v _BothServos BothServos `(v  1 e 1 0 ]
-"362
+"390
 [v _PortTests PortTests `(v  1 e 1 0 ]
-"397
+"425
 [v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
-"430
+"458
 [v _SolenoidTestA5 SolenoidTestA5 `(v  1 e 1 0 ]
-"454
-[v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
 "482
+[v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
+"510
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 "62 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -406,17 +406,17 @@ EmergencyStop_state 4
 [v _LATDbits LATDbits `VES508  1 e 1 @3980 ]
 "1316
 [v _LATE LATE `VEuc  1 e 1 @3981 ]
-[s S1505 . 1 `uc 1 LATE0 1 0 :1:0 
+[s S1547 . 1 `uc 1 LATE0 1 0 :1:0 
 `uc 1 LATE1 1 0 :1:1 
 `uc 1 LATE2 1 0 :1:2 
 ]
 "1333
-[s S1509 . 1 `uc 1 LE0 1 0 :1:0 
+[s S1551 . 1 `uc 1 LE0 1 0 :1:0 
 `uc 1 LE1 1 0 :1:1 
 `uc 1 LE2 1 0 :1:2 
 ]
-[u S1513 . 1 `S1505 1 . 1 0 `S1509 1 . 1 0 ]
-[v _LATEbits LATEbits `VES1513  1 e 1 @3981 ]
+[u S1555 . 1 `S1547 1 . 1 0 `S1551 1 . 1 0 ]
+[v _LATEbits LATEbits `VES1555  1 e 1 @3981 ]
 "1367
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1588
@@ -1045,8 +1045,10 @@ EmergencyStop_state 4
 [v _sensorTest sensorTest `(v  1 e 1 0 ]
 {
 "137
-[v sensorTest@res res `i  1 a 2 45 ]
-"162
+[v sensorTest@res res `i  1 a 2 47 ]
+"168
+[v sensorTest@on on `i  1 a 2 45 ]
+"190
 } 0
 "29 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
 [v _readMAG readMAG `(v  1 e 1 0 ]
@@ -1069,85 +1071,85 @@ EmergencyStop_state 4
 {
 "116
 } 0
-"164
+"192
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
 {
-"185
-[v actuatorTest@i_1584 i `uc  1 a 1 45 ]
-"309
-[v actuatorTest@i_1624 i `uc  1 a 1 67 ]
-[v actuatorTest@i_1623 i `uc  1 a 1 66 ]
-"296
-[v actuatorTest@i_1621 i `uc  1 a 1 65 ]
-[v actuatorTest@i_1620 i `uc  1 a 1 64 ]
+"213
+[v actuatorTest@i_1629 i `uc  1 a 1 45 ]
+"337
+[v actuatorTest@i_1669 i `uc  1 a 1 67 ]
+[v actuatorTest@i_1668 i `uc  1 a 1 66 ]
+"324
+[v actuatorTest@i_1666 i `uc  1 a 1 65 ]
+[v actuatorTest@i_1665 i `uc  1 a 1 64 ]
+"312
+[v actuatorTest@i_1662 i `uc  1 a 1 63 ]
+[v actuatorTest@i_1661 i `uc  1 a 1 62 ]
+"307
+[v actuatorTest@i_1659 i `uc  1 a 1 61 ]
+[v actuatorTest@i_1658 i `uc  1 a 1 60 ]
+"302
+[v actuatorTest@i_1656 i `uc  1 a 1 59 ]
+[v actuatorTest@i_1655 i `uc  1 a 1 58 ]
+"289
+[v actuatorTest@i_1652 i `uc  1 a 1 57 ]
+[v actuatorTest@i_1651 i `uc  1 a 1 56 ]
 "284
-[v actuatorTest@i_1617 i `uc  1 a 1 63 ]
-[v actuatorTest@i_1616 i `uc  1 a 1 62 ]
+[v actuatorTest@i_1649 i `uc  1 a 1 55 ]
+[v actuatorTest@i_1648 i `uc  1 a 1 54 ]
 "279
-[v actuatorTest@i_1614 i `uc  1 a 1 61 ]
-[v actuatorTest@i_1613 i `uc  1 a 1 60 ]
+[v actuatorTest@i_1646 i `uc  1 a 1 53 ]
+[v actuatorTest@i_1645 i `uc  1 a 1 52 ]
 "274
-[v actuatorTest@i_1611 i `uc  1 a 1 59 ]
-[v actuatorTest@i_1610 i `uc  1 a 1 58 ]
-"261
-[v actuatorTest@i_1607 i `uc  1 a 1 57 ]
-[v actuatorTest@i_1606 i `uc  1 a 1 56 ]
-"256
-[v actuatorTest@i_1604 i `uc  1 a 1 55 ]
-[v actuatorTest@i_1603 i `uc  1 a 1 54 ]
-"251
-[v actuatorTest@i_1601 i `uc  1 a 1 53 ]
-[v actuatorTest@i_1600 i `uc  1 a 1 52 ]
-"246
-[v actuatorTest@i_1598 i `uc  1 a 1 51 ]
-[v actuatorTest@i_1597 i `uc  1 a 1 50 ]
-"241
-[v actuatorTest@i_1595 i `uc  1 a 1 49 ]
-[v actuatorTest@i_1594 i `uc  1 a 1 48 ]
-"236
-[v actuatorTest@i_1592 i `uc  1 a 1 47 ]
-[v actuatorTest@i_1591 i `uc  1 a 1 46 ]
-"164
+[v actuatorTest@i_1643 i `uc  1 a 1 51 ]
+[v actuatorTest@i_1642 i `uc  1 a 1 50 ]
+"269
+[v actuatorTest@i_1640 i `uc  1 a 1 49 ]
+[v actuatorTest@i_1639 i `uc  1 a 1 48 ]
+"264
+[v actuatorTest@i_1637 i `uc  1 a 1 47 ]
+[v actuatorTest@i_1636 i `uc  1 a 1 46 ]
+"192
 [v actuatorTest@i i `i  1 a 2 68 ]
-"311
-} 0
-"454
-[v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
-{
-"459
-[v ToggleTestA5@on on `i  1 a 2 44 ]
-"480
-} 0
-"430
-[v _SolenoidTestA5 SolenoidTestA5 `(v  1 e 1 0 ]
-{
-"442
-[v SolenoidTestA5@i_1637 i `uc  1 a 1 47 ]
-"450
-[v SolenoidTestA5@i_1639 i `uc  1 a 1 48 ]
-"441
-[v SolenoidTestA5@i i `i  1 a 2 45 ]
-"452
-} 0
-"362
-[v _PortTests PortTests `(v  1 e 1 0 ]
-{
-"395
-} 0
-"397
-[v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
-{
-"428
+"339
 } 0
 "482
+[v _ToggleTestA5 ToggleTestA5 `(v  1 e 1 0 ]
+{
+"487
+[v ToggleTestA5@on on `i  1 a 2 44 ]
+"508
+} 0
+"458
+[v _SolenoidTestA5 SolenoidTestA5 `(v  1 e 1 0 ]
+{
+"470
+[v SolenoidTestA5@i_1682 i `uc  1 a 1 47 ]
+"478
+[v SolenoidTestA5@i_1684 i `uc  1 a 1 48 ]
+"469
+[v SolenoidTestA5@i i `i  1 a 2 45 ]
+"480
+} 0
+"390
+[v _PortTests PortTests `(v  1 e 1 0 ]
+{
+"423
+} 0
+"425
+[v _PortTestA5 PortTestA5 `(v  1 e 1 0 ]
+{
+"456
+} 0
+"510
 [v _EEPROMTest EEPROMTest `(v  1 e 1 0 ]
 {
-"492
+"520
 } 0
-"313
+"341
 [v _BothServos BothServos `(v  1 e 1 0 ]
 {
-"361
+"389
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v _printf printf `(i  1 e 2 0 ]

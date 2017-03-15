@@ -184,7 +184,7 @@ void sensorTest(void){
                 SOL_COND_SENSORS = ~SOL_OUT;
             }
             __lcd_home();__lcd_newline();
-            printf("COND: %d", COND_SENSORS)
+            printf("COND: %d", COND_SENSORS);
         }
     }
 }
