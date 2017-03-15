@@ -150,6 +150,7 @@ void sensorTest(void){
     // Pass: Presence of soup can sets MAG_signal high at 6mm, and
     //       presence of pop can sets MAG_signal high at 3mm.
     // Justification: These were the ranges we determined experimentally.
+    __lcd_clear();__lcd_home();
     printf("TST: MAGNETISM");
     __delay_ms(100);
     while(PORTBbits.RB1 == 0){
@@ -163,28 +164,30 @@ void sensorTest(void){
     // Conductivity sensor reading
     // Pass: 
     // Justification: 
+    __lcd_clear();__lcd_home();
     printf("TST: COND");
     __delay_ms(100);
-    int on = 0;
     while(1){
+        __lcd_clear();__lcd_home();
+        printf("TST: COND");
         while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
             // the PIC will wait and do nothing until a key press is signaled
+            
+            __lcd_home();__lcd_newline();
+            printf("COND: %d", COND_SENSORS);
         }
         if(PORTB >> 4 == 0b1111){
             break;
         }
         else{
-            if(on == 0){
-                on = 1;
-                SOL_COND_SENSORS = SOL_OUT;
+            SOL_COND_SENSORS = SOL_OUT;
+            while(PORTBbits.RB1 == 1){
+                // Wait until the key has been released
+                __lcd_home();__lcd_newline();
+                printf("COND: %d", COND_SENSORS);
             }
-            else{
-                on = 0;
-                SOL_COND_SENSORS = ~SOL_OUT;
-            }
-            __lcd_home();__lcd_newline();
-            printf("COND: %d", COND_SENSORS);
+            SOL_COND_SENSORS = ~SOL_OUT;
         }
     }
 }
