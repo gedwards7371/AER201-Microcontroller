@@ -19,7 +19,7 @@ void machineConfig(void) {
     
     //**PIN I/O**//
     //TRIS SETS DATA DIRECTION: 0  = output; 1 = input. Default is  0
-    TRISA = 0b01000111; // RA0, RA1, RA2, RA6 as inputs
+    TRISA = 0b00000111; // RA0, RA1, RA2 as inputs
                         // RA0 and RA1 are analog input, for the IR sensor and magnetism sensor respectively
     TRISB = 0b11110010; // RB1, RB4, RB5, RB6, RB7 as inputs
                         // RB1 is for the keypad interrupt

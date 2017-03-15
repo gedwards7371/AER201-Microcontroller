@@ -3030,9 +3030,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MachineConfig.c: 18: OSCTUNEbits.PLLEN = 1;
 "18
 [e = . . _OSCTUNEbits 0 2 -> -> 1 `i `uc ]
-[; ;MachineConfig.c: 22: TRISA = 0b01000111;
+[; ;MachineConfig.c: 22: TRISA = 0b00000111;
 "22
-[e = _TRISA -> -> 71 `i `uc ]
+[e = _TRISA -> -> 7 `i `uc ]
 [; ;MachineConfig.c: 24: TRISB = 0b11110010;
 "24
 [e = _TRISB -> -> 242 `i `uc ]
