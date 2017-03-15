@@ -29,13 +29,13 @@
 #define PAN_L       2000
 #define TILT_REST   1190
 #define TILT_DROP   1350
-#define TILT_DROP_DELAY 1500
 
 // Characteristic travel times in milliseconds
 #define TIME_LOADING_TO_ID      500
 #define TIME_ID_TO_DISTRIBUTION 500
 #define TIME_SOLENOID_MOTION    300
-#define TIME_SERVO_MOTION       500
+#define TIME_SERVO_MOTION       1000
+#define TILT_DROP_DELAY 1500
 
 // Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           10

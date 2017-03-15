@@ -159,6 +159,34 @@ void sensorTest(void){
        printf("MAG_signal: %d ", MAG_signal);
        __delay_ms(100);
     }
+    
+    // Conductivity sensor reading
+    // Pass: 
+    // Justification: 
+    printf("TST: COND");
+    __delay_ms(100);
+    int on = 0;
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
+            // the PIC will wait and do nothing until a key press is signaled
+        }
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
+        else{
+            if(on == 0){
+                on = 1;
+                SOL_COND_SENSORS = SOL_OUT;
+            }
+            else{
+                on = 0;
+                SOL_COND_SENSORS = ~SOL_OUT;
+            }
+            __lcd_home();__lcd_newline();
+            printf("COND: %d", COND_SENSORS)
+        }
+    }
 }
 
 void actuatorTest(void){    
@@ -292,21 +320,20 @@ void actuatorTest(void){
     printf("TST: CAM SERVO");
     __lcd_newline();
     printf("CAM UP  |RC0=1");
-    
-    /* PWM to make the CAM servo work with Twesh's circuit
-    for(i=0;i<10000;i++)
-    {
-        LATAbits.LATA5 = 1;
-        __delay_us(10);
-        LATAbits.LATA5 = 0;
-        __delay_us(90);
-    } */
-    
-    SERVOCAM = 0;
+    SERVOCAM = 1;
     __delay_1s();__delay_1s();
     __lcd_home();__lcd_newline();
-    SERVOCAM = 1;
     printf("CAM DWN |RC0=0");
+    
+    /* PWM to make the CAM servo work with Twesh's circuit */
+    for(i=0;i<10000;i++)
+    {
+        SERVOCAM = 1;
+        __delay_us(10);
+        SERVOCAM = 0;
+        __delay_us(90);
+    }    
+    
     __delay_1s();__delay_1s();
     machine_state = Testing_state;
 }
@@ -414,7 +441,7 @@ void PortTestA5(void){
                 // Wait until the key has been released
             }
             
-            /* PWM to make the CAM servo work with Twesh's circuit
+            /* PWM to make the CAM servo work with Twesh's circuit */
             for(i=0;i<10000;i++)
             {
                 LATAbits.LATA5 = 1;
@@ -422,7 +449,6 @@ void PortTestA5(void){
                 LATAbits.LATA5 = 0;
                 __delay_us(90);
             }    
-            */
             
             LATAbits.LATA5 = 0;
         }

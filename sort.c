@@ -167,10 +167,19 @@ void ID(void){
             cur_can = 3;
         }
         
-        SERVOCAM = 1; // Lower block
+        // Lower block
+        /* PWM to make the CAM servo work with Twesh's circuit */
+        for(int i=0;i<10000;i++)
+        {
+            SERVOCAM = 1;
+            __delay_us(10);
+            SERVOCAM = 0;
+            __delay_us(90);
+        }  
+        
         f_can_coming_to_distribution = 1;
         __delay_ms(TIME_ID_TO_DISTRIBUTION);
-        SERVOCAM = 0; // Raise block
+        SERVOCAM = 1; // Raise block
         
         f_can_coming_to_ID = 0; // clear ID flag to allow another can to come
     }
@@ -199,7 +208,7 @@ void Distribution(void){
         
         // Tilt to drop can into bin
         updateServoPosition(TILT_DROP, 3);
-        __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
+        __delay_ms(TILT_DROP_DELAY); // Give servo time to move
         
         // Reset the distribution stage
         updateServoPosition(PAN_MID, 1);
@@ -259,7 +268,7 @@ void initServos(void){
         __delay_ms(5); // So that servo ISRs don't race
         TMR3ON = 1;
         was_low_3 = 0;
-        SERVOCAM = 0; // Raise block between ID and distribution stages
+        SERVOCAM = 1; // Raise block between ID and distribution stages
 }
 void printSortTimer(void){ 
     getRTC();
