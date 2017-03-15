@@ -64,8 +64,10 @@ void initUI(void){
     machine_state = UI_state;
     logstate = 0;
     
-    loadRTC(); // Load RTC with the date and time from main
-            
+    if(RTCflag){
+        loadRTC(); // Load RTC with the date and time from main
+    }  
+    
     change_state_to_menu_start(); // Initialization  state
     firstboot = 1;
 }

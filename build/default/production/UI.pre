@@ -3953,7 +3953,9 @@ void initUI(void){
 machine_state = UI_state;
 logstate = 0;
 
+if(RTCflag){
 loadRTC();
+}
 
 change_state_to_menu_start();
 firstboot = 1;
