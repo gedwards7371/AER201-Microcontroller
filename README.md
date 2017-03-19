@@ -18,9 +18,6 @@ Program for an autonomous can sorting machine. Microcontroller used: PIC18F4620.
 ### RTC.c
 - Sets a desired time into the real-time clock (RTC) and contains functions to fetch and print current time
 
-### PortHigh.c
-- Will set certain pins high on keypress (for rapid prototyping purposes)
-
 ### MachineConfig.c
 - Configures PIC ports, interrupts, timers, and clock speed
 
