@@ -44,7 +44,7 @@
 #define MAX_CANS                12
 
 // IR sensor thresholds
-#define THIR    800
+#define THIR    1000
 #define THMAG   150
 
 //LCD Control Registers

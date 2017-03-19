@@ -4009,13 +4009,8 @@ EEPROM_write(addr, byte1);
 
 
 LATAbits.LATA5 = 0;
-for(int i=0; i<46; i++){
-LATAbits.LATA5 = !LATAbits.LATA5;
-delay_ms(45-i);
-}
-LATAbits.LATA5 = 1;
 
-
+# 92
 initServos();
 _delay((unsigned long)((5000)*(32000000/4000.0)));
 }
@@ -4075,7 +4070,7 @@ LATAbits.LATA3 = 0;
 }
 }
 
-# 156
+# 157
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 if(!sensor_outputs[2]){
@@ -4181,7 +4176,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 268
+# 269
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;

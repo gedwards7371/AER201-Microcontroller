@@ -3017,9 +3017,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _res `i ~T0 @X0 1 a ]
 [; ;ADCFunctionality.c: 25: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 26: IR_signal = (res > 800) ? 1 : 0;
+[; ;ADCFunctionality.c: 26: IR_signal = (res > 1000) ? 1 : 0;
 "26
-[e = _IR_signal ? > _res -> 800 `i : -> 1 `i -> 0 `i ]
+[e = _IR_signal ? > _res -> 1000 `i : -> 1 `i -> 0 `i ]
 [; ;ADCFunctionality.c: 27: }
 "27
 [e :UE 270 ]
