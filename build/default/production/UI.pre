@@ -4072,7 +4072,7 @@ lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
 printf(" -- POP  CAN -- ");
 lcdInst(0b11000000);;
-printf("NO TAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
+printf("NTAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
 
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
@@ -4081,7 +4081,7 @@ lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 lcdInst(0b10000000);;
 printf(" -- SOUP CAN -- ");
 lcdInst(0b11000000);;
-printf("NO LAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
+printf("NLAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
 
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}

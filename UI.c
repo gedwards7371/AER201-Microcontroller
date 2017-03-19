@@ -182,7 +182,7 @@ void UI(void){
             __lcd_home();
             printf(" -- POP  CAN -- ");
             __lcd_newline();
-            printf("NO TAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
+            printf("NTAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
 
             __delay_1s();if(!logstate){break;}
             __delay_1s();if(!logstate){break;}
@@ -191,7 +191,7 @@ void UI(void){
             __lcd_home();
             printf(" -- SOUP CAN -- ");
             __lcd_newline();
-            printf("NO LAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
+            printf("NLAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
 
             __delay_1s();if(!logstate){break;}
             __delay_1s();if(!logstate){break;}

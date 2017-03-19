@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=D:\Program Files (x86)\Microchip\xc8\v1.40\dat\en_msgs.txt -cs \
   -h+dist/default/production\AER201-Microcontroller.production.sym \
   --cmf=dist/default/production\AER201-Microcontroller.production.cmf -z \
-  -Q18F4620 -oC:\Users\Tyler\AppData\Local\Temp\sm4s.2 \
+  -Q18F4620 -oC:\Users\Tyler\AppData\Local\Temp\sa48.2 \
   -Mdist/default/production/AER201-Microcontroller.production.map -E1 \
   -ver=XC8 -ASTACK=0137h-0f7fh -pstack=STACK -ACODE=00h-0FFFFh \
   -ACONST=00h-0FFFFh -ASMALLCONST=01000h-010FFhx240 \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Tyler\AppData\Local\Temp\sm4s.obj \
+  C:\Users\Tyler\AppData\Local\Temp\sa48.obj \
   dist/default/production\AER201-Microcontroller.production.obj 
 
 Object code version is 3.11
@@ -39,7 +39,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Tyler\AppData\Local\Temp\sm4s.obj
+C:\Users\Tyler\AppData\Local\Temp\sa48.obj
                 init                                  E        E        4        4       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
@@ -47,7 +47,7 @@ C:\Users\Tyler\AppData\Local\Temp\sm4s.obj
 dist/default/production\AER201-Microcontroller.production.obj
                 intcode                               8        8        6        4       0
                 temp                                 7E       7E        1        1       1
-                mediumconst                        FB20     FB20      4E0     7D90       0
+                mediumconst                        FB24     FB24      4DC     7D92       0
                 text90                             4714     4714       12        4       0
                 text89                             4610     4610       26        4       0
                 text88                             4792     4792        8        4       0
@@ -254,7 +254,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   SMALLCONST     
 
         CLASS   MEDIUMCONST    
-                mediumconst                        FB20     FB20      4E0         0
+                mediumconst                        FB24     FB24      4DC         0
 
         CLASS   COMRAM         
                 temp                                 7E       7E        1         1
@@ -324,7 +324,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 intcode                        000008  004794  00479C         4       0  CODE    
                 cstackBANK0                    000080  000080  000100        80       1  BANK0   
                 bssBANK1                       000100  000037  000137       100       1  BANK1   
-                mediumconst                    00FB20  0004E0  010000      7D90       0  MEDIUMCO
+                mediumconst                    00FB24  0004DC  010000      7D92       0  MEDIUMCO
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -350,15 +350,15 @@ UNUSED ADDRESS RANGES
         BIGRAM           00007F-00007F                1
                          000137-000F7F              E49
         CODE             000004-000007                4
-                         00479C-00FB1F             B384
+                         00479C-00FB23             B388
         COMRAM           00007F-00007F                1
         CONST            000004-000007                4
-                         00479C-00FB1F             B384
+                         00479C-00FB23             B388
         EEDATA           F00000-F003FF              400
-        MEDIUMCONST      00479C-00FB1F             B384
+        MEDIUMCONST      00479C-00FB23             B388
         RAM              000137-000F7F              100
         SFR              000F80-000FFF               80
-        SMALLCONST       00479C-00FB1F              100
+        SMALLCONST       00479C-00FB23              100
         STACK            000137-000F7F              E49
 
                                   Symbol Table
@@ -743,7 +743,7 @@ __Lintentry                            intentry     000000
 __Lintret                              intret       000000
 __Lintsave_regs                        intsave_regs 000000
 __Lirdata                              irdata       000000
-__Lmediumconst                         mediumconst  00FB20
+__Lmediumconst                         mediumconst  00FB24
 __LnvFARRAM                            nvFARRAM     000000
 __Lnvbit                               nvbit        000000
 __Lnvrram                              nvrram       000000
@@ -934,7 +934,7 @@ __end_of_change_state_to_menu_22       text31       0041FE
 __end_of_change_state_to_menu_23       text65       004396
 __end_of_change_state_to_menu_start    text19       00456C
 __end_of_dispLogs                      text73       00465A
-__end_of_dpowers                       mediumconst  00FB3C
+__end_of_dpowers                       mediumconst  00FB40
 __end_of_getIR                         text6        004006
 __end_of_getMAG                        text9        0042D4
 __end_of_getRTC                        text25       003ADA
@@ -947,7 +947,7 @@ __end_of_initTime                      text20       00469E
 __end_of_initUI                        text15       0044E4
 __end_of_inputHandler                  text62       002AC0
 __end_of_isdigit                       text49       0045C2
-__end_of_keys                          mediumconst  00FB32
+__end_of_keys                          mediumconst  00FB36
 __end_of_lcdInst                       text53       004746
 __end_of_lcdNibble                     text54       003D8E
 __end_of_loadRTC                       text16       0039CC
@@ -989,7 +989,7 @@ __end_ofi2_printf                      text77       001916
 __end_ofi2_putch                       text78       004752
 __end_ofi2_strcpy                      text61       004306
 __initialization                       cinit        004058
-__mediumconst                          mediumconst  00FB20
+__mediumconst                          mediumconst  00FB24
 __pbssBANK0                            bssBANK0     0000DA
 __pbssBANK1                            bssBANK1     000100
 __pbssCOMRAM                           bssCOMRAM    00005B
@@ -1000,7 +1000,7 @@ __pdataBANK1                           dataBANK1    00012F
 __pidataBANK1                          idataBANK1   004772
 __pintcode                             intcode      000008
 __pintcode_body                        intcode_body 002AC0
-__pmediumconst                         mediumconst  00FB20
+__pmediumconst                         mediumconst  00FB24
 __ptext0                               text0        003524
 __ptext1                               text1        0046D4
 __ptext10                              text10       002D92
@@ -1208,7 +1208,7 @@ _cur_state                             bssBANK0     0000E0
 _debug                                 bssCOMRAM    000065
 _dispLogs                              text73       004636
 _down                                  bssCOMRAM    000067
-_dpowers                               mediumconst  00FB32
+_dpowers                               mediumconst  00FB36
 _enter                                 bssCOMRAM    000069
 _f_ID_receive                          bssCOMRAM    00006B
 _f_can_coming_to_ID                    bssCOMRAM    00006D
@@ -1233,7 +1233,7 @@ _input                                 bssCOMRAM    00007D
 _inputHandler                          text62       0028DA
 _isdigit                               text49       004598
 _isdigit$1936                          cstackBANK0  000081
-_keys                                  mediumconst  00FB21
+_keys                                  mediumconst  00FB25
 _lcdInst                               text53       004736
 _lcdNibble                             text54       003D26
 _loadRTC                               text16       003940
@@ -3023,7 +3023,7 @@ Total ram usage:        2 bytes
 		 -> STR_39(17), STR_38(17), STR_37(17), STR_36(17), 
 		 -> STR_35(17), STR_34(17), STR_33(17), STR_32(17), 
 		 -> STR_31(17), STR_30(17), STR_29(3), STR_28(17), 
-		 -> STR_27(19), STR_26(17), STR_25(19), STR_24(17), 
+		 -> STR_27(17), STR_26(17), STR_25(17), STR_24(17), 
 		 -> STR_23(14), STR_22(10), STR_21(24), STR_7(7), 
 		 -> STR_6(17), STR_5(18), STR_4(16), STR_3(18), 
 		 -> STR_2(14), STR_1(18), 
@@ -4074,7 +4074,7 @@ Total ram usage:       33 bytes
 		 -> STR_39(17), STR_38(17), STR_37(17), STR_36(17), 
 		 -> STR_35(17), STR_34(17), STR_33(17), STR_32(17), 
 		 -> STR_31(17), STR_30(17), STR_29(3), STR_28(17), 
-		 -> STR_27(19), STR_26(17), STR_25(19), STR_24(17), 
+		 -> STR_27(17), STR_26(17), STR_25(17), STR_24(17), 
 		 -> STR_23(14), STR_22(10), STR_21(24), STR_7(7), 
 		 -> STR_6(17), STR_5(18), STR_4(16), STR_3(18), 
 		 -> STR_2(14), STR_1(18), 
@@ -4654,14 +4654,14 @@ shared
 		i2_I2C_Master_Start		CODE           	4792	0000	9
 		i2_putch       		CODE           	4746	0000	13
 		i2_lcdNibble   		CODE           	3F5C	0000	87
-		_dpowers       		MEDIUMCONST    	FB32	0000	11
+		_dpowers       		MEDIUMCONST    	FB36	0000	11
 		i2___lwdiv     		CODE           	4006	0000	83
 		i2_isdigit     		CODE           	469E	0000	31
 		i2_strcpy      		CODE           	42D4	0000	51
 		i2___wmul      		CODE           	45EA	0000	39
 		i2_I2C_Master_Read		CODE           	4610	0000	39
 		i2___lwmod     		CODE           	4184	0000	67
-		_keys          		MEDIUMCONST    	FB21	0000	18
+		_keys          		MEDIUMCONST    	FB25	0000	18
 		__initialization		CODE           	4058	0000	69
 		i2_change_state_to_menu_12		CODE           	4336	0000	49
 		i2_change_state_to_menu_22		CODE           	4306	0000	49

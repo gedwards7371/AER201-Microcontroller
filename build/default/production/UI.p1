@@ -3584,7 +3584,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.c: 184: lcdInst(0b11000000);;
 "184
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 185: printf("NO TAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
+[; ;UI.c: 185: printf("NTAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
 "185
 [e ( _printf , , (. :s 25C _log_count_pop_no_tab _log_count_pop_w_tab ]
 [; ;UI.c: 187: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
@@ -3640,7 +3640,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.c: 193: lcdInst(0b11000000);;
 "193
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 194: printf("NO LAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
+[; ;UI.c: 194: printf("NLAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
 "194
 [e ( _printf , , (. :s 27C _log_count_can_no_lab _log_count_can_w_lab ]
 [; ;UI.c: 196: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
@@ -4966,8 +4966,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 21C 37 48 50 100 37 115 32 124 32 37 48 50 100 58 37 48 50 100 58 37 48 50 100 0 ]
 [a 2C 84 73 77 69 58 32 37 100 58 37 48 50 100 0 ]
 [a 1C 82 69 83 85 76 84 83 32 73 78 32 76 79 71 32 37 100 0 ]
-[a 25C 78 79 32 84 65 66 58 32 37 100 124 84 65 66 58 32 37 100 0 ]
-[a 27C 78 79 32 76 65 66 58 32 37 100 124 76 65 66 58 32 37 100 0 ]
+[a 25C 78 84 65 66 58 32 37 100 124 84 65 66 58 32 37 100 0 ]
+[a 27C 78 76 65 66 58 32 37 100 124 76 65 66 58 32 37 100 0 ]
 [a 29C 37 100 0 ]
 [a 12C 77 65 89 0 ]
 [a 18C 78 79 86 0 ]
