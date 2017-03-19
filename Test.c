@@ -23,7 +23,7 @@ void PortTests(void);
 void PortTestA5(void);
 void EEPROMTest(void);
 void ToggleTestA5(void);
-void SolenoidTestA5(void);
+void PusherTestA5(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -47,22 +47,22 @@ void Test(void){
             case 3: 
                 actuatorTest();
                 break;
-            case 5:
+            case 5: //  Key 4
                 PortTestA5();
                 break;
-            case 6:
+            case 6: //  Key 5
                 ToggleTestA5();
                 break;
-            case 7:
+            case 7: //  Key 6
                 EEPROMTest();
                 break;
-            case 8:
-                SolenoidTestA5();
+            case 8: // Key  B
+                PusherTestA5();
                 break;
-            case 9:
+            case 9: // Key  7
                 PortTests();
                 break;
-            case 10:
+            case 10: // Key 8
                 BothServos();
                 break;
             default:
@@ -371,9 +371,7 @@ void BothServos(void){
     __delay_ms(750);
 
     updateServoPosition(PAN_MID, 1);
-    updateServoPosition(TILT_REST, 3);
-    __delay_ms(750);
-    __delay_ms(750);
+    __delay_ms(1500);
     
     updateServoPosition(PAN_LMID, 1);
     __delay_ms(750);
@@ -393,6 +391,7 @@ void BothServos(void){
     TMR3ON = 0;
     di();
 }
+
 void PortTests(void){
     // Same as PortTestA5 but with multiple keys
     while(1){
@@ -461,27 +460,30 @@ void PortTestA5(void){
     }
 }
 
-void SolenoidTestA5(void){
+void PusherTestA5(void){
+    __lcd_clear();__lcd_home();
+    printf("PUSHER TST");
+    
     while(1){
-        __lcd_clear();__lcd_home();
-        printf("SOLENOID TST");
-        __lcd_newline();
-        
          while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
             // the PIC will wait and do nothing until a key press is signaled
         }
+         
+        //int looptime = 0.1 / (uptime_us / 1000000);
         
-        for(int i = 0; i < 3; i++){
-            __delay_1s();
-            LATAbits.LATA5 = 1;
-            __delay_ms(150);
-            LATAbits.LATA5 = 0;
-        }
+        /*
+        for(int i = 0; i<1550; i++){
+            SOL_PUSHER = 1; // activate solenoid pusher
+            __delay_us(65);
+            SOL_PUSHER = 0;
+            __delay_us(35);
+        }*/
+        SOL_PUSHER = 1;
+        __delay_ms(100);
+        SOL_PUSHER = 0;
         
-        __lcd_clear();__lcd_home();
-        printf("PUSH DONE");
-        __delay_1s();
+        while(PORTBbits.RB1 == 1) {continue;}
     }
 }
 
