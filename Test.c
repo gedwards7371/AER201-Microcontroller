@@ -23,7 +23,7 @@ void PortTests(void);
 void PortTestA5(void);
 void EEPROMTest(void);
 void ToggleTestA5(void);
-void PusherTestA5(void);
+void PusherTest(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -57,7 +57,7 @@ void Test(void){
                 EEPROMTest();
                 break;
             case 8: // Key  B
-                PusherTestA5();
+                PusherTest();
                 break;
             case 9: // Key  7
                 PortTests();
@@ -445,22 +445,12 @@ void PortTestA5(void){
             while(PORTBbits.RB1 == 1){
                 // Wait until the key has been released
             }
-            
-            /* PWM to make the CAM servo work with Twesh's circuit */
-            for(i=0;i<10000;i++)
-            {
-                LATAbits.LATA5 = 1;
-                __delay_us(10);
-                LATAbits.LATA5 = 0;
-                __delay_us(90);
-            }    
-            
             LATAbits.LATA5 = 0;
         }
     }
 }
 
-void PusherTestA5(void){
+void PusherTest(void){
     __lcd_clear();__lcd_home();
     printf("PUSHER TST");
     
@@ -469,19 +459,23 @@ void PusherTestA5(void){
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
             // the PIC will wait and do nothing until a key press is signaled
         }
-         
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
         //int looptime = 0.1 / (uptime_us / 1000000);
         
-        /*
-        for(int i = 0; i<1550; i++){
+        
+        for(int i = 0; i<3000; i++){
             SOL_PUSHER = 1; // activate solenoid pusher
-            __delay_us(65);
+            __delay_us(75);
             SOL_PUSHER = 0;
-            __delay_us(35);
-        }*/
+            __delay_us(25);
+        }
+        /*
         SOL_PUSHER = 1;
         __delay_ms(100);
         SOL_PUSHER = 0;
+        */
         
         while(PORTBbits.RB1 == 1) {continue;}
     }

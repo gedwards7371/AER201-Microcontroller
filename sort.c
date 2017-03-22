@@ -115,9 +115,14 @@ void Loading(void){
         else if(f_ID_receive){
             f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
             __delay_ms(TIME_OUT_OF_TROMMEL); 
-            SOL_PUSHER = 1;
-            __delay_ms(100);
-            SOL_PUSHER = 0; // deactivate solenoid pusher (could do this in ID since we have a delay there anyway)
+            
+            for(int i = 0; i<3000; i++){
+                SOL_PUSHER = 1; // activate solenoid pusher
+                __delay_us(70);
+                SOL_PUSHER = 0;
+                __delay_us(30);
+            }
+            
             f_can_coming_to_ID = 1;  
         }
     }
