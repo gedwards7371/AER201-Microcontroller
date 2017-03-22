@@ -147,11 +147,11 @@ void retrieveLog(int logNum){
     
     // Get # of cans of each type
     unsigned char byte2 = EEPROM_read(addr);
-    log_count_pop_no_tab = (int)(byte2 & 0b11110000);
+    log_count_pop_no_tab = (int)((byte2 & 0b11110000)>> 4);
     log_count_pop_w_tab = (int)(byte2 & 0b00001111);
     addr++;
     unsigned char byte3 = EEPROM_read(addr);
-    log_count_can_w_lab = (int)(byte3 & 0b11110000);
+    log_count_can_w_lab = (int)((byte3 & 0b11110000)>> 4);
     log_count_can_no_lab = (int)(byte3 & 0b00001111);
     addr++;
     

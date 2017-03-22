@@ -4010,7 +4010,13 @@ EEPROM_write(addr, byte1);
 
 LATAbits.LATA5 = 0;
 
-# 92
+for(int i=0; i<46; i++){
+LATAbits.LATA5 = !LATAbits.LATA5;
+delay_ms(45-i);
+}
+LATAbits.LATA5 = 1;
+
+
 initServos();
 _delay((unsigned long)((5000)*(32000000/4000.0)));
 }

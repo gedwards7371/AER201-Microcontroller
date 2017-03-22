@@ -81,12 +81,12 @@ void Loading(void){
         
         //Write to RA5 for DC motors, ramp up
         DC = 0;
-        /*
+        
         for(int i=0; i<46; i++){
             DC = !DC;
             delay_ms(45-i);
         }
-        DC = 1;*/
+        DC = 1;
         
         // Start sending pulses to servos
         initServos();    
