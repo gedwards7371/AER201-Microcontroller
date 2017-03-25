@@ -218,6 +218,7 @@ void Distribution(void){
             default:
                 break;
         }
+        updateServoPosition(TILT_REST, 3);
         __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
         
         // Tilt to drop can into bin

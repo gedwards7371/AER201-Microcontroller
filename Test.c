@@ -23,8 +23,9 @@ void PortTests(void);
 void PortTestA5(void);
 void EEPROMTest(void);
 void ToggleTestA5(void);
-void PusherTest(void);
 void SpeedTest(void);
+void PusherTest(void);
+void BlockerTest(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -39,33 +40,36 @@ void Test(void){
         var++;
         while(PORTBbits.RB1 == 1) {continue;}
         switch(var){
-            case 1:
+            case 1: // Key 1
                 algorithmTest();
                 break;
-            case 2:
+            case 2: // Key 2
                 sensorTest();
                 break;
-            case 3: 
+            case 3: // Key 3
                 actuatorTest();
                 break;
-            case 5: //  Key 4
+            case 5: // Key 4
                 PortTestA5();
                 break;
-            case 6: //  Key 5
+            case 6: // Key 5
                 //ToggleTestA5();
                 SpeedTest();
                 break;
-            case 7: //  Key 6
+            case 7: // Key 6
                 EEPROMTest();
                 break;
-            case 8: // Key  B
+            case 8: // Key B
                 PusherTest();
                 break;
-            case 9: // Key  7
+            case 9: // Key 7
                 PortTests();
                 break;
             case 10: // Key 8
                 BothServos();
+                break;
+            case 11: // Key 9
+                BlockerTest();
                 break;
             default:
                 break;
@@ -516,6 +520,7 @@ void ToggleTestA5(void){
 }
 
 void SpeedTest(void){
+    // Turns the trommel at half speed, on keypress
     __lcd_clear();__lcd_home();
     printf("S: D WILL RETURN ");
     __lcd_newline();
@@ -552,4 +557,36 @@ void EEPROMTest(void){
     // EEPROM_read tests
     // Pass: 
     // Justification: 
+}
+
+void BlockerTest(void){
+    __lcd_clear();__lcd_home();
+    printf("D WILL RETURN    ");
+    __lcd_newline();
+    printf("OTHER TOGGLES CAM");
+    int flag = 1; // 1 for up, 0 for down
+    while(1){
+        while(PORTBbits.RB1 == 0){ continue; }
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
+        else{
+            if(flag){
+               SERVOCAM = 1;
+               flag = !flag;
+            }
+            else{
+                for(int i=0;i<10000;i++)
+                {
+                    SERVOCAM = 1;
+                    __delay_us(10);
+                    SERVOCAM = 0;
+                    __delay_us(90);
+                }
+                SERVOCAM = 0;
+                flag = !flag;
+            }
+        }
+        while(PORTBbits.RB1 == 1){ continue; /*If button still pressed*/}
+    }
 }
