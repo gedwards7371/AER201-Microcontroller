@@ -797,9 +797,9 @@ EmergencyStop_state 4
 [v _ID ID `(v  1 e 1 0 ]
 {
 "177
-[v ID@i i `i  1 a 2 14 ]
+[v ID@i i `i  1 a 2 10 ]
 "138
-[v ID@sensor_outputs sensor_outputs `[2]i  1 a 4 10 ]
+[v ID@sensor_outputs sensor_outputs `[2]i  1 a 4 12 ]
 "196
 } 0
 "352

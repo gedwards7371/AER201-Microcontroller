@@ -161,7 +161,7 @@ void ID(void){
                 cur_can = 1;
             }
         }
-        else{
+        if(sensor_outputs[0]){
             if(!sensor_outputs[1]){  
                 count_can_w_lab++;
                 cur_can = 2;

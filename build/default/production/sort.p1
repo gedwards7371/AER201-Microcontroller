@@ -3387,12 +3387,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 289 ]
 "163
 }
+[e :U 287 ]
 [; ;sort.c: 162: }
 [; ;sort.c: 163: }
-[e $U 290  ]
+[; ;sort.c: 164: if(sensor_outputs[0]){
 "164
-[e :U 287 ]
-[; ;sort.c: 164: else{
+[e $ ! != *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 290  ]
 {
 [; ;sort.c: 165: if(!sensor_outputs[1]){
 "165
