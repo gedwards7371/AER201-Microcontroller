@@ -44,6 +44,7 @@ volatile int was_low_1;
 volatile int was_low_3;
 
 // Can type trackers
+int sensor_outputs[2]; // Create array to identify can type.[0] = magnetism, [1] = conductivity
 int count_total;
 int count_pop_no_tab;
 int count_pop_w_tab;
@@ -116,14 +117,29 @@ void Loading(void){
             f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
             __delay_ms(TIME_OUT_OF_TROMMEL); 
             
-            for(int i = 0; i<3000; i++){
-                SOL_PUSHER = 1; // activate solenoid pusher
-                __delay_us(70);
-                SOL_PUSHER = 0;
-                __delay_us(30);
+            // Read magnetism to distinguish pop cans and soup cans (start of IDing)
+            getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
+            sensor_outputs[0] = MAG_signal;
+            
+            if(sensor_outputs[0]){
+                for(int i = 0; i<2500; i++){
+                    SOL_PUSHER = 1; // activate solenoid pusher
+                    __delay_us(70);
+                    SOL_PUSHER = 0;
+                    __delay_us(30);
+                }
+            }
+            else{
+                for(int i = 0; i<2500; i++){
+                    SOL_PUSHER = 1; // activate solenoid pusher
+                    __delay_us(58);
+                    SOL_PUSHER = 0;
+                    __delay_us(42);
+                }
             }
             
-            f_can_coming_to_ID = 1;  
+            f_can_coming_to_ID = 1;
+            f_loadingNewCan = 0;
         }
     }
 }
@@ -131,15 +147,6 @@ void ID(void){
     if(f_can_coming_to_ID){
         // Characteristic delay based on time it takes can to be transported here
         __delay_ms(TIME_LOADING_TO_ID);
-        
-        // Create array to identify can type.
-        // [0] = magnetism, [1] = conductivity
-        // Note that this is a local variable because we don't want to use an old result, ever!
-        int sensor_outputs[2];
-        
-        // Read magnetism to distinguish pop cans and soup cans
-        getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
-        sensor_outputs[0] = MAG_signal;
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
         //__delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
@@ -250,6 +257,8 @@ void Distribution(void){
         updateServoPosition(TILT_REST, 3);
         __delay_ms(750);
         updateServoPosition(PAN_MID, 1);
+        updateServoPosition(TILT_REST, 3);
+        
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
         if(f_lastCan == 1){
@@ -337,7 +346,6 @@ void printSortTimer(void){
 
 void getIR(void){
     readIR();
-    
     if(IR_signal==1){
         __delay_ms(500);
         readIR();

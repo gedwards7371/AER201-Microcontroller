@@ -3904,6 +3904,7 @@ volatile extern int was_low_1;
 volatile extern int was_low_3;
 
 
+extern int sensor_outputs[2];
 extern int count_total;
 extern int count_pop_no_tab;
 extern int count_pop_w_tab;

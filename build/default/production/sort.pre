@@ -3904,6 +3904,7 @@ volatile extern int was_low_1;
 volatile extern int was_low_3;
 
 
+extern int sensor_outputs[2];
 extern int count_total;
 extern int count_pop_no_tab;
 extern int count_pop_w_tab;
@@ -3972,6 +3973,7 @@ volatile int was_low_1;
 volatile int was_low_3;
 
 
+int sensor_outputs[2];
 int count_total;
 int count_pop_no_tab;
 int count_pop_w_tab;
@@ -4044,14 +4046,29 @@ else if(f_ID_receive){
 f_loadingNewCan = 0;
 _delay((unsigned long)((1500)*(32000000/4000.0)));
 
-for(int i = 0; i<3000; i++){
+
+getMAG();
+sensor_outputs[0] = MAG_signal;
+
+if(sensor_outputs[0]){
+for(int i = 0; i<2500; i++){
 LATAbits.LATA4 = 1;
 _delay((unsigned long)((70)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
 _delay((unsigned long)((30)*(32000000/4000000.0)));
 }
+}
+else{
+for(int i = 0; i<2500; i++){
+LATAbits.LATA4 = 1;
+_delay((unsigned long)((58)*(32000000/4000000.0)));
+LATAbits.LATA4 = 0;
+_delay((unsigned long)((42)*(32000000/4000000.0)));
+}
+}
 
 f_can_coming_to_ID = 1;
+f_loadingNewCan = 0;
 }
 }
 }
@@ -4060,20 +4077,11 @@ if(f_can_coming_to_ID){
 
 _delay((unsigned long)((1500)*(32000000/4000.0)));
 
-
-
-
-int sensor_outputs[2];
-
-
-getMAG();
-sensor_outputs[0] = MAG_signal;
-
 LATAbits.LATA3 = 1;
 
 sensor_outputs[1] = PORTAbits.RA2;
 
-# 154
+# 161
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4120,7 +4128,7 @@ f_can_coming_to_ID = 0;
 void Distribution(void){
 if(f_can_coming_to_distribution){
 
-# 206
+# 213
 switch(cur_can){
 case 0:
 updateServoPosition(500, 1);
@@ -4132,7 +4140,7 @@ case 2:
 updateServoPosition(1670, 1);
 break;
 case 3:
-updateServoPosition(2100, 1);
+updateServoPosition(2200, 1);
 break;
 default:
 break;
@@ -4140,7 +4148,7 @@ break;
 updateServoPosition(1150, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 
-# 231
+# 238
 switch(cur_can){
 case 0:
 updateServoPosition(1200, 3);
@@ -4163,6 +4171,8 @@ _delay((unsigned long)((2500)*(32000000/4000.0)));
 updateServoPosition(1150, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 updateServoPosition(1200, 1);
+updateServoPosition(1150, 3);
+
 f_can_coming_to_distribution = 0;
 f_can_distributed = 1;
 if(f_lastCan == 1){
@@ -4199,7 +4209,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 296
+# 305
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4244,7 +4254,6 @@ printf("TIME %d:%02d", min, sec);
 
 void getIR(void){
 readIR();
-
 if(IR_signal==1){
 _delay((unsigned long)((500)*(32000000/4000.0)));
 readIR();

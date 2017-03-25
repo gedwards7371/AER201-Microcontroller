@@ -43,6 +43,7 @@ volatile extern int was_low_1; // flag to indicate whether pan servo is refreshi
 volatile extern int was_low_3; // flag to indicate whether tilt servo is refreshing (20ms low) or not refreshing (sending high signal)
 
 // Can type trackers
+extern int sensor_outputs[2];
 extern int count_total;
 extern int count_pop_no_tab;
 extern int count_pop_w_tab;
