@@ -312,7 +312,7 @@ void actuatorTest(void){
     
     __lcd_home();__lcd_newline();
     printf("DROP -- 2s      ");
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(POP_TILT_DROP, 3);
     __delay_1s();__delay_1s();
     
     __lcd_home();__lcd_newline();
@@ -366,7 +366,7 @@ void BothServos(void){
     updateServoPosition(PAN_R, 1);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(POP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
@@ -374,7 +374,7 @@ void BothServos(void){
     updateServoPosition(PAN_RMID, 1);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(POP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
@@ -386,7 +386,7 @@ void BothServos(void){
     updateServoPosition(PAN_LMID, 1);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(SOUP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
@@ -394,7 +394,7 @@ void BothServos(void){
     updateServoPosition(PAN_L, 1);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(SOUP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
@@ -476,19 +476,23 @@ void PusherTest(void){
         }
         //int looptime = 0.1 / (uptime_us / 1000000);
         
-        
-        for(int i = 0; i<3000; i++){
+        else if(PORTB >> 4 == 0b0101){
+           for(int i = 0; i<3000; i++){
             SOL_PUSHER = 1; // activate solenoid pusher
             __delay_us(75);
             SOL_PUSHER = 0;
             __delay_us(25);
+           }
         }
-        /*
-        SOL_PUSHER = 1;
-        __delay_ms(100);
-        SOL_PUSHER = 0;
-        */
-        
+        else if (PORTB >> 4 == 0b110){
+            for(int i = 0; i<3000; i++){
+            SOL_PUSHER = 1; // activate solenoid pusher
+            __delay_us(58);
+            SOL_PUSHER = 0;
+            __delay_us(42);
+           }
+        }
+
         while(PORTBbits.RB1 == 1) {continue;}
     }
 }
@@ -576,7 +580,7 @@ void BlockerTest(void){
                flag = !flag;
             }
             else{
-                for(int i=0;i<10000;i++)
+                for(int i=0;i<5000;i++)
                 {
                     SERVOCAM = 1;
                     __delay_us(10);

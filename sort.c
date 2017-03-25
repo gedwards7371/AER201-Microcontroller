@@ -142,9 +142,8 @@ void ID(void){
         sensor_outputs[0] = MAG_signal;
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
-        __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
+        //__delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
         sensor_outputs[1] = COND_SENSORS;
-        SOL_COND_SENSORS = 0; // Retract solenoids
         
         // Identify can type
         // cur_can:
@@ -184,6 +183,10 @@ void ID(void){
         }  
         SERVOCAM = 0;
         
+        SOL_COND_SENSORS = 0; // Retract solenoids. Note that this needs to happen after the cam is down,
+                              // because otherwise cans will sandwich the cam and it won't be able to
+                              // retract.
+        
         f_can_coming_to_distribution = 1;
         __delay_ms(TIME_ID_TO_DISTRIBUTION);
         SERVOCAM = 1; // Raise block
@@ -195,6 +198,11 @@ void Distribution(void){
     if(f_can_coming_to_distribution){
         
         // Set pan servo position
+        // cur_can:
+        //  0 - pop can no tab
+        //  1 - pop can with tab
+        //  2 - soup can with label
+        //  3 - soup can no label 
         switch(cur_can){
             case 0:
                 updateServoPosition(PAN_R, 1);
@@ -215,7 +223,27 @@ void Distribution(void){
         __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
         
         // Tilt to drop can into bin
-        updateServoPosition(TILT_DROP, 3);
+        // cur_can:
+        //  0 - pop can no tab
+        //  1 - pop can with tab
+        //  2 - soup can with label
+        //  3 - soup can no label 
+        switch(cur_can){
+            case 0:
+                updateServoPosition(POP_TILT_DROP, 3);
+                break;
+            case 1:
+                updateServoPosition(POP_TILT_DROP, 3);
+                break;
+            case 2:
+                updateServoPosition(SOUP_TILT_DROP, 3);
+                break;
+            case 3:
+                updateServoPosition(SOUP_TILT_DROP, 3);
+                break;
+            default:
+                break;
+        }
         __delay_ms(TILT_DROP_DELAY); // Give servo time to move
         
         // Reset the distribution stage

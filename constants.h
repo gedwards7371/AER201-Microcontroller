@@ -23,20 +23,21 @@
 #define SERVOPAN    LATCbits.LATC1 // pan servo (sides)
 #define SERVOTILT   LATCbits.LATC2 // tilt servo (up/down)
 #define PAN_R       500  
-#define PAN_RMID    750
+#define PAN_RMID    850
 #define PAN_MID     1200 // 1500
-#define PAN_LMID    1700
+#define PAN_LMID    1670
 #define PAN_L       2100
 #define TILT_REST   1150
-#define TILT_DROP   1350
+#define POP_TILT_DROP   1200
+#define SOUP_TILT_DROP 1300
 
 // Characteristic travel times in milliseconds
 #define TIME_OUT_OF_TROMMEL     1500
-#define TIME_LOADING_TO_ID      750
+#define TIME_LOADING_TO_ID      1500
 #define TIME_ID_TO_DISTRIBUTION 1500
 #define TIME_SOLENOID_MOTION    300
 #define TIME_SERVO_MOTION       750
-#define TILT_DROP_DELAY         2000
+#define TILT_DROP_DELAY         2500
 #define TIME_CONDUCTIVITY       600
 
 // Maximum operation allowances before forced termination
