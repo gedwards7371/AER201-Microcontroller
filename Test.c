@@ -138,6 +138,7 @@ void sensorTest(void){
     printf("TST: IR SNSR");
     __delay_ms(100);
     IR_EMITTER = 1;
+    //DC = 1;
     while(PORTBbits.RB1 == 0){
         readADC(0);
         int res = ADRESH<<8 | ADRESL;
@@ -148,8 +149,9 @@ void sensorTest(void){
         __lcd_newline();
         printf("%d", res);
         __delay_ms(100);
-     }  
+    }  
     IR_EMITTER = 0;
+    //DC = 0;
     
     
     // Magnetism sensor reading

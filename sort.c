@@ -139,7 +139,6 @@ void Loading(void){
             }
             
             f_can_coming_to_ID = 1;
-            f_loadingNewCan = 0;
         }
     }
 }
@@ -149,7 +148,7 @@ void ID(void){
         __delay_ms(TIME_LOADING_TO_ID);
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
-        //__delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
+        __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
         sensor_outputs[1] = COND_SENSORS;
         
         // Identify can type
@@ -178,7 +177,9 @@ void ID(void){
                 cur_can = 3;
             }
         }
-        
+        SOL_COND_SENSORS = 0;
+        __delay_ms(200);
+        SOL_COND_SENSORS = 1;
         // Lower block
         /* PWM to make the CAM servo work with Twesh's circuit */
         for(int i=0;i<10000;i++)
@@ -346,15 +347,18 @@ void printSortTimer(void){
 
 void getIR(void){
     readIR();
-    if(IR_signal==1){
-        __delay_ms(500);
+    for(int i = 0; i < 150; i++){
+        __delay_us(500);
         readIR();
-        if(IR_signal==1){
-            f_loadingNewCan = 1;
+        if(!IR_signal){
+            break;
         }
-        else{
-            f_loadingNewCan = 0;
-        }
+    }
+    if(IR_signal==1){
+        f_loadingNewCan = 1;
+    }
+    else{
+        f_loadingNewCan = 0;
     }
 }
 void getMAG(void){
