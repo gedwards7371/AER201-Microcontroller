@@ -4152,10 +4152,10 @@ _delay((unsigned long)((750)*(32000000/4000.0)));
 # 239
 switch(cur_can){
 case 0:
-updateServoPosition(1200, 3);
+updateServoPosition(1260, 3);
 break;
 case 1:
-updateServoPosition(1200, 3);
+updateServoPosition(1260, 3);
 break;
 case 2:
 updateServoPosition(1300, 3);

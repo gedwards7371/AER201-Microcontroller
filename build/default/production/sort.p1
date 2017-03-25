@@ -3625,18 +3625,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 240: case 0:
 "240
 [e :U 312 ]
-[; ;sort.c: 241: updateServoPosition(1200, 3);
+[; ;sort.c: 241: updateServoPosition(1260, 3);
 "241
-[e ( _updateServoPosition (2 , -> 1200 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1260 `i -> 3 `i ]
 [; ;sort.c: 242: break;
 "242
 [e $U 310  ]
 [; ;sort.c: 243: case 1:
 "243
 [e :U 313 ]
-[; ;sort.c: 244: updateServoPosition(1200, 3);
+[; ;sort.c: 244: updateServoPosition(1260, 3);
 "244
-[e ( _updateServoPosition (2 , -> 1200 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1260 `i -> 3 `i ]
 [; ;sort.c: 245: break;
 "245
 [e $U 310  ]

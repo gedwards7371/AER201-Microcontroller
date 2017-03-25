@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.40 build -251452761 
-                                                                                               Sat Mar 25 14:04:16 2017
+                                                                                               Sat Mar 25 14:50:20 2017
 
 Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010151
      1                           	processor	18F4620
@@ -4795,11 +4795,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   4720  00282C  D034               	goto	l6764
   4721  00282E                     l6754:
   4722                           
-  4723                           ;sort.c: 241: updateServoPosition(1200, 3);
+  4723                           ;sort.c: 241: updateServoPosition(1260, 3);
   4724  00282E  0E04               	movlw	4
   4725  002830  0100               	movlb	0	; () banked
   4726  002832  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  4727  002834  0EB0               	movlw	176
+  4727  002834  0EEC               	movlw	236
   4728  002836  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   4729  002838  0E00               	movlw	0
   4730  00283A  0100               	movlb	0	; () banked
@@ -4812,11 +4812,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   4737  002846  D03E               	goto	l6766
   4738  002848                     l6756:
   4739                           
-  4740                           ;sort.c: 244: updateServoPosition(1200, 3);
+  4740                           ;sort.c: 244: updateServoPosition(1260, 3);
   4741  002848  0E04               	movlw	4
   4742  00284A  0100               	movlb	0	; () banked
   4743  00284C  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  4744  00284E  0EB0               	movlw	176
+  4744  00284E  0EEC               	movlw	236
   4745  002850  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   4746  002852  0E00               	movlw	0
   4747  002854  0100               	movlb	0	; () banked
@@ -12394,11 +12394,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  12124  000690  6F8F               	movwf	(printf@f+1)& (0+255),b
  12125  000692  ECB8  F008         	call	_printf	;wreg free
  12126                           
- 12127                           ;Test.c: 317: updateServoPosition(1200, 3);
+ 12127                           ;Test.c: 317: updateServoPosition(1260, 3);
  12128  000696  0E04               	movlw	4
  12129  000698  0100               	movlb	0	; () banked
  12130  00069A  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
- 12131  00069C  0EB0               	movlw	176
+ 12131  00069C  0EEC               	movlw	236
  12132  00069E  6F80               	movwf	updateServoPosition@time_us& (0+255),b
  12133  0006A0  0E00               	movlw	0
  12134  0006A2  0100               	movlb	0	; () banked
@@ -13765,11 +13765,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  13455  001658  D7FA               	bra	u8567
  13456  00165A  F000               	nop	
  13457                           
- 13458                           ;Test.c: 371: updateServoPosition(1200, 3);
+ 13458                           ;Test.c: 371: updateServoPosition(1260, 3);
  13459  00165C  0E04               	movlw	4
  13460  00165E  0100               	movlb	0	; () banked
  13461  001660  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
- 13462  001662  0EB0               	movlw	176
+ 13462  001662  0EEC               	movlw	236
  13463  001664  6F80               	movwf	updateServoPosition@time_us& (0+255),b
  13464  001666  0E00               	movlw	0
  13465  001668  0100               	movlb	0	; () banked
@@ -13867,11 +13867,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  13557  00170A  D7FA               	bra	u8597
  13558  00170C  F000               	nop	
  13559                           
- 13560                           ;Test.c: 379: updateServoPosition(1200, 3);
+ 13560                           ;Test.c: 379: updateServoPosition(1260, 3);
  13561  00170E  0E04               	movlw	4
  13562  001710  0100               	movlb	0	; () banked
  13563  001712  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
- 13564  001714  0EB0               	movlw	176
+ 13564  001714  0EEC               	movlw	236
  13565  001716  6F80               	movwf	updateServoPosition@time_us& (0+255),b
  13566  001718  0E00               	movlw	0
  13567  00171A  0100               	movlb	0	; () banked
@@ -23910,7 +23910,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.40 build -251452761 
-Symbol Table                                                                                   Sat Mar 25 14:04:16 2017
+Symbol Table                                                                                   Sat Mar 25 14:50:20 2017
 
                                     _i 0131                     i2_I2C_Master_Start 4AD4  
                    i2_I2C_Master_Write 4AAA                                     l66 4A42  
