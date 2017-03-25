@@ -133,25 +133,18 @@ void ID(void){
         __delay_ms(TIME_LOADING_TO_ID);
         
         // Create array to identify can type.
-        // [0] = side conductivity, [1] = magnetism, [2] = top/bottom conductivity
+        // [0] = magnetism, [1] = conductivity
         // Note that this is a local variable because we don't want to use an old result, ever!
-        int sensor_outputs[3];
+        int sensor_outputs[2];
         
-        // Read conductivity sensor circuit. Because the solenoids are pushed in
-        // right now, this will tell us side of can conductivity
-        sensor_outputs[0] = COND_SENSORS; 
+        // Read magnetism to distinguish pop cans and soup cans
+        getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
+        sensor_outputs[0] = MAG_signal;
         
-        if(!sensor_outputs[0]){
-            getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
-            sensor_outputs[1] = MAG_signal;
-            if(!sensor_outputs[1]){
-                SOL_COND_SENSORS = 1; //activate solenoids for top/bottom conductivity sensors
-                // characteristic delay for time it takes solenoids move out
-                __delay_ms(TIME_CONDUCTIVITY); // IDK
-                sensor_outputs[2] = COND_SENSORS;
-                SOL_COND_SENSORS = 0;
-            }
-        }
+        SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
+        __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
+        sensor_outputs[1] = COND_SENSORS;
+        SOL_COND_SENSORS = 0; // Retract solenoids
         
         // Identify can type
         // cur_can:
@@ -161,23 +154,23 @@ void ID(void){
         //  3 - soup can no label  
         if(!sensor_outputs[0]){
             if(!sensor_outputs[1]){
-                if(!sensor_outputs[2]){
                     count_pop_no_tab++;
                     cur_can = 0;
-                }
-                else{
-                    count_pop_w_tab++;
-                    cur_can = 1;
-                }
             }
             else{
-                count_can_w_lab++;
-                cur_can = 2;
+                count_pop_w_tab++;
+                cur_can = 1;
             }
         }
         else{
-            count_can_no_lab++;
-            cur_can = 3;
+            if(!sensor_outputs[1]){  
+                count_can_w_lab++;
+                cur_can = 2;
+            }
+            else{
+                count_can_no_lab++;
+                cur_can = 3;
+            }
         }
         
         // Lower block
