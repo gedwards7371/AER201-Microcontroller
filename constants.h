@@ -18,11 +18,11 @@
 #define DC_RAMP     45
 #define DC          LATAbits.LATA5 // DC motors
 
-//Servo motors
+//Servo motors, times in microseconds
 #define SERVOCAM    LATCbits.LATC0 // cam servo for blocker
 #define SERVOPAN    LATCbits.LATC1 // pan servo (sides)
 #define SERVOTILT   LATCbits.LATC2 // tilt servo (up/down)
-#define PAN_R       500
+#define PAN_R       500  
 #define PAN_RMID    750
 #define PAN_MID     1200 // 1500
 #define PAN_LMID    1700

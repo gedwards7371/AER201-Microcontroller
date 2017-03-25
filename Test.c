@@ -24,6 +24,7 @@ void PortTestA5(void);
 void EEPROMTest(void);
 void ToggleTestA5(void);
 void PusherTest(void);
+void SpeedTest(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -51,7 +52,8 @@ void Test(void){
                 PortTestA5();
                 break;
             case 6: //  Key 5
-                ToggleTestA5();
+                //ToggleTestA5();
+                SpeedTest();
                 break;
             case 7: //  Key 6
                 EEPROMTest();
@@ -348,7 +350,7 @@ void BothServos(void){
     TMR3ON = 1;
     machine_state = Sorting_state;
     was_low_1 = 0;
-    was_low_1 = 0;
+    was_low_3 = 0;
     
         // Combined control over both servos
     // Pass: (1) Pan servo vists R, RMID, MID, LMID, L
@@ -356,7 +358,9 @@ void BothServos(void){
     // Justification: tests the full range of motion we need for both servos
     initServos();
     __delay_ms(1500);
+    
     updateServoPosition(PAN_R, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
     updateServoPosition(TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
@@ -364,6 +368,7 @@ void BothServos(void){
     __delay_ms(750);
 
     updateServoPosition(PAN_RMID, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
     updateServoPosition(TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
@@ -371,16 +376,19 @@ void BothServos(void){
     __delay_ms(750);
 
     updateServoPosition(PAN_MID, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(1500);
     
     updateServoPosition(PAN_LMID, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
     updateServoPosition(TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-
+    
     updateServoPosition(PAN_L, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
     updateServoPosition(TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
@@ -491,21 +499,46 @@ void ToggleTestA5(void){
         while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
             // the PIC will wait and do nothing until a key press is signaled
+            continue;
         }
         if(PORTB >> 4 == 0b1111){
             break;
         }
         else{
-            if(on == 0){
-                on = 1;
+            while(1){
                 LATAbits.LATA5 = 1;
-            }
-            else{
-                on = 0;
-                LATAbits.LATA5  = 0;
-            }
+                __delay_ms(3000);
+                LATAbits.LATA5 = 0;
+                __delay_ms(1000);
+            }  
         }
-        while(PORTBbits.RB1 == 1) {continue;}
+    }
+}
+
+void SpeedTest(void){
+    __lcd_clear();__lcd_home();
+    printf("S: D WILL RETURN ");
+    __lcd_newline();
+    printf("OTHER SETS RA5   ");
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
+            // the PIC will wait and do nothing until a key press is signaled
+        }
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
+        else{
+            while(PORTBbits.RB1 == 1){
+             LATAbits.LATA5 = 1;
+             __delay_ms(5);
+             LATAbits.LATA5 = 0;
+             __delay_ms(5);
+                
+                // Wait until the key has been released
+            }
+            LATAbits.LATA5 = 0;
+        }
     }
 }
 
