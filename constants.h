@@ -39,6 +39,7 @@
 #define TIME_SERVO_MOTION       750
 #define TILT_DROP_DELAY         2500
 #define TIME_CONDUCTIVITY       600
+#define TIME_INTERMITTENT_DRUM_STOP 15
 
 // Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           179

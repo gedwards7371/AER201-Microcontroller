@@ -215,13 +215,13 @@ void Loading(void){
                                             break;
                                         default:
                                             SOL_PUSHER = 1;
-                                            __delay_ms(25);
-                                            SOL_PUSHER = 0;
+                                            __delay_us(100);
                                             break;
                                     }  
                                 }
                             }
                         }
+                        SOL_PUSHER = 0;
                         if(IR_signal==1){
                             if(j == 10){
                                 DC = 1;
@@ -246,6 +246,12 @@ void ID(void){
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
         __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
         sensor_outputs[1] = COND_SENSORS;
+        SOL_COND_SENSORS = 0;
+        
+        __delay_ms(200);
+        SOL_COND_SENSORS = 1;
+        __delay_ms(TIME_CONDUCTIVITY);
+        sensor_outputs[1] = (sensor_outputs[1] | COND_SENSORS);
         
         // Identify can type
         // cur_can:
@@ -444,6 +450,10 @@ void printSortTimer(void){
         most_recent_sort_time = total_time;
         f_most_recent_sort_time = 0;
     }
+    
+    //if(total_time - most_recent_sort_time == TIME_INTERMITTENT_DRUM_STOP){
+    //    DC = 0;
+    //}
      
     
     if((total_time - most_recent_sort_time == MAX_NO_CANS) | (total_time == MAX_SORT_TIME)){
