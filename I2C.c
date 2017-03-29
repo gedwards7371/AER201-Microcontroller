@@ -34,12 +34,6 @@ void I2C_Master_Start()
   SEN = 1;
 }
 
-void I2C_Master_RepeatedStart()
-{
-  I2C_Master_Wait();
-  RSEN = 1;
-}
-
 void I2C_Master_Stop()
 {
   I2C_Master_Wait();

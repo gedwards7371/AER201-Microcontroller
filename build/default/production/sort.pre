@@ -3882,11 +3882,13 @@ extern int f_can_coming_to_distribution;
 
 
 extern int f_can_distributed;
+extern int f_most_recent_sort_time;
 
 
 void printSortTimer(void);
 extern int startTime[7];
 extern int total_time;
+extern int most_recent_sort_time;
 
 
 void delay_ms(unsigned char milliseconds);
@@ -3951,6 +3953,7 @@ int f_ID_receive;
 int f_can_coming_to_ID;
 int f_can_coming_to_distribution;
 int f_can_distributed;
+int f_most_recent_sort_time;
 
 
 int count_total;
@@ -3962,6 +3965,7 @@ int count_can_no_lab;
 
 int startTime[7];
 int total_time;
+int most_recent_sort_time;
 
 
 int IR_signal;
@@ -4073,9 +4077,13 @@ _delay((unsigned long)((100)*(32000000/4000.0)));
 
 readIR();
 if(IR_signal==1){
+_delay((unsigned long)((100)*(32000000/4000.0)));
+readIR();
+if(IR_signal==1){
 LATAbits.LATA4 = 1;
 _delay((unsigned long)((250)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
+}
 }
 f_can_coming_to_ID = 1;
 }
@@ -4090,7 +4098,7 @@ LATAbits.LATA3 = 1;
 _delay((unsigned long)((600)*(32000000/4000.0)));
 sensor_outputs[1] = PORTAbits.RA2;
 
-# 170
+# 176
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4148,7 +4156,7 @@ f_can_coming_to_ID = 0;
 void Distribution(void){
 if(f_can_coming_to_distribution){
 
-# 233
+# 239
 switch(cur_can){
 case 0:
 updateServoPosition(500, 1);
@@ -4168,7 +4176,7 @@ break;
 updateServoPosition(1050, 3);
 _delay((unsigned long)((750)*(32000000/4000.0)));
 
-# 258
+# 264
 switch(cur_can){
 case 0:
 updateServoPosition(1260, 3);
@@ -4195,6 +4203,7 @@ updateServoPosition(1050, 3);
 
 f_can_coming_to_distribution = 0;
 f_can_distributed = 1;
+f_most_recent_sort_time = 1;
 if(f_lastCan == 1){
 machine_state = DoneSorting_state;
 }
@@ -4212,6 +4221,7 @@ f_ID_receive = 1;
 f_can_coming_to_ID = 0;
 f_can_coming_to_distribution = 0;
 f_can_distributed = 0;
+f_most_recent_sort_time = 0;
 
 
 count_total = 0;
@@ -4219,6 +4229,9 @@ count_pop_no_tab = 0;
 count_pop_w_tab = 0;
 count_can_w_lab = 0;
 count_can_no_lab = 0;
+
+
+most_recent_sort_time = 0;
 }
 void initSortTimer(void){
 
@@ -4229,7 +4242,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 325
+# 336
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4257,12 +4270,17 @@ unsigned int timeDiff = cur_sec - start_sec;
 
 total_time = timeDiff;
 
-if(timeDiff >= 179){
+if(f_most_recent_sort_time){
+most_recent_sort_time = timeDiff;
+f_most_recent_sort_time;
+}
+
+
+if((most_recent_sort_time - timeDiff == 15) | (timeDiff == 179)){
 machine_state = DoneSorting_state;
 
 }
 
-int hour = timeDiff / 3600;
 int min = (timeDiff % 3600) / 60;
 int sec = (timeDiff % 3600) % 60;
 

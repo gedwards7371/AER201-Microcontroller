@@ -21,11 +21,13 @@ extern int f_can_coming_to_distribution;
 
 // DISTRIBUTION STAGE FLAGS
 extern int f_can_distributed; // flag to say a can has been put in its appropriate bin
+extern int f_most_recent_sort_time; // flag to update comparison time in printSortTimer
 
 // Time tracking
 void printSortTimer(void);
 extern int startTime[7];
 extern int total_time;
+extern int most_recent_sort_time;
 
 // DC motor control
 void delay_ms(unsigned char milliseconds);

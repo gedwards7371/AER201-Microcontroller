@@ -3882,11 +3882,13 @@ extern int f_can_coming_to_distribution;
 
 
 extern int f_can_distributed;
+extern int f_most_recent_sort_time;
 
 
 void printSortTimer(void);
 extern int startTime[7];
 extern int total_time;
+extern int most_recent_sort_time;
 
 
 void delay_ms(unsigned char milliseconds);
@@ -3962,12 +3964,6 @@ void I2C_Master_Start()
 {
 I2C_Master_Wait();
 SEN = 1;
-}
-
-void I2C_Master_RepeatedStart()
-{
-I2C_Master_Wait();
-RSEN = 1;
 }
 
 void I2C_Master_Stop()
