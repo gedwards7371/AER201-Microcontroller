@@ -190,25 +190,25 @@ EmergencyStop_state 4
 [v _sort sort `(v  1 e 1 0 ]
 "70
 [v _Loading Loading `(v  1 e 1 0 ]
-"189
+"195
 [v _ID ID `(v  1 e 1 0 ]
-"258
+"264
 [v _Distribution Distribution `(v  1 e 1 0 ]
-"325
+"331
 [v _initGlobalVars initGlobalVars `(v  1 e 1 0 ]
-"348
+"354
 [v _initSortTimer initSortTimer `(v  1 e 1 0 ]
-"368
+"374
 [v _initServos initServos `(v  1 e 1 0 ]
-"379
+"385
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
-"411
+"417
 [v _getIR getIR `(v  1 e 1 0 ]
-"427
+"433
 [v _getMAG getMAG `(v  1 e 1 0 ]
-"436
+"442
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
-"448
+"454
 [v _delay_ms delay_ms `(v  1 e 1 0 ]
 "30 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _Test Test `(v  1 e 1 0 ]
@@ -410,17 +410,17 @@ EmergencyStop_state 4
 [v _LATDbits LATDbits `VES509  1 e 1 @3980 ]
 "1316
 [v _LATE LATE `VEuc  1 e 1 @3981 ]
-[s S1568 . 1 `uc 1 LATE0 1 0 :1:0 
+[s S1569 . 1 `uc 1 LATE0 1 0 :1:0 
 `uc 1 LATE1 1 0 :1:1 
 `uc 1 LATE2 1 0 :1:2 
 ]
 "1333
-[s S1572 . 1 `uc 1 LE0 1 0 :1:0 
+[s S1573 . 1 `uc 1 LE0 1 0 :1:0 
 `uc 1 LE1 1 0 :1:1 
 `uc 1 LE2 1 0 :1:2 
 ]
-[u S1576 . 1 `S1568 1 . 1 0 `S1572 1 . 1 0 ]
-[v _LATEbits LATEbits `VES1576  1 e 1 @3981 ]
+[u S1577 . 1 `S1569 1 . 1 0 `S1573 1 . 1 0 ]
+[v _LATEbits LATEbits `VES1577  1 e 1 @3981 ]
 "1367
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1588
@@ -445,7 +445,7 @@ EmergencyStop_state 4
 ]
 [u S634 . 1 `S623 1 . 1 0 `S628 1 . 1 0 ]
 [v _OSCTUNEbits OSCTUNEbits `VES634  1 e 1 @3995 ]
-[s S1263 . 1 `uc 1 CCP2IF 1 0 :1:0 
+[s S1264 . 1 `uc 1 CCP2IF 1 0 :1:0 
 `uc 1 TMR3IF 1 0 :1:1 
 `uc 1 HLVDIF 1 0 :1:2 
 `uc 1 BCLIF 1 0 :1:3 
@@ -455,12 +455,12 @@ EmergencyStop_state 4
 `uc 1 OSCFIF 1 0 :1:7 
 ]
 "2792
-[s S1272 . 1 `uc 1 . 1 0 :2:0 
+[s S1273 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LVDIF 1 0 :1:2 
 ]
-[u S1275 . 1 `S1263 1 . 1 0 `S1272 1 . 1 0 ]
-[v _PIR2bits PIR2bits `VES1275  1 e 1 @4001 ]
-[s S1204 . 1 `uc 1 RD 1 0 :1:0 
+[u S1276 . 1 `S1264 1 . 1 0 `S1273 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES1276  1 e 1 @4001 ]
+[s S1205 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -470,11 +470,11 @@ EmergencyStop_state 4
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "2922
-[s S1213 . 1 `uc 1 . 1 0 :6:0 
+[s S1214 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 EEFS 1 0 :1:6 
 ]
-[u S1216 . 1 `S1204 1 . 1 0 `S1213 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES1216  1 e 1 @4006 ]
+[u S1217 . 1 `S1205 1 . 1 0 `S1214 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES1217  1 e 1 @4006 ]
 "2966
 [v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
 "2972
@@ -757,45 +757,47 @@ EmergencyStop_state 4
 "70
 [v _Loading Loading `(v  1 e 1 0 ]
 {
-"161
-[v Loading@i_1107 i `i  1 a 2 60 ]
-"153
-[v Loading@i_1106 i `i  1 a 2 58 ]
-"137
-[v Loading@i_1104 i `i  1 a 2 56 ]
-"129
-[v Loading@i_1103 i `i  1 a 2 54 ]
+"160
+[v Loading@i_1107 i `i  1 a 2 62 ]
+"152
+[v Loading@i_1106 i `i  1 a 2 60 ]
+"136
+[v Loading@i_1104 i `i  1 a 2 58 ]
+"128
+[v Loading@i_1103 i `i  1 a 2 56 ]
+"171
+[v Loading@i_1108 i `i  1 a 2 53 ]
 "88
-[v Loading@i i `i  1 a 2 62 ]
+[v Loading@i i `i  1 a 2 64 ]
 "81
 [v Loading@addr addr `us  1 a 2 51 ]
 "82
-[v Loading@byte1 byte1 `uc  1 a 1 53 ]
-"188
+[v Loading@byte1 byte1 `uc  1 a 1 55 ]
+"194
 } 0
-"348
+"354
 [v _initSortTimer initSortTimer `(v  1 e 1 0 ]
 {
-"351
+"357
 [v initSortTimer@i i `i  1 a 2 8 ]
-"367
+"373
 } 0
-"325
+"331
 [v _initGlobalVars initGlobalVars `(v  1 e 1 0 ]
 {
-"347
+"353
 } 0
-"427
+"433
 [v _getMAG getMAG `(v  1 e 1 0 ]
 {
-"434
+"440
 } 0
-"411
+"417
 [v _getIR getIR `(v  1 e 1 0 ]
 {
-"413
+"419
 [v getIR@i i `i  1 a 2 7 ]
-"426
+"432
 } 0
 "23 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
 [v _readIR readIR `(v  1 e 1 0 ]
@@ -804,27 +806,27 @@ EmergencyStop_state 4
 [v readIR@res res `i  1 a 2 4 ]
 "27
 } 0
-"189 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"195 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _ID ID `(v  1 e 1 0 ]
 {
-"248
-[v ID@i_1118 i `i  1 a 2 6 ]
-"229
+"254
+[v ID@i_1119 i `i  1 a 2 6 ]
+"235
 [v ID@i i `i  1 a 2 4 ]
-"257
+"263
 } 0
-"448
+"454
 [v _delay_ms delay_ms `(v  1 e 1 0 ]
 {
 [v delay_ms@milliseconds milliseconds `uc  1 a 1 wreg ]
 [v delay_ms@milliseconds milliseconds `uc  1 a 1 wreg ]
 [v delay_ms@milliseconds milliseconds `uc  1 a 1 1 ]
-"454
+"460
 } 0
-"258
+"264
 [v _Distribution Distribution `(v  1 e 1 0 ]
 {
-"323
+"329
 } 0
 "15 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\MachineConfig.c
 [v _machineConfig machineConfig `(v  1 e 1 0 ]
@@ -856,7 +858,7 @@ EmergencyStop_state 4
 [v _EEPROM_write EEPROM_write `(v  1 e 1 0 ]
 {
 "64
-[v EEPROM_write@i_1337 i `uc  1 a 1 48 ]
+[v EEPROM_write@i_1338 i `uc  1 a 1 48 ]
 "62
 [v EEPROM_write@i i `uc  1 a 1 47 ]
 "32
@@ -1089,40 +1091,40 @@ EmergencyStop_state 4
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
 {
 "224
-[v actuatorTest@i_1651 i `uc  1 a 1 45 ]
+[v actuatorTest@i_1652 i `uc  1 a 1 45 ]
 "348
-[v actuatorTest@i_1691 i `uc  1 a 1 67 ]
-[v actuatorTest@i_1690 i `uc  1 a 1 66 ]
+[v actuatorTest@i_1692 i `uc  1 a 1 67 ]
+[v actuatorTest@i_1691 i `uc  1 a 1 66 ]
 "335
-[v actuatorTest@i_1688 i `uc  1 a 1 65 ]
-[v actuatorTest@i_1687 i `uc  1 a 1 64 ]
+[v actuatorTest@i_1689 i `uc  1 a 1 65 ]
+[v actuatorTest@i_1688 i `uc  1 a 1 64 ]
 "323
-[v actuatorTest@i_1684 i `uc  1 a 1 63 ]
-[v actuatorTest@i_1683 i `uc  1 a 1 62 ]
+[v actuatorTest@i_1685 i `uc  1 a 1 63 ]
+[v actuatorTest@i_1684 i `uc  1 a 1 62 ]
 "318
-[v actuatorTest@i_1681 i `uc  1 a 1 61 ]
-[v actuatorTest@i_1680 i `uc  1 a 1 60 ]
+[v actuatorTest@i_1682 i `uc  1 a 1 61 ]
+[v actuatorTest@i_1681 i `uc  1 a 1 60 ]
 "313
-[v actuatorTest@i_1678 i `uc  1 a 1 59 ]
-[v actuatorTest@i_1677 i `uc  1 a 1 58 ]
+[v actuatorTest@i_1679 i `uc  1 a 1 59 ]
+[v actuatorTest@i_1678 i `uc  1 a 1 58 ]
 "300
-[v actuatorTest@i_1674 i `uc  1 a 1 57 ]
-[v actuatorTest@i_1673 i `uc  1 a 1 56 ]
+[v actuatorTest@i_1675 i `uc  1 a 1 57 ]
+[v actuatorTest@i_1674 i `uc  1 a 1 56 ]
 "295
-[v actuatorTest@i_1671 i `uc  1 a 1 55 ]
-[v actuatorTest@i_1670 i `uc  1 a 1 54 ]
+[v actuatorTest@i_1672 i `uc  1 a 1 55 ]
+[v actuatorTest@i_1671 i `uc  1 a 1 54 ]
 "290
-[v actuatorTest@i_1668 i `uc  1 a 1 53 ]
-[v actuatorTest@i_1667 i `uc  1 a 1 52 ]
+[v actuatorTest@i_1669 i `uc  1 a 1 53 ]
+[v actuatorTest@i_1668 i `uc  1 a 1 52 ]
 "285
-[v actuatorTest@i_1665 i `uc  1 a 1 51 ]
-[v actuatorTest@i_1664 i `uc  1 a 1 50 ]
+[v actuatorTest@i_1666 i `uc  1 a 1 51 ]
+[v actuatorTest@i_1665 i `uc  1 a 1 50 ]
 "280
-[v actuatorTest@i_1662 i `uc  1 a 1 49 ]
-[v actuatorTest@i_1661 i `uc  1 a 1 48 ]
+[v actuatorTest@i_1663 i `uc  1 a 1 49 ]
+[v actuatorTest@i_1662 i `uc  1 a 1 48 ]
 "275
-[v actuatorTest@i_1659 i `uc  1 a 1 47 ]
-[v actuatorTest@i_1658 i `uc  1 a 1 46 ]
+[v actuatorTest@i_1660 i `uc  1 a 1 47 ]
+[v actuatorTest@i_1659 i `uc  1 a 1 46 ]
 "203
 [v actuatorTest@i i `i  1 a 2 68 ]
 "350
@@ -1136,11 +1138,11 @@ EmergencyStop_state 4
 [v _PusherTest PusherTest `(v  1 e 1 0 ]
 {
 "510
-[v PusherTest@i_1710 i `i  1 a 2 51 ]
+[v PusherTest@i_1711 i `i  1 a 2 51 ]
 "502
 [v PusherTest@i i `i  1 a 2 49 ]
 "488
-[v PusherTest@res_1706 res `i  1 a 2 47 ]
+[v PusherTest@res_1707 res `i  1 a 2 47 ]
 "474
 [v PusherTest@res res `i  1 a 2 45 ]
 "521
@@ -1174,20 +1176,20 @@ EmergencyStop_state 4
 {
 "407
 } 0
-"368 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"374 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _initServos initServos `(v  1 e 1 0 ]
 {
-"378
+"384
 } 0
-"436
+"442
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
 {
-"437
+"443
 [v updateServoPosition@my_time my_time `ui  1 a 2 6 ]
-"436
+"442
 [v updateServoPosition@time_us time_us `i  1 p 2 0 ]
 [v updateServoPosition@timer timer `i  1 p 2 2 ]
-"446
+"452
 } 0
 "589 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _BlockerTest BlockerTest `(v  1 e 1 0 ]
@@ -1408,24 +1410,24 @@ EmergencyStop_state 4
 [v i2EEPROM_read@address address `us  1 p 2 0 ]
 "82
 } 0
-"379 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"385 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
 {
-"382
+"388
 [v printSortTimer@i i `i  1 a 2 70 ]
-"381
-[v printSortTimer@curTime curTime `[7]i  1 a 14 44 ]
 "387
+[v printSortTimer@curTime curTime `[7]i  1 a 14 44 ]
+"393
 [v printSortTimer@timeDiff timeDiff `ui  1 a 2 68 ]
-"403
-[v printSortTimer@sec sec `i  1 a 2 64 ]
-"402
-[v printSortTimer@min min `i  1 a 2 62 ]
-"386
-[v printSortTimer@cur_sec cur_sec `ui  1 a 2 60 ]
-"385
-[v printSortTimer@start_sec start_sec `ui  1 a 2 58 ]
 "409
+[v printSortTimer@sec sec `i  1 a 2 64 ]
+"408
+[v printSortTimer@min min `i  1 a 2 62 ]
+"392
+[v printSortTimer@cur_sec cur_sec `ui  1 a 2 60 ]
+"391
+[v printSortTimer@start_sec start_sec `ui  1 a 2 58 ]
+"415
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v i2_printf printf `(i  1 e 2 0 ]

@@ -92,8 +92,7 @@ void Loading(void){
         DC = 1;
         
         // Start sending pulses to servos
-        initServos();    
-        __delay_ms(5000);
+        initServos();
     }
     else{
         // If a can is not already waiting to go to the ID stage, we want the
@@ -169,10 +168,11 @@ void Loading(void){
                 
                 __delay_ms(200);
                 // Check if can is still stuck. If so, hit it with all we've got!
+                int i = 1;
                 while(IR_signal == 1){
                     readIR();
                     if(IR_signal==1){
-                        __delay_ms(100);
+                        __delay_ms(200);
                         readIR();
                         if(IR_signal==1){
                             SOL_PUSHER = 1;
@@ -180,6 +180,12 @@ void Loading(void){
                             SOL_PUSHER =  0;
                         }
                     }
+                    if(i % 10 == 0){
+                        DC = 1;
+                        __delay_ms(5000);
+                        DC = 0;
+                    }
+                    i++;
                 }
             }
             f_can_coming_to_ID = 1;
