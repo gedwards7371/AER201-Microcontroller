@@ -143,7 +143,7 @@ void Loading(void){
             }
             
             __delay_ms(200);
-            // Check if can is stuck. If so, hit it with all we've got!
+            // Check if can is stuck. If so, hit it again.
             readIR();
             if(IR_signal==1){
                 __delay_ms(100);
@@ -168,15 +168,17 @@ void Loading(void){
                 }
                 
                 __delay_ms(200);
-                // Check if can is stuck. If so, hit it with all we've got!
-                readIR();
-                if(IR_signal==1){
-                    __delay_ms(100);
+                // Check if can is still stuck. If so, hit it with all we've got!
+                while(IR_signal == 1){
                     readIR();
                     if(IR_signal==1){
-                        SOL_PUSHER = 1;
-                        __delay_ms(250);
-                        SOL_PUSHER =  0;
+                        __delay_ms(100);
+                        readIR();
+                        if(IR_signal==1){
+                            SOL_PUSHER = 1;
+                            __delay_ms(250);
+                            SOL_PUSHER =  0;
+                        }
                     }
                 }
             }
