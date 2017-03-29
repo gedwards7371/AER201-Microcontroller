@@ -171,6 +171,10 @@ void Loading(void){
                 int j = 1;
                 while(IR_signal == 1){
                     readIR();
+                    if(j == 10){
+                        DC = !DC;
+                        j = 0;
+                    }
                     if(IR_signal==1){
                         __delay_ms(350);
                         readIR();
@@ -222,17 +226,10 @@ void Loading(void){
                             }
                         }
                         SOL_PUSHER = 0;
-                        if(IR_signal==1){
-                            if(j == 10){
-                                DC = 1;
-                                __delay_ms(5000);
-                                DC = 0;
-                                j = 0;
-                            }
-                        }
                         j++;
                     }
                 }
+                DC = 0;
             }
             f_can_coming_to_ID = 1;
         }
@@ -451,10 +448,15 @@ void printSortTimer(void){
         f_most_recent_sort_time = 0;
     }
     
-    //if(total_time - most_recent_sort_time == TIME_INTERMITTENT_DRUM_STOP){
-    //    DC = 0;
-    //}
-     
+    if(total_time - most_recent_sort_time == TIME_INTERMITTENT_DRUM_STOP){
+        DC = 0;
+        __delay_ms(2000);
+        for(int i=0; i<46; i++){
+                DC = !DC;
+                delay_ms(45-i);
+        }
+        DC = 1;
+    }
     
     if((total_time - most_recent_sort_time == MAX_NO_CANS) | (total_time == MAX_SORT_TIME)){
         machine_state = DoneSorting_state;
