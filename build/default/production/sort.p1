@@ -3309,15 +3309,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 128: LATAbits.LATA4 = 1;
 "128
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 129: _delay((unsigned long)((70)*(32000000/4000000.0)));
+[; ;sort.c: 129: _delay((unsigned long)((75)*(32000000/4000000.0)));
 "129
-[e ( __delay (1 -> * -> -> 70 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 [; ;sort.c: 130: LATAbits.LATA4 = 0;
 "130
 [e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 131: _delay((unsigned long)((30)*(32000000/4000000.0)));
+[; ;sort.c: 131: _delay((unsigned long)((25)*(32000000/4000000.0)));
 "131
-[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
 "132
 }
 "127
@@ -3369,9 +3369,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 286 ]
 [; ;sort.c: 140: }
 [; ;sort.c: 141: }
-[; ;sort.c: 143: _delay((unsigned long)((50)*(32000000/4000.0)));
+[; ;sort.c: 143: _delay((unsigned long)((100)*(32000000/4000.0)));
 "143
-[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [; ;sort.c: 145: readIR();
 "145
 [e ( _readIR ..  ]
@@ -3704,18 +3704,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 265: case 2:
 "265
 [e :U 319 ]
-[; ;sort.c: 266: updateServoPosition(1370, 3);
+[; ;sort.c: 266: updateServoPosition(1500, 3);
 "266
-[e ( _updateServoPosition (2 , -> 1370 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1500 `i -> 3 `i ]
 [; ;sort.c: 267: break;
 "267
 [e $U 315  ]
 [; ;sort.c: 268: case 3:
 "268
 [e :U 320 ]
-[; ;sort.c: 269: updateServoPosition(1370, 3);
+[; ;sort.c: 269: updateServoPosition(1500, 3);
 "269
-[e ( _updateServoPosition (2 , -> 1370 `i -> 3 `i ]
+[e ( _updateServoPosition (2 , -> 1500 `i -> 3 `i ]
 [; ;sort.c: 270: break;
 "270
 [e $U 315  ]

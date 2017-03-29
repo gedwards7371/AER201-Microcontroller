@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.40 build -251452761 
-                                                                                               Wed Mar 29 00:09:16 2017
+                                                                                               Wed Mar 29 00:38:27 2017
 
 Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010151
      1                           	processor	18F4620
@@ -3404,21 +3404,21 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3370  0028EC  8889               	bsf	3977,4,c	;volatile
   3371                           
   3372                           ; BSR set to: 0
-  3373                           ;sort.c: 129: _delay((unsigned long)((70)*(32000000/4000000.0)));
-  3374  0028EE  0EBA               	movlw	186
+  3373                           ;sort.c: 129: _delay((unsigned long)((75)*(32000000/4000000.0)));
+  3374  0028EE  0EC8               	movlw	200
   3375  0028F0                     u7607:
   3376  0028F0  2EE8               	decfsz	wreg,f,c
   3377  0028F2  D7FE               	bra	u7607
-  3378  0028F4  D000               	nop2	
-  3379                           
-  3380                           ;sort.c: 130: LATAbits.LATA4 = 0;
-  3381  0028F6  9889               	bcf	3977,4,c	;volatile
-  3382                           
-  3383                           ;sort.c: 131: _delay((unsigned long)((30)*(32000000/4000000.0)));
-  3384  0028F8  0E50               	movlw	80
-  3385  0028FA                     u7617:
-  3386  0028FA  2EE8               	decfsz	wreg,f,c
-  3387  0028FC  D7FE               	bra	u7617
+  3378                           
+  3379                           ;sort.c: 130: LATAbits.LATA4 = 0;
+  3380  0028F4  9889               	bcf	3977,4,c	;volatile
+  3381                           
+  3382                           ;sort.c: 131: _delay((unsigned long)((25)*(32000000/4000000.0)));
+  3383  0028F6  0E42               	movlw	66
+  3384  0028F8                     u7617:
+  3385  0028F8  2EE8               	decfsz	wreg,f,c
+  3386  0028FA  D7FE               	bra	u7617
+  3387  0028FC  D000               	nop2	
   3388  0028FE  0100               	movlb	0	; () banked
   3389  002900  4BB6               	infsnz	Loading@i_1099& (0+255),f,b
   3390  002902  2BB7               	incf	(Loading@i_1099+1)& (0+255),f,b
@@ -3478,14 +3478,14 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   3444                           ; BSR set to: 0
   3445                           ;sort.c: 140: }
   3446                           ;sort.c: 141: }
-  3447                           ;sort.c: 143: _delay((unsigned long)((50)*(32000000/4000.0)));
-  3448  002940  0E03               	movlw	3
+  3447                           ;sort.c: 143: _delay((unsigned long)((100)*(32000000/4000.0)));
+  3448  002940  0E05               	movlw	5
   3449  002942  0100               	movlb	0	; () banked
   3450  002944  6FB2               	movwf	(??_Loading+1)& (0+255),b
-  3451  002946  0E08               	movlw	8
+  3451  002946  0E0F               	movlw	15
   3452  002948  0100               	movlb	0	; () banked
   3453  00294A  6FB1               	movwf	??_Loading& (0+255),b
-  3454  00294C  0E77               	movlw	119
+  3454  00294C  0EF1               	movlw	241
   3455  00294E                     u7647:
   3456  00294E  2EE8               	decfsz	wreg,f,c
   3457  002950  D7FE               	bra	u7647
@@ -4967,11 +4967,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   4892  002A92  D031               	goto	l6830
   4893  002A94                     l6822:
   4894                           
-  4895                           ;sort.c: 266: updateServoPosition(1370, 3);
+  4895                           ;sort.c: 266: updateServoPosition(1500, 3);
   4896  002A94  0E05               	movlw	5
   4897  002A96  0100               	movlb	0	; () banked
   4898  002A98  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  4899  002A9A  0E5A               	movlw	90
+  4899  002A9A  0EDC               	movlw	220
   4900  002A9C  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   4901  002A9E  0E00               	movlw	0
   4902  002AA0  0100               	movlb	0	; () banked
@@ -4984,11 +4984,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
   4909  002AAC  D024               	goto	l6830
   4910  002AAE                     l6824:
   4911                           
-  4912                           ;sort.c: 269: updateServoPosition(1370, 3);
+  4912                           ;sort.c: 269: updateServoPosition(1500, 3);
   4913  002AAE  0E05               	movlw	5
   4914  002AB0  0100               	movlb	0	; () banked
   4915  002AB2  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
-  4916  002AB4  0E5A               	movlw	90
+  4916  002AB4  0EDC               	movlw	220
   4917  002AB6  6F80               	movwf	updateServoPosition@time_us& (0+255),b
   4918  002AB8  0E00               	movlw	0
   4919  002ABA  0100               	movlb	0	; () banked
@@ -14152,11 +14152,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  13842  001808  D7FA               	bra	u8777
  13843  00180A  F000               	nop	
  13844                           
- 13845                           ;Test.c: 391: updateServoPosition(1370, 3);
+ 13845                           ;Test.c: 391: updateServoPosition(1500, 3);
  13846  00180C  0E05               	movlw	5
  13847  00180E  0100               	movlb	0	; () banked
  13848  001810  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
- 13849  001812  0E5A               	movlw	90
+ 13849  001812  0EDC               	movlw	220
  13850  001814  6F80               	movwf	updateServoPosition@time_us& (0+255),b
  13851  001816  0E00               	movlw	0
  13852  001818  0100               	movlb	0	; () banked
@@ -14254,11 +14254,11 @@ Microchip Technology Omniscient Code Generator v1.40 (Free mode) build 201612010
  13944  0018BA  D7FA               	bra	u8807
  13945  0018BC  F000               	nop	
  13946                           
- 13947                           ;Test.c: 399: updateServoPosition(1370, 3);
+ 13947                           ;Test.c: 399: updateServoPosition(1500, 3);
  13948  0018BE  0E05               	movlw	5
  13949  0018C0  0100               	movlb	0	; () banked
  13950  0018C2  6F81               	movwf	(updateServoPosition@time_us+1)& (0+255),b
- 13951  0018C4  0E5A               	movlw	90
+ 13951  0018C4  0EDC               	movlw	220
  13952  0018C6  6F80               	movwf	updateServoPosition@time_us& (0+255),b
  13953  0018C8  0E00               	movlw	0
  13954  0018CA  0100               	movlb	0	; () banked
@@ -24051,7 +24051,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.40 build -251452761 
-Symbol Table                                                                                   Wed Mar 29 00:09:16 2017
+Symbol Table                                                                                   Wed Mar 29 00:38:27 2017
 
                                     _i 0131                     i2_I2C_Master_Start 4B8C  
                    i2_I2C_Master_Write 4B62                                     l66 4AFA  
@@ -24296,7 +24296,7 @@ Symbol Table                                                                    
                                  u7607 28F0                                   u8417 04D0  
                                  u8337 029E                                   u8257 0092  
                                  u8177 1ED6                                   u8097 1D0E  
-                                 u7617 28FA                                   u8507 074A  
+                                 u7617 28F8                                   u8507 074A  
                                  u8427 052C                                   u8347 031C  
                                  u8267 0102                                   u8187 1EF0  
                                  u7707 304A                                   u7627 292A  

@@ -29,7 +29,7 @@
 #define PAN_L       2200
 #define TILT_REST   1050 // 1150
 #define POP_TILT_DROP  1260
-#define SOUP_TILT_DROP 1370
+#define SOUP_TILT_DROP 1500
 
 // Characteristic travel times in milliseconds
 #define TIME_OUT_OF_TROMMEL     1500

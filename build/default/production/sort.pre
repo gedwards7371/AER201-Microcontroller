@@ -4055,9 +4055,9 @@ sensor_outputs[0] = MAG_signal;
 if(sensor_outputs[0]){
 for(int i = 0; i<2500; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((70)*(32000000/4000000.0)));
+_delay((unsigned long)((75)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((30)*(32000000/4000000.0)));
+_delay((unsigned long)((25)*(32000000/4000000.0)));
 }
 }
 else{
@@ -4069,7 +4069,7 @@ _delay((unsigned long)((42)*(32000000/4000000.0)));
 }
 }
 
-_delay((unsigned long)((50)*(32000000/4000.0)));
+_delay((unsigned long)((100)*(32000000/4000.0)));
 
 readIR();
 if(IR_signal==1){
@@ -4177,10 +4177,10 @@ case 1:
 updateServoPosition(1260, 3);
 break;
 case 2:
-updateServoPosition(1370, 3);
+updateServoPosition(1500, 3);
 break;
 case 3:
-updateServoPosition(1370, 3);
+updateServoPosition(1500, 3);
 break;
 default:
 break;

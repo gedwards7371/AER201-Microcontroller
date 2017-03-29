@@ -126,9 +126,9 @@ void Loading(void){
             if(sensor_outputs[0]){
                 for(int i = 0; i<2500; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
-                    __delay_us(70);
+                    __delay_us(75);
                     SOL_PUSHER = 0;
-                    __delay_us(30);
+                    __delay_us(25);
                 }
             }
             else{
@@ -140,7 +140,7 @@ void Loading(void){
                 }
             }
             
-            __delay_ms(50);
+            __delay_ms(100);
             // Check if can is stuck. If so, hit it with all we've got!
             readIR();
             if(IR_signal==1){
