@@ -141,7 +141,7 @@ void Loading(void){
                 }
             }
             
-            __delay_ms(200);
+            __delay_ms(350);
             // Check if can is stuck. If so, hit it again.
             readIR();
             if(IR_signal==1){
@@ -166,26 +166,72 @@ void Loading(void){
                     }
                 }
                 
-                __delay_ms(200);
+                __delay_ms(350);
                 // Check if can is still stuck. If so, hit it with all we've got!
-                int i = 1;
+                int j = 1;
                 while(IR_signal == 1){
                     readIR();
                     if(IR_signal==1){
-                        __delay_ms(200);
+                        __delay_ms(350);
                         readIR();
                         if(IR_signal==1){
-                            SOL_PUSHER = 1;
-                            __delay_ms(250);
-                            SOL_PUSHER =  0;
+                            if(sensor_outputs[0]){
+                                SOL_PUSHER = 1;
+                                __delay_ms(250);
+                                SOL_PUSHER = 0;
+                            }
+                            else{
+                                for(int i = 0; i<2500; i++){
+                                    switch(j){
+                                        case 1:
+                                            SOL_PUSHER = 1;
+                                            __delay_us(75);
+                                            SOL_PUSHER = 0;
+                                            __delay_us(25);
+                                            break;
+                                        case 2:
+                                            SOL_PUSHER = 1;
+                                            __delay_us(80);
+                                            SOL_PUSHER = 0;
+                                            __delay_us(20);
+                                            break;
+                                        case 3:
+                                            SOL_PUSHER = 1;
+                                            __delay_us(85);
+                                            SOL_PUSHER = 0;
+                                            __delay_us(15);
+                                            break;
+                                        case 4:
+                                            SOL_PUSHER = 1;
+                                            __delay_us(90);
+                                            SOL_PUSHER = 0;
+                                            __delay_us(10);
+                                            break;
+                                        case 5:
+                                            SOL_PUSHER = 1;
+                                            __delay_us(95);
+                                            SOL_PUSHER = 0;
+                                            __delay_us(5);
+                                            break;
+                                        default:
+                                            SOL_PUSHER = 1;
+                                            __delay_ms(25);
+                                            SOL_PUSHER = 0;
+                                            break;
+                                    }  
+                                }
+                            }
                         }
+                        if(IR_signal==1){
+                            if(j == 10){
+                                DC = 1;
+                                __delay_ms(5000);
+                                DC = 0;
+                                j = 0;
+                            }
+                        }
+                        j++;
                     }
-                    if(i % 10 == 0){
-                        DC = 1;
-                        __delay_ms(5000);
-                        DC = 0;
-                    }
-                    i++;
                 }
             }
             f_can_coming_to_ID = 1;

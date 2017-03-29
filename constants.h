@@ -29,7 +29,7 @@
 #define PAN_L       2400 // 2200
 #define TILT_REST   1050 // 1150
 #define POP_TILT_DROP  1260
-#define SOUP_TILT_DROP 1420
+#define SOUP_TILT_DROP 1390
 
 // Characteristic travel times in milliseconds
 #define TIME_OUT_OF_TROMMEL     1500
@@ -43,7 +43,7 @@
 // Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           179
 #define MAX_CANS                12
-#define MAX_NO_CANS             179 // 25
+#define MAX_NO_CANS             42
 
 // IR sensor thresholds
 #define THIR    800
