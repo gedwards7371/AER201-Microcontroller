@@ -3901,9 +3901,12 @@ extern int MAG_signal;
 
 
 void updateServoPosition(int time_us, int timer);
+void updateServoStates(void);
 extern unsigned int servoTimes[4];
 volatile extern int was_low_1;
 volatile extern int was_low_3;
+volatile extern int servo_timer_counter;
+volatile extern int servo_state;
 
 
 extern int sensor_outputs[2];

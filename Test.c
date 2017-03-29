@@ -455,11 +455,11 @@ void PortTestA5(void){
             break;
         }
         else{
-            LATAbits.LATA5 = 1;
+            DC = 1;
             while(PORTBbits.RB1 == 1){
                 // Wait until the key has been released
             }
-            LATAbits.LATA5 = 0;
+            DC = 0;
         }
     }
 }

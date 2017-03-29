@@ -44,6 +44,8 @@ int MAG_signal;
 unsigned int servoTimes[4];
 volatile int was_low_1;
 volatile int was_low_3;
+volatile int servo_timer_counter;
+volatile int servo_state;
 
 // Can type trackers
 int sensor_outputs[2]; // Create array to identify can type.[0] = magnetism, [1] = conductivity
@@ -410,6 +412,10 @@ void initGlobalVars(void){
     
     // Time variables
     most_recent_sort_time  = 999;
+    
+    // Servo variables
+    servo_timer_counter = 0;
+    servo_state = -1;
 }
 void initSortTimer(void){
     // 1 second timer to generate interrupts
@@ -517,6 +523,56 @@ void updateServoPosition(int time_us, int timer){
         case 3:
             servoTimes[2] = my_time >> 8;
             servoTimes[3] = my_time & 0xFF;
+    }
+    servo_state = time_us;
+}
+void updateServoStates(void){
+    //
+    //...only enter the location code after ensuring conditions are met in time code
+    // ^ -> relies on characteristic travel times...use a flag for the location switch statements
+    //
+    //...take care of time with servo_timer_counter
+    //
+    // Takes care of current location, not how long duration @ location is
+    switch(servo_state){
+        case PAN_R:
+            updateServoPosition(POP_TILT_DROP, 3);
+            updateServoPosition(TILT_REST, 3);
+            servo_timer_counter = 0;
+            break;
+        case PAN_RMID:
+            updateServoPosition(POP_TILT_DROP, 3);
+            updateServoPosition(TILT_REST, 3);
+            servo_timer_counter = 0;
+            break;
+        case PAN_LMID:
+            updateServoPosition(SOUP_TILT_DROP, 3);
+            updateServoPosition(TILT_REST, 3);
+            servo_timer_counter = 0;
+            break;
+        case PAN_L:
+            updateServoPosition(SOUP_TILT_DROP, 3);
+            updateServoPosition(TILT_REST, 3);
+            servo_timer_counter = 0;
+            break;
+        
+        case POP_TILT_DROP:
+            updateServoPosition(TILT_REST, 3);
+            servo_timer_counter = 0;
+            break;
+        case SOUP_TILT_DROP:
+            updateServoPosition(TILT_REST, 3);
+            servo_timer_counter = 0;
+            break;
+            
+        case TILT_REST:
+            updateServoPosition(PAN_MID, 1);
+            updateServoPosition(TILT_REST, 3);
+            servo_timer_counter = 0;
+            break;
+            
+        default:
+            break;
     }
 }
 
