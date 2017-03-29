@@ -154,7 +154,7 @@ void Loading(void){
                             __delay_us(75);
                             SOL_PUSHER = 0;
                             __delay_us(25);
-                            }
+                        }
                     }
                     else{
                         for(int i = 0; i<2500; i++){
@@ -227,6 +227,17 @@ void Loading(void){
                         }
                         SOL_PUSHER = 0;
                         j++;
+                    }
+                    // Recognition of "almost got unstuck" case
+                    if(!IR_signal){
+                        __delay_ms(1000);
+                        readIR();
+                        if(IR_signal==1){
+                            continue;
+                        }
+                        else{
+                            break;
+                        }
                     }
                 }
                 DC = 0;

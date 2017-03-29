@@ -190,25 +190,25 @@ EmergencyStop_state 4
 [v _sort sort `(v  1 e 1 0 ]
 "70
 [v _Loading Loading `(v  1 e 1 0 ]
-"238
+"249
 [v _ID ID `(v  1 e 1 0 ]
-"313
+"324
 [v _Distribution Distribution `(v  1 e 1 0 ]
-"380
+"391
 [v _initGlobalVars initGlobalVars `(v  1 e 1 0 ]
-"403
+"414
 [v _initSortTimer initSortTimer `(v  1 e 1 0 ]
-"423
-[v _initServos initServos `(v  1 e 1 0 ]
 "434
+[v _initServos initServos `(v  1 e 1 0 ]
+"445
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
-"475
+"486
 [v _getIR getIR `(v  1 e 1 0 ]
-"491
+"502
 [v _getMAG getMAG `(v  1 e 1 0 ]
-"500
+"511
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
-"512
+"523
 [v _delay_ms delay_ms `(v  1 e 1 0 ]
 [v i2_delay_ms delay_ms `(v  1 e 1 0 ]
 "30 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
@@ -776,31 +776,31 @@ EmergencyStop_state 4
 [v Loading@addr addr `us  1 a 2 51 ]
 "82
 [v Loading@byte1 byte1 `uc  1 a 1 53 ]
-"237
+"248
 } 0
-"403
+"414
 [v _initSortTimer initSortTimer `(v  1 e 1 0 ]
 {
-"406
+"417
 [v initSortTimer@i i `i  1 a 2 8 ]
-"422
+"433
 } 0
-"380
+"391
 [v _initGlobalVars initGlobalVars `(v  1 e 1 0 ]
 {
-"402
+"413
 } 0
-"491
+"502
 [v _getMAG getMAG `(v  1 e 1 0 ]
 {
-"498
+"509
 } 0
-"475
+"486
 [v _getIR getIR `(v  1 e 1 0 ]
 {
-"477
+"488
 [v getIR@i i `i  1 a 2 7 ]
-"490
+"501
 } 0
 "23 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
 [v _readIR readIR `(v  1 e 1 0 ]
@@ -809,27 +809,27 @@ EmergencyStop_state 4
 [v readIR@res res `i  1 a 2 4 ]
 "27
 } 0
-"238 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"249 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _ID ID `(v  1 e 1 0 ]
 {
-"303
+"314
 [v ID@i_1120 i `i  1 a 2 6 ]
-"284
+"295
 [v ID@i i `i  1 a 2 4 ]
-"312
+"323
 } 0
-"512
+"523
 [v _delay_ms delay_ms `(v  1 e 1 0 ]
 {
 [v delay_ms@milliseconds milliseconds `uc  1 a 1 wreg ]
 [v delay_ms@milliseconds milliseconds `uc  1 a 1 wreg ]
 [v delay_ms@milliseconds milliseconds `uc  1 a 1 1 ]
-"518
+"529
 } 0
-"313
+"324
 [v _Distribution Distribution `(v  1 e 1 0 ]
 {
-"378
+"389
 } 0
 "15 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\MachineConfig.c
 [v _machineConfig machineConfig `(v  1 e 1 0 ]
@@ -1179,20 +1179,20 @@ EmergencyStop_state 4
 {
 "407
 } 0
-"423 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"434 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _initServos initServos `(v  1 e 1 0 ]
 {
-"433
+"444
 } 0
-"500
+"511
 [v _updateServoPosition updateServoPosition `(v  1 e 1 0 ]
 {
-"501
+"512
 [v updateServoPosition@my_time my_time `ui  1 a 2 6 ]
-"500
+"511
 [v updateServoPosition@time_us time_us `i  1 p 2 0 ]
 [v updateServoPosition@timer timer `i  1 p 2 2 ]
-"510
+"521
 } 0
 "589 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _BlockerTest BlockerTest `(v  1 e 1 0 ]
@@ -1413,26 +1413,26 @@ EmergencyStop_state 4
 [v i2EEPROM_read@address address `us  1 p 2 0 ]
 "82
 } 0
-"434 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"445 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _printSortTimer printSortTimer `(v  1 e 1 0 ]
 {
-"454
+"465
 [v printSortTimer@i_1132 i `i  1 a 2 70 ]
-"437
+"448
 [v printSortTimer@i i `i  1 a 2 72 ]
-"436
+"447
 [v printSortTimer@curTime curTime `[7]i  1 a 14 44 ]
-"442
+"453
 [v printSortTimer@timeDiff timeDiff `ui  1 a 2 68 ]
-"467
+"478
 [v printSortTimer@sec sec `i  1 a 2 64 ]
-"466
+"477
 [v printSortTimer@min min `i  1 a 2 62 ]
-"441
+"452
 [v printSortTimer@cur_sec cur_sec `ui  1 a 2 60 ]
-"440
+"451
 [v printSortTimer@start_sec start_sec `ui  1 a 2 58 ]
-"473
+"484
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v i2_printf printf `(i  1 e 2 0 ]
@@ -1545,11 +1545,11 @@ EmergencyStop_state 4
 {
 "29
 } 0
-"512 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
+"523 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v i2_delay_ms delay_ms `(v  1 e 1 0 ]
 {
 [v i2delay_ms@milliseconds milliseconds `uc  1 a 1 wreg ]
 [v i2delay_ms@milliseconds milliseconds `uc  1 a 1 wreg ]
 [v i2delay_ms@milliseconds milliseconds `uc  1 a 1 1 ]
-"518
+"529
 } 0

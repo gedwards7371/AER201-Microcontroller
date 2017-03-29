@@ -31,15 +31,15 @@
 #define POP_TILT_DROP  1260
 #define SOUP_TILT_DROP 1390
 
-// Characteristic travel times in milliseconds
-#define TIME_OUT_OF_TROMMEL     1500
+// Characteristic travel times in milliseconds unless otherwise noted
+#define TIME_OUT_OF_TROMMEL     750
 #define TIME_LOADING_TO_ID      1500
 #define TIME_ID_TO_DISTRIBUTION 1500
 #define TIME_SOLENOID_MOTION    300
 #define TIME_SERVO_MOTION       750
 #define TILT_DROP_DELAY         2500
 #define TIME_CONDUCTIVITY       600
-#define TIME_INTERMITTENT_DRUM_STOP 20
+#define TIME_INTERMITTENT_DRUM_STOP 20 // Seconds
 
 // Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           179
