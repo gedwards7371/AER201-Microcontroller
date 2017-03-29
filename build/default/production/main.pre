@@ -4000,4 +4000,6 @@ LATB = 0x00;
 LATC = 0x00;
 LATD = 0x00;
 LATE = 0x00;
+TMR1ON = 0;
+TMR3ON = 0;
 }

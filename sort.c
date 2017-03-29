@@ -142,16 +142,42 @@ void Loading(void){
                 }
             }
             
-            __delay_ms(100);
+            __delay_ms(200);
             // Check if can is stuck. If so, hit it with all we've got!
             readIR();
             if(IR_signal==1){
                 __delay_ms(100);
                 readIR();
                 if(IR_signal==1){
-                    SOL_PUSHER = 1;
-                    __delay_us(250);
-                    SOL_PUSHER = 0;
+                    if(sensor_outputs[0]){
+                        for(int i = 0; i<2500; i++){
+                            SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
+                            __delay_us(75);
+                            SOL_PUSHER = 0;
+                            __delay_us(25);
+                            }
+                    }
+                    else{
+                        for(int i = 0; i<2500; i++){
+                            SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
+                            __delay_us(58);
+                            SOL_PUSHER = 0;
+                            __delay_us(42);
+                        }
+                    }
+                }
+                
+                __delay_ms(200);
+                // Check if can is stuck. If so, hit it with all we've got!
+                readIR();
+                if(IR_signal==1){
+                    __delay_ms(100);
+                    readIR();
+                    if(IR_signal==1){
+                        SOL_PUSHER = 1;
+                        __delay_ms(250);
+                        SOL_PUSHER =  0;
+                    }
                 }
             }
             f_can_coming_to_ID = 1;
@@ -315,7 +341,7 @@ void initGlobalVars(void){
     count_can_no_lab = 0;
     
     // Time variables
-    most_recent_sort_time  = 0;
+    most_recent_sort_time  = 999;
 }
 void initSortTimer(void){
     // 1 second timer to generate interrupts
@@ -361,12 +387,12 @@ void printSortTimer(void){
     total_time = timeDiff;
     
     if(f_most_recent_sort_time){
-        most_recent_sort_time = timeDiff;
-        f_most_recent_sort_time;
+        most_recent_sort_time = total_time;
+        f_most_recent_sort_time = 0;
     }
      
     
-    if((most_recent_sort_time - timeDiff == 15) | (timeDiff == MAX_SORT_TIME)){
+    if((total_time - most_recent_sort_time == MAX_NO_CANS) | (total_time == MAX_SORT_TIME)){
         machine_state = DoneSorting_state;
         // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
     }

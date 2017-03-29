@@ -35,6 +35,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
 "1316
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
+"7578
+[v _TMR1ON `Vb ~T0 @X0 0 e@32360 ]
+"7596
+[v _TMR3ON `Vb ~T0 @X0 0 e@32136 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3136,7 +3140,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 75: LATE = 0x00;
 "75
 [e = _LATE -> -> 0 `i `uc ]
-[; ;main.c: 76: }
+[; ;main.c: 76: TMR1ON = 0;
 "76
+[e = _TMR1ON -> -> 0 `i `b ]
+[; ;main.c: 77: TMR3ON = 0;
+"77
+[e = _TMR3ON -> -> 0 `i `b ]
+[; ;main.c: 78: }
+"78
 [e :UE 283 ]
 }

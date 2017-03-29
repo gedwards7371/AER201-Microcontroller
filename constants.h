@@ -26,10 +26,10 @@
 #define PAN_RMID    850
 #define PAN_MID     1200 // 1500
 #define PAN_LMID    1670
-#define PAN_L       2200
+#define PAN_L       2400 // 2200
 #define TILT_REST   1050 // 1150
 #define POP_TILT_DROP  1260
-#define SOUP_TILT_DROP 1500
+#define SOUP_TILT_DROP 1400
 
 // Characteristic travel times in milliseconds
 #define TIME_OUT_OF_TROMMEL     1500
@@ -43,9 +43,10 @@
 // Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           179
 #define MAX_CANS                12
+#define MAX_NO_CANS             179 // 25
 
 // IR sensor thresholds
-#define THIR    1000
+#define THIR    800
 #define THMAG   150
 
 //LCD Control Registers

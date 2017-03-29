@@ -467,11 +467,31 @@ void PortTestA5(void){
 void PusherTest(void){
     __lcd_clear();__lcd_home();
     printf("PUSHER TST");
+    IR_EMITTER = 1;
+    //DC = 1;
+    while(PORTBbits.RB1 == 0){
+        readADC(0);
+        int res = ADRESH<<8 | ADRESL;
+        IR_signal = (res > THIR) ? 1 : 0;
+        
+        __lcd_clear();__lcd_home();
+        printf("IR_signal: %d ", IR_signal);
+        __lcd_newline();
+        printf("%d", res);
+        __delay_ms(100);
+    }  
+    
     
     while(1){
          while(PORTBbits.RB1 == 0){ 
-            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
-            // the PIC will wait and do nothing until a key press is signaled
+            readADC(0);
+            int res = ADRESH<<8 | ADRESL;
+            IR_signal = (res > THIR) ? 1 : 0;
+            __lcd_clear();__lcd_home();
+            printf("IR_signal: %d ", IR_signal);
+            __lcd_newline();
+            printf("%d", res);
+            __delay_ms(100);
         }
         if(PORTB >> 4 == 0b1111){
             break;
@@ -497,6 +517,7 @@ void PusherTest(void){
 
         while(PORTBbits.RB1 == 1) {continue;}
     }
+    IR_EMITTER = 0;
 }
 
 void ToggleTestA5(void){

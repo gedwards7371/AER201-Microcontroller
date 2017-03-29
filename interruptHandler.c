@@ -27,6 +27,11 @@ void interrupt handler(void) {
                 updateMenu();
             }
         }
+        if(machine_state == Sorting_state){
+            if(input == '*'){
+                machine_state = DoneSorting_state;
+            }
+        }
     }
     
     //** 1 SECOND TIMER THAT CALLS printSortTimer() **
