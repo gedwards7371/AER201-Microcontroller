@@ -116,14 +116,16 @@ void Loading(void){
         else if(f_ID_receive){
             f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
             __delay_ms(TIME_OUT_OF_TROMMEL); 
-            
+            DC  =  0; // Stop trommel to minimize can-within-can chances and meet our
+                     // design requirement of "simplicity" by not having unnecessary actions
+                    
             // Read magnetism to distinguish pop cans and soup cans (start of IDing)
             getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[0] = MAG_signal;
             
             if(sensor_outputs[0]){
                 for(int i = 0; i<2500; i++){
-                    SOL_PUSHER = 1; // activate solenoid pusher
+                    SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
                     __delay_us(70);
                     SOL_PUSHER = 0;
                     __delay_us(30);
@@ -131,13 +133,21 @@ void Loading(void){
             }
             else{
                 for(int i = 0; i<2500; i++){
-                    SOL_PUSHER = 1; // activate solenoid pusher
+                    SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
                     __delay_us(58);
                     SOL_PUSHER = 0;
                     __delay_us(42);
                 }
             }
             
+            __delay_ms(50);
+            // Check if can is stuck. If so, hit it with all we've got!
+            readIR();
+            if(IR_signal==1){
+                SOL_PUSHER = 1;
+                __delay_us(250);
+                SOL_PUSHER = 0;
+            }
             f_can_coming_to_ID = 1;
         }
     }
@@ -198,6 +208,15 @@ void ID(void){
         f_can_coming_to_distribution = 1;
         __delay_ms(TIME_ID_TO_DISTRIBUTION);
         SERVOCAM = 1; // Raise block
+        
+        // Turn on DC motors again to start mixing remaining cans
+        if(!f_lastCan){
+            for(int i=0; i<46; i++){
+                DC = !DC;
+                delay_ms(45-i);
+            }
+            DC = 1;
+        }
         
         f_can_coming_to_ID = 0; // clear ID flag to allow another can to come
     }
