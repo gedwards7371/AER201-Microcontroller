@@ -31,9 +31,9 @@ void Test(void){
     // Test cases for the algorithm, sensors, and actuators
     while(1){
         __lcd_clear();__lcd_home();
-        printf("1.ALG|2.SNR|3.AC");
+        printf("2.SNR|4.HI|5.MED");
         __lcd_newline();
-        printf("4.HI|5.TOG|6.EEP");
+        printf("B.PSH|8.SV|9.BLK");
         __delay_ms(100);
         while(PORTBbits.RB1 == 0) {continue;}
         var = PORTB >> 4;
@@ -195,7 +195,7 @@ void sensorTest(void){
                 __lcd_home();__lcd_newline();
                 printf("COND: %d", COND_SENSORS);
             }
-            SOL_COND_SENSORS = ~SOL_OUT;
+            SOL_COND_SENSORS = !SOL_OUT;
         }
     }
 }
@@ -235,10 +235,10 @@ void actuatorTest(void){
     for(i=0;i<5;i++){
         SOL_COND_SENSORS = SOL_OUT;
         __delay_ms(TIME_SOLENOID_MOTION);
-        SOL_COND_SENSORS = ~SOL_OUT;
+        SOL_COND_SENSORS = !SOL_OUT;
         __delay_ms(1000-TIME_SOLENOID_MOTION);
     }
-    SOL_COND_SENSORS = ~SOL_OUT;
+    SOL_COND_SENSORS = !SOL_OUT;
     __lcd_clear();__lcd_home();
     
     // Pusher solenoid activation
@@ -251,10 +251,10 @@ void actuatorTest(void){
     for(i=0;i<5;i++){
         SOL_PUSHER = SOL_OUT;
         __delay_ms(TIME_SOLENOID_MOTION);
-        SOL_PUSHER = ~SOL_OUT;
+        SOL_PUSHER = !SOL_OUT;
         __delay_ms(1000-TIME_SOLENOID_MOTION);
     }
-    SOL_PUSHER = ~SOL_OUT;
+    SOL_PUSHER = !SOL_OUT;
     __lcd_clear();__lcd_home();
     
     // Initialize code for all servos
@@ -567,19 +567,33 @@ void EEPROMTest(void){
 
 void BlockerTest(void){
     __lcd_clear();__lcd_home();
-    printf("D WILL RETURN    ");
+    printf("D: RET|2: COND %d", COND_SENSORS);
     __lcd_newline();
-    printf("OTHER TOGGLES CAM");
-    int flag = 1; // 1 for up, 0 for down
+    printf("OTHER: CAM TOGGLE");
+    int cam_flag = 1; // 1 for up, 0 for down
+    int cond_flag = 0; // 1 for out, 0 for in
     while(1){
-        while(PORTBbits.RB1 == 0){ continue; }
+        while(PORTBbits.RB1 == 0){ 
+            __lcd_home();
+            printf("D: RET|2: COND %d", COND_SENSORS);
+        }
         if(PORTB >> 4 == 0b1111){
             break;
         }
+        else if(PORTB >> 4 == 0b0001){
+            if(cond_flag){
+               SOL_COND_SENSORS = 1;
+               cond_flag = !cond_flag;
+            }
+            else{
+                SOL_COND_SENSORS = 0;
+                cond_flag = !cond_flag;
+            }
+        }
         else{
-            if(flag){
+            if(cam_flag){
                SERVOCAM = 1;
-               flag = !flag;
+               cam_flag = !cam_flag;
             }
             else{
                 for(int i=0;i<5000;i++)
@@ -590,9 +604,13 @@ void BlockerTest(void){
                     __delay_us(90);
                 }
                 SERVOCAM = 0;
-                flag = !flag;
+                cam_flag = !cam_flag;
             }
         }
-        while(PORTBbits.RB1 == 1){ continue; /*If button still pressed*/}
+        while(PORTBbits.RB1 == 1){
+        /*If button still pressed*/
+            __lcd_home();
+            printf("D: RET|2: COND %d", COND_SENSORS);
+        }
     }
 }

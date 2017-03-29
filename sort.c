@@ -22,6 +22,7 @@ int f_ID_receive;
 int f_can_coming_to_ID;
 int f_can_coming_to_distribution;
 int f_can_distributed;
+int f_most_recent_sort_time;
 
 // Count variables
 int count_total;
@@ -33,6 +34,7 @@ int count_can_no_lab;
 // Time trackers
 int startTime[7];
 int total_time;
+int most_recent_sort_time;
 
 // Sensors
 int IR_signal;
@@ -144,9 +146,13 @@ void Loading(void){
             // Check if can is stuck. If so, hit it with all we've got!
             readIR();
             if(IR_signal==1){
-                SOL_PUSHER = 1;
-                __delay_us(250);
-                SOL_PUSHER = 0;
+                __delay_ms(100);
+                readIR();
+                if(IR_signal==1){
+                    SOL_PUSHER = 1;
+                    __delay_us(250);
+                    SOL_PUSHER = 0;
+                }
             }
             f_can_coming_to_ID = 1;
         }
@@ -281,6 +287,7 @@ void Distribution(void){
         
         f_can_coming_to_distribution = 0;
         f_can_distributed = 1;
+        f_most_recent_sort_time = 1;
         if(f_lastCan == 1){
             machine_state = DoneSorting_state;
         }
@@ -298,6 +305,7 @@ void initGlobalVars(void){
     f_can_coming_to_ID = 0;
     f_can_coming_to_distribution = 0;
     f_can_distributed = 0;
+    f_most_recent_sort_time = 0;
     
     // Count variables
     count_total = 0;
@@ -305,6 +313,9 @@ void initGlobalVars(void){
     count_pop_w_tab = 0;
     count_can_w_lab = 0;
     count_can_no_lab = 0;
+    
+    // Time variables
+    most_recent_sort_time  = 0;
 }
 void initSortTimer(void){
     // 1 second timer to generate interrupts
@@ -349,12 +360,17 @@ void printSortTimer(void){
     
     total_time = timeDiff;
     
-    if(timeDiff >= MAX_SORT_TIME){
+    if(f_most_recent_sort_time){
+        most_recent_sort_time = timeDiff;
+        f_most_recent_sort_time;
+    }
+     
+    
+    if((most_recent_sort_time - timeDiff == 15) | (timeDiff == MAX_SORT_TIME)){
         machine_state = DoneSorting_state;
         // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
     }
     
-    int hour = timeDiff / 3600;
     int min = (timeDiff % 3600) / 60;
     int sec = (timeDiff % 3600) % 60;
     
