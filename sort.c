@@ -293,7 +293,8 @@ void ID(void){
             }
         }
         SOL_COND_SENSORS = 0;
-        __delay_ms(200);
+        
+        while(!f_can_distributed){continue;}
         SOL_COND_SENSORS = 1;
         // Lower block
         /* PWM to make the CAM servo work with Twesh's circuit */
@@ -328,7 +329,7 @@ void ID(void){
 }
 void Distribution(void){
     if(f_can_coming_to_distribution){
-        
+        f_can_distributed = 0;
         // Set pan servo position
         // cur_can:
         //  0 - pop can no tab
@@ -368,7 +369,7 @@ void initGlobalVars(void){
     f_ID_receive = 1;
     f_can_coming_to_ID = 0;
     f_can_coming_to_distribution = 0;
-    f_can_distributed = 0;
+    f_can_distributed = 1;
     f_most_recent_sort_time = 0;
     
     // Count variables
@@ -503,6 +504,8 @@ void updateServoPosition(int time_us, int timer){
 void updateServoStates(void){
     //...only change servo state after ensuring travel times have been met or exceeded
     if(servo_timer_counter >= servo_timer_target){
+        __lcd_clear();__lcd_home();
+        printf("ENT");
         // Takes care of current location, not how long duration @ location is
         if(f_panning_to_bin){
             switch(pan_servo_state){
@@ -535,7 +538,7 @@ void updateServoStates(void){
         }
         else if(pan_servo_state == PAN_MID){
             // Don't do anything if waiting for a can...
-            
+            servo_timer_counter = 0;
         }
         else{
             switch(tilt_servo_state){
