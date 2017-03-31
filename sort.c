@@ -45,7 +45,10 @@ unsigned int servoTimes[4];
 volatile int was_low_1;
 volatile int was_low_3;
 volatile int servo_timer_counter;
-volatile int servo_state;
+volatile int servo_timer_target;
+volatile int pan_servo_state;
+volatile int tilt_servo_state;
+volatile int f_panning_to_bin;
 
 // Can type trackers
 int sensor_outputs[2]; // Create array to identify can type.[0] = magnetism, [1] = conductivity
@@ -349,44 +352,9 @@ void Distribution(void){
                 break;
         }
         updateServoPosition(TILT_REST, 3);
-        __delay_ms(TIME_SERVO_MOTION); // Give servo time to move
-        
-        // Tilt to drop can into bin
-        // cur_can:
-        //  0 - pop can no tab
-        //  1 - pop can with tab
-        //  2 - soup can with label
-        //  3 - soup can no label 
-        switch(cur_can){
-            case 0:
-                updateServoPosition(POP_TILT_DROP, 3);
-                break;
-            case 1:
-                updateServoPosition(POP_TILT_DROP, 3);
-                break;
-            case 2:
-                updateServoPosition(SOUP_TILT_DROP, 3);
-                break;
-            case 3:
-                updateServoPosition(SOUP_TILT_DROP, 3);
-                break;
-            default:
-                break;
-        }
-        __delay_ms(TILT_DROP_DELAY); // Give servo time to move
-        
-        // Reset the distribution stage
-        updateServoPosition(TILT_REST, 3);
-        __delay_ms(750);
-        updateServoPosition(PAN_MID, 1);
-        updateServoPosition(TILT_REST, 3);
-        
+        servo_timer_target = TIME_SERVO_MOTION;
+        f_panning_to_bin = 1;
         f_can_coming_to_distribution = 0;
-        f_can_distributed = 1;
-        f_most_recent_sort_time = 1;
-        if(f_lastCan == 1){
-            machine_state = DoneSorting_state;
-        }
     }
 }
 
@@ -415,7 +383,10 @@ void initGlobalVars(void){
     
     // Servo variables
     servo_timer_counter = 0;
-    servo_state = -1;
+    servo_timer_target = 9999;
+    pan_servo_state = -1;
+    tilt_servo_state = -1;
+    f_panning_to_bin = 0;
 }
 void initSortTimer(void){
     // 1 second timer to generate interrupts
@@ -520,59 +491,83 @@ void updateServoPosition(int time_us, int timer){
         case 1:
             servoTimes[0] = my_time >> 8;
             servoTimes[1] = my_time & 0xFF;
+            
+            pan_servo_state = time_us;
         case 3:
             servoTimes[2] = my_time >> 8;
             servoTimes[3] = my_time & 0xFF;
+            
+            tilt_servo_state = time_us;
     }
-    servo_state = time_us;
 }
 void updateServoStates(void){
-    //
-    //...only enter the location code after ensuring conditions are met in time code
-    // ^ -> relies on characteristic travel times...use a flag for the location switch statements
-    //
-    //...take care of time with servo_timer_counter
-    //
-    // Takes care of current location, not how long duration @ location is
-    switch(servo_state){
-        case PAN_R:
-            updateServoPosition(POP_TILT_DROP, 3);
-            updateServoPosition(TILT_REST, 3);
-            servo_timer_counter = 0;
-            break;
-        case PAN_RMID:
-            updateServoPosition(POP_TILT_DROP, 3);
-            updateServoPosition(TILT_REST, 3);
-            servo_timer_counter = 0;
-            break;
-        case PAN_LMID:
-            updateServoPosition(SOUP_TILT_DROP, 3);
-            updateServoPosition(TILT_REST, 3);
-            servo_timer_counter = 0;
-            break;
-        case PAN_L:
-            updateServoPosition(SOUP_TILT_DROP, 3);
-            updateServoPosition(TILT_REST, 3);
-            servo_timer_counter = 0;
-            break;
-        
-        case POP_TILT_DROP:
-            updateServoPosition(TILT_REST, 3);
-            servo_timer_counter = 0;
-            break;
-        case SOUP_TILT_DROP:
-            updateServoPosition(TILT_REST, 3);
-            servo_timer_counter = 0;
-            break;
+    //...only change servo state after ensuring travel times have been met or exceeded
+    if(servo_timer_counter >= servo_timer_target){
+        // Takes care of current location, not how long duration @ location is
+        if(f_panning_to_bin){
+            switch(pan_servo_state){
+                // Changes tilt state based on where the pan is
+                case PAN_R:
+                    updateServoPosition(POP_TILT_DROP, 3);
+                    servo_timer_counter = 0;
+                    servo_timer_target = TILT_DROP_DELAY;
+                    break;
+                case PAN_RMID:
+                    updateServoPosition(POP_TILT_DROP, 3);
+                    servo_timer_counter = 0;
+              
+                    servo_timer_target = TILT_DROP_DELAY;
+                    break;
+                case PAN_LMID:
+                    updateServoPosition(SOUP_TILT_DROP, 3);
+                    servo_timer_counter = 0;
+                    servo_timer_target = TILT_DROP_DELAY;
+                    break;
+                case PAN_L:
+                    updateServoPosition(SOUP_TILT_DROP, 3);
+                    servo_timer_counter = 0;
+                    servo_timer_target = TILT_DROP_DELAY;
+                    break;
+                default:
+                    break;
+            }
+            f_panning_to_bin = 0;
+        }
+        else if(pan_servo_state == PAN_MID){
+            // Don't do anything if waiting for a can...
             
-        case TILT_REST:
-            updateServoPosition(PAN_MID, 1);
-            updateServoPosition(TILT_REST, 3);
-            servo_timer_counter = 0;
-            break;
-            
-        default:
-            break;
+        }
+        else{
+            switch(tilt_servo_state){
+                // Reset the distribution stage
+                case POP_TILT_DROP:
+                    updateServoPosition(TILT_REST, 3);
+                    servo_timer_counter = 0;
+                    servo_timer_target = TIME_SERVO_MOTION;
+                    break;
+                case SOUP_TILT_DROP:
+                    updateServoPosition(TILT_REST, 3);
+                    servo_timer_counter = 0;
+                    servo_timer_target = TIME_SERVO_MOTION;
+                    break;
+
+                case TILT_REST:
+                    updateServoPosition(PAN_MID, 1);
+                    updateServoPosition(TILT_REST, 3);
+                    servo_timer_counter = 0;
+                    servo_timer_target = 9999;
+
+                    f_can_distributed = 1;
+                    f_most_recent_sort_time = 1;
+                    if(f_lastCan == 1){
+                        machine_state = DoneSorting_state;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }
 

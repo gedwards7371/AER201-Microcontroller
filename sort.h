@@ -45,7 +45,10 @@ extern unsigned int servoTimes[4]; // [0]=TMR1H, [1]=TMR1L, [2]=TMR3H, [3]=TMR3L
 volatile extern int was_low_1; // flag to indicate whether pan servo is refreshing (20ms low) or not refreshing (sending high signal)
 volatile extern int was_low_3; // flag to indicate whether tilt servo is refreshing (20ms low) or not refreshing (sending high signal)
 volatile extern int servo_timer_counter;
-volatile extern int servo_state;
+volatile extern int servo_timer_target;
+volatile extern int pan_servo_state;
+volatile extern int tilt_servo_state;
+volatile extern int f_panning_to_bin;
 
 // Can type trackers
 extern int sensor_outputs[2];

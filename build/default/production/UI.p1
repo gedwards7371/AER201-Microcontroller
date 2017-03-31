@@ -3008,14 +3008,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 45: volatile extern int was_low_1;
 [; ;sort.h: 46: volatile extern int was_low_3;
 [; ;sort.h: 47: volatile extern int servo_timer_counter;
-[; ;sort.h: 48: volatile extern int servo_state;
-[; ;sort.h: 51: extern int sensor_outputs[2];
-[; ;sort.h: 52: extern int count_total;
-[; ;sort.h: 53: extern int count_pop_no_tab;
-[; ;sort.h: 54: extern int count_pop_w_tab;
-[; ;sort.h: 55: extern int count_can_w_lab;
-[; ;sort.h: 56: extern int count_can_no_lab;
-[; ;sort.h: 57: extern int cur_can;
+[; ;sort.h: 48: volatile extern int servo_timer_target;
+[; ;sort.h: 49: volatile extern int pan_servo_state;
+[; ;sort.h: 50: volatile extern int tilt_servo_state;
+[; ;sort.h: 51: volatile extern int f_panning_to_bin;
+[; ;sort.h: 54: extern int sensor_outputs[2];
+[; ;sort.h: 55: extern int count_total;
+[; ;sort.h: 56: extern int count_pop_no_tab;
+[; ;sort.h: 57: extern int count_pop_w_tab;
+[; ;sort.h: 58: extern int count_can_w_lab;
+[; ;sort.h: 59: extern int count_can_no_lab;
+[; ;sort.h: 60: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(void);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
@@ -3323,8 +3326,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.c: 124: lcdInst(0b11000000);;
 "124
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[v F3232 `uc ~T0 @X0 -> 0 `x s ]
-[i F3232
+[v F3235 `uc ~T0 @X0 -> 0 `x s ]
+[i F3235
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3335,7 +3338,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "125
 [v _month `uc ~T0 @X0 4  a ]
 [; ;UI.c: 125: char month[] = "MMM";
-[e = _month F3232 ]
+[e = _month F3235 ]
 [; ;UI.c: 126: switch(log_startTime[5]){
 "126
 [e $U 302  ]
