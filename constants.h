@@ -34,8 +34,8 @@
 
 // Characteristic travel times in milliseconds unless otherwise noted
 #define TIME_OUT_OF_TROMMEL     750
-#define TIME_LOADING_TO_ID      1500
-#define TIME_ID_TO_DISTRIBUTION 1500
+#define TIME_LOADING_TO_ID      1000
+#define TIME_ID_TO_DISTRIBUTION 750
 #define TIME_SOLENOID_MOTION    300
 #define TIME_SERVO_MOTION       750
 #define TILT_DROP_DELAY         700 // 2500

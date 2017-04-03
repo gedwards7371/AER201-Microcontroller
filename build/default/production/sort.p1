@@ -3802,9 +3802,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "255
 [e $ ! != _f_can_coming_to_ID -> 0 `i 323  ]
 {
-[; ;sort.c: 257: _delay((unsigned long)((1500)*(32000000/4000.0)));
+[; ;sort.c: 257: _delay((unsigned long)((1000)*(32000000/4000.0)));
 "257
-[e ( __delay (1 -> * -> -> 1500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [; ;sort.c: 259: LATAbits.LATA3 = 1;
 "259
 [e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
@@ -3958,9 +3958,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.c: 314: f_can_coming_to_distribution = 1;
 "314
 [e = _f_can_coming_to_distribution -> 1 `i ]
-[; ;sort.c: 315: _delay((unsigned long)((1500)*(32000000/4000.0)));
+[; ;sort.c: 315: _delay((unsigned long)((750)*(32000000/4000.0)));
 "315
-[e ( __delay (1 -> * -> -> 1500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [; ;sort.c: 316: LATCbits.LATC0 = 1;
 "316
 [e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
