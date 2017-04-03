@@ -27,6 +27,11 @@ void interrupt handler(void) {
                 updateMenu();
             }
         }
+        if(machine_state == Sorting_state){
+            if(input == '*'){
+                machine_state = DoneSorting_state;
+            }
+        }
     }
     
     //** 1 SECOND TIMER THAT CALLS printSortTimer() **
@@ -59,6 +64,9 @@ void interrupt handler(void) {
                 TMR1L = 20000 - servoTimes[1];
             }
             TMR1ON = 1;
+            servo_timer_counter += 10;
+            //servo_timer_counter += (float)((65535-((servoTimes[0] << 8) | (servoTimes[1] & 0xFF)))/1000);
+            updateServoStates();
         }
     }
     

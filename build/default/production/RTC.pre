@@ -3882,11 +3882,13 @@ extern int f_can_coming_to_distribution;
 
 
 extern int f_can_distributed;
+extern int f_most_recent_sort_time;
 
 
 void printSortTimer(void);
 extern int startTime[7];
 extern int total_time;
+extern int most_recent_sort_time;
 
 
 void delay_ms(unsigned char milliseconds);
@@ -3899,11 +3901,18 @@ extern int MAG_signal;
 
 
 void updateServoPosition(int time_us, int timer);
+void updateServoStates(void);
 extern unsigned int servoTimes[4];
 volatile extern int was_low_1;
 volatile extern int was_low_3;
+volatile extern int servo_timer_counter;
+volatile extern int servo_timer_target;
+volatile extern int pan_servo_state;
+volatile extern int tilt_servo_state;
+volatile extern int f_panning_to_bin;
 
 
+extern int sensor_outputs[2];
 extern int count_total;
 extern int count_pop_no_tab;
 extern int count_pop_w_tab;

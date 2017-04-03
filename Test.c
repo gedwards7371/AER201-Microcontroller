@@ -23,47 +23,53 @@ void PortTests(void);
 void PortTestA5(void);
 void EEPROMTest(void);
 void ToggleTestA5(void);
-void PusherTestA5(void);
+void SpeedTest(void);
+void PusherTest(void);
+void BlockerTest(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
     while(1){
         __lcd_clear();__lcd_home();
-        printf("1.ALG|2.SNR|3.AC");
+        printf("2.SNR|4.HI|5.MED");
         __lcd_newline();
-        printf("4.HI|5.TOG|6.EEP");
+        printf("B.PSH|8.SV|9.BLK");
         __delay_ms(100);
         while(PORTBbits.RB1 == 0) {continue;}
         var = PORTB >> 4;
         var++;
         while(PORTBbits.RB1 == 1) {continue;}
         switch(var){
-            case 1:
+            case 1: // Key 1
                 algorithmTest();
                 break;
-            case 2:
+            case 2: // Key 2
                 sensorTest();
                 break;
-            case 3: 
+            case 3: // Key 3
                 actuatorTest();
                 break;
-            case 5: //  Key 4
+            case 5: // Key 4
                 PortTestA5();
                 break;
-            case 6: //  Key 5
-                ToggleTestA5();
+            case 6: // Key 5
+                //ToggleTestA5();
+                SpeedTest();
                 break;
-            case 7: //  Key 6
+            case 7: // Key 6
                 EEPROMTest();
                 break;
-            case 8: // Key  B
-                PusherTestA5();
+            case 8: // Key B
+                PusherTest();
                 break;
-            case 9: // Key  7
+            case 9: // Key 7
                 PortTests();
                 break;
             case 10: // Key 8
                 BothServos();
+                break;
+            case 11: // Key 9
+                BlockerTest();
                 break;
             default:
                 break;
@@ -132,6 +138,7 @@ void sensorTest(void){
     printf("TST: IR SNSR");
     __delay_ms(100);
     IR_EMITTER = 1;
+    //DC = 1;
     while(PORTBbits.RB1 == 0){
         readADC(0);
         int res = ADRESH<<8 | ADRESL;
@@ -142,8 +149,9 @@ void sensorTest(void){
         __lcd_newline();
         printf("%d", res);
         __delay_ms(100);
-     }  
+    }  
     IR_EMITTER = 0;
+    //DC = 0;
     
     
     // Magnetism sensor reading
@@ -187,7 +195,7 @@ void sensorTest(void){
                 __lcd_home();__lcd_newline();
                 printf("COND: %d", COND_SENSORS);
             }
-            SOL_COND_SENSORS = ~SOL_OUT;
+            SOL_COND_SENSORS = !SOL_OUT;
         }
     }
 }
@@ -227,10 +235,10 @@ void actuatorTest(void){
     for(i=0;i<5;i++){
         SOL_COND_SENSORS = SOL_OUT;
         __delay_ms(TIME_SOLENOID_MOTION);
-        SOL_COND_SENSORS = ~SOL_OUT;
+        SOL_COND_SENSORS = !SOL_OUT;
         __delay_ms(1000-TIME_SOLENOID_MOTION);
     }
-    SOL_COND_SENSORS = ~SOL_OUT;
+    SOL_COND_SENSORS = !SOL_OUT;
     __lcd_clear();__lcd_home();
     
     // Pusher solenoid activation
@@ -243,10 +251,10 @@ void actuatorTest(void){
     for(i=0;i<5;i++){
         SOL_PUSHER = SOL_OUT;
         __delay_ms(TIME_SOLENOID_MOTION);
-        SOL_PUSHER = ~SOL_OUT;
+        SOL_PUSHER = !SOL_OUT;
         __delay_ms(1000-TIME_SOLENOID_MOTION);
     }
-    SOL_PUSHER = ~SOL_OUT;
+    SOL_PUSHER = !SOL_OUT;
     __lcd_clear();__lcd_home();
     
     // Initialize code for all servos
@@ -306,7 +314,7 @@ void actuatorTest(void){
     
     __lcd_home();__lcd_newline();
     printf("DROP -- 2s      ");
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(POP_TILT_DROP, 3);
     __delay_1s();__delay_1s();
     
     __lcd_home();__lcd_newline();
@@ -348,7 +356,7 @@ void BothServos(void){
     TMR3ON = 1;
     machine_state = Sorting_state;
     was_low_1 = 0;
-    was_low_1 = 0;
+    was_low_3 = 0;
     
         // Combined control over both servos
     // Pass: (1) Pan servo vists R, RMID, MID, LMID, L
@@ -356,33 +364,39 @@ void BothServos(void){
     // Justification: tests the full range of motion we need for both servos
     initServos();
     __delay_ms(1500);
+    
     updateServoPosition(PAN_R, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(POP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
 
     updateServoPosition(PAN_RMID, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(POP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
 
     updateServoPosition(PAN_MID, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(1500);
     
     updateServoPosition(PAN_LMID, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(SOUP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-
+    
     updateServoPosition(PAN_L, 1);
+    updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
-    updateServoPosition(TILT_DROP, 3);
+    updateServoPosition(SOUP_TILT_DROP, 3);
     __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
@@ -441,50 +455,69 @@ void PortTestA5(void){
             break;
         }
         else{
-            LATAbits.LATA5 = 1;
+            DC = 1;
             while(PORTBbits.RB1 == 1){
                 // Wait until the key has been released
             }
-            
-            /* PWM to make the CAM servo work with Twesh's circuit */
-            for(i=0;i<10000;i++)
-            {
-                LATAbits.LATA5 = 1;
-                __delay_us(10);
-                LATAbits.LATA5 = 0;
-                __delay_us(90);
-            }    
-            
-            LATAbits.LATA5 = 0;
+            DC = 0;
         }
     }
 }
 
-void PusherTestA5(void){
+void PusherTest(void){
     __lcd_clear();__lcd_home();
     printf("PUSHER TST");
+    IR_EMITTER = 1;
+    //DC = 1;
+    while(PORTBbits.RB1 == 0){
+        readADC(0);
+        int res = ADRESH<<8 | ADRESL;
+        IR_signal = (res > THIR) ? 1 : 0;
+        
+        __lcd_clear();__lcd_home();
+        printf("IR_signal: %d ", IR_signal);
+        __lcd_newline();
+        printf("%d", res);
+        __delay_ms(100);
+    }  
+    
     
     while(1){
          while(PORTBbits.RB1 == 0){ 
-            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
-            // the PIC will wait and do nothing until a key press is signaled
+            readADC(0);
+            int res = ADRESH<<8 | ADRESL;
+            IR_signal = (res > THIR) ? 1 : 0;
+            __lcd_clear();__lcd_home();
+            printf("IR_signal: %d ", IR_signal);
+            __lcd_newline();
+            printf("%d", res);
+            __delay_ms(100);
         }
-         
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
         //int looptime = 0.1 / (uptime_us / 1000000);
         
-        /*
-        for(int i = 0; i<1550; i++){
+        else if(PORTB >> 4 == 0b0101){
+           for(int i = 0; i<3000; i++){
             SOL_PUSHER = 1; // activate solenoid pusher
-            __delay_us(65);
+            __delay_us(75);
             SOL_PUSHER = 0;
-            __delay_us(35);
-        }*/
-        SOL_PUSHER = 1;
-        __delay_ms(100);
-        SOL_PUSHER = 0;
-        
+            __delay_us(25);
+           }
+        }
+        else if (PORTB >> 4 == 0b110){
+            for(int i = 0; i<3000; i++){
+            SOL_PUSHER = 1; // activate solenoid pusher
+            __delay_us(58);
+            SOL_PUSHER = 0;
+            __delay_us(42);
+           }
+        }
+
         while(PORTBbits.RB1 == 1) {continue;}
     }
+    IR_EMITTER = 0;
 }
 
 void ToggleTestA5(void){
@@ -497,21 +530,47 @@ void ToggleTestA5(void){
         while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
             // the PIC will wait and do nothing until a key press is signaled
+            continue;
         }
         if(PORTB >> 4 == 0b1111){
             break;
         }
         else{
-            if(on == 0){
-                on = 1;
+            while(1){
                 LATAbits.LATA5 = 1;
-            }
-            else{
-                on = 0;
-                LATAbits.LATA5  = 0;
-            }
+                __delay_ms(3000);
+                LATAbits.LATA5 = 0;
+                __delay_ms(1000);
+            }  
         }
-        while(PORTBbits.RB1 == 1) {continue;}
+    }
+}
+
+void SpeedTest(void){
+    // Turns the trommel at half speed, on keypress
+    __lcd_clear();__lcd_home();
+    printf("S: D WILL RETURN ");
+    __lcd_newline();
+    printf("OTHER SETS RA5   ");
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
+            // the PIC will wait and do nothing until a key press is signaled
+        }
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
+        else{
+            while(PORTBbits.RB1 == 1){
+             LATAbits.LATA5 = 1;
+             __delay_ms(5);
+             LATAbits.LATA5 = 0;
+             __delay_ms(5);
+                
+                // Wait until the key has been released
+            }
+            LATAbits.LATA5 = 0;
+        }
     }
 }
 
@@ -525,4 +584,54 @@ void EEPROMTest(void){
     // EEPROM_read tests
     // Pass: 
     // Justification: 
+}
+
+void BlockerTest(void){
+    __lcd_clear();__lcd_home();
+    printf("D: RET|2: COND %d", COND_SENSORS);
+    __lcd_newline();
+    printf("OTHER: CAM TOGGLE");
+    int cam_flag = 1; // 1 for up, 0 for down
+    int cond_flag = 0; // 1 for out, 0 for in
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            __lcd_home();
+            printf("D: RET|2: COND %d", COND_SENSORS);
+        }
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
+        else if(PORTB >> 4 == 0b0001){
+            if(cond_flag){
+               SOL_COND_SENSORS = 1;
+               cond_flag = !cond_flag;
+            }
+            else{
+                SOL_COND_SENSORS = 0;
+                cond_flag = !cond_flag;
+            }
+        }
+        else{
+            if(cam_flag){
+               SERVOCAM = 1;
+               cam_flag = !cam_flag;
+            }
+            else{
+                for(int i=0;i<5000;i++)
+                {
+                    SERVOCAM = 1;
+                    __delay_us(10);
+                    SERVOCAM = 0;
+                    __delay_us(90);
+                }
+                SERVOCAM = 0;
+                cam_flag = !cam_flag;
+            }
+        }
+        while(PORTBbits.RB1 == 1){
+        /*If button still pressed*/
+            __lcd_home();
+            printf("D: RET|2: COND %d", COND_SENSORS);
+        }
+    }
 }
