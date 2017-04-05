@@ -120,6 +120,7 @@ void Loading(void){
         // "If a new can has already been loaded but the IR stage was not ready
         // the last time we executed this chunk...and if ID stage is ready..."
         else if(f_ID_receive){
+            f_most_recent_sort_time = 1;
             f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
             __delay_ms(TIME_OUT_OF_TROMMEL); 
             DC  =  0; // Stop trommel to minimize can-within-can chances and meet our
@@ -295,21 +296,36 @@ void ID(void){
         SOL_COND_SENSORS = 0;
         
         while(!f_can_distributed){continue;}
-        SOL_COND_SENSORS = 1;
-        // Lower block
-        /* PWM to make the CAM servo work with Twesh's circuit */
-        for(int i=0;i<10000;i++)
-        {
-            SERVOCAM = 1;
-            __delay_us(10);
-            SERVOCAM = 0;
-            __delay_us(90);
-        }  
-        SERVOCAM = 0;
         
-        SOL_COND_SENSORS = 0; // Retract solenoids. Note that this needs to happen after the cam is down,
-                              // because otherwise cans will sandwich the cam and it won't be able to
-                              // retract.
+        if(sensor_outputs[0]){
+            // "If a soup can, grab it with the conductivity sensors so that the blocker can lower..."
+            SOL_COND_SENSORS = 1;
+            // Lower block
+            /* PWM to make the CAM servo work with Twesh's circuit */
+            for(int i=0;i<10000;i++)
+            {
+                SERVOCAM = 1;
+                __delay_us(10);
+                SERVOCAM = 0;
+                __delay_us(90);
+            }
+            
+            SOL_COND_SENSORS = 0; // Retract solenoids. Note that this needs to happen after the cam is down,
+                                  // because otherwise cans will sandwich the cam and it won't be able to
+                                  // retract.
+        }
+        else{
+            // "If a pop can, allow it to rest against the blocker before lowering it..."
+            for(int i=0;i<10000;i++)
+            {
+                SERVOCAM = 1;
+                __delay_us(10);
+                SERVOCAM = 0;
+                __delay_us(90);
+            } 
+        }
+        
+        SERVOCAM = 0;   
         
         f_can_coming_to_distribution = 1;
         __delay_ms(TIME_ID_TO_DISTRIBUTION);
@@ -504,8 +520,6 @@ void updateServoPosition(int time_us, int timer){
 void updateServoStates(void){
     //...only change servo state after ensuring travel times have been met or exceeded
     if(servo_timer_counter >= servo_timer_target){
-        __lcd_clear();__lcd_home();
-        printf("ENT");
         // Takes care of current location, not how long duration @ location is
         if(f_panning_to_bin){
             switch(pan_servo_state){
@@ -561,7 +575,6 @@ void updateServoStates(void){
                     servo_timer_target = 9999;
 
                     f_can_distributed = 1;
-                    f_most_recent_sort_time = 1;
                     if(f_lastCan == 1){
                         machine_state = DoneSorting_state;
                     }
