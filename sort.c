@@ -236,7 +236,7 @@ void Loading(void){
                     }
                     // Recognition of "almost got unstuck" case
                     if(!IR_signal){
-                        __delay_ms(1000);
+                        __delay_ms(500);
                         readIR();
                         if(IR_signal==1){
                             continue;

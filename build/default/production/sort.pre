@@ -4173,7 +4173,7 @@ j++;
 }
 
 if(!IR_signal){
-_delay((unsigned long)((1000)*(32000000/4000.0)));
+_delay((unsigned long)((500)*(32000000/4000.0)));
 readIR();
 if(IR_signal==1){
 continue;
