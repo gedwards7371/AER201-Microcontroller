@@ -56,10 +56,12 @@ void machineConfig(void) {
     
     TMR0IE = 1; // Enable Timer0 interrupts
     TMR1IE = 1; // Enable Timer1 interrupts
-    T1CON = 0b10110000;
-    T3CON = 0b10110000;
     TMR2IE = 1; // Enable Timer2 interrupts
     TMR3IE = 1; // Enable Timer3 interrupts
+    
+    T1CON = 0b10110000;
+    T2CON = 0b01111011;
+    T3CON = 0b10110000;
     PEIE = 1; // Enable peripheral interrupts
     ADIE = 0; // Disable A/D conversion interrupts (important for readADC())
     di(); // Disable all interrupts for now

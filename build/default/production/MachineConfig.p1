@@ -65,14 +65,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR0IE `Vb ~T0 @X0 0 e@32661 ]
 "7572
 [v _TMR1IE `Vb ~T0 @X0 0 e@31976 ]
-"5157
-[v _T1CON `Vuc ~T0 @X0 0 e@4045 ]
-"3493
-[v _T3CON `Vuc ~T0 @X0 0 e@4017 ]
 "7580
 [v _TMR2IE `Vb ~T0 @X0 0 e@31977 ]
 "7590
 [v _TMR3IE `Vb ~T0 @X0 0 e@32001 ]
+"5157
+[v _T1CON `Vuc ~T0 @X0 0 e@4045 ]
+"4972
+[v _T2CON `Vuc ~T0 @X0 0 e@4042 ]
+"3493
+[v _T3CON `Vuc ~T0 @X0 0 e@4017 ]
 "7216
 [v _PEIE `Vb ~T0 @X0 0 e@32662 ]
 "6628
@@ -3098,28 +3100,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MachineConfig.c: 58: TMR1IE = 1;
 "58
 [e = _TMR1IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 59: T1CON = 0b10110000;
+[; ;MachineConfig.c: 59: TMR2IE = 1;
 "59
-[e = _T1CON -> -> 176 `i `uc ]
-[; ;MachineConfig.c: 60: T3CON = 0b10110000;
-"60
-[e = _T3CON -> -> 176 `i `uc ]
-[; ;MachineConfig.c: 61: TMR2IE = 1;
-"61
 [e = _TMR2IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 62: TMR3IE = 1;
-"62
+[; ;MachineConfig.c: 60: TMR3IE = 1;
+"60
 [e = _TMR3IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 63: PEIE = 1;
+[; ;MachineConfig.c: 62: T1CON = 0b10110000;
+"62
+[e = _T1CON -> -> 176 `i `uc ]
+[; ;MachineConfig.c: 63: T2CON = 0b01111011;
 "63
-[e = _PEIE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 64: ADIE = 0;
+[e = _T2CON -> -> 123 `i `uc ]
+[; ;MachineConfig.c: 64: T3CON = 0b10110000;
 "64
-[e = _ADIE -> -> 0 `i `b ]
-[; ;MachineConfig.c: 65: (INTCONbits.GIE = 0);
+[e = _T3CON -> -> 176 `i `uc ]
+[; ;MachineConfig.c: 65: PEIE = 1;
 "65
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 66: }
+[e = _PEIE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 66: ADIE = 0;
 "66
+[e = _ADIE -> -> 0 `i `b ]
+[; ;MachineConfig.c: 67: (INTCONbits.GIE = 0);
+"67
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 68: }
+"68
 [e :UE 266 ]
 }

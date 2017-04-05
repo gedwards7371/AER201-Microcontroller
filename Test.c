@@ -26,6 +26,7 @@ void ToggleTestA5(void);
 void SpeedTest(void);
 void PusherTest(void);
 void BlockerTest(void);
+void arm(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -48,6 +49,9 @@ void Test(void){
                 break;
             case 3: // Key 3
                 actuatorTest();
+                break;
+            case 4: // Key A
+                arm();
                 break;
             case 5: // Key 4
                 PortTestA5();
@@ -632,6 +636,42 @@ void BlockerTest(void){
         /*If button still pressed*/
             __lcd_home();
             printf("D: RET|2: COND %d", COND_SENSORS);
+        }
+    }
+}
+
+void arm(void){
+    __lcd_clear();__lcd_home();
+    printf("D WILL RETURN   ");
+    __lcd_newline();
+    printf("ELSE TOGGLES ARM");
+    int on = 0;
+    while(1){
+        if(on){
+            on = !on;
+            while(PORTBbits.RB1 == 0){
+                LATBbits.LATB3 = 1;
+                __delay_us(1200);
+                LATBbits.LATB3 = 0;
+                __delay_ms(19);
+            }
+            if(PORTB >> 4 == 0b1111){
+                break;
+            }
+            while(PORTBbits.RB1 == 1){ continue; }
+        }
+        else{
+            on = !on;
+            while(PORTBbits.RB1 == 0){
+                LATBbits.LATB3 = 1;
+                __delay_us(2400);
+                LATBbits.LATB3 = 0;
+                __delay_ms(17);
+            }
+            if(PORTB >> 4 == 0b1111){
+                break;
+            }
+            while(PORTBbits.RB1 == 1){ continue; }
         }
     }
 }
