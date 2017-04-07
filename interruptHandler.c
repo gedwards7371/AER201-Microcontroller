@@ -14,23 +14,26 @@
 
 // Interrupt handler
 void interrupt handler(void) {
-    //** Interrupt handler for key presses: updates the menu state **
+    //** Interrupt handler for key presses **
     if(INT1IF){
-        INT1IF = 0;     //Clear flag bit
-        if(machine_state == UI_state) { // "If we're supposed to be in the UI..."
-            input = keys[(PORTB & 0xF0) >> 4];
-            
-            if(input == '*'){
-                machine_state = Testing_state;
-            }
-            else{
-                updateMenu();
+        INT1IF = 0; // Clear flag bit
+        input = keys[(PORTB & 0xF0) >> 4];
+        if(input == '*'){
+            switch(machine_state){
+                case UI_state:
+                    machine_state = Testing_state;
+                    break;
+                case Testing_state:
+                    machine_state = UI_state;
+                    change_state_to_menu_start();
+                    break;
+                case Sorting_state:
+                    machine_state = DoneSorting_state;
+                    break;
             }
         }
-        if(machine_state == Sorting_state){
-            if(input == '*'){
-                machine_state = DoneSorting_state;
-            }
+        else if(machine_state == UI_state){ // "If we're supposed to be in the UI..."
+            updateMenu();
         }
     }
     
@@ -46,7 +49,7 @@ void interrupt handler(void) {
         }
     }
     
-    //** Timer for servo delays **
+    //** Timer for pan servo delays **
     if(TMR1IF){
         TMR1IF = 0; // Clear interrupt flag
         TMR1ON = 0;
@@ -70,6 +73,28 @@ void interrupt handler(void) {
         }
     }
     
+    //** Timer for tilt servo delays **
+    if(TMR2IF){
+        TMR2IF = 0; // Clear interrupt flag
+        TMR2ON = 0;
+        if(machine_state == Sorting_state){
+            if(was_low_3){
+                SERVOARM = 1;
+                was_low_2 = 0;
+                TMR3H = servoTimes[2];
+                TMR3L = servoTimes[3];
+            }
+            else{
+                SERVOARM = 0;
+                was_low_2 = 1;
+                TMR3H = 20000 - servoTimes[2];
+                TMR3L = 20000 - servoTimes[3];
+            }
+            TMR2ON = 1;
+        }
+    }
+    
+    //** Timer for tilt servo delays **
     if(TMR3IF){
         TMR3IF = 0; // Clear interrupt flag
         TMR3ON = 0;

@@ -80,16 +80,19 @@ void UI(void){
         printf("RESULTS IN LOG %d", sel+1);
         __lcd_newline();
         printf("TIME: %d:%02d", (total_time % 3600) / 60, (total_time % 3600) % 60);
-        machine_state = UI_state; // Return to UI state
-        while(PORTBbits.RB1==0){
+        while(PORTBbits.RB1 == 1) {continue;}
+        while(PORTBbits.RB1 == 0){
             // Wait for user to press a key
         }
-        if(cur_state==12){
+        if(cur_state == 12){
             change_state_to_menu_12();
         }
         else{
             change_state_to_menu_22();
         }
+        while(PORTBbits.RB1 == 1){ continue; } // Wait until key is released
+        __delay_ms(100);
+        machine_state = UI_state; // Return to UI state
     }
     else if(cur_state == 0){
         __delay_1s();

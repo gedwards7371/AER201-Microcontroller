@@ -3979,16 +3979,19 @@ lcdInst(0b10000000);;
 printf("RESULTS IN LOG %d", sel+1);
 lcdInst(0b11000000);;
 printf("TIME: %d:%02d", (total_time % 3600) / 60, (total_time % 3600) % 60);
-machine_state = UI_state;
-while(PORTBbits.RB1==0){
+while(PORTBbits.RB1 == 1) {continue;}
+while(PORTBbits.RB1 == 0){
 
 }
-if(cur_state==12){
+if(cur_state == 12){
 change_state_to_menu_12();
 }
 else{
 change_state_to_menu_22();
 }
+while(PORTBbits.RB1 == 1){ continue; }
+_delay((unsigned long)((100)*(32000000/4000.0)));
+machine_state = UI_state;
 }
 else if(cur_state == 0){
 for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};

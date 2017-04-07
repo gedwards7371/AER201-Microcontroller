@@ -3118,24 +3118,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.c: 82: printf("TIME: %d:%02d", (total_time % 3600) / 60, (total_time % 3600) % 60);
 "82
 [e ( _printf , , (. :s 2C / % _total_time -> 3600 `i -> 60 `i % % _total_time -> 3600 `i -> 60 `i ]
-[; ;UI.c: 83: machine_state = UI_state;
+[; ;UI.c: 83: while(PORTBbits.RB1 == 1) {continue;}
 "83
-[e = _machine_state . `E3120 0 ]
-[; ;UI.c: 84: while(PORTBbits.RB1==0){
-"84
 [e $U 270  ]
 [e :U 271 ]
 {
-"86
+[e $U 270  ]
 }
 [e :U 270 ]
-"84
-[e $ == -> . . _PORTBbits 0 1 `i -> 0 `i 271  ]
+[e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 271  ]
 [e :U 272 ]
+[; ;UI.c: 84: while(PORTBbits.RB1 == 0){
+"84
+[e $U 273  ]
+[e :U 274 ]
+{
+"86
+}
+[e :U 273 ]
+"84
+[e $ == -> . . _PORTBbits 0 1 `i -> 0 `i 274  ]
+[e :U 275 ]
 [; ;UI.c: 86: }
-[; ;UI.c: 87: if(cur_state==12){
+[; ;UI.c: 87: if(cur_state == 12){
 "87
-[e $ ! == _cur_state -> 12 `i 273  ]
+[e $ ! == _cur_state -> 12 `i 276  ]
 {
 [; ;UI.c: 88: change_state_to_menu_12();
 "88
@@ -3143,9 +3150,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "89
 }
 [; ;UI.c: 89: }
-[e $U 274  ]
+[e $U 277  ]
 "90
-[e :U 273 ]
+[e :U 276 ]
 [; ;UI.c: 90: else{
 {
 [; ;UI.c: 91: change_state_to_menu_22();
@@ -3153,181 +3160,197 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _change_state_to_menu_22 ..  ]
 "92
 }
-[e :U 274 ]
-"93
-}
+[e :U 277 ]
 [; ;UI.c: 92: }
-[; ;UI.c: 93: }
-[e $U 275  ]
-"94
-[e :U 269 ]
-[; ;UI.c: 94: else if(cur_state == 0){
-[e $ ! == _cur_state -> 0 `i 276  ]
+[; ;UI.c: 93: while(PORTBbits.RB1 == 1){ continue; }
+"93
+[e $U 278  ]
+[e :U 279 ]
 {
-[; ;UI.c: 95: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};
+[e $U 278  ]
+}
+[e :U 278 ]
+[e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 279  ]
+[e :U 280 ]
+[; ;UI.c: 94: _delay((unsigned long)((100)*(32000000/4000.0)));
+"94
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;UI.c: 95: machine_state = UI_state;
 "95
+[e = _machine_state . `E3120 0 ]
+"96
+}
+[; ;UI.c: 96: }
+[e $U 281  ]
+"97
+[e :U 269 ]
+[; ;UI.c: 97: else if(cur_state == 0){
+[e $ ! == _cur_state -> 0 `i 282  ]
+{
+[; ;UI.c: 98: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};
+"98
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 277  ]
-[e $U 278  ]
-[e :U 277 ]
+[e $ < -> _i `i -> 100 `i 283  ]
+[e $U 284  ]
+[e :U 283 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 277  ]
-[e :U 278 ]
+[e $ < -> _i `i -> 100 `i 283  ]
+[e :U 284 ]
 }
-[; ;UI.c: 96: if(cur_state == 0){
-"96
-[e $ ! == _cur_state -> 0 `i 280  ]
-{
-[; ;UI.c: 97: printRTC();
-"97
-[e ( _printRTC ..  ]
-"98
-}
-[e :U 280 ]
+[; ;UI.c: 99: if(cur_state == 0){
 "99
-}
-[e :U 276 ]
+[e $ ! == _cur_state -> 0 `i 286  ]
+{
+[; ;UI.c: 100: printRTC();
 "100
-[e :U 275 ]
-[; ;UI.c: 98: }
-[; ;UI.c: 99: }
-[; ;UI.c: 100: while(logstate){
-[e $U 281  ]
-[e :U 282 ]
-{
-[; ;UI.c: 102: if(!log_completion){
-"102
-[e $ ! ! != _log_completion -> 0 `i 284  ]
-{
-[; ;UI.c: 103: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
-"103
-[e ( _lcdInst (1 -> -> 1 `i `uc ]
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;UI.c: 104: lcdInst(0b10000000);;
-"104
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 105: printf("-- LOG %2d HERE--", log);
-"105
-[e ( _printf , (. :s 3C _log ]
-[; ;UI.c: 106: lcdInst(0b11000000);;
-"106
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 107: printf("DIDN'T COMPLETE");
-"107
-[e ( _printf :s 4C ]
-[; ;UI.c: 108: while(1) {for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}}
-"108
+[e ( _printRTC ..  ]
+"101
+}
 [e :U 286 ]
-{
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 288  ]
-[e $U 289  ]
+"102
+}
+[e :U 282 ]
+"103
+[e :U 281 ]
+[; ;UI.c: 101: }
+[; ;UI.c: 102: }
+[; ;UI.c: 103: while(logstate){
+[e $U 287  ]
 [e :U 288 ]
 {
+[; ;UI.c: 105: if(!log_completion){
+"105
+[e $ ! ! != _log_completion -> 0 `i 290  ]
+{
+[; ;UI.c: 106: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"106
+[e ( _lcdInst (1 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;UI.c: 107: lcdInst(0b10000000);;
+"107
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 108: printf("-- LOG %2d HERE--", log);
+"108
+[e ( _printf , (. :s 3C _log ]
+[; ;UI.c: 109: lcdInst(0b11000000);;
+"109
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 110: printf("DIDN'T COMPLETE");
+"110
+[e ( _printf :s 4C ]
+[; ;UI.c: 111: while(1) {for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}}
+"111
+[e :U 292 ]
+{
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 100 `i 294  ]
+[e $U 295  ]
+[e :U 294 ]
+{
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 288  ]
-[e :U 289 ]
+[e $ < -> _i `i -> 100 `i 294  ]
+[e :U 295 ]
 }
-[e $ ! ! != _logstate -> 0 `i 291  ]
+[e $ ! ! != _logstate -> 0 `i 297  ]
 {
-[e $U 287  ]
+[e $U 293  ]
+}
+[e :U 297 ]
 }
 [e :U 291 ]
-}
-[e :U 285 ]
-[e $U 286  ]
-[e :U 287 ]
-[; ;UI.c: 109: break;
-"109
-[e $U 283  ]
-"110
-}
-[; ;UI.c: 110: }
 [e $U 292  ]
-"111
-[e :U 284 ]
-[; ;UI.c: 111: else{
-{
-[; ;UI.c: 112: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
-"112
-[e ( _lcdInst (1 -> -> 1 `i `uc ]
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;UI.c: 113: lcdInst(0b10000000);;
-"113
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 114: printf("-- LOG %2d HERE--", log);
-"114
-[e ( _printf , (. :s 5C _log ]
-[; ;UI.c: 115: lcdInst(0b11000000);;
-"115
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 116: printf("PAUSE < | BACK >");
-"116
-[e ( _printf :s 6C ]
-[; ;UI.c: 118: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"118
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 293  ]
-[e $U 294  ]
 [e :U 293 ]
+[; ;UI.c: 112: break;
+"112
+[e $U 289  ]
+"113
+}
+[; ;UI.c: 113: }
+[e $U 298  ]
+"114
+[e :U 290 ]
+[; ;UI.c: 114: else{
 {
+[; ;UI.c: 115: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"115
+[e ( _lcdInst (1 -> -> 1 `i `uc ]
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 293  ]
-[e :U 294 ]
-}
-[e $ ! ! != _logstate -> 0 `i 296  ]
-{
-[e $U 283  ]
-}
-[e :U 296 ]
-[; ;UI.c: 119: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+[; ;UI.c: 116: lcdInst(0b10000000);;
+"116
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 117: printf("-- LOG %2d HERE--", log);
+"117
+[e ( _printf , (. :s 5C _log ]
+[; ;UI.c: 118: lcdInst(0b11000000);;
+"118
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 119: printf("PAUSE < | BACK >");
 "119
+[e ( _printf :s 6C ]
+[; ;UI.c: 121: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"121
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 297  ]
-[e $U 298  ]
-[e :U 297 ]
+[e $ < -> _i `i -> 100 `i 299  ]
+[e $U 300  ]
+[e :U 299 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 297  ]
-[e :U 298 ]
-}
-[e $ ! ! != _logstate -> 0 `i 300  ]
-{
-[e $U 283  ]
-}
+[e $ < -> _i `i -> 100 `i 299  ]
 [e :U 300 ]
-[; ;UI.c: 121: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
-"121
+}
+[e $ ! ! != _logstate -> 0 `i 302  ]
+{
+[e $U 289  ]
+}
+[e :U 302 ]
+[; ;UI.c: 122: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"122
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 100 `i 303  ]
+[e $U 304  ]
+[e :U 303 ]
+{
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 100 `i 303  ]
+[e :U 304 ]
+}
+[e $ ! ! != _logstate -> 0 `i 306  ]
+{
+[e $U 289  ]
+}
+[e :U 306 ]
+[; ;UI.c: 124: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"124
 [e ( _lcdInst (1 -> -> 1 `i `uc ]
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;UI.c: 122: lcdInst(0b10000000);;
-"122
+[; ;UI.c: 125: lcdInst(0b10000000);;
+"125
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 123: printf("START:");
-"123
+[; ;UI.c: 126: printf("START:");
+"126
 [e ( _printf :s 7C ]
-[; ;UI.c: 124: lcdInst(0b11000000);;
-"124
+[; ;UI.c: 127: lcdInst(0b11000000);;
+"127
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[v F3235 `uc ~T0 @X0 -> 0 `x s ]
-[i F3235
+[v F3236 `uc ~T0 @X0 -> 0 `x s ]
+[i F3236
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3335,1641 +3358,1641 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"125
-[v _month `uc ~T0 @X0 4  a ]
-[; ;UI.c: 125: char month[] = "MMM";
-[e = _month F3235 ]
-[; ;UI.c: 126: switch(log_startTime[5]){
-"126
-[e $U 302  ]
-{
-[; ;UI.c: 127: case 1 :
-"127
-[e :U 303 ]
-[; ;UI.c: 128: strcpy(month, "JAN");
 "128
-[e ( _strcpy (2 , &U _month :s 8C ]
-[; ;UI.c: 129: break;
+[v _month `uc ~T0 @X0 4  a ]
+[; ;UI.c: 128: char month[] = "MMM";
+[e = _month F3236 ]
+[; ;UI.c: 129: switch(log_startTime[5]){
 "129
-[e $U 301  ]
-[; ;UI.c: 130: case 2:
+[e $U 308  ]
+{
+[; ;UI.c: 130: case 1 :
 "130
-[e :U 304 ]
-[; ;UI.c: 131: strcpy(month, "FEB");
+[e :U 309 ]
+[; ;UI.c: 131: strcpy(month, "JAN");
 "131
-[e ( _strcpy (2 , &U _month :s 9C ]
+[e ( _strcpy (2 , &U _month :s 8C ]
 [; ;UI.c: 132: break;
 "132
-[e $U 301  ]
-[; ;UI.c: 133: case 3:
+[e $U 307  ]
+[; ;UI.c: 133: case 2:
 "133
-[e :U 305 ]
-[; ;UI.c: 134: strcpy(month, "MAR");
+[e :U 310 ]
+[; ;UI.c: 134: strcpy(month, "FEB");
 "134
-[e ( _strcpy (2 , &U _month :s 10C ]
+[e ( _strcpy (2 , &U _month :s 9C ]
 [; ;UI.c: 135: break;
 "135
-[e $U 301  ]
-[; ;UI.c: 136: case 4:
+[e $U 307  ]
+[; ;UI.c: 136: case 3:
 "136
-[e :U 306 ]
-[; ;UI.c: 137: strcpy(month, "APR");
+[e :U 311 ]
+[; ;UI.c: 137: strcpy(month, "MAR");
 "137
-[e ( _strcpy (2 , &U _month :s 11C ]
+[e ( _strcpy (2 , &U _month :s 10C ]
 [; ;UI.c: 138: break;
 "138
-[e $U 301  ]
-[; ;UI.c: 139: case 5:
+[e $U 307  ]
+[; ;UI.c: 139: case 4:
 "139
-[e :U 307 ]
-[; ;UI.c: 140: strcpy(month, "MAY");
+[e :U 312 ]
+[; ;UI.c: 140: strcpy(month, "APR");
 "140
-[e ( _strcpy (2 , &U _month :s 12C ]
+[e ( _strcpy (2 , &U _month :s 11C ]
 [; ;UI.c: 141: break;
 "141
-[e $U 301  ]
-[; ;UI.c: 142: case 6:
+[e $U 307  ]
+[; ;UI.c: 142: case 5:
 "142
-[e :U 308 ]
-[; ;UI.c: 143: strcpy(month, "JUN");
+[e :U 313 ]
+[; ;UI.c: 143: strcpy(month, "MAY");
 "143
-[e ( _strcpy (2 , &U _month :s 13C ]
+[e ( _strcpy (2 , &U _month :s 12C ]
 [; ;UI.c: 144: break;
 "144
-[e $U 301  ]
-[; ;UI.c: 145: case 7:
+[e $U 307  ]
+[; ;UI.c: 145: case 6:
 "145
-[e :U 309 ]
-[; ;UI.c: 146: strcpy(month, "JUL");
+[e :U 314 ]
+[; ;UI.c: 146: strcpy(month, "JUN");
 "146
-[e ( _strcpy (2 , &U _month :s 14C ]
+[e ( _strcpy (2 , &U _month :s 13C ]
 [; ;UI.c: 147: break;
 "147
-[e $U 301  ]
-[; ;UI.c: 148: case 8:
+[e $U 307  ]
+[; ;UI.c: 148: case 7:
 "148
-[e :U 310 ]
-[; ;UI.c: 149: strcpy(month, "AUG");
+[e :U 315 ]
+[; ;UI.c: 149: strcpy(month, "JUL");
 "149
-[e ( _strcpy (2 , &U _month :s 15C ]
+[e ( _strcpy (2 , &U _month :s 14C ]
 [; ;UI.c: 150: break;
 "150
-[e $U 301  ]
-[; ;UI.c: 151: case 9:
+[e $U 307  ]
+[; ;UI.c: 151: case 8:
 "151
-[e :U 311 ]
-[; ;UI.c: 152: strcpy(month, "SEP");
+[e :U 316 ]
+[; ;UI.c: 152: strcpy(month, "AUG");
 "152
-[e ( _strcpy (2 , &U _month :s 16C ]
+[e ( _strcpy (2 , &U _month :s 15C ]
 [; ;UI.c: 153: break;
 "153
-[e $U 301  ]
-[; ;UI.c: 154: case 10:
+[e $U 307  ]
+[; ;UI.c: 154: case 9:
 "154
-[e :U 312 ]
-[; ;UI.c: 155: strcpy(month, "OCT");
+[e :U 317 ]
+[; ;UI.c: 155: strcpy(month, "SEP");
 "155
-[e ( _strcpy (2 , &U _month :s 17C ]
+[e ( _strcpy (2 , &U _month :s 16C ]
 [; ;UI.c: 156: break;
 "156
-[e $U 301  ]
-[; ;UI.c: 157: case 11:
+[e $U 307  ]
+[; ;UI.c: 157: case 10:
 "157
-[e :U 313 ]
-[; ;UI.c: 158: strcpy(month, "NOV");
+[e :U 318 ]
+[; ;UI.c: 158: strcpy(month, "OCT");
 "158
-[e ( _strcpy (2 , &U _month :s 18C ]
+[e ( _strcpy (2 , &U _month :s 17C ]
 [; ;UI.c: 159: break;
 "159
-[e $U 301  ]
-[; ;UI.c: 160: case 12:
+[e $U 307  ]
+[; ;UI.c: 160: case 11:
 "160
-[e :U 314 ]
-[; ;UI.c: 161: strcpy(month, "DEC");
+[e :U 319 ]
+[; ;UI.c: 161: strcpy(month, "NOV");
 "161
-[e ( _strcpy (2 , &U _month :s 19C ]
+[e ( _strcpy (2 , &U _month :s 18C ]
 [; ;UI.c: 162: break;
 "162
-[e $U 301  ]
-[; ;UI.c: 163: default:
+[e $U 307  ]
+[; ;UI.c: 163: case 12:
 "163
-[e :U 315 ]
-[; ;UI.c: 164: strcpy(month, "ERR");
+[e :U 320 ]
+[; ;UI.c: 164: strcpy(month, "DEC");
 "164
-[e ( _strcpy (2 , &U _month :s 20C ]
+[e ( _strcpy (2 , &U _month :s 19C ]
 [; ;UI.c: 165: break;
 "165
-[e $U 301  ]
+[e $U 307  ]
+[; ;UI.c: 166: default:
 "166
-}
-[; ;UI.c: 166: }
-[e $U 301  ]
-"126
-[e :U 302 ]
-[e [\ *U + &U _log_startTime * -> -> -> 5 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux , $ -> 1 `i 303
- , $ -> 2 `i 304
- , $ -> 3 `i 305
- , $ -> 4 `i 306
- , $ -> 5 `i 307
- , $ -> 6 `i 308
- , $ -> 7 `i 309
- , $ -> 8 `i 310
- , $ -> 9 `i 311
- , $ -> 10 `i 312
- , $ -> 11 `i 313
- , $ -> 12 `i 314
- 315 ]
-"166
-[e :U 301 ]
-[; ;UI.c: 167: printf("%02d%s | %02d:%02d:%02d", log_startTime[4],month,log_startTime[2],log_startTime[1],log_startTime[0]);
-"167
-[e ( _printf , , , , , (. :s 21C *U + &U _log_startTime * -> -> -> 4 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux -> &U _month `*Cuc *U + &U _log_startTime * -> -> -> 2 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux *U + &U _log_startTime * -> -> -> 1 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux *U + &U _log_startTime * -> -> -> 0 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux ]
-[; ;UI.c: 169: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"169
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 316  ]
-[e $U 317  ]
-[e :U 316 ]
-{
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 316  ]
-[e :U 317 ]
-}
-[e $ ! ! != _logstate -> 0 `i 319  ]
-{
-[e $U 283  ]
-}
-[e :U 319 ]
-[; ;UI.c: 170: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"170
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 320  ]
-[e $U 321  ]
-[e :U 320 ]
-{
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 320  ]
 [e :U 321 ]
+[; ;UI.c: 167: strcpy(month, "ERR");
+"167
+[e ( _strcpy (2 , &U _month :s 20C ]
+[; ;UI.c: 168: break;
+"168
+[e $U 307  ]
+"169
 }
-[e $ ! ! != _logstate -> 0 `i 323  ]
-{
-[e $U 283  ]
-}
-[e :U 323 ]
-[; ;UI.c: 172: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+[; ;UI.c: 169: }
+[e $U 307  ]
+"129
+[e :U 308 ]
+[e [\ *U + &U _log_startTime * -> -> -> 5 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux , $ -> 1 `i 309
+ , $ -> 2 `i 310
+ , $ -> 3 `i 311
+ , $ -> 4 `i 312
+ , $ -> 5 `i 313
+ , $ -> 6 `i 314
+ , $ -> 7 `i 315
+ , $ -> 8 `i 316
+ , $ -> 9 `i 317
+ , $ -> 10 `i 318
+ , $ -> 11 `i 319
+ , $ -> 12 `i 320
+ 321 ]
+"169
+[e :U 307 ]
+[; ;UI.c: 170: printf("%02d%s | %02d:%02d:%02d", log_startTime[4],month,log_startTime[2],log_startTime[1],log_startTime[0]);
+"170
+[e ( _printf , , , , , (. :s 21C *U + &U _log_startTime * -> -> -> 4 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux -> &U _month `*Cuc *U + &U _log_startTime * -> -> -> 2 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux *U + &U _log_startTime * -> -> -> 1 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux *U + &U _log_startTime * -> -> -> 0 `i `ui `ux -> -> # *U &U _log_startTime `ui `ux ]
+[; ;UI.c: 172: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 "172
-[e ( _lcdInst (1 -> -> 1 `i `uc ]
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;UI.c: 173: lcdInst(0b10000000);;
-"173
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 174: printf("DURATION:");
-"174
-[e ( _printf :s 22C ]
-[; ;UI.c: 175: lcdInst(0b11000000);;
-"175
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 176: printf("%d MIN %d SEC", (log_total_time % 3600) / 60, (log_total_time % 3600) % 60);
-"176
-[e ( _printf , , (. :s 23C / % _log_total_time -> 3600 `i -> 60 `i % % _log_total_time -> 3600 `i -> 60 `i ]
-[; ;UI.c: 178: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"178
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 324  ]
-[e $U 325  ]
-[e :U 324 ]
+[e $ < -> _i `i -> 100 `i 322  ]
+[e $U 323  ]
+[e :U 322 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 324  ]
+[e $ < -> _i `i -> 100 `i 322  ]
+[e :U 323 ]
+}
+[e $ ! ! != _logstate -> 0 `i 325  ]
+{
+[e $U 289  ]
+}
 [e :U 325 ]
-}
-[e $ ! ! != _logstate -> 0 `i 327  ]
+[; ;UI.c: 173: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"173
 {
-[e $U 283  ]
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 100 `i 326  ]
+[e $U 327  ]
+[e :U 326 ]
+{
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 100 `i 326  ]
 [e :U 327 ]
-[; ;UI.c: 179: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"179
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 328  ]
-[e $U 329  ]
-[e :U 328 ]
-{
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 328  ]
+[e $ ! ! != _logstate -> 0 `i 329  ]
+{
+[e $U 289  ]
+}
 [e :U 329 ]
-}
-[e $ ! ! != _logstate -> 0 `i 331  ]
-{
-[e $U 283  ]
-}
-[e :U 331 ]
-[; ;UI.c: 181: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+[; ;UI.c: 175: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"175
+[e ( _lcdInst (1 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;UI.c: 176: lcdInst(0b10000000);;
+"176
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 177: printf("DURATION:");
+"177
+[e ( _printf :s 22C ]
+[; ;UI.c: 178: lcdInst(0b11000000);;
+"178
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 179: printf("%d MIN %d SEC", (log_total_time % 3600) / 60, (log_total_time % 3600) % 60);
+"179
+[e ( _printf , , (. :s 23C / % _log_total_time -> 3600 `i -> 60 `i % % _log_total_time -> 3600 `i -> 60 `i ]
+[; ;UI.c: 181: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 "181
-[e ( _lcdInst (1 -> -> 1 `i `uc ]
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;UI.c: 182: lcdInst(0b10000000);;
-"182
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 183: printf(" -- POP  CAN -- ");
-"183
-[e ( _printf :s 24C ]
-[; ;UI.c: 184: lcdInst(0b11000000);;
-"184
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 185: printf("NTAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
-"185
-[e ( _printf , , (. :s 25C _log_count_pop_no_tab _log_count_pop_w_tab ]
-[; ;UI.c: 187: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"187
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 332  ]
-[e $U 333  ]
-[e :U 332 ]
+[e $ < -> _i `i -> 100 `i 330  ]
+[e $U 331  ]
+[e :U 330 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 332  ]
+[e $ < -> _i `i -> 100 `i 330  ]
+[e :U 331 ]
+}
+[e $ ! ! != _logstate -> 0 `i 333  ]
+{
+[e $U 289  ]
+}
 [e :U 333 ]
-}
-[e $ ! ! != _logstate -> 0 `i 335  ]
+[; ;UI.c: 182: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"182
 {
-[e $U 283  ]
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 100 `i 334  ]
+[e $U 335  ]
+[e :U 334 ]
+{
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 100 `i 334  ]
 [e :U 335 ]
-[; ;UI.c: 188: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"188
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 336  ]
-[e $U 337  ]
-[e :U 336 ]
-{
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 336  ]
+[e $ ! ! != _logstate -> 0 `i 337  ]
+{
+[e $U 289  ]
+}
 [e :U 337 ]
-}
-[e $ ! ! != _logstate -> 0 `i 339  ]
-{
-[e $U 283  ]
-}
-[e :U 339 ]
-[; ;UI.c: 190: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+[; ;UI.c: 184: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"184
+[e ( _lcdInst (1 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;UI.c: 185: lcdInst(0b10000000);;
+"185
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 186: printf(" -- POP  CAN -- ");
+"186
+[e ( _printf :s 24C ]
+[; ;UI.c: 187: lcdInst(0b11000000);;
+"187
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 188: printf("NTAB: %d|TAB: %d", log_count_pop_no_tab, log_count_pop_w_tab);
+"188
+[e ( _printf , , (. :s 25C _log_count_pop_no_tab _log_count_pop_w_tab ]
+[; ;UI.c: 190: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 "190
-[e ( _lcdInst (1 -> -> 1 `i `uc ]
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;UI.c: 191: lcdInst(0b10000000);;
-"191
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 192: printf(" -- SOUP CAN -- ");
-"192
-[e ( _printf :s 26C ]
-[; ;UI.c: 193: lcdInst(0b11000000);;
-"193
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 194: printf("NLAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
-"194
-[e ( _printf , , (. :s 27C _log_count_can_no_lab _log_count_can_w_lab ]
-[; ;UI.c: 196: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"196
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 340  ]
-[e $U 341  ]
-[e :U 340 ]
+[e $ < -> _i `i -> 100 `i 338  ]
+[e $U 339  ]
+[e :U 338 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 340  ]
+[e $ < -> _i `i -> 100 `i 338  ]
+[e :U 339 ]
+}
+[e $ ! ! != _logstate -> 0 `i 341  ]
+{
+[e $U 289  ]
+}
 [e :U 341 ]
-}
-[e $ ! ! != _logstate -> 0 `i 343  ]
-{
-[e $U 283  ]
-}
-[e :U 343 ]
-[; ;UI.c: 197: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"197
+[; ;UI.c: 191: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"191
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 344  ]
-[e $U 345  ]
-[e :U 344 ]
+[e $ < -> _i `i -> 100 `i 342  ]
+[e $U 343  ]
+[e :U 342 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 344  ]
-[e :U 345 ]
+[e $ < -> _i `i -> 100 `i 342  ]
+[e :U 343 ]
 }
-[e $ ! ! != _logstate -> 0 `i 347  ]
+[e $ ! ! != _logstate -> 0 `i 345  ]
 {
-[e $U 283  ]
+[e $U 289  ]
 }
-[e :U 347 ]
-[; ;UI.c: 199: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
-"199
+[e :U 345 ]
+[; ;UI.c: 193: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"193
 [e ( _lcdInst (1 -> -> 1 `i `uc ]
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;UI.c: 200: lcdInst(0b10000000);;
-"200
+[; ;UI.c: 194: lcdInst(0b10000000);;
+"194
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 201: printf("-- TOTAL CANS --");
-"201
-[e ( _printf :s 28C ]
-[; ;UI.c: 202: lcdInst(0b11000000);;
-"202
+[; ;UI.c: 195: printf(" -- SOUP CAN -- ");
+"195
+[e ( _printf :s 26C ]
+[; ;UI.c: 196: lcdInst(0b11000000);;
+"196
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 203: printf("%d", log_count_total);
-"203
-[e ( _printf , (. :s 29C _log_count_total ]
-[; ;UI.c: 205: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"205
+[; ;UI.c: 197: printf("NLAB: %d|LAB: %d", log_count_can_no_lab, log_count_can_w_lab);
+"197
+[e ( _printf , , (. :s 27C _log_count_can_no_lab _log_count_can_w_lab ]
+[; ;UI.c: 199: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"199
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 348  ]
-[e $U 349  ]
-[e :U 348 ]
+[e $ < -> _i `i -> 100 `i 346  ]
+[e $U 347  ]
+[e :U 346 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 348  ]
+[e $ < -> _i `i -> 100 `i 346  ]
+[e :U 347 ]
+}
+[e $ ! ! != _logstate -> 0 `i 349  ]
+{
+[e $U 289  ]
+}
 [e :U 349 ]
-}
-[e $ ! ! != _logstate -> 0 `i 351  ]
-{
-[e $U 283  ]
-}
-[e :U 351 ]
-[; ;UI.c: 206: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
-"206
+[; ;UI.c: 200: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"200
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 100 `i 352  ]
-[e $U 353  ]
-[e :U 352 ]
+[e $ < -> _i `i -> 100 `i 350  ]
+[e $U 351  ]
+[e :U 350 ]
 {
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 100 `i 352  ]
-[e :U 353 ]
+[e $ < -> _i `i -> 100 `i 350  ]
+[e :U 351 ]
 }
-[e $ ! ! != _logstate -> 0 `i 355  ]
+[e $ ! ! != _logstate -> 0 `i 353  ]
 {
-[e $U 283  ]
+[e $U 289  ]
 }
+[e :U 353 ]
+[; ;UI.c: 202: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"202
+[e ( _lcdInst (1 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;UI.c: 203: lcdInst(0b10000000);;
+"203
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 204: printf("-- TOTAL CANS --");
+"204
+[e ( _printf :s 28C ]
+[; ;UI.c: 205: lcdInst(0b11000000);;
+"205
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 206: printf("%d", log_count_total);
+"206
+[e ( _printf , (. :s 29C _log_count_total ]
+[; ;UI.c: 208: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
+"208
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 100 `i 354  ]
+[e $U 355  ]
+[e :U 354 ]
+{
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 100 `i 354  ]
 [e :U 355 ]
-"207
 }
-[e :U 292 ]
+[e $ ! ! != _logstate -> 0 `i 357  ]
+{
+[e $U 289  ]
+}
+[e :U 357 ]
+[; ;UI.c: 209: for(char i=0;i<100;i++){_delay((unsigned long)((10)*(32000000/4000.0)));};if(!logstate){break;}
 "209
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 100 `i 358  ]
+[e $U 359  ]
+[e :U 358 ]
+{
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 }
-[e :U 281 ]
-"100
-[e $ != _logstate -> 0 `i 282  ]
-[e :U 283 ]
-[; ;UI.c: 207: }
-[; ;UI.c: 209: }
-[; ;UI.c: 210: }
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 100 `i 358  ]
+[e :U 359 ]
+}
+[e $ ! ! != _logstate -> 0 `i 361  ]
+{
+[e $U 289  ]
+}
+[e :U 361 ]
 "210
+}
+[e :U 298 ]
+"212
+}
+[e :U 287 ]
+"103
+[e $ != _logstate -> 0 `i 288  ]
+[e :U 289 ]
+[; ;UI.c: 210: }
+[; ;UI.c: 212: }
+[; ;UI.c: 213: }
+"213
 [e :UE 268 ]
 }
-"213
+"216
 [v _updateMenu `(v ~T0 @X0 1 ef ]
 {
-[; ;UI.c: 213: void updateMenu(void){
+[; ;UI.c: 216: void updateMenu(void){
 [e :U _updateMenu ]
 [f ]
-[; ;UI.c: 214: up = 0; down = 0; enter = 0; back = 0;
-"214
+[; ;UI.c: 217: up = 0; down = 0; enter = 0; back = 0;
+"217
 [e = _up -> 0 `i ]
 [e = _down -> 0 `i ]
 [e = _enter -> 0 `i ]
 [e = _back -> 0 `i ]
-[; ;UI.c: 215: (INTCONbits.GIE = 0);
-"215
+[; ;UI.c: 218: (INTCONbits.GIE = 0);
+"218
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;UI.c: 217: if (inputHandler()
-[; ;UI.c: 220: ){
-"220
-[e $ ! != ( _inputHandler ..  -> 0 `i 357  ]
+[; ;UI.c: 220: if (inputHandler()
+[; ;UI.c: 223: ){
+"223
+[e $ ! != ( _inputHandler ..  -> 0 `i 363  ]
 {
-[; ;UI.c: 221: switch(cur_state){
-"221
-[e $U 359  ]
-{
-[; ;UI.c: 222: case 0 :
-"222
-[e :U 360 ]
-[; ;UI.c: 224: change_state_to_menu_11();
+[; ;UI.c: 224: switch(cur_state){
 "224
-[e ( _change_state_to_menu_11 ..  ]
-[; ;UI.c: 225: break;
+[e $U 365  ]
+{
+[; ;UI.c: 225: case 0 :
 "225
-[e $U 358  ]
-[; ;UI.c: 227: case 11 :
+[e :U 366 ]
+[; ;UI.c: 227: change_state_to_menu_11();
 "227
-[e :U 361 ]
-[; ;UI.c: 228: if(up){
+[e ( _change_state_to_menu_11 ..  ]
+[; ;UI.c: 228: break;
 "228
-[e $ ! != _up -> 0 `i 362  ]
-{
-[; ;UI.c: 229: change_state_to_menu_23();
-"229
-[e ( _change_state_to_menu_23 ..  ]
+[e $U 364  ]
+[; ;UI.c: 230: case 11 :
 "230
-}
-[; ;UI.c: 230: }
-[e $U 363  ]
+[e :U 367 ]
+[; ;UI.c: 231: if(up){
 "231
-[e :U 362 ]
-[; ;UI.c: 231: else if(down){
-[e $ ! != _down -> 0 `i 364  ]
+[e $ ! != _up -> 0 `i 368  ]
 {
-[; ;UI.c: 232: change_state_to_menu_12();
+[; ;UI.c: 232: change_state_to_menu_23();
 "232
-[e ( _change_state_to_menu_12 ..  ]
+[e ( _change_state_to_menu_23 ..  ]
 "233
 }
 [; ;UI.c: 233: }
-[e $U 365  ]
-"234
-[e :U 364 ]
-[; ;UI.c: 234: else if(enter){
-[e $ ! != _enter -> 0 `i 366  ]
-{
-[; ;UI.c: 235: change_state_to_menu_start();
-"235
-[e ( _change_state_to_menu_start ..  ]
-"236
-}
-[e :U 366 ]
-"237
-[e :U 365 ]
-[e :U 363 ]
-[; ;UI.c: 236: }
-[; ;UI.c: 237: break;
-[e $U 358  ]
-[; ;UI.c: 239: case 12 :
-"239
-[e :U 367 ]
-[; ;UI.c: 240: if(up){
-"240
-[e $ ! != _up -> 0 `i 368  ]
-{
-[; ;UI.c: 241: change_state_to_menu_11();
-"241
-[e ( _change_state_to_menu_11 ..  ]
-"242
-}
-[; ;UI.c: 242: }
 [e $U 369  ]
-"243
+"234
 [e :U 368 ]
-[; ;UI.c: 243: else if(down){
+[; ;UI.c: 234: else if(down){
 [e $ ! != _down -> 0 `i 370  ]
 {
-[; ;UI.c: 244: change_state_to_menu_23();
+[; ;UI.c: 235: change_state_to_menu_12();
+"235
+[e ( _change_state_to_menu_12 ..  ]
+"236
+}
+[; ;UI.c: 236: }
+[e $U 371  ]
+"237
+[e :U 370 ]
+[; ;UI.c: 237: else if(enter){
+[e $ ! != _enter -> 0 `i 372  ]
+{
+[; ;UI.c: 238: change_state_to_menu_start();
+"238
+[e ( _change_state_to_menu_start ..  ]
+"239
+}
+[e :U 372 ]
+"240
+[e :U 371 ]
+[e :U 369 ]
+[; ;UI.c: 239: }
+[; ;UI.c: 240: break;
+[e $U 364  ]
+[; ;UI.c: 242: case 12 :
+"242
+[e :U 373 ]
+[; ;UI.c: 243: if(up){
+"243
+[e $ ! != _up -> 0 `i 374  ]
+{
+[; ;UI.c: 244: change_state_to_menu_11();
 "244
-[e ( _change_state_to_menu_23 ..  ]
+[e ( _change_state_to_menu_11 ..  ]
 "245
 }
 [; ;UI.c: 245: }
-[e $U 371  ]
-"246
-[e :U 370 ]
-[; ;UI.c: 246: else if(enter){
-[e $ ! != _enter -> 0 `i 372  ]
-{
-[; ;UI.c: 247: machine_state = Sorting_state;
-"247
-[e = _machine_state . `E3120 1 ]
-"248
-}
-[e :U 372 ]
-"249
-[e :U 371 ]
-[e :U 369 ]
-[; ;UI.c: 248: }
-[; ;UI.c: 249: break;
-[e $U 358  ]
-[; ;UI.c: 251: case 22 :
-"251
-[e :U 373 ]
-[; ;UI.c: 252: if(up){
-"252
-[e $ ! != _up -> 0 `i 374  ]
-{
-[; ;UI.c: 253: change_state_to_menu_11();
-"253
-[e ( _change_state_to_menu_11 ..  ]
-"254
-}
-[; ;UI.c: 254: }
 [e $U 375  ]
-"255
+"246
 [e :U 374 ]
-[; ;UI.c: 255: else if(down){
+[; ;UI.c: 246: else if(down){
 [e $ ! != _down -> 0 `i 376  ]
 {
-[; ;UI.c: 256: change_state_to_menu_23();
-"256
+[; ;UI.c: 247: change_state_to_menu_23();
+"247
 [e ( _change_state_to_menu_23 ..  ]
+"248
+}
+[; ;UI.c: 248: }
+[e $U 377  ]
+"249
+[e :U 376 ]
+[; ;UI.c: 249: else if(enter){
+[e $ ! != _enter -> 0 `i 378  ]
+{
+[; ;UI.c: 250: machine_state = Sorting_state;
+"250
+[e = _machine_state . `E3120 1 ]
+"251
+}
+[e :U 378 ]
+"252
+[e :U 377 ]
+[e :U 375 ]
+[; ;UI.c: 251: }
+[; ;UI.c: 252: break;
+[e $U 364  ]
+[; ;UI.c: 254: case 22 :
+"254
+[e :U 379 ]
+[; ;UI.c: 255: if(up){
+"255
+[e $ ! != _up -> 0 `i 380  ]
+{
+[; ;UI.c: 256: change_state_to_menu_11();
+"256
+[e ( _change_state_to_menu_11 ..  ]
 "257
 }
 [; ;UI.c: 257: }
-[e $U 377  ]
-"258
-[e :U 376 ]
-[; ;UI.c: 258: else if(enter){
-[e $ ! != _enter -> 0 `i 378  ]
-{
-[; ;UI.c: 259: machine_state = Sorting_state;
-"259
-[e = _machine_state . `E3120 1 ]
-"260
-}
-[e :U 378 ]
-"261
-[e :U 377 ]
-[e :U 375 ]
-[; ;UI.c: 260: }
-[; ;UI.c: 261: break;
-[e $U 358  ]
-[; ;UI.c: 263: case 23 :
-"263
-[e :U 379 ]
-[; ;UI.c: 264: if(up){
-"264
-[e $ ! != _up -> 0 `i 380  ]
-{
-[; ;UI.c: 265: change_state_to_menu_22();
-"265
-[e ( _change_state_to_menu_22 ..  ]
-"266
-}
-[; ;UI.c: 266: }
 [e $U 381  ]
-"267
+"258
 [e :U 380 ]
-[; ;UI.c: 267: else if(down){
+[; ;UI.c: 258: else if(down){
 [e $ ! != _down -> 0 `i 382  ]
 {
-[; ;UI.c: 268: change_state_to_menu_11();
+[; ;UI.c: 259: change_state_to_menu_23();
+"259
+[e ( _change_state_to_menu_23 ..  ]
+"260
+}
+[; ;UI.c: 260: }
+[e $U 383  ]
+"261
+[e :U 382 ]
+[; ;UI.c: 261: else if(enter){
+[e $ ! != _enter -> 0 `i 384  ]
+{
+[; ;UI.c: 262: machine_state = Sorting_state;
+"262
+[e = _machine_state . `E3120 1 ]
+"263
+}
+[e :U 384 ]
+"264
+[e :U 383 ]
+[e :U 381 ]
+[; ;UI.c: 263: }
+[; ;UI.c: 264: break;
+[e $U 364  ]
+[; ;UI.c: 266: case 23 :
+"266
+[e :U 385 ]
+[; ;UI.c: 267: if(up){
+"267
+[e $ ! != _up -> 0 `i 386  ]
+{
+[; ;UI.c: 268: change_state_to_menu_22();
 "268
-[e ( _change_state_to_menu_11 ..  ]
+[e ( _change_state_to_menu_22 ..  ]
 "269
 }
 [; ;UI.c: 269: }
-[e $U 383  ]
-"270
-[e :U 382 ]
-[; ;UI.c: 270: else if(enter){
-[e $ ! != _enter -> 0 `i 384  ]
-{
-[; ;UI.c: 271: change_state_to_logs_11();
-"271
-[e ( _change_state_to_logs_11 ..  ]
-"272
-}
-[e :U 384 ]
-"273
-[e :U 383 ]
-[e :U 381 ]
-[; ;UI.c: 272: }
-[; ;UI.c: 273: break;
-[e $U 358  ]
-[; ;UI.c: 275: case 1011:
-"275
-[e :U 385 ]
-[; ;UI.c: 276: if(up){
-"276
-[e $ ! != _up -> 0 `i 386  ]
-{
-[; ;UI.c: 277: change_state_to_logs_34();
-"277
-[e ( _change_state_to_logs_34 ..  ]
-"278
-}
-[; ;UI.c: 278: }
 [e $U 387  ]
-"279
+"270
 [e :U 386 ]
-[; ;UI.c: 279: else if(down){
+[; ;UI.c: 270: else if(down){
 [e $ ! != _down -> 0 `i 388  ]
 {
-[; ;UI.c: 280: change_state_to_logs_12();
+[; ;UI.c: 271: change_state_to_menu_11();
+"271
+[e ( _change_state_to_menu_11 ..  ]
+"272
+}
+[; ;UI.c: 272: }
+[e $U 389  ]
+"273
+[e :U 388 ]
+[; ;UI.c: 273: else if(enter){
+[e $ ! != _enter -> 0 `i 390  ]
+{
+[; ;UI.c: 274: change_state_to_logs_11();
+"274
+[e ( _change_state_to_logs_11 ..  ]
+"275
+}
+[e :U 390 ]
+"276
+[e :U 389 ]
+[e :U 387 ]
+[; ;UI.c: 275: }
+[; ;UI.c: 276: break;
+[e $U 364  ]
+[; ;UI.c: 278: case 1011:
+"278
+[e :U 391 ]
+[; ;UI.c: 279: if(up){
+"279
+[e $ ! != _up -> 0 `i 392  ]
+{
+[; ;UI.c: 280: change_state_to_logs_34();
 "280
-[e ( _change_state_to_logs_12 ..  ]
+[e ( _change_state_to_logs_34 ..  ]
 "281
 }
 [; ;UI.c: 281: }
-[e $U 389  ]
+[e $U 393  ]
 "282
-[e :U 388 ]
-[; ;UI.c: 282: else if(enter){
-[e $ ! != _enter -> 0 `i 390  ]
+[e :U 392 ]
+[; ;UI.c: 282: else if(down){
+[e $ ! != _down -> 0 `i 394  ]
 {
-[; ;UI.c: 283: dispLogs(1);
+[; ;UI.c: 283: change_state_to_logs_12();
 "283
-[e ( _dispLogs (1 -> 1 `i ]
+[e ( _change_state_to_logs_12 ..  ]
 "284
 }
 [; ;UI.c: 284: }
-[e $U 391  ]
+[e $U 395  ]
 "285
-[e :U 390 ]
-[; ;UI.c: 285: else if(back){
-[e $ ! != _back -> 0 `i 392  ]
+[e :U 394 ]
+[; ;UI.c: 285: else if(enter){
+[e $ ! != _enter -> 0 `i 396  ]
 {
-[; ;UI.c: 286: change_state_to_menu_23();
+[; ;UI.c: 286: dispLogs(1);
 "286
-[e ( _change_state_to_menu_23 ..  ]
+[e ( _dispLogs (1 -> 1 `i ]
 "287
 }
-[e :U 392 ]
-"288
-[e :U 391 ]
-[e :U 389 ]
-[e :U 387 ]
 [; ;UI.c: 287: }
-[; ;UI.c: 288: break;
-[e $U 358  ]
-[; ;UI.c: 290: case 1012:
+[e $U 397  ]
+"288
+[e :U 396 ]
+[; ;UI.c: 288: else if(back){
+[e $ ! != _back -> 0 `i 398  ]
+{
+[; ;UI.c: 289: change_state_to_menu_23();
+"289
+[e ( _change_state_to_menu_23 ..  ]
 "290
-[e :U 393 ]
-[; ;UI.c: 291: if(up){
-"291
-[e $ ! != _up -> 0 `i 394  ]
-{
-[; ;UI.c: 292: change_state_to_logs_11();
-"292
-[e ( _change_state_to_logs_11 ..  ]
-"293
 }
-[; ;UI.c: 293: }
-[e $U 395  ]
+[e :U 398 ]
+"291
+[e :U 397 ]
+[e :U 395 ]
+[e :U 393 ]
+[; ;UI.c: 290: }
+[; ;UI.c: 291: break;
+[e $U 364  ]
+[; ;UI.c: 293: case 1012:
+"293
+[e :U 399 ]
+[; ;UI.c: 294: if(up){
 "294
-[e :U 394 ]
-[; ;UI.c: 294: else if(down){
-[e $ ! != _down -> 0 `i 396  ]
+[e $ ! != _up -> 0 `i 400  ]
 {
-[; ;UI.c: 295: change_state_to_logs_23();
+[; ;UI.c: 295: change_state_to_logs_11();
 "295
-[e ( _change_state_to_logs_23 ..  ]
+[e ( _change_state_to_logs_11 ..  ]
 "296
 }
 [; ;UI.c: 296: }
-[e $U 397  ]
+[e $U 401  ]
 "297
-[e :U 396 ]
-[; ;UI.c: 297: else if(enter){
-[e $ ! != _enter -> 0 `i 398  ]
+[e :U 400 ]
+[; ;UI.c: 297: else if(down){
+[e $ ! != _down -> 0 `i 402  ]
 {
-[; ;UI.c: 298: dispLogs(2);
+[; ;UI.c: 298: change_state_to_logs_23();
 "298
-[e ( _dispLogs (1 -> 2 `i ]
+[e ( _change_state_to_logs_23 ..  ]
 "299
 }
 [; ;UI.c: 299: }
-[e $U 399  ]
+[e $U 403  ]
 "300
-[e :U 398 ]
-[; ;UI.c: 300: else if(back){
-[e $ ! != _back -> 0 `i 400  ]
+[e :U 402 ]
+[; ;UI.c: 300: else if(enter){
+[e $ ! != _enter -> 0 `i 404  ]
 {
-[; ;UI.c: 301: change_state_to_menu_23();
+[; ;UI.c: 301: dispLogs(2);
 "301
-[e ( _change_state_to_menu_23 ..  ]
+[e ( _dispLogs (1 -> 2 `i ]
 "302
 }
-[e :U 400 ]
-"303
-[e :U 399 ]
-[e :U 397 ]
-[e :U 395 ]
 [; ;UI.c: 302: }
-[; ;UI.c: 303: break;
-[e $U 358  ]
-[; ;UI.c: 305: case 1022 :
+[e $U 405  ]
+"303
+[e :U 404 ]
+[; ;UI.c: 303: else if(back){
+[e $ ! != _back -> 0 `i 406  ]
+{
+[; ;UI.c: 304: change_state_to_menu_23();
+"304
+[e ( _change_state_to_menu_23 ..  ]
 "305
-[e :U 401 ]
-[; ;UI.c: 306: if(up){
-"306
-[e $ ! != _up -> 0 `i 402  ]
-{
-[; ;UI.c: 307: change_state_to_logs_11();
-"307
-[e ( _change_state_to_logs_11 ..  ]
-"308
 }
-[; ;UI.c: 308: }
-[e $U 403  ]
+[e :U 406 ]
+"306
+[e :U 405 ]
+[e :U 403 ]
+[e :U 401 ]
+[; ;UI.c: 305: }
+[; ;UI.c: 306: break;
+[e $U 364  ]
+[; ;UI.c: 308: case 1022 :
+"308
+[e :U 407 ]
+[; ;UI.c: 309: if(up){
 "309
-[e :U 402 ]
-[; ;UI.c: 309: else if(down){
-[e $ ! != _down -> 0 `i 404  ]
+[e $ ! != _up -> 0 `i 408  ]
 {
-[; ;UI.c: 310: change_state_to_logs_23();
+[; ;UI.c: 310: change_state_to_logs_11();
 "310
-[e ( _change_state_to_logs_23 ..  ]
+[e ( _change_state_to_logs_11 ..  ]
 "311
 }
 [; ;UI.c: 311: }
-[e $U 405  ]
+[e $U 409  ]
 "312
-[e :U 404 ]
-[; ;UI.c: 312: else if(enter){
-[e $ ! != _enter -> 0 `i 406  ]
+[e :U 408 ]
+[; ;UI.c: 312: else if(down){
+[e $ ! != _down -> 0 `i 410  ]
 {
-[; ;UI.c: 313: dispLogs(2);
+[; ;UI.c: 313: change_state_to_logs_23();
 "313
-[e ( _dispLogs (1 -> 2 `i ]
+[e ( _change_state_to_logs_23 ..  ]
 "314
 }
 [; ;UI.c: 314: }
-[e $U 407  ]
+[e $U 411  ]
 "315
-[e :U 406 ]
-[; ;UI.c: 315: else if(back){
-[e $ ! != _back -> 0 `i 408  ]
+[e :U 410 ]
+[; ;UI.c: 315: else if(enter){
+[e $ ! != _enter -> 0 `i 412  ]
 {
-[; ;UI.c: 316: change_state_to_menu_23();
+[; ;UI.c: 316: dispLogs(2);
 "316
-[e ( _change_state_to_menu_23 ..  ]
+[e ( _dispLogs (1 -> 2 `i ]
 "317
 }
-[e :U 408 ]
-"318
-[e :U 407 ]
-[e :U 405 ]
-[e :U 403 ]
 [; ;UI.c: 317: }
-[; ;UI.c: 318: break;
-[e $U 358  ]
-[; ;UI.c: 320: case 1023 :
+[e $U 413  ]
+"318
+[e :U 412 ]
+[; ;UI.c: 318: else if(back){
+[e $ ! != _back -> 0 `i 414  ]
+{
+[; ;UI.c: 319: change_state_to_menu_23();
+"319
+[e ( _change_state_to_menu_23 ..  ]
 "320
-[e :U 409 ]
-[; ;UI.c: 321: if(up){
-"321
-[e $ ! != _up -> 0 `i 410  ]
-{
-[; ;UI.c: 322: change_state_to_logs_22();
-"322
-[e ( _change_state_to_logs_22 ..  ]
-"323
 }
-[; ;UI.c: 323: }
-[e $U 411  ]
+[e :U 414 ]
+"321
+[e :U 413 ]
+[e :U 411 ]
+[e :U 409 ]
+[; ;UI.c: 320: }
+[; ;UI.c: 321: break;
+[e $U 364  ]
+[; ;UI.c: 323: case 1023 :
+"323
+[e :U 415 ]
+[; ;UI.c: 324: if(up){
 "324
-[e :U 410 ]
-[; ;UI.c: 324: else if(down){
-[e $ ! != _down -> 0 `i 412  ]
+[e $ ! != _up -> 0 `i 416  ]
 {
-[; ;UI.c: 325: change_state_to_logs_34();
+[; ;UI.c: 325: change_state_to_logs_22();
 "325
-[e ( _change_state_to_logs_34 ..  ]
+[e ( _change_state_to_logs_22 ..  ]
 "326
 }
 [; ;UI.c: 326: }
-[e $U 413  ]
+[e $U 417  ]
 "327
-[e :U 412 ]
-[; ;UI.c: 327: else if(enter){
-[e $ ! != _enter -> 0 `i 414  ]
+[e :U 416 ]
+[; ;UI.c: 327: else if(down){
+[e $ ! != _down -> 0 `i 418  ]
 {
-[; ;UI.c: 328: dispLogs(3);
+[; ;UI.c: 328: change_state_to_logs_34();
 "328
-[e ( _dispLogs (1 -> 3 `i ]
+[e ( _change_state_to_logs_34 ..  ]
 "329
 }
 [; ;UI.c: 329: }
-[e $U 415  ]
+[e $U 419  ]
 "330
-[e :U 414 ]
-[; ;UI.c: 330: else if(back){
-[e $ ! != _back -> 0 `i 416  ]
+[e :U 418 ]
+[; ;UI.c: 330: else if(enter){
+[e $ ! != _enter -> 0 `i 420  ]
 {
-[; ;UI.c: 331: change_state_to_menu_23();
+[; ;UI.c: 331: dispLogs(3);
 "331
-[e ( _change_state_to_menu_23 ..  ]
+[e ( _dispLogs (1 -> 3 `i ]
 "332
 }
-[e :U 416 ]
-"333
-[e :U 415 ]
-[e :U 413 ]
-[e :U 411 ]
 [; ;UI.c: 332: }
-[; ;UI.c: 333: break;
-[e $U 358  ]
-[; ;UI.c: 335: case 1033 :
+[e $U 421  ]
+"333
+[e :U 420 ]
+[; ;UI.c: 333: else if(back){
+[e $ ! != _back -> 0 `i 422  ]
+{
+[; ;UI.c: 334: change_state_to_menu_23();
+"334
+[e ( _change_state_to_menu_23 ..  ]
 "335
-[e :U 417 ]
-[; ;UI.c: 336: if(up){
-"336
-[e $ ! != _up -> 0 `i 418  ]
-{
-[; ;UI.c: 337: change_state_to_logs_22();
-"337
-[e ( _change_state_to_logs_22 ..  ]
-"338
 }
-[; ;UI.c: 338: }
-[e $U 419  ]
+[e :U 422 ]
+"336
+[e :U 421 ]
+[e :U 419 ]
+[e :U 417 ]
+[; ;UI.c: 335: }
+[; ;UI.c: 336: break;
+[e $U 364  ]
+[; ;UI.c: 338: case 1033 :
+"338
+[e :U 423 ]
+[; ;UI.c: 339: if(up){
 "339
-[e :U 418 ]
-[; ;UI.c: 339: else if(down){
-[e $ ! != _down -> 0 `i 420  ]
+[e $ ! != _up -> 0 `i 424  ]
 {
-[; ;UI.c: 340: change_state_to_logs_34();
+[; ;UI.c: 340: change_state_to_logs_22();
 "340
-[e ( _change_state_to_logs_34 ..  ]
+[e ( _change_state_to_logs_22 ..  ]
 "341
 }
 [; ;UI.c: 341: }
-[e $U 421  ]
+[e $U 425  ]
 "342
-[e :U 420 ]
-[; ;UI.c: 342: else if(enter){
-[e $ ! != _enter -> 0 `i 422  ]
+[e :U 424 ]
+[; ;UI.c: 342: else if(down){
+[e $ ! != _down -> 0 `i 426  ]
 {
-[; ;UI.c: 343: dispLogs(3);
+[; ;UI.c: 343: change_state_to_logs_34();
 "343
-[e ( _dispLogs (1 -> 3 `i ]
+[e ( _change_state_to_logs_34 ..  ]
 "344
 }
 [; ;UI.c: 344: }
-[e $U 423  ]
+[e $U 427  ]
 "345
-[e :U 422 ]
-[; ;UI.c: 345: else if(back){
-[e $ ! != _back -> 0 `i 424  ]
+[e :U 426 ]
+[; ;UI.c: 345: else if(enter){
+[e $ ! != _enter -> 0 `i 428  ]
 {
-[; ;UI.c: 346: change_state_to_menu_23();
+[; ;UI.c: 346: dispLogs(3);
 "346
-[e ( _change_state_to_menu_23 ..  ]
+[e ( _dispLogs (1 -> 3 `i ]
 "347
 }
-[e :U 424 ]
-"348
-[e :U 423 ]
-[e :U 421 ]
-[e :U 419 ]
 [; ;UI.c: 347: }
-[; ;UI.c: 348: break;
-[e $U 358  ]
-[; ;UI.c: 350: case 1034 :
+[e $U 429  ]
+"348
+[e :U 428 ]
+[; ;UI.c: 348: else if(back){
+[e $ ! != _back -> 0 `i 430  ]
+{
+[; ;UI.c: 349: change_state_to_menu_23();
+"349
+[e ( _change_state_to_menu_23 ..  ]
 "350
-[e :U 425 ]
-[; ;UI.c: 351: if(up){
-"351
-[e $ ! != _up -> 0 `i 426  ]
-{
-[; ;UI.c: 352: change_state_to_logs_33();
-"352
-[e ( _change_state_to_logs_33 ..  ]
-"353
 }
-[; ;UI.c: 353: }
-[e $U 427  ]
+[e :U 430 ]
+"351
+[e :U 429 ]
+[e :U 427 ]
+[e :U 425 ]
+[; ;UI.c: 350: }
+[; ;UI.c: 351: break;
+[e $U 364  ]
+[; ;UI.c: 353: case 1034 :
+"353
+[e :U 431 ]
+[; ;UI.c: 354: if(up){
 "354
-[e :U 426 ]
-[; ;UI.c: 354: else if(down){
-[e $ ! != _down -> 0 `i 428  ]
+[e $ ! != _up -> 0 `i 432  ]
 {
-[; ;UI.c: 355: change_state_to_logs_11();
+[; ;UI.c: 355: change_state_to_logs_33();
 "355
-[e ( _change_state_to_logs_11 ..  ]
+[e ( _change_state_to_logs_33 ..  ]
 "356
 }
 [; ;UI.c: 356: }
-[e $U 429  ]
+[e $U 433  ]
 "357
-[e :U 428 ]
-[; ;UI.c: 357: else if(enter){
-[e $ ! != _enter -> 0 `i 430  ]
+[e :U 432 ]
+[; ;UI.c: 357: else if(down){
+[e $ ! != _down -> 0 `i 434  ]
 {
-[; ;UI.c: 358: dispLogs(4);
+[; ;UI.c: 358: change_state_to_logs_11();
 "358
-[e ( _dispLogs (1 -> 4 `i ]
+[e ( _change_state_to_logs_11 ..  ]
 "359
 }
 [; ;UI.c: 359: }
-[e $U 431  ]
+[e $U 435  ]
 "360
-[e :U 430 ]
-[; ;UI.c: 360: else if(back){
-[e $ ! != _back -> 0 `i 432  ]
+[e :U 434 ]
+[; ;UI.c: 360: else if(enter){
+[e $ ! != _enter -> 0 `i 436  ]
 {
-[; ;UI.c: 361: change_state_to_menu_23();
+[; ;UI.c: 361: dispLogs(4);
 "361
-[e ( _change_state_to_menu_23 ..  ]
+[e ( _dispLogs (1 -> 4 `i ]
 "362
 }
-[e :U 432 ]
-"363
-[e :U 431 ]
-[e :U 429 ]
-[e :U 427 ]
 [; ;UI.c: 362: }
-[; ;UI.c: 363: break;
-[e $U 358  ]
-[; ;UI.c: 365: default:
+[e $U 437  ]
+"363
+[e :U 436 ]
+[; ;UI.c: 363: else if(back){
+[e $ ! != _back -> 0 `i 438  ]
+{
+[; ;UI.c: 364: change_state_to_menu_23();
+"364
+[e ( _change_state_to_menu_23 ..  ]
 "365
-[e :U 433 ]
-[; ;UI.c: 366: break;
-"366
-[e $U 358  ]
-"367
-}
-[; ;UI.c: 367: }
-[e $U 358  ]
-"221
-[e :U 359 ]
-[e [\ _cur_state , $ -> 0 `i 360
- , $ -> 11 `i 361
- , $ -> 12 `i 367
- , $ -> 22 `i 373
- , $ -> 23 `i 379
- , $ -> 1011 `i 385
- , $ -> 1012 `i 393
- , $ -> 1022 `i 401
- , $ -> 1023 `i 409
- , $ -> 1033 `i 417
- , $ -> 1034 `i 425
- 433 ]
-"367
-[e :U 358 ]
-"368
-}
-[e :U 357 ]
-[; ;UI.c: 368: }
-[; ;UI.c: 369: (INTCONbits.GIE = 1);
-"369
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;UI.c: 370: }
-"370
-[e :UE 356 ]
-}
-"372
-[v _inputHandler `(i ~T0 @X0 1 ef ]
-{
-[; ;UI.c: 372: int inputHandler(void){
-[e :U _inputHandler ]
-[f ]
-[; ;UI.c: 377: if(firstboot){
-"377
-[e $ ! != _firstboot -> 0 `i 435  ]
-{
-[; ;UI.c: 378: change_state_to_menu_11();
-"378
-[e ( _change_state_to_menu_11 ..  ]
-[; ;UI.c: 379: firstboot = 0;
-"379
-[e = _firstboot -> 0 `i ]
-[; ;UI.c: 380: return 0;
-"380
-[e ) -> 0 `i ]
-[e $UE 434  ]
-"381
-}
-[e :U 435 ]
-[; ;UI.c: 381: }
-[; ;UI.c: 382: if (logstate){
-"382
-[e $ ! != _logstate -> 0 `i 436  ]
-{
-[; ;UI.c: 383: if(input == 'C' && PORTBbits.RB1 == 1){
-"383
-[e $ ! && == -> _input `ui -> 67 `ui == -> . . _PORTBbits 0 1 `i -> 1 `i 437  ]
-{
-[; ;UI.c: 385: while(PORTBbits.RB1 == 1){
-"385
-[e $U 438  ]
-[e :U 439 ]
-{
-[; ;UI.c: 386: _delay((unsigned long)((10)*(32000000/4000.0)));
-"386
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"387
 }
 [e :U 438 ]
-"385
-[e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 439  ]
-[e :U 440 ]
-[; ;UI.c: 387: }
-[; ;UI.c: 388: return 0;
-"388
-[e ) -> 0 `i ]
-[e $UE 434  ]
-"389
-}
-[; ;UI.c: 389: }
-[e $U 441  ]
-"390
+"366
 [e :U 437 ]
-[; ;UI.c: 390: else if (input == 'D'){
-[e $ ! == -> _input `ui -> 68 `ui 442  ]
+[e :U 435 ]
+[e :U 433 ]
+[; ;UI.c: 365: }
+[; ;UI.c: 366: break;
+[e $U 364  ]
+[; ;UI.c: 368: default:
+"368
+[e :U 439 ]
+[; ;UI.c: 369: break;
+"369
+[e $U 364  ]
+"370
+}
+[; ;UI.c: 370: }
+[e $U 364  ]
+"224
+[e :U 365 ]
+[e [\ _cur_state , $ -> 0 `i 366
+ , $ -> 11 `i 367
+ , $ -> 12 `i 373
+ , $ -> 22 `i 379
+ , $ -> 23 `i 385
+ , $ -> 1011 `i 391
+ , $ -> 1012 `i 399
+ , $ -> 1022 `i 407
+ , $ -> 1023 `i 415
+ , $ -> 1033 `i 423
+ , $ -> 1034 `i 431
+ 439 ]
+"370
+[e :U 364 ]
+"371
+}
+[e :U 363 ]
+[; ;UI.c: 371: }
+[; ;UI.c: 372: (INTCONbits.GIE = 1);
+"372
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;UI.c: 373: }
+"373
+[e :UE 362 ]
+}
+"375
+[v _inputHandler `(i ~T0 @X0 1 ef ]
 {
-[; ;UI.c: 392: logstate = 0;
-"392
-[e = _logstate -> 0 `i ]
-[; ;UI.c: 393: switch(cur_state){
-"393
+[; ;UI.c: 375: int inputHandler(void){
+[e :U _inputHandler ]
+[f ]
+[; ;UI.c: 380: if(firstboot){
+"380
+[e $ ! != _firstboot -> 0 `i 441  ]
+{
+[; ;UI.c: 381: change_state_to_menu_11();
+"381
+[e ( _change_state_to_menu_11 ..  ]
+[; ;UI.c: 382: firstboot = 0;
+"382
+[e = _firstboot -> 0 `i ]
+[; ;UI.c: 383: return 0;
+"383
+[e ) -> 0 `i ]
+[e $UE 440  ]
+"384
+}
+[e :U 441 ]
+[; ;UI.c: 384: }
+[; ;UI.c: 385: if (logstate){
+"385
+[e $ ! != _logstate -> 0 `i 442  ]
+{
+[; ;UI.c: 386: if(input == 'C' && PORTBbits.RB1 == 1){
+"386
+[e $ ! && == -> _input `ui -> 67 `ui == -> . . _PORTBbits 0 1 `i -> 1 `i 443  ]
+{
+[; ;UI.c: 388: while(PORTBbits.RB1 == 1){
+"388
 [e $U 444  ]
-{
-[; ;UI.c: 394: case 1011 :
-"394
 [e :U 445 ]
-[; ;UI.c: 395: change_state_to_logs_11();
-"395
-[e ( _change_state_to_logs_11 ..  ]
-[; ;UI.c: 396: break;
-"396
-[e $U 443  ]
-[; ;UI.c: 397: case 1012 :
-"397
+{
+[; ;UI.c: 389: _delay((unsigned long)((10)*(32000000/4000.0)));
+"389
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"390
+}
+[e :U 444 ]
+"388
+[e $ == -> . . _PORTBbits 0 1 `i -> 1 `i 445  ]
 [e :U 446 ]
-[; ;UI.c: 398: change_state_to_logs_12();
+[; ;UI.c: 390: }
+[; ;UI.c: 391: return 0;
+"391
+[e ) -> 0 `i ]
+[e $UE 440  ]
+"392
+}
+[; ;UI.c: 392: }
+[e $U 447  ]
+"393
+[e :U 443 ]
+[; ;UI.c: 393: else if (input == 'D'){
+[e $ ! == -> _input `ui -> 68 `ui 448  ]
+{
+[; ;UI.c: 395: logstate = 0;
+"395
+[e = _logstate -> 0 `i ]
+[; ;UI.c: 396: switch(cur_state){
+"396
+[e $U 450  ]
+{
+[; ;UI.c: 397: case 1011 :
+"397
+[e :U 451 ]
+[; ;UI.c: 398: change_state_to_logs_11();
 "398
-[e ( _change_state_to_logs_12 ..  ]
+[e ( _change_state_to_logs_11 ..  ]
 [; ;UI.c: 399: break;
 "399
-[e $U 443  ]
-[; ;UI.c: 400: case 1022 :
+[e $U 449  ]
+[; ;UI.c: 400: case 1012 :
 "400
-[e :U 447 ]
-[; ;UI.c: 401: change_state_to_logs_22();
+[e :U 452 ]
+[; ;UI.c: 401: change_state_to_logs_12();
 "401
-[e ( _change_state_to_logs_22 ..  ]
+[e ( _change_state_to_logs_12 ..  ]
 [; ;UI.c: 402: break;
 "402
-[e $U 443  ]
-[; ;UI.c: 403: case 1023 :
+[e $U 449  ]
+[; ;UI.c: 403: case 1022 :
 "403
-[e :U 448 ]
-[; ;UI.c: 404: change_state_to_logs_23();
+[e :U 453 ]
+[; ;UI.c: 404: change_state_to_logs_22();
 "404
-[e ( _change_state_to_logs_23 ..  ]
+[e ( _change_state_to_logs_22 ..  ]
 [; ;UI.c: 405: break;
 "405
-[e $U 443  ]
-[; ;UI.c: 406: case 1033:
+[e $U 449  ]
+[; ;UI.c: 406: case 1023 :
 "406
-[e :U 449 ]
-[; ;UI.c: 407: change_state_to_logs_33();
+[e :U 454 ]
+[; ;UI.c: 407: change_state_to_logs_23();
 "407
-[e ( _change_state_to_logs_33 ..  ]
+[e ( _change_state_to_logs_23 ..  ]
 [; ;UI.c: 408: break;
 "408
-[e $U 443  ]
-[; ;UI.c: 409: case 1034 :
+[e $U 449  ]
+[; ;UI.c: 409: case 1033:
 "409
-[e :U 450 ]
-[; ;UI.c: 410: change_state_to_logs_34();
+[e :U 455 ]
+[; ;UI.c: 410: change_state_to_logs_33();
 "410
-[e ( _change_state_to_logs_34 ..  ]
+[e ( _change_state_to_logs_33 ..  ]
 [; ;UI.c: 411: break;
 "411
-[e $U 443  ]
+[e $U 449  ]
+[; ;UI.c: 412: case 1034 :
 "412
-}
-[; ;UI.c: 412: }
-[e $U 443  ]
-"393
-[e :U 444 ]
-[e [\ _cur_state , $ -> 1011 `i 445
- , $ -> 1012 `i 446
- , $ -> 1022 `i 447
- , $ -> 1023 `i 448
- , $ -> 1033 `i 449
- , $ -> 1034 `i 450
- 443 ]
-"412
-[e :U 443 ]
-[; ;UI.c: 413: return 0;
+[e :U 456 ]
+[; ;UI.c: 413: change_state_to_logs_34();
 "413
-[e ) -> 0 `i ]
-[e $UE 434  ]
+[e ( _change_state_to_logs_34 ..  ]
+[; ;UI.c: 414: break;
 "414
-}
-[; ;UI.c: 414: }
-[e $U 451  ]
+[e $U 449  ]
 "415
-[e :U 442 ]
-[; ;UI.c: 415: else{
-{
+}
+[; ;UI.c: 415: }
+[e $U 449  ]
+"396
+[e :U 450 ]
+[e [\ _cur_state , $ -> 1011 `i 451
+ , $ -> 1012 `i 452
+ , $ -> 1022 `i 453
+ , $ -> 1023 `i 454
+ , $ -> 1033 `i 455
+ , $ -> 1034 `i 456
+ 449 ]
+"415
+[e :U 449 ]
 [; ;UI.c: 416: return 0;
 "416
 [e ) -> 0 `i ]
-[e $UE 434  ]
+[e $UE 440  ]
 "417
 }
-[e :U 451 ]
-[e :U 441 ]
-"418
-}
-[e :U 436 ]
 [; ;UI.c: 417: }
-[; ;UI.c: 418: }
-[; ;UI.c: 419: switch(input){
+[e $U 457  ]
+"418
+[e :U 448 ]
+[; ;UI.c: 418: else{
+{
+[; ;UI.c: 419: return 0;
 "419
-[e $U 453  ]
-{
-[; ;UI.c: 421: case '1' :
-"421
-[e :U 454 ]
-[; ;UI.c: 422: if(cur_state == 11){
-"422
-[e $ ! == _cur_state -> 11 `i 455  ]
-{
-[; ;UI.c: 423: return 0;
-"423
 [e ) -> 0 `i ]
-[e $UE 434  ]
-"424
+[e $UE 440  ]
+"420
 }
-[; ;UI.c: 424: }
-[e $U 456  ]
-"425
-[e :U 455 ]
-[; ;UI.c: 425: else{
+[e :U 457 ]
+[e :U 447 ]
+"421
+}
+[e :U 442 ]
+[; ;UI.c: 420: }
+[; ;UI.c: 421: }
+[; ;UI.c: 422: switch(input){
+"422
+[e $U 459  ]
 {
-[; ;UI.c: 426: change_state_to_menu_11();
+[; ;UI.c: 424: case '1' :
+"424
+[e :U 460 ]
+[; ;UI.c: 425: if(cur_state == 11){
+"425
+[e $ ! == _cur_state -> 11 `i 461  ]
+{
+[; ;UI.c: 426: return 0;
 "426
-[e ( _change_state_to_menu_11 ..  ]
+[e ) -> 0 `i ]
+[e $UE 440  ]
 "427
 }
-[e :U 456 ]
 [; ;UI.c: 427: }
-[; ;UI.c: 428: return 0;
+[e $U 462  ]
 "428
-[e ) -> 0 `i ]
-[e $UE 434  ]
-[; ;UI.c: 429: case '2' :
-"429
-[e :U 457 ]
-[; ;UI.c: 430: if(cur_state == 22 | cur_state == 12){
-"430
-[e $ ! | == _cur_state -> 22 `i == _cur_state -> 12 `i 458  ]
+[e :U 461 ]
+[; ;UI.c: 428: else{
 {
+[; ;UI.c: 429: change_state_to_menu_11();
+"429
+[e ( _change_state_to_menu_11 ..  ]
+"430
+}
+[e :U 462 ]
+[; ;UI.c: 430: }
 [; ;UI.c: 431: return 0;
 "431
 [e ) -> 0 `i ]
-[e $UE 434  ]
+[e $UE 440  ]
+[; ;UI.c: 432: case '2' :
 "432
-}
-[; ;UI.c: 432: }
-[e $U 459  ]
+[e :U 463 ]
+[; ;UI.c: 433: if(cur_state == 22 | cur_state == 12){
 "433
-[e :U 458 ]
-[; ;UI.c: 433: else if(cur_state == 23){
-[e $ ! == _cur_state -> 23 `i 460  ]
+[e $ ! | == _cur_state -> 22 `i == _cur_state -> 12 `i 464  ]
 {
-[; ;UI.c: 434: change_state_to_menu_22();
+[; ;UI.c: 434: return 0;
 "434
-[e ( _change_state_to_menu_22 ..  ]
+[e ) -> 0 `i ]
+[e $UE 440  ]
 "435
 }
 [; ;UI.c: 435: }
-[e $U 461  ]
+[e $U 465  ]
 "436
-[e :U 460 ]
-[; ;UI.c: 436: else{
+[e :U 464 ]
+[; ;UI.c: 436: else if(cur_state == 23){
+[e $ ! == _cur_state -> 23 `i 466  ]
 {
-[; ;UI.c: 437: change_state_to_menu_12();
+[; ;UI.c: 437: change_state_to_menu_22();
 "437
-[e ( _change_state_to_menu_12 ..  ]
+[e ( _change_state_to_menu_22 ..  ]
 "438
 }
-[e :U 461 ]
-[e :U 459 ]
 [; ;UI.c: 438: }
-[; ;UI.c: 439: return 0;
+[e $U 467  ]
 "439
-[e ) -> 0 `i ]
-[e $UE 434  ]
-[; ;UI.c: 440: case '3' :
-"440
-[e :U 462 ]
-[; ;UI.c: 441: if(cur_state == 23){
-"441
-[e $ ! == _cur_state -> 23 `i 463  ]
+[e :U 466 ]
+[; ;UI.c: 439: else{
 {
+[; ;UI.c: 440: change_state_to_menu_12();
+"440
+[e ( _change_state_to_menu_12 ..  ]
+"441
+}
+[e :U 467 ]
+[e :U 465 ]
+[; ;UI.c: 441: }
 [; ;UI.c: 442: return 0;
 "442
 [e ) -> 0 `i ]
-[e $UE 434  ]
+[e $UE 440  ]
+[; ;UI.c: 443: case '3' :
 "443
-}
-[; ;UI.c: 443: }
-[e $U 464  ]
+[e :U 468 ]
+[; ;UI.c: 444: if(cur_state == 23){
 "444
-[e :U 463 ]
-[; ;UI.c: 444: else{
+[e $ ! == _cur_state -> 23 `i 469  ]
 {
-[; ;UI.c: 445: change_state_to_menu_23();
+[; ;UI.c: 445: return 0;
 "445
-[e ( _change_state_to_menu_23 ..  ]
+[e ) -> 0 `i ]
+[e $UE 440  ]
 "446
 }
-[e :U 464 ]
 [; ;UI.c: 446: }
-[; ;UI.c: 447: return 0;
+[e $U 470  ]
 "447
-[e ) -> 0 `i ]
-[e $UE 434  ]
-[; ;UI.c: 449: case 'A' :
+[e :U 469 ]
+[; ;UI.c: 447: else{
+{
+[; ;UI.c: 448: change_state_to_menu_23();
+"448
+[e ( _change_state_to_menu_23 ..  ]
 "449
-[e :U 465 ]
-[; ;UI.c: 450: up = 1;
+}
+[e :U 470 ]
+[; ;UI.c: 449: }
+[; ;UI.c: 450: return 0;
 "450
-[e = _up -> 1 `i ]
-[; ;UI.c: 451: return 1;
-"451
-[e ) -> 1 `i ]
-[e $UE 434  ]
-[; ;UI.c: 452: case 'B' :
+[e ) -> 0 `i ]
+[e $UE 440  ]
+[; ;UI.c: 452: case 'A' :
 "452
-[e :U 466 ]
-[; ;UI.c: 453: down = 1;
+[e :U 471 ]
+[; ;UI.c: 453: up = 1;
 "453
-[e = _down -> 1 `i ]
+[e = _up -> 1 `i ]
 [; ;UI.c: 454: return 1;
 "454
 [e ) -> 1 `i ]
-[e $UE 434  ]
-[; ;UI.c: 455: case 'C' :
+[e $UE 440  ]
+[; ;UI.c: 455: case 'B' :
 "455
-[e :U 467 ]
-[; ;UI.c: 456: enter = 1;
+[e :U 472 ]
+[; ;UI.c: 456: down = 1;
 "456
-[e = _enter -> 1 `i ]
+[e = _down -> 1 `i ]
 [; ;UI.c: 457: return 1;
 "457
 [e ) -> 1 `i ]
-[e $UE 434  ]
-[; ;UI.c: 458: case 'D' :
+[e $UE 440  ]
+[; ;UI.c: 458: case 'C' :
 "458
-[e :U 468 ]
-[; ;UI.c: 459: back = 1;
+[e :U 473 ]
+[; ;UI.c: 459: enter = 1;
 "459
-[e = _back -> 1 `i ]
+[e = _enter -> 1 `i ]
 [; ;UI.c: 460: return 1;
 "460
 [e ) -> 1 `i ]
-[e $UE 434  ]
-[; ;UI.c: 461: default :
+[e $UE 440  ]
+[; ;UI.c: 461: case 'D' :
 "461
-[e :U 469 ]
+[e :U 474 ]
+[; ;UI.c: 462: back = 1;
+"462
+[e = _back -> 1 `i ]
 [; ;UI.c: 463: return 1;
 "463
 [e ) -> 1 `i ]
-[e $UE 434  ]
+[e $UE 440  ]
+[; ;UI.c: 464: default :
 "464
-}
-[; ;UI.c: 464: }
-[e $U 452  ]
-"419
-[e :U 453 ]
-[e [\ _input , $ -> -> 49 `ui `uc 454
- , $ -> -> 50 `ui `uc 457
- , $ -> -> 51 `ui `uc 462
- , $ -> -> 65 `ui `uc 465
- , $ -> -> 66 `ui `uc 466
- , $ -> -> 67 `ui `uc 467
- , $ -> -> 68 `ui `uc 468
- 469 ]
-"464
-[e :U 452 ]
-[; ;UI.c: 465: }
-"465
-[e :UE 434 ]
-}
+[e :U 475 ]
+[; ;UI.c: 466: return 1;
+"466
+[e ) -> 1 `i ]
+[e $UE 440  ]
 "467
+}
+[; ;UI.c: 467: }
+[e $U 458  ]
+"422
+[e :U 459 ]
+[e [\ _input , $ -> -> 49 `ui `uc 460
+ , $ -> -> 50 `ui `uc 463
+ , $ -> -> 51 `ui `uc 468
+ , $ -> -> 65 `ui `uc 471
+ , $ -> -> 66 `ui `uc 472
+ , $ -> -> 67 `ui `uc 473
+ , $ -> -> 68 `ui `uc 474
+ 475 ]
+"467
+[e :U 458 ]
+[; ;UI.c: 468: }
+"468
+[e :UE 440 ]
+}
+"470
 [v _dispLogs `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;UI.c: 467: void dispLogs(int myLog){
+[; ;UI.c: 470: void dispLogs(int myLog){
 [e :U _dispLogs ]
 [v _myLog `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;UI.c: 468: logstate = 1;
-"468
-[e = _logstate -> 1 `i ]
-[; ;UI.c: 469: log = myLog;
-"469
-[e = _log _myLog ]
-[; ;UI.c: 470: retrieveLog(myLog - 1);
-"470
-[e ( _retrieveLog (1 - _myLog -> 1 `i ]
-[; ;UI.c: 471: }
+[; ;UI.c: 471: logstate = 1;
 "471
-[e :UE 470 ]
-}
+[e = _logstate -> 1 `i ]
+[; ;UI.c: 472: log = myLog;
+"472
+[e = _log _myLog ]
+[; ;UI.c: 473: retrieveLog(myLog - 1);
+"473
+[e ( _retrieveLog (1 - _myLog -> 1 `i ]
+[; ;UI.c: 474: }
 "474
-[v _change_state_to_menu_start `(v ~T0 @X0 1 ef ]
-{
-[; ;UI.c: 474: void change_state_to_menu_start(void){
-[e :U _change_state_to_menu_start ]
-[f ]
-[; ;UI.c: 475: cur_state = 0;
-"475
-[e = _cur_state -> 0 `i ]
-[; ;UI.c: 477: lcdInst(0b10000000);;
-"477
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 478: printRTC();
-"478
-[e ( _printRTC ..  ]
-[; ;UI.c: 479: lcdInst(0b11000000);;
-"479
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 480: printf("PUSH TO CONTINUE");
-"480
-[e ( _printf :s 30C ]
-[; ;UI.c: 481: }
-"481
-[e :UE 471 ]
-}
-"482
-[v _change_state_to_menu_11 `(v ~T0 @X0 1 ef ]
-{
-[; ;UI.c: 482: void change_state_to_menu_11(void){
-[e :U _change_state_to_menu_11 ]
-[f ]
-[; ;UI.c: 483: cur_state = 11;
-"483
-[e = _cur_state -> 11 `i ]
-[; ;UI.c: 485: lcdInst(0b10000000);;
-"485
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 486: printf("1. DATE/TIME   <");
-"486
-[e ( _printf :s 31C ]
-[; ;UI.c: 487: lcdInst(0b11000000);;
-"487
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 488: printf("2. SORT         ");
-"488
-[e ( _printf :s 32C ]
-[; ;UI.c: 489: }
-"489
-[e :UE 472 ]
-}
-"490
-[v _change_state_to_menu_12 `(v ~T0 @X0 1 ef ]
-{
-[; ;UI.c: 490: void change_state_to_menu_12(void){
-[e :U _change_state_to_menu_12 ]
-[f ]
-[; ;UI.c: 491: cur_state = 12;
-"491
-[e = _cur_state -> 12 `i ]
-[; ;UI.c: 493: lcdInst(0b10000000);;
-"493
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 494: printf("1. DATE/TIME    ");
-"494
-[e ( _printf :s 33C ]
-[; ;UI.c: 495: lcdInst(0b11000000);;
-"495
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 496: printf("2. SORT        <");
-"496
-[e ( _printf :s 34C ]
-[; ;UI.c: 497: }
-"497
-[e :UE 473 ]
-}
-"498
-[v _change_state_to_menu_22 `(v ~T0 @X0 1 ef ]
-{
-[; ;UI.c: 498: void change_state_to_menu_22(void){
-[e :U _change_state_to_menu_22 ]
-[f ]
-[; ;UI.c: 499: cur_state = 22;
-"499
-[e = _cur_state -> 22 `i ]
-[; ;UI.c: 501: lcdInst(0b10000000);;
-"501
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 502: printf("2. SORT        <");
-"502
-[e ( _printf :s 35C ]
-[; ;UI.c: 503: lcdInst(0b11000000);;
-"503
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 504: printf("3. LOGS         ");
-"504
-[e ( _printf :s 36C ]
-[; ;UI.c: 505: }
-"505
-[e :UE 474 ]
-}
-"506
-[v _change_state_to_menu_23 `(v ~T0 @X0 1 ef ]
-{
-[; ;UI.c: 506: void change_state_to_menu_23(void){
-[e :U _change_state_to_menu_23 ]
-[f ]
-[; ;UI.c: 507: cur_state = 23;
-"507
-[e = _cur_state -> 23 `i ]
-[; ;UI.c: 509: lcdInst(0b10000000);;
-"509
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 510: printf("2. SORT         ");
-"510
-[e ( _printf :s 37C ]
-[; ;UI.c: 511: lcdInst(0b11000000);;
-"511
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 512: printf("3. LOGS        <");
-"512
-[e ( _printf :s 38C ]
-[; ;UI.c: 513: }
-"513
-[e :UE 475 ]
-}
-"514
-[v _change_state_to_logs_11 `(v ~T0 @X0 1 ef ]
-{
-[; ;UI.c: 514: void change_state_to_logs_11(void){
-[e :U _change_state_to_logs_11 ]
-[f ]
-[; ;UI.c: 515: cur_state = 1011;
-"515
-[e = _cur_state -> 1011 `i ]
-[; ;UI.c: 516: lcdInst(0b10000000);;
-"516
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 517: printf("LOG 1          <");
-"517
-[e ( _printf :s 39C ]
-[; ;UI.c: 518: lcdInst(0b11000000);;
-"518
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 519: printf("LOG 2           ");
-"519
-[e ( _printf :s 40C ]
-[; ;UI.c: 520: }
-"520
 [e :UE 476 ]
 }
-"521
-[v _change_state_to_logs_12 `(v ~T0 @X0 1 ef ]
+"477
+[v _change_state_to_menu_start `(v ~T0 @X0 1 ef ]
 {
-[; ;UI.c: 521: void change_state_to_logs_12(void){
-[e :U _change_state_to_logs_12 ]
+[; ;UI.c: 477: void change_state_to_menu_start(void){
+[e :U _change_state_to_menu_start ]
 [f ]
-[; ;UI.c: 522: cur_state = 1012;
-"522
-[e = _cur_state -> 1012 `i ]
-[; ;UI.c: 523: lcdInst(0b10000000);;
-"523
+[; ;UI.c: 478: cur_state = 0;
+"478
+[e = _cur_state -> 0 `i ]
+[; ;UI.c: 480: lcdInst(0b10000000);;
+"480
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 524: printf("LOG 1           ");
-"524
-[e ( _printf :s 41C ]
-[; ;UI.c: 525: lcdInst(0b11000000);;
-"525
+[; ;UI.c: 481: printRTC();
+"481
+[e ( _printRTC ..  ]
+[; ;UI.c: 482: lcdInst(0b11000000);;
+"482
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 526: printf("LOG 2          <");
-"526
-[e ( _printf :s 42C ]
-[; ;UI.c: 527: }
-"527
+[; ;UI.c: 483: printf("PUSH TO CONTINUE");
+"483
+[e ( _printf :s 30C ]
+[; ;UI.c: 484: }
+"484
 [e :UE 477 ]
 }
-"528
-[v _change_state_to_logs_22 `(v ~T0 @X0 1 ef ]
+"485
+[v _change_state_to_menu_11 `(v ~T0 @X0 1 ef ]
 {
-[; ;UI.c: 528: void change_state_to_logs_22(void){
-[e :U _change_state_to_logs_22 ]
+[; ;UI.c: 485: void change_state_to_menu_11(void){
+[e :U _change_state_to_menu_11 ]
 [f ]
-[; ;UI.c: 529: cur_state = 1022;
-"529
-[e = _cur_state -> 1022 `i ]
-[; ;UI.c: 530: lcdInst(0b10000000);;
-"530
+[; ;UI.c: 486: cur_state = 11;
+"486
+[e = _cur_state -> 11 `i ]
+[; ;UI.c: 488: lcdInst(0b10000000);;
+"488
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 531: printf("LOG 2          <");
-"531
-[e ( _printf :s 43C ]
-[; ;UI.c: 532: lcdInst(0b11000000);;
-"532
+[; ;UI.c: 489: printf("1. DATE/TIME   <");
+"489
+[e ( _printf :s 31C ]
+[; ;UI.c: 490: lcdInst(0b11000000);;
+"490
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 533: printf("LOG 3           ");
-"533
-[e ( _printf :s 44C ]
-[; ;UI.c: 534: }
-"534
+[; ;UI.c: 491: printf("2. SORT         ");
+"491
+[e ( _printf :s 32C ]
+[; ;UI.c: 492: }
+"492
 [e :UE 478 ]
 }
-"535
-[v _change_state_to_logs_23 `(v ~T0 @X0 1 ef ]
+"493
+[v _change_state_to_menu_12 `(v ~T0 @X0 1 ef ]
 {
-[; ;UI.c: 535: void change_state_to_logs_23(void){
-[e :U _change_state_to_logs_23 ]
+[; ;UI.c: 493: void change_state_to_menu_12(void){
+[e :U _change_state_to_menu_12 ]
 [f ]
-[; ;UI.c: 536: cur_state = 1023;
-"536
-[e = _cur_state -> 1023 `i ]
-[; ;UI.c: 537: lcdInst(0b10000000);;
-"537
+[; ;UI.c: 494: cur_state = 12;
+"494
+[e = _cur_state -> 12 `i ]
+[; ;UI.c: 496: lcdInst(0b10000000);;
+"496
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 538: printf("LOG 2           ");
-"538
-[e ( _printf :s 45C ]
-[; ;UI.c: 539: lcdInst(0b11000000);;
-"539
+[; ;UI.c: 497: printf("1. DATE/TIME    ");
+"497
+[e ( _printf :s 33C ]
+[; ;UI.c: 498: lcdInst(0b11000000);;
+"498
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 540: printf("LOG 3          <");
-"540
-[e ( _printf :s 46C ]
-[; ;UI.c: 541: }
-"541
+[; ;UI.c: 499: printf("2. SORT        <");
+"499
+[e ( _printf :s 34C ]
+[; ;UI.c: 500: }
+"500
 [e :UE 479 ]
 }
-"542
-[v _change_state_to_logs_33 `(v ~T0 @X0 1 ef ]
+"501
+[v _change_state_to_menu_22 `(v ~T0 @X0 1 ef ]
 {
-[; ;UI.c: 542: void change_state_to_logs_33(void){
-[e :U _change_state_to_logs_33 ]
+[; ;UI.c: 501: void change_state_to_menu_22(void){
+[e :U _change_state_to_menu_22 ]
 [f ]
-[; ;UI.c: 543: cur_state = 1033;
-"543
-[e = _cur_state -> 1033 `i ]
-[; ;UI.c: 544: lcdInst(0b10000000);;
-"544
+[; ;UI.c: 502: cur_state = 22;
+"502
+[e = _cur_state -> 22 `i ]
+[; ;UI.c: 504: lcdInst(0b10000000);;
+"504
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 545: printf("LOG 3          <");
-"545
-[e ( _printf :s 47C ]
-[; ;UI.c: 546: lcdInst(0b11000000);;
-"546
+[; ;UI.c: 505: printf("2. SORT        <");
+"505
+[e ( _printf :s 35C ]
+[; ;UI.c: 506: lcdInst(0b11000000);;
+"506
 [e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 547: printf("LOG 4           ");
-"547
-[e ( _printf :s 48C ]
-[; ;UI.c: 548: }
-"548
+[; ;UI.c: 507: printf("3. LOGS         ");
+"507
+[e ( _printf :s 36C ]
+[; ;UI.c: 508: }
+"508
 [e :UE 480 ]
 }
+"509
+[v _change_state_to_menu_23 `(v ~T0 @X0 1 ef ]
+{
+[; ;UI.c: 509: void change_state_to_menu_23(void){
+[e :U _change_state_to_menu_23 ]
+[f ]
+[; ;UI.c: 510: cur_state = 23;
+"510
+[e = _cur_state -> 23 `i ]
+[; ;UI.c: 512: lcdInst(0b10000000);;
+"512
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 513: printf("2. SORT         ");
+"513
+[e ( _printf :s 37C ]
+[; ;UI.c: 514: lcdInst(0b11000000);;
+"514
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 515: printf("3. LOGS        <");
+"515
+[e ( _printf :s 38C ]
+[; ;UI.c: 516: }
+"516
+[e :UE 481 ]
+}
+"517
+[v _change_state_to_logs_11 `(v ~T0 @X0 1 ef ]
+{
+[; ;UI.c: 517: void change_state_to_logs_11(void){
+[e :U _change_state_to_logs_11 ]
+[f ]
+[; ;UI.c: 518: cur_state = 1011;
+"518
+[e = _cur_state -> 1011 `i ]
+[; ;UI.c: 519: lcdInst(0b10000000);;
+"519
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 520: printf("LOG 1          <");
+"520
+[e ( _printf :s 39C ]
+[; ;UI.c: 521: lcdInst(0b11000000);;
+"521
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 522: printf("LOG 2           ");
+"522
+[e ( _printf :s 40C ]
+[; ;UI.c: 523: }
+"523
+[e :UE 482 ]
+}
+"524
+[v _change_state_to_logs_12 `(v ~T0 @X0 1 ef ]
+{
+[; ;UI.c: 524: void change_state_to_logs_12(void){
+[e :U _change_state_to_logs_12 ]
+[f ]
+[; ;UI.c: 525: cur_state = 1012;
+"525
+[e = _cur_state -> 1012 `i ]
+[; ;UI.c: 526: lcdInst(0b10000000);;
+"526
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 527: printf("LOG 1           ");
+"527
+[e ( _printf :s 41C ]
+[; ;UI.c: 528: lcdInst(0b11000000);;
+"528
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 529: printf("LOG 2          <");
+"529
+[e ( _printf :s 42C ]
+[; ;UI.c: 530: }
+"530
+[e :UE 483 ]
+}
+"531
+[v _change_state_to_logs_22 `(v ~T0 @X0 1 ef ]
+{
+[; ;UI.c: 531: void change_state_to_logs_22(void){
+[e :U _change_state_to_logs_22 ]
+[f ]
+[; ;UI.c: 532: cur_state = 1022;
+"532
+[e = _cur_state -> 1022 `i ]
+[; ;UI.c: 533: lcdInst(0b10000000);;
+"533
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 534: printf("LOG 2          <");
+"534
+[e ( _printf :s 43C ]
+[; ;UI.c: 535: lcdInst(0b11000000);;
+"535
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 536: printf("LOG 3           ");
+"536
+[e ( _printf :s 44C ]
+[; ;UI.c: 537: }
+"537
+[e :UE 484 ]
+}
+"538
+[v _change_state_to_logs_23 `(v ~T0 @X0 1 ef ]
+{
+[; ;UI.c: 538: void change_state_to_logs_23(void){
+[e :U _change_state_to_logs_23 ]
+[f ]
+[; ;UI.c: 539: cur_state = 1023;
+"539
+[e = _cur_state -> 1023 `i ]
+[; ;UI.c: 540: lcdInst(0b10000000);;
+"540
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 541: printf("LOG 2           ");
+"541
+[e ( _printf :s 45C ]
+[; ;UI.c: 542: lcdInst(0b11000000);;
+"542
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 543: printf("LOG 3          <");
+"543
+[e ( _printf :s 46C ]
+[; ;UI.c: 544: }
+"544
+[e :UE 485 ]
+}
+"545
+[v _change_state_to_logs_33 `(v ~T0 @X0 1 ef ]
+{
+[; ;UI.c: 545: void change_state_to_logs_33(void){
+[e :U _change_state_to_logs_33 ]
+[f ]
+[; ;UI.c: 546: cur_state = 1033;
+"546
+[e = _cur_state -> 1033 `i ]
+[; ;UI.c: 547: lcdInst(0b10000000);;
+"547
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 548: printf("LOG 3          <");
+"548
+[e ( _printf :s 47C ]
+[; ;UI.c: 549: lcdInst(0b11000000);;
 "549
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 550: printf("LOG 4           ");
+"550
+[e ( _printf :s 48C ]
+[; ;UI.c: 551: }
+"551
+[e :UE 486 ]
+}
+"552
 [v _change_state_to_logs_34 `(v ~T0 @X0 1 ef ]
 {
-[; ;UI.c: 549: void change_state_to_logs_34(void){
+[; ;UI.c: 552: void change_state_to_logs_34(void){
 [e :U _change_state_to_logs_34 ]
 [f ]
-[; ;UI.c: 550: cur_state = 1034;
-"550
-[e = _cur_state -> 1034 `i ]
-[; ;UI.c: 551: lcdInst(0b10000000);;
-"551
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;UI.c: 552: printf("LOG 3           ");
-"552
-[e ( _printf :s 49C ]
-[; ;UI.c: 553: lcdInst(0b11000000);;
+[; ;UI.c: 553: cur_state = 1034;
 "553
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;UI.c: 554: printf("LOG 4          <");
+[e = _cur_state -> 1034 `i ]
+[; ;UI.c: 554: lcdInst(0b10000000);;
 "554
-[e ( _printf :s 50C ]
-[; ;UI.c: 555: }
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;UI.c: 555: printf("LOG 3           ");
 "555
-[e :UE 481 ]
+[e ( _printf :s 49C ]
+[; ;UI.c: 556: lcdInst(0b11000000);;
+"556
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;UI.c: 557: printf("LOG 4          <");
+"557
+[e ( _printf :s 50C ]
+[; ;UI.c: 558: }
+"558
+[e :UE 487 ]
 }
 [p f _printf 8683652 ]
 [a 21C 37 48 50 100 37 115 32 124 32 37 48 50 100 58 37 48 50 100 58 37 48 50 100 0 ]

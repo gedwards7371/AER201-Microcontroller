@@ -3172,123 +3172,123 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.c: 69: }
 [; ;RTC.c: 70: int RTC_month = INT_time[5];
 [e = _RTC_month *U + &U _INT_time * -> -> -> 5 `i `ui `ux -> -> # *U &U _INT_time `ui `ux ]
-[; ;RTC.c: 71: switch(RTC_month){
-"71
+[; ;RTC.c: 72: switch(RTC_month){
+"72
 [e $U 280  ]
 {
-[; ;RTC.c: 72: case 1 :
-"72
-[e :U 281 ]
-[; ;RTC.c: 73: strcpy(month, "JAN");
+[; ;RTC.c: 73: case 1 :
 "73
-[e ( _strcpy (2 , &U _month :s 1C ]
-[; ;RTC.c: 74: break;
+[e :U 281 ]
+[; ;RTC.c: 74: strcpy(month, "JAN");
 "74
-[e $U 279  ]
-[; ;RTC.c: 75: case 2:
+[e ( _strcpy (2 , &U _month :s 1C ]
+[; ;RTC.c: 75: break;
 "75
-[e :U 282 ]
-[; ;RTC.c: 76: strcpy(month, "FEB");
+[e $U 279  ]
+[; ;RTC.c: 76: case 2:
 "76
-[e ( _strcpy (2 , &U _month :s 2C ]
-[; ;RTC.c: 77: break;
+[e :U 282 ]
+[; ;RTC.c: 77: strcpy(month, "FEB");
 "77
-[e $U 279  ]
-[; ;RTC.c: 78: case 3:
+[e ( _strcpy (2 , &U _month :s 2C ]
+[; ;RTC.c: 78: break;
 "78
-[e :U 283 ]
-[; ;RTC.c: 79: strcpy(month, "MAR");
+[e $U 279  ]
+[; ;RTC.c: 79: case 3:
 "79
-[e ( _strcpy (2 , &U _month :s 3C ]
-[; ;RTC.c: 80: break;
+[e :U 283 ]
+[; ;RTC.c: 80: strcpy(month, "MAR");
 "80
-[e $U 279  ]
-[; ;RTC.c: 81: case 4:
+[e ( _strcpy (2 , &U _month :s 3C ]
+[; ;RTC.c: 81: break;
 "81
-[e :U 284 ]
-[; ;RTC.c: 82: strcpy(month, "APR");
+[e $U 279  ]
+[; ;RTC.c: 82: case 4:
 "82
-[e ( _strcpy (2 , &U _month :s 4C ]
-[; ;RTC.c: 83: break;
+[e :U 284 ]
+[; ;RTC.c: 83: strcpy(month, "APR");
 "83
-[e $U 279  ]
-[; ;RTC.c: 84: case 5:
+[e ( _strcpy (2 , &U _month :s 4C ]
+[; ;RTC.c: 84: break;
 "84
-[e :U 285 ]
-[; ;RTC.c: 85: strcpy(month, "MAY");
+[e $U 279  ]
+[; ;RTC.c: 85: case 5:
 "85
-[e ( _strcpy (2 , &U _month :s 5C ]
-[; ;RTC.c: 86: break;
+[e :U 285 ]
+[; ;RTC.c: 86: strcpy(month, "MAY");
 "86
-[e $U 279  ]
-[; ;RTC.c: 87: case 6:
+[e ( _strcpy (2 , &U _month :s 5C ]
+[; ;RTC.c: 87: break;
 "87
-[e :U 286 ]
-[; ;RTC.c: 88: strcpy(month, "JUN");
+[e $U 279  ]
+[; ;RTC.c: 88: case 6:
 "88
-[e ( _strcpy (2 , &U _month :s 6C ]
-[; ;RTC.c: 89: break;
+[e :U 286 ]
+[; ;RTC.c: 89: strcpy(month, "JUN");
 "89
-[e $U 279  ]
-[; ;RTC.c: 90: case 7:
+[e ( _strcpy (2 , &U _month :s 6C ]
+[; ;RTC.c: 90: break;
 "90
-[e :U 287 ]
-[; ;RTC.c: 91: strcpy(month, "JUL");
+[e $U 279  ]
+[; ;RTC.c: 91: case 7:
 "91
-[e ( _strcpy (2 , &U _month :s 7C ]
-[; ;RTC.c: 92: break;
+[e :U 287 ]
+[; ;RTC.c: 92: strcpy(month, "JUL");
 "92
-[e $U 279  ]
-[; ;RTC.c: 93: case 8:
+[e ( _strcpy (2 , &U _month :s 7C ]
+[; ;RTC.c: 93: break;
 "93
-[e :U 288 ]
-[; ;RTC.c: 94: strcpy(month, "AUG");
+[e $U 279  ]
+[; ;RTC.c: 94: case 8:
 "94
-[e ( _strcpy (2 , &U _month :s 8C ]
-[; ;RTC.c: 95: break;
+[e :U 288 ]
+[; ;RTC.c: 95: strcpy(month, "AUG");
 "95
-[e $U 279  ]
-[; ;RTC.c: 96: case 9:
+[e ( _strcpy (2 , &U _month :s 8C ]
+[; ;RTC.c: 96: break;
 "96
-[e :U 289 ]
-[; ;RTC.c: 97: strcpy(month, "SEP");
+[e $U 279  ]
+[; ;RTC.c: 97: case 9:
 "97
-[e ( _strcpy (2 , &U _month :s 9C ]
-[; ;RTC.c: 98: break;
+[e :U 289 ]
+[; ;RTC.c: 98: strcpy(month, "SEP");
 "98
-[e $U 279  ]
-[; ;RTC.c: 99: case 10:
+[e ( _strcpy (2 , &U _month :s 9C ]
+[; ;RTC.c: 99: break;
 "99
-[e :U 290 ]
-[; ;RTC.c: 100: strcpy(month, "OCT");
+[e $U 279  ]
+[; ;RTC.c: 100: case 10:
 "100
-[e ( _strcpy (2 , &U _month :s 10C ]
-[; ;RTC.c: 101: break;
+[e :U 290 ]
+[; ;RTC.c: 101: strcpy(month, "OCT");
 "101
-[e $U 279  ]
-[; ;RTC.c: 102: case 11:
+[e ( _strcpy (2 , &U _month :s 10C ]
+[; ;RTC.c: 102: break;
 "102
-[e :U 291 ]
-[; ;RTC.c: 103: strcpy(month, "NOV");
+[e $U 279  ]
+[; ;RTC.c: 103: case 11:
 "103
-[e ( _strcpy (2 , &U _month :s 11C ]
-[; ;RTC.c: 104: break;
+[e :U 291 ]
+[; ;RTC.c: 104: strcpy(month, "NOV");
 "104
-[e $U 279  ]
-[; ;RTC.c: 105: case 12:
+[e ( _strcpy (2 , &U _month :s 11C ]
+[; ;RTC.c: 105: break;
 "105
-[e :U 292 ]
-[; ;RTC.c: 106: strcpy(month, "DEC");
+[e $U 279  ]
+[; ;RTC.c: 106: case 12:
 "106
-[e ( _strcpy (2 , &U _month :s 12C ]
-[; ;RTC.c: 107: break;
+[e :U 292 ]
+[; ;RTC.c: 107: strcpy(month, "DEC");
 "107
-[e $U 279  ]
+[e ( _strcpy (2 , &U _month :s 12C ]
+[; ;RTC.c: 108: break;
 "108
-}
-[; ;RTC.c: 108: }
 [e $U 279  ]
-"71
+"109
+}
+[; ;RTC.c: 109: }
+[e $U 279  ]
+"72
 [e :U 280 ]
 [e [\ _RTC_month , $ -> 1 `i 281
  , $ -> 2 `i 282
@@ -3303,16 +3303,16 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> 11 `i 291
  , $ -> 12 `i 292
  279 ]
-"108
-[e :U 279 ]
-[; ;RTC.c: 109: lcdInst(0b10000000);;
 "109
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;RTC.c: 110: printf("%02d%s | %02d:%02d:%02d", INT_time[4],month,INT_time[2],INT_time[1],INT_time[0]);
+[e :U 279 ]
+[; ;RTC.c: 110: lcdInst(0b10000000);;
 "110
-[e ( _printf , , , , , (. :s 13C *U + &U _INT_time * -> -> -> 4 `i `ui `ux -> -> # *U &U _INT_time `ui `ux -> &U _month `*Cuc *U + &U _INT_time * -> -> -> 2 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 1 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 0 `i `ui `ux -> -> # *U &U _INT_time `ui `ux ]
-[; ;RTC.c: 111: }
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;RTC.c: 111: printf("%02d%s | %02d:%02d:%02d", INT_time[4],month,INT_time[2],INT_time[1],INT_time[0]);
 "111
+[e ( _printf , , , , , (. :s 13C *U + &U _INT_time * -> -> -> 4 `i `ui `ux -> -> # *U &U _INT_time `ui `ux -> &U _month `*Cuc *U + &U _INT_time * -> -> -> 2 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 1 `i `ui `ux -> -> # *U &U _INT_time `ui `ux *U + &U _INT_time * -> -> -> 0 `i `ui `ux -> -> # *U &U _INT_time `ui `ux ]
+[; ;RTC.c: 112: }
+"112
 [e :UE 275 ]
 }
 [p f _printf 8683652 ]

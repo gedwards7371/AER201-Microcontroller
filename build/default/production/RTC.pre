@@ -4006,6 +4006,7 @@ for(int i = 0; i < 7; i++){
 INT_time[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 }
 int RTC_month = INT_time[5];
+
 switch(RTC_month){
 case 1 :
 strcpy(month, "JAN");

@@ -19,8 +19,7 @@ void algorithmTest(void);
 void sensorTest(void);
 void actuatorTest(void);
 void BothServos(void);
-void PortTests(void);
-void PortTestA5(void);
+void PortTestDC(void);
 void EEPROMTest(void);
 void ToggleTestA5(void);
 void SpeedTest(void);
@@ -30,12 +29,11 @@ void arm(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
-    while(1){
+    while(machine_state == Testing_state){
         __lcd_clear();__lcd_home();
         printf("2.SNR|4.HI|5.MED");
         __lcd_newline();
         printf("B.PSH|8.SV|9.BLK");
-        __delay_ms(100);
         while(PORTBbits.RB1 == 0) {continue;}
         var = PORTB >> 4;
         var++;
@@ -54,7 +52,7 @@ void Test(void){
                 arm();
                 break;
             case 5: // Key 4
-                PortTestA5();
+                PortTestDC();
                 break;
             case 6: // Key 5
                 //ToggleTestA5();
@@ -65,9 +63,6 @@ void Test(void){
                 break;
             case 8: // Key B
                 PusherTest();
-                break;
-            case 9: // Key 7
-                PortTests();
                 break;
             case 10: // Key 8
                 BothServos();
@@ -410,46 +405,11 @@ void BothServos(void){
     di();
 }
 
-void PortTests(void){
-    // Same as PortTestA5 but with multiple keys
-    while(1){
-        while(PORTBbits.RB1 == 0) {continue;}
-        var = PORTB >> 4;
-        switch(var){
-            case 0:
-                LATEbits.LATE0 = 1;
-                break;
-            case 1:
-                LATEbits.LATE1 = 1;
-                break;
-            case 2:
-                LATDbits.LATD0 = 1;
-                break;
-            case 3:
-                LATAbits.LATA3 = 1;
-                break;
-            case 4:
-                LATAbits.LATA4 = 1;
-                break;
-            case 5:
-                LATAbits.LATA5 = 1;
-                break;
-            default:
-                break;
-        }
-        while(PORTBbits.RB1 == 1) {continue;}
-        Nop();  //Apply breakpoint here because of compiler optimizations
-        Nop();
-        LATA = 0x00;
-        LATE = 0x00;
-        LATD = 0x00;   }
-}
-
-void PortTestA5(void){
+void PortTestDC(void){
     __lcd_clear();__lcd_home();
     printf("D WILL RETURN    ");
     __lcd_newline();
-    printf("OTHER SETS RA5   ");
+    printf("OTHER SETS DC   ");
     while(1){
         while(PORTBbits.RB1 == 0){ 
             // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
@@ -566,14 +526,14 @@ void SpeedTest(void){
         }
         else{
             while(PORTBbits.RB1 == 1){
-             LATAbits.LATA5 = 1;
+             DC = 1;
              __delay_ms(5);
-             LATAbits.LATA5 = 0;
+             DC = 0;
              __delay_ms(5);
                 
                 // Wait until the key has been released
             }
-            LATAbits.LATA5 = 0;
+            DC = 0;
         }
     }
 }

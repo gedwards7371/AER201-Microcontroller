@@ -68,6 +68,7 @@ void printRTC(void){
         INT_time[i] = __bcd_to_num(time[i]);
     }
     int RTC_month = INT_time[5];
+    
     switch(RTC_month){
         case 1 :
             strcpy(month, "JAN");

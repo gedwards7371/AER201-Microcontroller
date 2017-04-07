@@ -3003,9 +3003,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "25
 [e $ ! != _RTCflag -> 0 `i 267  ]
 {
-[; ;main.c: 26: initTime(0x42, 0x20, 0x15, 0x04, 0x15, 0x03, 0x17);
+[; ;main.c: 26: initTime(0x42, 0x36, 0x13, 0x06, 0x07, 0x04, 0x17);
 "26
-[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 32 `i `uc -> -> 21 `i `uc -> -> 4 `i `uc -> -> 21 `i `uc -> -> 3 `i `uc -> -> 23 `i `uc ]
+[e ( _initTime (4 , , , , , , -> -> 66 `i `uc -> -> 54 `i `uc -> -> 19 `i `uc -> -> 6 `i `uc -> -> 7 `i `uc -> -> 4 `i `uc -> -> 23 `i `uc ]
 "27
 }
 [; ;main.c: 27: }
