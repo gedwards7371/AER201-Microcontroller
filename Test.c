@@ -610,9 +610,9 @@ void arm(void){
         if(on){
             on = !on;
             while(PORTBbits.RB1 == 0){
-                LATBbits.LATB3 = 1;
+                SERVOARM = 1;
                 __delay_us(1200);
-                LATBbits.LATB3 = 0;
+                SERVOARM = 0;
                 __delay_ms(19);
             }
             if(PORTB >> 4 == 0b1111){

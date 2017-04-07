@@ -60,7 +60,8 @@ void machineConfig(void) {
     TMR3IE = 1; // Enable Timer3 interrupts
     
     T1CON = 0b10110000;
-    T2CON = 0b01111011;
+    T2CON = 0b01111011; // 1:16 postscale, 16x prescale
+    PR2 = 0x22; // TMR2 comparison register
     T3CON = 0b10110000;
     PEIE = 1; // Enable peripheral interrupts
     ADIE = 0; // Disable A/D conversion interrupts (important for readADC())

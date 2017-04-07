@@ -75,21 +75,25 @@ void interrupt handler(void) {
     
     //** Timer for tilt servo delays **
     if(TMR2IF){
+        // TMR2IF triggers when TMR2 == PR2
+        // PR2 = 0xFF by default --> set to 0x11 to get this interrupt every 0.50 ms
         TMR2IF = 0; // Clear interrupt flag
         TMR2ON = 0;
+        timer2_counter++;
         if(machine_state == Sorting_state){
-            if(was_low_3){
+            if(was_low_2 && (timer2_counter == (40 - f_arm_position))){
+                // 1.5... ms high if f_arm_position == 3
+                // 2.5... ms high if f_arm_position == 5
                 SERVOARM = 1;
                 was_low_2 = 0;
-                TMR3H = servoTimes[2];
-                TMR3L = servoTimes[3];
+                timer2_counter = 0;
             }
-            else{
+            else if((!was_low_2) && (timer2_counter == f_arm_position)){
                 SERVOARM = 0;
                 was_low_2 = 1;
-                TMR3H = 20000 - servoTimes[2];
-                TMR3L = 20000 - servoTimes[3];
+                timer2_counter = 0;
             }
+            PR2 = 0x11;
             TMR2ON = 1;
         }
     }

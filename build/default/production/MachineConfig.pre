@@ -3904,12 +3904,15 @@ void updateServoPosition(int time_us, int timer);
 void updateServoStates(void);
 extern unsigned int servoTimes[4];
 volatile extern int was_low_1;
+volatile extern int was_low_2;
 volatile extern int was_low_3;
 volatile extern int servo_timer_counter;
 volatile extern int servo_timer_target;
 volatile extern int pan_servo_state;
 volatile extern int tilt_servo_state;
 volatile extern int f_panning_to_bin;
+volatile extern int timer2_counter;
+volatile extern int f_arm_position;
 
 
 extern int sensor_outputs[2];
@@ -3999,6 +4002,7 @@ TMR3IE = 1;
 
 T1CON = 0b10110000;
 T2CON = 0b01111011;
+PR2 = 0x22;
 T3CON = 0b10110000;
 PEIE = 1;
 ADIE = 0;

@@ -43,12 +43,15 @@ int MAG_signal;
 // Servo control
 unsigned int servoTimes[4];
 volatile int was_low_1;
+volatile int was_low_2;
 volatile int was_low_3;
 volatile int servo_timer_counter;
 volatile int servo_timer_target;
 volatile int pan_servo_state;
 volatile int tilt_servo_state;
 volatile int f_panning_to_bin;
+volatile int timer2_counter;
+volatile int f_arm_position;
 
 // Can type trackers
 int sensor_outputs[2]; // Create array to identify can type.[0] = magnetism, [1] = conductivity
@@ -401,6 +404,8 @@ void initGlobalVars(void){
     // Servo variables
     servo_timer_counter = 0;
     servo_timer_target = 9999;
+    timer2_counter = 0;
+    f_arm_position = 2;
     pan_servo_state = -1;
     tilt_servo_state = -1;
     f_panning_to_bin = 0;
@@ -426,13 +431,19 @@ void initSortTimer(void){
     TMR0ON = 1;
 }
 void initServos(void){
+        // Pan and tilt servo initialization to middle
         updateServoPosition(PAN_MID, 1);
         updateServoPosition(TILT_REST, 3);
         TMR1ON = 1;
         was_low_1 = 0;
-        __delay_ms(5); // So that servo ISRs don't race
+        __delay_ms(5); // So that these servo ISRs don't race
         TMR3ON = 1;
         was_low_3 = 0;
+        
+        // Arm servo initialization to "out"
+        SERVOARM = 1;
+        TMR2ON = 1;
+        was_low_2 = 0;
         
         SERVOCAM = 1; // Raise block between ID and distribution stages
 }

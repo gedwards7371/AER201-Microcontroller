@@ -31,6 +31,7 @@
 #define TILT_REST   1050 // 1150
 #define POP_TILT_DROP  1260
 #define SOUP_TILT_DROP 1390
+#define SERVOARM    LATBbits.LATB3
 
 // Characteristic travel times in milliseconds unless otherwise noted
 #define TIME_OUT_OF_TROMMEL     750
