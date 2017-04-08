@@ -37,6 +37,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
 "7578
 [v _TMR1ON `Vb ~T0 @X0 0 e@32360 ]
+"7586
+[v _TMR2ON `Vb ~T0 @X0 0 e@32338 ]
 "7596
 [v _TMR3ON `Vb ~T0 @X0 0 e@32136 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -2946,24 +2948,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 39: extern int MAG_signal;
 [; ;sort.h: 42: void updateServoPosition(int time_us, int timer);
 [; ;sort.h: 43: void updateServoStates(void);
-[; ;sort.h: 44: extern unsigned int servoTimes[4];
-[; ;sort.h: 45: volatile extern int was_low_1;
-[; ;sort.h: 46: volatile extern int was_low_2;
-[; ;sort.h: 47: volatile extern int was_low_3;
-[; ;sort.h: 48: volatile extern int servo_timer_counter;
-[; ;sort.h: 49: volatile extern int servo_timer_target;
-[; ;sort.h: 50: volatile extern int pan_servo_state;
-[; ;sort.h: 51: volatile extern int tilt_servo_state;
-[; ;sort.h: 52: volatile extern int f_panning_to_bin;
-[; ;sort.h: 53: volatile extern int timer2_counter;
-[; ;sort.h: 54: volatile extern int f_arm_position;
-[; ;sort.h: 57: extern int sensor_outputs[2];
-[; ;sort.h: 58: extern int count_total;
-[; ;sort.h: 59: extern int count_pop_no_tab;
-[; ;sort.h: 60: extern int count_pop_w_tab;
-[; ;sort.h: 61: extern int count_can_w_lab;
-[; ;sort.h: 62: extern int count_can_no_lab;
-[; ;sort.h: 63: extern int cur_can;
+[; ;sort.h: 44: void updateArmState(void);
+[; ;sort.h: 45: extern unsigned int servoTimes[4];
+[; ;sort.h: 46: volatile extern int was_low_1;
+[; ;sort.h: 47: volatile extern int was_low_2;
+[; ;sort.h: 48: volatile extern int was_low_3;
+[; ;sort.h: 49: volatile extern int servo_timer_counter;
+[; ;sort.h: 50: volatile extern int servo_timer_target;
+[; ;sort.h: 51: volatile extern int pan_servo_state;
+[; ;sort.h: 52: volatile extern int tilt_servo_state;
+[; ;sort.h: 53: volatile extern int f_panning_to_bin;
+[; ;sort.h: 54: volatile extern int timer2_counter;
+[; ;sort.h: 55: volatile extern int f_arm_position;
+[; ;sort.h: 58: extern int sensor_outputs[2];
+[; ;sort.h: 59: extern int count_total;
+[; ;sort.h: 60: extern int count_pop_no_tab;
+[; ;sort.h: 61: extern int count_pop_w_tab;
+[; ;sort.h: 62: extern int count_can_w_lab;
+[; ;sort.h: 63: extern int count_can_no_lab;
+[; ;sort.h: 64: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(void);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
@@ -3152,10 +3155,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 76: TMR1ON = 0;
 "76
 [e = _TMR1ON -> -> 0 `i `b ]
-[; ;main.c: 77: TMR3ON = 0;
+[; ;main.c: 77: TMR2ON = 0;
 "77
-[e = _TMR3ON -> -> 0 `i `b ]
-[; ;main.c: 78: }
+[e = _TMR2ON -> -> 0 `i `b ]
+[; ;main.c: 78: TMR3ON = 0;
 "78
+[e = _TMR3ON -> -> 0 `i `b ]
+[; ;main.c: 79: }
+"79
 [e :UE 283 ]
 }

@@ -23,7 +23,7 @@ void PortTestDC(void);
 void EEPROMTest(void);
 void ToggleTestA5(void);
 void SpeedTest(void);
-void PusherTest(void);
+void PlatformTest(void);
 void BlockerTest(void);
 void arm(void);
 
@@ -33,7 +33,7 @@ void Test(void){
         __lcd_clear();__lcd_home();
         printf("2.SNR|4.HI|5.MED");
         __lcd_newline();
-        printf("B.PSH|8.SV|9.BLK");
+        printf("B.PLA|8.SV|9.BLK");
         while(PORTBbits.RB1 == 0) {continue;}
         var = PORTB >> 4;
         var++;
@@ -62,7 +62,7 @@ void Test(void){
                 EEPROMTest();
                 break;
             case 8: // Key B
-                PusherTest();
+                PlatformTest();
                 break;
             case 10: // Key 8
                 BothServos();
@@ -403,6 +403,7 @@ void BothServos(void){
     TMR1ON = 0;
     TMR3ON = 0;
     di();
+    machine_state = Testing_state;
 }
 
 void PortTestDC(void){
@@ -428,60 +429,88 @@ void PortTestDC(void){
     }
 }
 
-void PusherTest(void){
-    __lcd_clear();__lcd_home();
-    printf("PUSHER TST");
+void PlatformTest(void){
     IR_EMITTER = 1;
-    //DC = 1;
+    
+    ei();
+    machine_state = Sorting_state;
+    was_low_2 = 0;
+    f_arm_position = 2;
+    timer2_counter = 0;
+    initServos();
+    TMR1IF = 0;
+    TMR1ON = 0;
+    TMR3IF = 0;
+    TMR3ON = 0;
+    
+    int on = 1;
+    __lcd_clear();__lcd_home();
+    printf("1: DC | A: ARM  ");
+    
     while(PORTBbits.RB1 == 0){
         readADC(0);
         int res = ADRESH<<8 | ADRESL;
         IR_signal = (res > THIR) ? 1 : 0;
         
-        __lcd_clear();__lcd_home();
-        printf("IR_signal: %d ", IR_signal);
         __lcd_newline();
-        printf("%d", res);
+        printf("5:H|6:L|IR:%d   ", res);
         __delay_ms(100);
     }  
     
-    
     while(1){
-         while(PORTBbits.RB1 == 0){ 
+        while(PORTBbits.RB1 == 0){ 
             readADC(0);
             int res = ADRESH<<8 | ADRESL;
             IR_signal = (res > THIR) ? 1 : 0;
-            __lcd_clear();__lcd_home();
-            printf("IR_signal: %d ", IR_signal);
             __lcd_newline();
-            printf("%d", res);
+            printf("5:H|6:L|IR:%d   ", res);
             __delay_ms(100);
         }
         if(PORTB >> 4 == 0b1111){
             break;
         }
-        //int looptime = 0.1 / (uptime_us / 1000000);
+        else if(PORTB >> 4 == 0b0000){
+            DC = !DC;
+        }
+        else if(PORTB >> 4 == 0b0011){
+            if(on){
+                f_arm_position = 1;
+                on = !on;
+            }
+            else{
+                f_arm_position = 0;
+                on = !on;
+            }
+        }
         
         else if(PORTB >> 4 == 0b0101){
-           for(int i = 0; i<3000; i++){
-            SOL_PUSHER = 1; // activate solenoid pusher
-            __delay_us(75);
-            SOL_PUSHER = 0;
-            __delay_us(25);
-           }
+            // key 5
+            for(int i = 0; i<300; i++){
+                SOL_PUSHER = 1; // activate solenoid pusher
+                __delay_us(750);
+                SOL_PUSHER = 0;
+                __delay_us(250);
+            }
         }
-        else if (PORTB >> 4 == 0b110){
-            for(int i = 0; i<3000; i++){
-            SOL_PUSHER = 1; // activate solenoid pusher
-            __delay_us(58);
-            SOL_PUSHER = 0;
-            __delay_us(42);
-           }
+        else if (PORTB >> 4 == 0b0110){
+            // key 6
+            for(int i = 0; i<300; i++){
+                SOL_PUSHER = 1; // activate solenoid pusher
+                __delay_us(580);
+                SOL_PUSHER = 0;
+                __delay_us(420);
+            }
         }
 
         while(PORTBbits.RB1 == 1) {continue;}
     }
+    
     IR_EMITTER = 0;
+    di();
+    TMR1IF = 1;
+    TMR3IF = 1;
+    stopSignals();
+    machine_state = Testing_state;
 }
 
 void ToggleTestA5(void){
@@ -605,12 +634,22 @@ void arm(void){
     printf("D WILL RETURN   ");
     __lcd_newline();
     printf("ELSE TOGGLES ARM");
+    
+    ei();
+    machine_state = Sorting_state;
+    was_low_2 = 0;
+    f_arm_position = 2;
+    timer2_counter = 0;
+    initServos();
+    TMR1ON = 0;
+    TMR3ON = 0;
+    
     int on = 0;
     while(1){
         if(on){
             on = !on;
             while(PORTBbits.RB1 == 0){
-                f_arm_position = 2;
+                f_arm_position = 0;
             }
             if(PORTB >> 4 == 0b1111){
                 break;
@@ -620,7 +659,7 @@ void arm(void){
         else{
             on = !on;
             while(PORTBbits.RB1 == 0){
-                f_arm_position = 3;
+                f_arm_position = 1;
             }
             if(PORTB >> 4 == 0b1111){
                 break;
@@ -628,4 +667,8 @@ void arm(void){
             while(PORTBbits.RB1 == 1){ continue; }
         }
     }
+    
+    di();
+    stopSignals();
+    machine_state = Testing_state;
 }

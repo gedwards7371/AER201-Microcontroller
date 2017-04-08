@@ -130,7 +130,7 @@ void Loading(void){
                      // design requirement of "simplicity" by not having unnecessary actions
                     
             // Read magnetism to distinguish pop cans and soup cans (start of IDing)
-            f_arm_position = 5;
+            f_arm_position = 1;
             getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[0] = MAG_signal;
             
@@ -261,7 +261,7 @@ void ID(void){
         // Characteristic delay based on time it takes can to be transported here
         __delay_ms(TIME_LOADING_TO_ID);
         
-        f_arm_position = 2;
+        f_arm_position = 0;
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
         __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
@@ -439,11 +439,14 @@ void initServos(void){
         updateServoPosition(TILT_REST, 3);
         TMR1ON = 1;
         was_low_1 = 0;
+        
         __delay_ms(5); // So that these servo ISRs don't race
+        
         TMR3ON = 1;
         was_low_3 = 0;
-        
+                
         // Arm servo initialization to "out"
+        __delay_ms(1); // To decrease chances of ISR racing
         SERVOARM = 1;
         TMR2ON = 1;
         was_low_2 = 0;
@@ -598,6 +601,31 @@ void updateServoStates(void){
                     break;
             }
         }
+    }
+}
+void updateArmState(void){
+    // PR2=0x11 -> 500 us
+    // PR2=0xA0 -> 5000 us
+    // PR2=0xFF -> 7968.75 us
+    // 1000 us -> "out" position | 1000 us -> PR2 = 0x20
+    // 2000 us -> "in" position | 2000 us -> PR2 = 0x40
+    // 20000 us downtime is fine for both positions; we will instead try using 16000 us
+    if(!was_low_2){
+        // Here we set the timer conditions for the high signal
+        switch(f_arm_position){
+            case 0:
+                // "out" position
+                PR2 = 0x20;
+                break;
+            case 1:
+                // "in" position
+                PR2 = 0x40;
+                break;
+        }
+    }
+    else{
+        // Here we set the timer conditions for the low signal
+        PR2 = 0xFF; // ~8 ms
     }
 }
 

@@ -49,7 +49,7 @@ void interrupt handler(void) {
         }
     }
     
-    //** Timer for pan servo delays **
+    //** Timer for pan servo PWM **
     if(TMR1IF){
         TMR1IF = 0; // Clear interrupt flag
         TMR1ON = 0;
@@ -73,32 +73,31 @@ void interrupt handler(void) {
         }
     }
     
-    //** Timer for tilt servo delays **
+    //** Timer for arm servo PWM **
     if(TMR2IF){
         // TMR2IF triggers when TMR2 == PR2
-        // PR2 = 0xFF by default --> set to 0x11 to get this interrupt every 0.50 ms
+        // PR2 = 0xFF by default --> set to some hexadecimal value for custom delays
         TMR2IF = 0; // Clear interrupt flag
         TMR2ON = 0;
         timer2_counter++;
         if(machine_state == Sorting_state){
-            if(was_low_2 && (timer2_counter == (40 - f_arm_position))){
-                // 1.5... ms high if f_arm_position == 3
-                // 2.5... ms high if f_arm_position == 5
+            if(was_low_2 && (timer2_counter == 2)){
+                // 2 * ~8 ms = ~16 ms 
                 SERVOARM = 1;
                 was_low_2 = 0;
                 timer2_counter = 0;
             }
-            else if((!was_low_2) && (timer2_counter == f_arm_position)){
+            else if(!was_low_2){
                 SERVOARM = 0;
                 was_low_2 = 1;
                 timer2_counter = 0;
             }
-            PR2 = 0x11;
+            updateArmState();
             TMR2ON = 1;
         }
     }
     
-    //** Timer for tilt servo delays **
+    //** Timer for tilt servo PWM **
     if(TMR3IF){
         TMR3IF = 0; // Clear interrupt flag
         TMR3ON = 0;

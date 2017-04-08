@@ -3902,6 +3902,7 @@ extern int MAG_signal;
 
 void updateServoPosition(int time_us, int timer);
 void updateServoStates(void);
+void updateArmState(void);
 extern unsigned int servoTimes[4];
 volatile extern int was_low_1;
 volatile extern int was_low_2;
@@ -4070,7 +4071,7 @@ LATBbits.LATB2 = 0;
 
 
 
-f_arm_position = 5;
+f_arm_position = 1;
 getMAG();
 sensor_outputs[0] = MAG_signal;
 
@@ -4201,7 +4202,7 @@ if(f_can_coming_to_ID){
 
 _delay((unsigned long)((1000)*(32000000/4000.0)));
 
-f_arm_position = 2;
+f_arm_position = 0;
 
 LATAbits.LATA3 = 1;
 _delay((unsigned long)((600)*(32000000/4000.0)));
@@ -4364,11 +4365,14 @@ updateServoPosition(1200, 1);
 updateServoPosition(1050, 3);
 TMR1ON = 1;
 was_low_1 = 0;
+
 _delay((unsigned long)((5)*(32000000/4000.0)));
+
 TMR3ON = 1;
 was_low_3 = 0;
 
 
+_delay((unsigned long)((1)*(32000000/4000.0)));
 LATBbits.LATB3 = 1;
 TMR2ON = 1;
 was_low_2 = 0;
@@ -4523,6 +4527,27 @@ default:
 break;
 }
 }
+}
+}
+void updateArmState(void){
+
+# 613
+if(!was_low_2){
+
+switch(f_arm_position){
+case 0:
+
+PR2 = 0x20;
+break;
+case 1:
+
+PR2 = 0x40;
+break;
+}
+}
+else{
+
+PR2 = 0xFF;
 }
 }
 
