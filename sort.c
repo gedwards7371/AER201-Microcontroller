@@ -130,6 +130,7 @@ void Loading(void){
                      // design requirement of "simplicity" by not having unnecessary actions
                     
             // Read magnetism to distinguish pop cans and soup cans (start of IDing)
+            f_arm_position = 5;
             getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[0] = MAG_signal;
             
@@ -259,6 +260,8 @@ void ID(void){
     if(f_can_coming_to_ID){
         // Characteristic delay based on time it takes can to be transported here
         __delay_ms(TIME_LOADING_TO_ID);
+        
+        f_arm_position = 2;
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
         __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out

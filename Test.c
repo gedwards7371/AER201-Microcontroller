@@ -610,10 +610,7 @@ void arm(void){
         if(on){
             on = !on;
             while(PORTBbits.RB1 == 0){
-                SERVOARM = 1;
-                __delay_us(1200);
-                SERVOARM = 0;
-                __delay_ms(19);
+                f_arm_position = 2;
             }
             if(PORTB >> 4 == 0b1111){
                 break;
@@ -623,10 +620,7 @@ void arm(void){
         else{
             on = !on;
             while(PORTBbits.RB1 == 0){
-                LATBbits.LATB3 = 1;
-                __delay_us(2400);
-                LATBbits.LATB3 = 0;
-                __delay_ms(17);
+                f_arm_position = 3;
             }
             if(PORTB >> 4 == 0b1111){
                 break;
