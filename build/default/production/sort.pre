@@ -4076,19 +4076,19 @@ getMAG();
 sensor_outputs[0] = MAG_signal;
 
 if(sensor_outputs[0]){
-for(int i = 0; i<2500; i++){
+for(int i = 0; i<25; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((75)*(32000000/4000000.0)));
+_delay((unsigned long)((7500)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((25)*(32000000/4000000.0)));
+_delay((unsigned long)((2500)*(32000000/4000000.0)));
 }
 }
 else{
-for(int i = 0; i<2500; i++){
+for(int i = 0; i<25; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((58)*(32000000/4000000.0)));
+_delay((unsigned long)((5800)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((42)*(32000000/4000000.0)));
+_delay((unsigned long)((4200)*(32000000/4000000.0)));
 }
 }
 
@@ -4100,19 +4100,19 @@ _delay((unsigned long)((100)*(32000000/4000.0)));
 readIR();
 if(IR_signal==1){
 if(sensor_outputs[0]){
-for(int i = 0; i<2500; i++){
+for(int i = 0; i<25; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((75)*(32000000/4000000.0)));
+_delay((unsigned long)((7500)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((25)*(32000000/4000000.0)));
+_delay((unsigned long)((2500)*(32000000/4000000.0)));
 }
 }
 else{
-for(int i = 0; i<2500; i++){
+for(int i = 0; i<25; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((58)*(32000000/4000000.0)));
+_delay((unsigned long)((5800)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((42)*(32000000/4000000.0)));
+_delay((unsigned long)((4200)*(32000000/4000000.0)));
 }
 }
 }
@@ -4136,41 +4136,41 @@ _delay((unsigned long)((250)*(32000000/4000.0)));
 LATAbits.LATA4 = 0;
 }
 else{
-for(int i = 0; i<2500; i++){
+for(int i = 0; i<25; i++){
 switch(j){
 case 1:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((75)*(32000000/4000000.0)));
+_delay((unsigned long)((7500)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((25)*(32000000/4000000.0)));
+_delay((unsigned long)((2500)*(32000000/4000000.0)));
 break;
 case 2:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((80)*(32000000/4000000.0)));
+_delay((unsigned long)((8000)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((20)*(32000000/4000000.0)));
+_delay((unsigned long)((2000)*(32000000/4000000.0)));
 break;
 case 3:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((85)*(32000000/4000000.0)));
+_delay((unsigned long)((8500)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((15)*(32000000/4000000.0)));
+_delay((unsigned long)((1500)*(32000000/4000000.0)));
 break;
 case 4:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((90)*(32000000/4000000.0)));
+_delay((unsigned long)((9000)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((10)*(32000000/4000000.0)));
+_delay((unsigned long)((1000)*(32000000/4000000.0)));
 break;
 case 5:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((95)*(32000000/4000000.0)));
+_delay((unsigned long)((9500)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((5)*(32000000/4000000.0)));
+_delay((unsigned long)((5000)*(32000000/4000000.0)));
 break;
 default:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((100)*(32000000/4000000.0)));
+_delay((unsigned long)((10)*(32000000/4000.0)));
 break;
 }
 }
@@ -4340,7 +4340,7 @@ most_recent_sort_time = 999;
 servo_timer_counter = 0;
 servo_timer_target = 9999;
 timer2_counter = 0;
-f_arm_position = 2;
+f_arm_position = 0;
 pan_servo_state = -1;
 tilt_servo_state = -1;
 f_panning_to_bin = 0;
@@ -4373,7 +4373,7 @@ was_low_3 = 0;
 
 
 _delay((unsigned long)((1)*(32000000/4000.0)));
-LATBbits.LATB3 = 1;
+LATBbits.LATB3 = 0;
 TMR2ON = 1;
 was_low_2 = 0;
 

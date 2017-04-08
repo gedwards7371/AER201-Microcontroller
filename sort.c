@@ -135,19 +135,19 @@ void Loading(void){
             sensor_outputs[0] = MAG_signal;
             
             if(sensor_outputs[0]){
-                for(int i = 0; i<2500; i++){
+                for(int i = 0; i<25; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
-                    __delay_us(75);
+                    __delay_us(7500);
                     SOL_PUSHER = 0;
-                    __delay_us(25);
+                    __delay_us(2500);
                 }
             }
             else{
-                for(int i = 0; i<2500; i++){
+                for(int i = 0; i<25; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                    __delay_us(58);
+                    __delay_us(5800);
                     SOL_PUSHER = 0;
-                    __delay_us(42);
+                    __delay_us(4200);
                 }
             }
             
@@ -159,19 +159,19 @@ void Loading(void){
                 readIR();
                 if(IR_signal==1){
                     if(sensor_outputs[0]){
-                        for(int i = 0; i<2500; i++){
+                        for(int i = 0; i<25; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
-                            __delay_us(75);
+                            __delay_us(7500);
                             SOL_PUSHER = 0;
-                            __delay_us(25);
+                            __delay_us(2500);
                         }
                     }
                     else{
-                        for(int i = 0; i<2500; i++){
+                        for(int i = 0; i<25; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                            __delay_us(58);
+                            __delay_us(5800);
                             SOL_PUSHER = 0;
-                            __delay_us(42);
+                            __delay_us(4200);
                         }
                     }
                 }
@@ -195,41 +195,41 @@ void Loading(void){
                                 SOL_PUSHER = 0;
                             }
                             else{
-                                for(int i = 0; i<2500; i++){
+                                for(int i = 0; i<25; i++){
                                     switch(j){
                                         case 1:
                                             SOL_PUSHER = 1;
-                                            __delay_us(75);
+                                            __delay_us(7500);
                                             SOL_PUSHER = 0;
-                                            __delay_us(25);
+                                            __delay_us(2500);
                                             break;
                                         case 2:
                                             SOL_PUSHER = 1;
-                                            __delay_us(80);
+                                            __delay_us(8000);
                                             SOL_PUSHER = 0;
-                                            __delay_us(20);
+                                            __delay_us(2000);
                                             break;
                                         case 3:
                                             SOL_PUSHER = 1;
-                                            __delay_us(85);
+                                            __delay_us(8500);
                                             SOL_PUSHER = 0;
-                                            __delay_us(15);
+                                            __delay_us(1500);
                                             break;
                                         case 4:
                                             SOL_PUSHER = 1;
-                                            __delay_us(90);
+                                            __delay_us(9000);
                                             SOL_PUSHER = 0;
-                                            __delay_us(10);
+                                            __delay_us(1000);
                                             break;
                                         case 5:
                                             SOL_PUSHER = 1;
-                                            __delay_us(95);
+                                            __delay_us(9500);
                                             SOL_PUSHER = 0;
-                                            __delay_us(5);
+                                            __delay_us(5000);
                                             break;
                                         default:
                                             SOL_PUSHER = 1;
-                                            __delay_us(100);
+                                            __delay_ms(10);
                                             break;
                                     }  
                                 }
@@ -408,7 +408,7 @@ void initGlobalVars(void){
     servo_timer_counter = 0;
     servo_timer_target = 9999;
     timer2_counter = 0;
-    f_arm_position = 2;
+    f_arm_position = 0;
     pan_servo_state = -1;
     tilt_servo_state = -1;
     f_panning_to_bin = 0;
@@ -446,8 +446,8 @@ void initServos(void){
         was_low_3 = 0;
                 
         // Arm servo initialization to "out"
-        __delay_ms(1); // To decrease chances of ISR racing
-        SERVOARM = 1;
+        __delay_ms(1); // To decrease chances of ISRs racing
+        SERVOARM = 0;
         TMR2ON = 1;
         was_low_2 = 0;
         

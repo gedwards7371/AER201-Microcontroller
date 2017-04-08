@@ -26,6 +26,7 @@ void SpeedTest(void);
 void PlatformTest(void);
 void BlockerTest(void);
 void arm(void);
+void PortTestPusher(void);
 
 void Test(void){
     // Test cases for the algorithm, sensors, and actuators
@@ -55,11 +56,10 @@ void Test(void){
                 PortTestDC();
                 break;
             case 6: // Key 5
-                //ToggleTestA5();
                 SpeedTest();
                 break;
             case 7: // Key 6
-                EEPROMTest();
+                PortTestPusher();
                 break;
             case 8: // Key B
                 PlatformTest();
@@ -432,16 +432,12 @@ void PortTestDC(void){
 void PlatformTest(void){
     IR_EMITTER = 1;
     
-    ei();
     machine_state = Sorting_state;
-    was_low_2 = 0;
     f_arm_position = 2;
     timer2_counter = 0;
-    initServos();
-    TMR1IF = 0;
-    TMR1ON = 0;
-    TMR3IF = 0;
-    TMR3ON = 0;
+    SERVOARM = 1;
+    TMR2ON = 1;
+    was_low_2 = 0;
     
     int on = 1;
     __lcd_clear();__lcd_home();
@@ -485,20 +481,20 @@ void PlatformTest(void){
         
         else if(PORTB >> 4 == 0b0101){
             // key 5
-            for(int i = 0; i<300; i++){
+            for(int i = 0; i<30; i++){
                 SOL_PUSHER = 1; // activate solenoid pusher
-                __delay_us(750);
+                __delay_us(7500);
                 SOL_PUSHER = 0;
-                __delay_us(250);
+                __delay_us(2500);
             }
         }
         else if (PORTB >> 4 == 0b0110){
             // key 6
-            for(int i = 0; i<300; i++){
+            for(int i = 0; i<30; i++){
                 SOL_PUSHER = 1; // activate solenoid pusher
-                __delay_us(580);
+                __delay_us(5800);
                 SOL_PUSHER = 0;
-                __delay_us(420);
+                __delay_us(4200);
             }
         }
 
@@ -506,7 +502,6 @@ void PlatformTest(void){
     }
     
     IR_EMITTER = 0;
-    di();
     TMR1IF = 1;
     TMR3IF = 1;
     stopSignals();
@@ -637,12 +632,11 @@ void arm(void){
     
     ei();
     machine_state = Sorting_state;
-    was_low_2 = 0;
     f_arm_position = 2;
     timer2_counter = 0;
-    initServos();
-    TMR1ON = 0;
-    TMR3ON = 0;
+    SERVOARM = 1;
+    TMR2ON = 1;
+    was_low_2 = 0;
     
     int on = 0;
     while(1){
@@ -671,4 +665,27 @@ void arm(void){
     di();
     stopSignals();
     machine_state = Testing_state;
+}
+
+void PortTestPusher(void){
+    __lcd_clear();__lcd_home();
+    printf("D WILL RETURN    ");
+    __lcd_newline();
+    printf("OTHER SETS PUSHER");
+    while(1){
+        while(PORTBbits.RB1 == 0){ 
+            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
+            // the PIC will wait and do nothing until a key press is signaled
+        }
+        if(PORTB >> 4 == 0b1111){
+            break;
+        }
+        else{
+            SOL_PUSHER = 1;
+            while(PORTBbits.RB1 == 1){
+                // Wait until the key has been released
+            }
+            SOL_PUSHER = 0;
+        }
+    }
 }
