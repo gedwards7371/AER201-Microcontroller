@@ -3966,6 +3966,7 @@ lcdNibble(data);
 
 void lcdNibble(char data){
 
+(INTCONbits.GIE = 0);
 char temp = data & 0xF0;
 LATD = LATD & 0x0F;
 LATD = temp | LATD;
@@ -3985,6 +3986,7 @@ LATDbits.LATD3 = 1;
 _delay((unsigned long)((25)*(32000000/4000000.0)));
 LATDbits.LATD3 = 0;
 _delay((unsigned long)((25)*(32000000/4000000.0)));
+(INTCONbits.GIE = 1);
 }
 
 void initLCD(void) {

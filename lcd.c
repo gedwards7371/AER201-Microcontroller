@@ -24,6 +24,7 @@ void putch(char data){
 
 void lcdNibble(char data){
     // Send of 4 most sig bits, then the 4 least sig bits (MSD,LSD)
+    di();
     char temp = data & 0xF0; // mask 4 msb
     LATD = LATD & 0x0F; // clears LATD[4:7] by setting to 0; preserves state of LATD[0:3]
     LATD = temp | LATD; // Writes temp to LATD[4:7]]
@@ -43,6 +44,7 @@ void lcdNibble(char data){
     __delay_us(LCD_DELAY);
     E = 0;
     __delay_us(LCD_DELAY);
+    ei();
 }
 
 void initLCD(void) {

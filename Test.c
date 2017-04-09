@@ -404,9 +404,6 @@ void BothServos(void){
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
     
-    TMR1ON = 0;
-    TMR3ON = 0;
-    di();
     stopSignals();
     machine_state = Testing_state;
 }
@@ -453,6 +450,8 @@ void PlatformTest(void){
         int res = ADRESH<<8 | ADRESL;
         IR_signal = (res > THIR) ? 1 : 0;
         
+        __lcd_clear();__lcd_home();
+        printf("1: DC | A: ARM  ");
         __lcd_newline();
         printf("5:H|6:L|IR:%d   ", res);
         __delay_ms(100);
@@ -463,6 +462,9 @@ void PlatformTest(void){
             readADC(0);
             int res = ADRESH<<8 | ADRESL;
             IR_signal = (res > THIR) ? 1 : 0;
+            
+            __lcd_clear();__lcd_home();
+            printf("1: DC | A: ARM  ");
             __lcd_newline();
             printf("5:H|6:L|IR:%d   ", res);
             __delay_ms(100);
@@ -507,8 +509,6 @@ void PlatformTest(void){
     }
     
     IR_EMITTER = 0;
-    TMR1IF = 1;
-    TMR3IF = 1;
     stopSignals();
     machine_state = Testing_state;
 }
