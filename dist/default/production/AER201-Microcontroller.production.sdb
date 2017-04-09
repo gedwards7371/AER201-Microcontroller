@@ -226,17 +226,17 @@ EmergencyStop_state 4
 [v _actuatorTest actuatorTest `(v  1 e 1 0 ]
 "351
 [v _BothServos BothServos `(v  1 e 1 0 ]
-"409
+"414
 [v _PortTestDC PortTestDC `(v  1 e 1 0 ]
-"432
+"437
 [v _PlatformTest PlatformTest `(v  1 e 1 0 ]
-"537
+"542
 [v _SpeedTest SpeedTest `(v  1 e 1 0 ]
-"577
+"582
 [v _BlockerTest BlockerTest `(v  1 e 1 0 ]
-"627
+"632
 [v _arm arm `(v  1 e 1 0 ]
-"670
+"675
 [v _PortTestPusher PortTestPusher `(v  1 e 1 0 ]
 "62 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -1121,12 +1121,12 @@ EmergencyStop_state 4
 [v readMAG@res res `i  1 a 2 4 ]
 "34
 } 0
-"627 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"632 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _arm arm `(v  1 e 1 0 ]
 {
-"641
+"646
 [v arm@on on `i  1 a 2 44 ]
-"668
+"673
 } 0
 "79
 [v _algorithmTest algorithmTest `(v  1 e 1 0 ]
@@ -1175,40 +1175,35 @@ EmergencyStop_state 4
 [v actuatorTest@i i `i  1 a 2 68 ]
 "349
 } 0
-"537
+"542
 [v _SpeedTest SpeedTest `(v  1 e 1 0 ]
 {
-"563
+"568
 } 0
-"670
+"675
 [v _PortTestPusher PortTestPusher `(v  1 e 1 0 ]
 {
-"691
+"696
 } 0
-"409
+"414
 [v _PortTestDC PortTestDC `(v  1 e 1 0 ]
 {
-"430
+"435
 } 0
-"432
+"437
 [v _PlatformTest PlatformTest `(v  1 e 1 0 ]
 {
-"493
+"498
 [v PlatformTest@i_1784 i `i  1 a 2 51 ]
-"484
+"489
 [v PlatformTest@i i `i  1 a 2 49 ]
-"459
+"464
 [v PlatformTest@res_1781 res `i  1 a 2 47 ]
-"448
+"453
 [v PlatformTest@res res `i  1 a 2 45 ]
-"442
+"447
 [v PlatformTest@on on `i  1 a 2 53 ]
-"509
-} 0
-"70 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\main.c
-[v _stopSignals stopSignals `(v  1 e 1 0 ]
-{
-"79
+"514
 } 0
 "15 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
 [v _readADC readADC `(v  1 e 1 0 ]
@@ -1222,7 +1217,12 @@ EmergencyStop_state 4
 "351 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _BothServos BothServos `(v  1 e 1 0 ]
 {
-"407
+"412
+} 0
+"70 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\main.c
+[v _stopSignals stopSignals `(v  1 e 1 0 ]
+{
+"79
 } 0
 "436 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\sort.c
 [v _initServos initServos `(v  1 e 1 0 ]
@@ -1239,16 +1239,16 @@ EmergencyStop_state 4
 [v updateServoPosition@timer timer `i  1 p 2 2 ]
 "536
 } 0
-"577 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"582 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _BlockerTest BlockerTest `(v  1 e 1 0 ]
 {
-"608
+"613
 [v BlockerTest@i i `i  1 a 2 44 ]
-"583
+"588
 [v BlockerTest@cond_flag cond_flag `i  1 a 2 48 ]
-"582
+"587
 [v BlockerTest@cam_flag cam_flag `i  1 a 2 46 ]
-"625
+"630
 } 0
 "464 D:\Program Files (x86)\Microchip\xc8\v1.40\sources\common\doprnt.c
 [v _printf printf `(i  1 e 2 0 ]

@@ -23,7 +23,7 @@ void main(void) {
     // Load RTC. Comment this out after it's been done the first time
     RTCflag = 0;
     if(RTCflag){
-        initTime(0x42, 0x36, 0x13, 0x06, 0x07, 0x04, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
+        initTime(0x42, 0x47, 0x17, 0x07, 0x08, 0x04, 0x17); //sec, min, hour, weekday (0x01 is Sunday), day, month (0x01 is Jan), year (0x17)
     }
     else{
         I2C_Master_Init(10000); //Initialize I2C Master with 100KHz clock

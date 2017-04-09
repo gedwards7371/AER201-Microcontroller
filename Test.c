@@ -380,7 +380,11 @@ void BothServos(void){
     updateServoPosition(TILT_REST, 3);
     __delay_ms(750);
 
-    updateServoPosition(PAN_MID, 1);
+    updateServoPosition(PAN_R, 1);
+    updateServoPosition(TILT_REST, 3);
+    __delay_ms(750);
+    updateServoPosition(POP_TILT_DROP, 3);
+    __delay_ms(TILT_DROP_DELAY);
     updateServoPosition(TILT_REST, 3);
     __delay_ms(1500);
     
@@ -403,6 +407,7 @@ void BothServos(void){
     TMR1ON = 0;
     TMR3ON = 0;
     di();
+    stopSignals();
     machine_state = Testing_state;
 }
 
@@ -433,9 +438,9 @@ void PlatformTest(void){
     IR_EMITTER = 1;
     
     machine_state = Sorting_state;
-    f_arm_position = 2;
+    f_arm_position = 0;
     timer2_counter = 0;
-    SERVOARM = 1;
+    SERVOARM = 0;
     TMR2ON = 1;
     was_low_2 = 0;
     
