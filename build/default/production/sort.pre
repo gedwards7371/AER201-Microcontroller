@@ -4262,10 +4262,6 @@ sensor_outputs[1] = (sensor_outputs[1] || res3);
 LATAbits.LATA3 = 0;
 }
 
-
-lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;lcdInst(0b10000000);;
-printf("            F%dM%dL%d", res1, res2, res3);
-
 # 332
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
@@ -4304,15 +4300,7 @@ f_can_coming_to_distribution = 1;
 _delay((unsigned long)((750)*(32000000/4000.0)));
 LATCbits.LATC0 = 1;
 
-
-if(!f_lastCan){
-for(int i=0; i<46; i++){
-LATBbits.LATB2 = !LATBbits.LATB2;
-delay_ms(45-i);
-}
-LATBbits.LATB2 = 1;
-}
-
+# 378
 f_can_coming_to_ID = 0;
 }
 }

@@ -301,7 +301,7 @@ void ID(void){
         res1 = ((res1 / n) > 0.3) ? 1 : 0;
         res2 = ((res2 / n) > 0.3) ? 1 : 0;
         
-        // Average value
+        // Did at least one sample return conductive...?
         sensor_outputs[1] = (res1 || res2);
         SOL_COND_SENSORS = 0;
         
@@ -319,8 +319,8 @@ void ID(void){
         }
         
         //if(debug){
-        __lcd_clear();__lcd_home();
-        printf("            F%dM%dL%d", res1, res2, res3);
+        //__lcd_clear();__lcd_home();
+        //printf("            F%dM%dL%d", res1, res2, res3);
         //}
         
         // Identify can type
@@ -367,13 +367,13 @@ void ID(void){
         SERVOCAM = 1; // Raise block
         
         // Turn on DC motors again to start mixing remaining cans
-        if(!f_lastCan){
+        /*if(!f_lastCan){
             for(int i=0; i<46; i++){
                 DC = !DC;
                 delay_ms(45-i);
             }
             DC = 1;
-        }
+        }*/
         
         f_can_coming_to_ID = 0; // clear ID flag to allow another can to come
     }
