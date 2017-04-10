@@ -4246,8 +4246,22 @@ res2 = ((res2 / n) > 0.3) ? 1 : 0;
 
 
 sensor_outputs[1] = (res1 || res2);
+LATAbits.LATA3 = 0;
 
-# 312
+if(sensor_outputs[0]){
+_delay((unsigned long)((200)*(32000000/4000.0)));
+LATAbits.LATA3 = 1;
+int res3 = 0;
+for(int i = 0; i<n; i++){
+delay_ms(time);
+readCOND();
+res3 += COND_signal;
+}
+LATAbits.LATA3 = 0;
+sensor_outputs[1] = (sensor_outputs[1] || res3);
+}
+
+# 326
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4268,12 +4282,11 @@ count_can_no_lab++;
 cur_can = 3;
 }
 }
-LATAbits.LATA3 = 0;
 
-
+if(debug){
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;lcdInst(0b10000000);;
 printf("            F%dL%d", res1, res2);
-
+}
 
 while(!f_can_distributed){continue;}
 
@@ -4307,7 +4320,7 @@ void Distribution(void){
 if(f_can_coming_to_distribution){
 f_can_distributed = 0;
 
-# 376
+# 389
 switch(cur_can){
 case 0:
 updateServoPosition(500, 1);
@@ -4372,7 +4385,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 447
+# 460
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4433,9 +4446,9 @@ int min = (timeDiff % 3600) / 60;
 int sec = (timeDiff % 3600) % 60;
 
 lcdInst(0b10000000);;
-printf("SORTING...");
+printf("SORTING...     ");
 lcdInst(0b11000000);;
-printf("TIME %d:%02d", min, sec);
+printf("TIME %d:%02d   ", min, sec);
 }
 
 void getIR(void){
@@ -4549,7 +4562,7 @@ break;
 }
 void updateArmState(void){
 
-# 628
+# 641
 if(!was_low_2){
 
 switch(f_arm_position){

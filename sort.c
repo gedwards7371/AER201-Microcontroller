@@ -302,6 +302,20 @@ void ID(void){
         
         // Average value
         sensor_outputs[1] = (res1 || res2);
+        SOL_COND_SENSORS = 0;
+        
+        if(sensor_outputs[0]){
+            __delay_ms(200);
+            SOL_COND_SENSORS = 1;
+            int res3 = 0;
+            for(int i = 0; i<n; i++){
+                delay_ms(time);
+                readCOND();
+                res3 += COND_signal;
+            }
+            SOL_COND_SENSORS = 0;
+            sensor_outputs[1] = (sensor_outputs[1] || res3);
+        }        
         
         // Identify can type
         // cur_can:
@@ -329,12 +343,11 @@ void ID(void){
                 cur_can = 3;
             }
         }
-        SOL_COND_SENSORS = 0;
         
-        //if(debug){
+        if(debug){
         __lcd_clear();__lcd_home();
         printf("            F%dL%d", res1,  res2);
-        //}
+        }
         
         while(!f_can_distributed){continue;}
         
@@ -504,9 +517,9 @@ void printSortTimer(void){
     int sec = (timeDiff % 3600) % 60;
     
     __lcd_home();
-    printf("SORTING...");
+    printf("SORTING...     ");
     __lcd_newline();
-    printf("TIME %d:%02d", min, sec);
+    printf("TIME %d:%02d   ", min, sec);
 }
 
 void getIR(void){

@@ -3091,52 +3091,52 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MachineConfig.c: 47: ADCON1 = 0b00001100;
 "47
 [e = _ADCON1 -> -> 12 `i `uc ]
-[; ;MachineConfig.c: 50: CVRCON = 0x00;
-"50
-[e = _CVRCON -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 51: CMCONbits.CIS = 0;
+[; ;MachineConfig.c: 51: CVRCON = 0x00;
 "51
-[e = . . _CMCONbits 0 1 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 52: ADCON2 = 0b10110001;
+[e = _CVRCON -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 52: CMCONbits.CIS = 0;
 "52
+[e = . . _CMCONbits 0 1 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 53: ADCON2 = 0b10110001;
+"53
 [e = _ADCON2 -> -> 177 `i `uc ]
-[; ;MachineConfig.c: 55: INT1IE = 1;
-"55
+[; ;MachineConfig.c: 56: INT1IE = 1;
+"56
 [e = _INT1IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 57: TMR0IE = 1;
-"57
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 58: TMR1IE = 1;
+[; ;MachineConfig.c: 58: TMR0IE = 1;
 "58
-[e = _TMR1IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 59: TMR2IE = 1;
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 59: TMR1IE = 1;
 "59
-[e = _TMR2IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 60: TMR3IE = 1;
+[e = _TMR1IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 60: TMR2IE = 1;
 "60
+[e = _TMR2IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 61: TMR3IE = 1;
+"61
 [e = _TMR3IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 62: T1CON = 0b10110000;
-"62
-[e = _T1CON -> -> 176 `i `uc ]
-[; ;MachineConfig.c: 63: T2CON = 0b01111011;
+[; ;MachineConfig.c: 63: T1CON = 0b10110000;
 "63
-[e = _T2CON -> -> 123 `i `uc ]
-[; ;MachineConfig.c: 64: PR2 = 0x22;
+[e = _T1CON -> -> 176 `i `uc ]
+[; ;MachineConfig.c: 64: T2CON = 0b01111011;
 "64
-[e = _PR2 -> -> 34 `i `uc ]
-[; ;MachineConfig.c: 65: T3CON = 0b10110000;
+[e = _T2CON -> -> 123 `i `uc ]
+[; ;MachineConfig.c: 65: PR2 = 0x22;
 "65
-[e = _T3CON -> -> 176 `i `uc ]
-[; ;MachineConfig.c: 66: PEIE = 1;
+[e = _PR2 -> -> 34 `i `uc ]
+[; ;MachineConfig.c: 66: T3CON = 0b10110000;
 "66
-[e = _PEIE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 67: ADIE = 0;
+[e = _T3CON -> -> 176 `i `uc ]
+[; ;MachineConfig.c: 67: PEIE = 1;
 "67
-[e = _ADIE -> -> 0 `i `b ]
-[; ;MachineConfig.c: 68: (INTCONbits.GIE = 0);
+[e = _PEIE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 68: ADIE = 0;
 "68
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 69: }
+[e = _ADIE -> -> 0 `i `b ]
+[; ;MachineConfig.c: 69: (INTCONbits.GIE = 0);
 "69
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 70: }
+"70
 [e :UE 266 ]
 }

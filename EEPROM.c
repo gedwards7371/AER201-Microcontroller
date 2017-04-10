@@ -30,7 +30,7 @@ int log_total_time;
 // </editor-fold>
 
 void initEEPROM(void){
-    sel = 1;
+    EEPROM_write(0, 0x01);
 }
 
 void EEPROM_write(unsigned short address, unsigned char data){    
