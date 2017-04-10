@@ -3892,6 +3892,7 @@ extern int most_recent_sort_time;
 
 
 void delay_ms(unsigned char milliseconds);
+extern int motor_toggle_count;
 
 
 void getIR(void);

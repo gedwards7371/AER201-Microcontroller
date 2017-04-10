@@ -56,9 +56,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _delay_ms `(v ~T0 @X0 0 ef1`uc ]
 "4
 [v _initServos `(v ~T0 @X0 0 ef ]
-"36
-[v _getIR `(v ~T0 @X0 0 ef ]
 "37
+[v _getIR `(v ~T0 @X0 0 ef ]
+"38
 [v _getMAG `(v ~T0 @X0 0 ef ]
 "878 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -73,13 +73,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATAbits `VS37 ~T0 @X0 0 e@3977 ]
 "2 ADCFunctionality.h
 [v _readIR `(v ~T0 @X0 0 ef ]
-"294 sort.c
+"297 sort.c
 [v _readCOND `(i ~T0 @X0 0 ef ]
 "11 main.h
 [v _debug `i ~T0 @X0 0 e ]
 "195 D:\Program Files (x86)\Microchip\xc8\v1.40\include\stdio.h
 [v _printf `(i ~T0 @X0 0 ev`*Cuc ]
-"44 sort.h
+"45 sort.h
 [v _updateServoPosition `(v ~T0 @X0 0 ef2`i`i ]
 "8 RTC.h
 [v _getRTC `(v ~T0 @X0 0 ef ]
@@ -3004,33 +3004,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 29: extern int total_time;
 [; ;sort.h: 30: extern int most_recent_sort_time;
 [; ;sort.h: 33: void delay_ms(unsigned char milliseconds);
-[; ;sort.h: 36: void getIR(void);
-[; ;sort.h: 37: void getMAG(void);
-[; ;sort.h: 38: void getCOND(void);
-[; ;sort.h: 39: extern int IR_signal;
-[; ;sort.h: 40: extern int MAG_signal;
-[; ;sort.h: 41: extern int COND_signal;
-[; ;sort.h: 44: void updateServoPosition(int time_us, int timer);
-[; ;sort.h: 45: void updateServoStates(void);
-[; ;sort.h: 46: void updateArmState(void);
-[; ;sort.h: 47: extern unsigned int servoTimes[4];
-[; ;sort.h: 48: volatile extern int was_low_1;
-[; ;sort.h: 49: volatile extern int was_low_2;
-[; ;sort.h: 50: volatile extern int was_low_3;
-[; ;sort.h: 51: volatile extern int servo_timer_counter;
-[; ;sort.h: 52: volatile extern int servo_timer_target;
-[; ;sort.h: 53: volatile extern int pan_servo_state;
-[; ;sort.h: 54: volatile extern int tilt_servo_state;
-[; ;sort.h: 55: volatile extern int f_panning_to_bin;
-[; ;sort.h: 56: volatile extern int timer2_counter;
-[; ;sort.h: 57: volatile extern int f_arm_position;
-[; ;sort.h: 60: extern int sensor_outputs[2];
-[; ;sort.h: 61: extern int count_total;
-[; ;sort.h: 62: extern int count_pop_no_tab;
-[; ;sort.h: 63: extern int count_pop_w_tab;
-[; ;sort.h: 64: extern int count_can_w_lab;
-[; ;sort.h: 65: extern int count_can_no_lab;
-[; ;sort.h: 66: extern int cur_can;
+[; ;sort.h: 34: extern int motor_toggle_count;
+[; ;sort.h: 37: void getIR(void);
+[; ;sort.h: 38: void getMAG(void);
+[; ;sort.h: 39: void getCOND(void);
+[; ;sort.h: 40: extern int IR_signal;
+[; ;sort.h: 41: extern int MAG_signal;
+[; ;sort.h: 42: extern int COND_signal;
+[; ;sort.h: 45: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 46: void updateServoStates(void);
+[; ;sort.h: 47: void updateArmState(void);
+[; ;sort.h: 48: extern unsigned int servoTimes[4];
+[; ;sort.h: 49: volatile extern int was_low_1;
+[; ;sort.h: 50: volatile extern int was_low_2;
+[; ;sort.h: 51: volatile extern int was_low_3;
+[; ;sort.h: 52: volatile extern int servo_timer_counter;
+[; ;sort.h: 53: volatile extern int servo_timer_target;
+[; ;sort.h: 54: volatile extern int pan_servo_state;
+[; ;sort.h: 55: volatile extern int tilt_servo_state;
+[; ;sort.h: 56: volatile extern int f_panning_to_bin;
+[; ;sort.h: 57: volatile extern int timer2_counter;
+[; ;sort.h: 58: volatile extern int f_arm_position;
+[; ;sort.h: 61: extern int sensor_outputs[2];
+[; ;sort.h: 62: extern int count_total;
+[; ;sort.h: 63: extern int count_pop_no_tab;
+[; ;sort.h: 64: extern int count_pop_w_tab;
+[; ;sort.h: 65: extern int count_can_w_lab;
+[; ;sort.h: 66: extern int count_can_no_lab;
+[; ;sort.h: 67: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(void);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
@@ -3106,143 +3107,146 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _COND_signal `i ~T0 @X0 1 e ]
 [; ;sort.c: 42: int COND_signal;
 "45
-[v _servoTimes `ui ~T0 @X0 -> 4 `i e ]
-[; ;sort.c: 45: unsigned int servoTimes[4];
-"46
-[v _was_low_1 `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 46: volatile int was_low_1;
-"47
-[v _was_low_2 `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 47: volatile int was_low_2;
+[v _motor_toggle_count `i ~T0 @X0 1 e ]
+[; ;sort.c: 45: int motor_toggle_count;
 "48
-[v _was_low_3 `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 48: volatile int was_low_3;
+[v _servoTimes `ui ~T0 @X0 -> 4 `i e ]
+[; ;sort.c: 48: unsigned int servoTimes[4];
 "49
-[v _servo_timer_counter `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 49: volatile int servo_timer_counter;
+[v _was_low_1 `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 49: volatile int was_low_1;
 "50
-[v _servo_timer_target `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 50: volatile int servo_timer_target;
+[v _was_low_2 `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 50: volatile int was_low_2;
 "51
-[v _pan_servo_state `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 51: volatile int pan_servo_state;
+[v _was_low_3 `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 51: volatile int was_low_3;
 "52
-[v _tilt_servo_state `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 52: volatile int tilt_servo_state;
+[v _servo_timer_counter `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 52: volatile int servo_timer_counter;
 "53
-[v _f_panning_to_bin `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 53: volatile int f_panning_to_bin;
+[v _servo_timer_target `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 53: volatile int servo_timer_target;
 "54
-[v _timer2_counter `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 54: volatile int timer2_counter;
+[v _pan_servo_state `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 54: volatile int pan_servo_state;
 "55
-[v _f_arm_position `Vi ~T0 @X0 1 e ]
-[; ;sort.c: 55: volatile int f_arm_position;
+[v _tilt_servo_state `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 55: volatile int tilt_servo_state;
+"56
+[v _f_panning_to_bin `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 56: volatile int f_panning_to_bin;
+"57
+[v _timer2_counter `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 57: volatile int timer2_counter;
 "58
+[v _f_arm_position `Vi ~T0 @X0 1 e ]
+[; ;sort.c: 58: volatile int f_arm_position;
+"61
 [v _sensor_outputs `i ~T0 @X0 -> 2 `i e ]
-[; ;sort.c: 58: int sensor_outputs[2];
-[; ;sort.c: 59: int count_total;
-[; ;sort.c: 60: int count_pop_no_tab;
-[; ;sort.c: 61: int count_pop_w_tab;
-[; ;sort.c: 62: int count_can_w_lab;
-[; ;sort.c: 63: int count_can_no_lab;
-"64
-[v _cur_can `i ~T0 @X0 1 e ]
-[; ;sort.c: 64: int cur_can;
+[; ;sort.c: 61: int sensor_outputs[2];
+[; ;sort.c: 62: int count_total;
+[; ;sort.c: 63: int count_pop_no_tab;
+[; ;sort.c: 64: int count_pop_w_tab;
+[; ;sort.c: 65: int count_can_w_lab;
+[; ;sort.c: 66: int count_can_no_lab;
 "67
+[v _cur_can `i ~T0 @X0 1 e ]
+[; ;sort.c: 67: int cur_can;
+"70
 [v _sort `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 67: void sort(void){
+[; ;sort.c: 70: void sort(void){
 [e :U _sort ]
 [f ]
-[; ;sort.c: 68: if(machine_state == Sorting_state){
-"68
-[e $ ! == -> _machine_state `i -> . `E3120 1 `i 267  ]
-{
-[; ;sort.c: 69: Loading();
-"69
-[e ( _Loading ..  ]
-"70
-}
-[e :U 267 ]
-[; ;sort.c: 70: }
 [; ;sort.c: 71: if(machine_state == Sorting_state){
 "71
-[e $ ! == -> _machine_state `i -> . `E3120 1 `i 268  ]
+[e $ ! == -> _machine_state `i -> . `E3120 1 `i 267  ]
 {
-[; ;sort.c: 72: ID();
+[; ;sort.c: 72: Loading();
 "72
-[e ( _ID ..  ]
+[e ( _Loading ..  ]
 "73
 }
-[e :U 268 ]
+[e :U 267 ]
 [; ;sort.c: 73: }
 [; ;sort.c: 74: if(machine_state == Sorting_state){
 "74
-[e $ ! == -> _machine_state `i -> . `E3120 1 `i 269  ]
+[e $ ! == -> _machine_state `i -> . `E3120 1 `i 268  ]
 {
-[; ;sort.c: 75: Distribution();
+[; ;sort.c: 75: ID();
 "75
-[e ( _Distribution ..  ]
+[e ( _ID ..  ]
 "76
 }
-[e :U 269 ]
+[e :U 268 ]
 [; ;sort.c: 76: }
-[; ;sort.c: 77: }
+[; ;sort.c: 77: if(machine_state == Sorting_state){
 "77
+[e $ ! == -> _machine_state `i -> . `E3120 1 `i 269  ]
+{
+[; ;sort.c: 78: Distribution();
+"78
+[e ( _Distribution ..  ]
+"79
+}
+[e :U 269 ]
+[; ;sort.c: 79: }
+[; ;sort.c: 80: }
+"80
 [e :UE 266 ]
 }
-"79
+"82
 [v _Loading `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 79: void Loading(void){
+[; ;sort.c: 82: void Loading(void){
 [e :U _Loading ]
 [f ]
-[; ;sort.c: 80: if(first){
-"80
+[; ;sort.c: 83: if(first){
+"83
 [e $ ! != _first -> 0 `i 271  ]
 {
-[; ;sort.c: 81: TMR1IF = 1;
-"81
-[e = _TMR1IF -> -> 1 `i `b ]
-[; ;sort.c: 82: TMR2IF = 1;
-"82
-[e = _TMR2IF -> -> 1 `i `b ]
-[; ;sort.c: 83: TMR3IF = 1;
-"83
-[e = _TMR3IF -> -> 1 `i `b ]
-[; ;sort.c: 84: initGlobalVars();
+[; ;sort.c: 84: TMR1IF = 1;
 "84
-[e ( _initGlobalVars ..  ]
-[; ;sort.c: 85: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+[e = _TMR1IF -> -> 1 `i `b ]
+[; ;sort.c: 85: TMR2IF = 1;
 "85
+[e = _TMR2IF -> -> 1 `i `b ]
+[; ;sort.c: 86: TMR3IF = 1;
+"86
+[e = _TMR3IF -> -> 1 `i `b ]
+[; ;sort.c: 87: initGlobalVars();
+"87
+[e ( _initGlobalVars ..  ]
+[; ;sort.c: 88: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
+"88
 [e ( _lcdInst (1 -> -> 1 `i `uc ]
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 86: initSortTimer();
-"86
+[; ;sort.c: 89: initSortTimer();
+"89
 [e ( _initSortTimer ..  ]
-[; ;sort.c: 87: LATCbits.LATC5 = 1;
-"87
+[; ;sort.c: 90: LATCbits.LATC5 = 1;
+"90
 [e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
-[; ;sort.c: 92: sel = EEPROM_read(0);
-"92
-[e = _sel ( _EEPROM_read (1 -> -> 0 `i `us ]
-"93
-[v _addr `us ~T0 @X0 1 a ]
-[; ;sort.c: 93: unsigned short addr = 1 + 11 * sel;
-[e = _addr -> + -> 1 `i * -> 11 `i -> _sel `i `us ]
-"94
-[v _byte1 `uc ~T0 @X0 1 a ]
-[; ;sort.c: 94: unsigned char byte1 = 0b01111111;
-[e = _byte1 -> -> 127 `i `uc ]
-[; ;sort.c: 95: EEPROM_write(addr, byte1);
+[; ;sort.c: 95: sel = EEPROM_read(0);
 "95
-[e ( _EEPROM_write (2 , _addr _byte1 ]
-[; ;sort.c: 98: LATBbits.LATB2 = 0;
+[e = _sel ( _EEPROM_read (1 -> -> 0 `i `us ]
+"96
+[v _addr `us ~T0 @X0 1 a ]
+[; ;sort.c: 96: unsigned short addr = 1 + 11 * sel;
+[e = _addr -> + -> 1 `i * -> 11 `i -> _sel `i `us ]
+"97
+[v _byte1 `uc ~T0 @X0 1 a ]
+[; ;sort.c: 97: unsigned char byte1 = 0b01111111;
+[e = _byte1 -> -> 127 `i `uc ]
+[; ;sort.c: 98: EEPROM_write(addr, byte1);
 "98
+[e ( _EEPROM_write (2 , _addr _byte1 ]
+[; ;sort.c: 101: LATBbits.LATB2 = 0;
+"101
 [e = . . _LATBbits 0 2 -> -> 0 `i `uc ]
-[; ;sort.c: 100: for(int i=0; i<46; i++){
-"100
+[; ;sort.c: 103: for(int i=0; i<46; i++){
+"103
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3250,117 +3254,117 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 273  ]
 [e :U 272 ]
 {
-[; ;sort.c: 101: LATBbits.LATB2 = !LATBbits.LATB2;
-"101
+[; ;sort.c: 104: LATBbits.LATB2 = !LATBbits.LATB2;
+"104
 [e = . . _LATBbits 0 2 -> -> ! != -> . . _LATBbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;sort.c: 102: delay_ms(45-i);
-"102
+[; ;sort.c: 105: delay_ms(45-i);
+"105
 [e ( _delay_ms (1 -> - -> 45 `i _i `uc ]
-"103
+"106
 }
-"100
+"103
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 46 `i 272  ]
 [e :U 273 ]
-"103
+"106
 }
-[; ;sort.c: 103: }
-[; ;sort.c: 104: LATBbits.LATB2 = 1;
-"104
-[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
-[; ;sort.c: 107: initServos();
+[; ;sort.c: 106: }
+[; ;sort.c: 107: LATBbits.LATB2 = 1;
 "107
+[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
+[; ;sort.c: 110: initServos();
+"110
 [e ( _initServos ..  ]
-"108
+"111
 }
-[; ;sort.c: 108: }
+[; ;sort.c: 111: }
 [e $U 275  ]
-"109
-[e :U 271 ]
-[; ;sort.c: 109: else{
-{
-[; ;sort.c: 112: if(!f_loadingNewCan){
 "112
+[e :U 271 ]
+[; ;sort.c: 112: else{
+{
+[; ;sort.c: 115: if(!f_loadingNewCan){
+"115
 [e $ ! ! != _f_loadingNewCan -> 0 `i 276  ]
 {
-[; ;sort.c: 114: getIR();
-"114
+[; ;sort.c: 117: getIR();
+"117
 [e ( _getIR ..  ]
-[; ;sort.c: 116: if(!f_loadingNewCan){
-"116
+[; ;sort.c: 119: if(!f_loadingNewCan){
+"119
 [e $ ! ! != _f_loadingNewCan -> 0 `i 277  ]
 {
-[; ;sort.c: 117: return;
-"117
-[e $UE 270  ]
-"118
-}
-[; ;sort.c: 118: }
-[e $U 278  ]
+[; ;sort.c: 120: return;
 "120
-[e :U 277 ]
-[; ;sort.c: 120: else{
-{
-[; ;sort.c: 121: count_total++;
+[e $UE 270  ]
 "121
+}
+[; ;sort.c: 121: }
+[e $U 278  ]
+"123
+[e :U 277 ]
+[; ;sort.c: 123: else{
+{
+[; ;sort.c: 124: count_total++;
+"124
 [e ++ _count_total -> 1 `i ]
-[; ;sort.c: 122: if(count_total == 12){
-"122
+[; ;sort.c: 125: if(count_total == 12){
+"125
 [e $ ! == _count_total -> 12 `i 279  ]
 {
-[; ;sort.c: 123: f_lastCan = 1;
-"123
+[; ;sort.c: 126: f_lastCan = 1;
+"126
 [e = _f_lastCan -> 1 `i ]
-"124
+"127
 }
 [e :U 279 ]
-"125
+"128
 }
 [e :U 278 ]
-"126
-}
-[; ;sort.c: 124: }
-[; ;sort.c: 125: }
-[; ;sort.c: 126: }
-[e $U 280  ]
 "129
+}
+[; ;sort.c: 127: }
+[; ;sort.c: 128: }
+[; ;sort.c: 129: }
+[e $U 280  ]
+"132
 [e :U 276 ]
-[; ;sort.c: 129: else if(f_ID_receive){
+[; ;sort.c: 132: else if(f_ID_receive){
 [e $ ! != _f_ID_receive -> 0 `i 281  ]
 {
-[; ;sort.c: 130: f_most_recent_sort_time = 1;
-"130
-[e = _f_most_recent_sort_time -> 1 `i ]
-[; ;sort.c: 131: f_loadingNewCan = 0;
-"131
-[e = _f_loadingNewCan -> 0 `i ]
-[; ;sort.c: 132: _delay((unsigned long)((400)*(32000000/4000.0)));
-"132
-[e ( __delay (1 -> * -> -> 400 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 133: LATBbits.LATB2 = 0;
+[; ;sort.c: 133: f_most_recent_sort_time = 1;
 "133
+[e = _f_most_recent_sort_time -> 1 `i ]
+[; ;sort.c: 134: f_loadingNewCan = 0;
+"134
+[e = _f_loadingNewCan -> 0 `i ]
+[; ;sort.c: 135: _delay((unsigned long)((400)*(32000000/4000.0)));
+"135
+[e ( __delay (1 -> * -> -> 400 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 136: LATBbits.LATB2 = 0;
+"136
 [e = . . _LATBbits 0 2 -> -> 0 `i `uc ]
-[; ;sort.c: 137: f_arm_position = 1;
-"137
-[e = _f_arm_position -> 1 `i ]
-[; ;sort.c: 139: delay_ms(750);
-"139
-[e ( _delay_ms (1 -> -> 750 `i `uc ]
-[; ;sort.c: 140: getMAG();
+[; ;sort.c: 140: f_arm_position = 1;
 "140
-[e ( _getMAG ..  ]
-[; ;sort.c: 141: sensor_outputs[0] = MAG_signal;
-"141
-[e = *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux _MAG_signal ]
-[; ;sort.c: 143: TMR2IF = 0;
+[e = _f_arm_position -> 1 `i ]
+[; ;sort.c: 142: delay_ms(750);
+"142
+[e ( _delay_ms (1 -> -> 750 `i `uc ]
+[; ;sort.c: 143: getMAG();
 "143
-[e = _TMR2IF -> -> 0 `i `b ]
-[; ;sort.c: 144: if(sensor_outputs[0]){
+[e ( _getMAG ..  ]
+[; ;sort.c: 144: sensor_outputs[0] = MAG_signal;
 "144
+[e = *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux _MAG_signal ]
+[; ;sort.c: 146: TMR2IF = 0;
+"146
+[e = _TMR2IF -> -> 0 `i `b ]
+[; ;sort.c: 147: if(sensor_outputs[0]){
+"147
 [e $ ! != *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 282  ]
 {
-[; ;sort.c: 145: for(int i = 0; i<2500; i++){
-"145
+[; ;sort.c: 148: for(int i = 0; i<2500; i++){
+"148
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3368,37 +3372,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 284  ]
 [e :U 283 ]
 {
-[; ;sort.c: 146: LATAbits.LATA4 = 1;
-"146
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 147: _delay((unsigned long)((75)*(32000000/4000000.0)));
-"147
-[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 148: LATAbits.LATA4 = 0;
-"148
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 149: _delay((unsigned long)((25)*(32000000/4000000.0)));
+[; ;sort.c: 149: LATAbits.LATA4 = 1;
 "149
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 150: _delay((unsigned long)((75)*(32000000/4000000.0)));
 "150
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 151: LATAbits.LATA4 = 0;
+"151
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 152: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"152
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"153
 }
-"145
+"148
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2500 `i 283  ]
 [e :U 284 ]
-"150
-}
-"151
-}
-[; ;sort.c: 150: }
-[; ;sort.c: 151: }
-[e $U 286  ]
-"152
-[e :U 282 ]
-[; ;sort.c: 152: else{
-{
-[; ;sort.c: 153: for(int i = 0; i<2500; i++){
 "153
+}
+"154
+}
+[; ;sort.c: 153: }
+[; ;sort.c: 154: }
+[e $U 286  ]
+"155
+[e :U 282 ]
+[; ;sort.c: 155: else{
+{
+[; ;sort.c: 156: for(int i = 0; i<2500; i++){
+"156
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3406,57 +3410,57 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 288  ]
 [e :U 287 ]
 {
-[; ;sort.c: 154: LATAbits.LATA4 = 1;
-"154
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 155: _delay((unsigned long)((58)*(32000000/4000000.0)));
-"155
-[e ( __delay (1 -> * -> -> 58 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 156: LATAbits.LATA4 = 0;
-"156
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 157: _delay((unsigned long)((42)*(32000000/4000000.0)));
+[; ;sort.c: 157: LATAbits.LATA4 = 1;
 "157
-[e ( __delay (1 -> * -> -> 42 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 158: _delay((unsigned long)((58)*(32000000/4000000.0)));
 "158
+[e ( __delay (1 -> * -> -> 58 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 159: LATAbits.LATA4 = 0;
+"159
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 160: _delay((unsigned long)((42)*(32000000/4000000.0)));
+"160
+[e ( __delay (1 -> * -> -> 42 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"161
 }
-"153
+"156
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2500 `i 287  ]
 [e :U 288 ]
-"158
+"161
 }
-"159
+"162
 }
 [e :U 286 ]
-[; ;sort.c: 158: }
-[; ;sort.c: 159: }
-[; ;sort.c: 161: _delay((unsigned long)((350)*(32000000/4000.0)));
-"161
-[e ( __delay (1 -> * -> -> 350 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 163: readIR();
-"163
-[e ( _readIR ..  ]
-[; ;sort.c: 164: if(IR_signal==1){
+[; ;sort.c: 161: }
+[; ;sort.c: 162: }
+[; ;sort.c: 164: _delay((unsigned long)((350)*(32000000/4000.0)));
 "164
-[e $ ! == _IR_signal -> 1 `i 290  ]
-{
-[; ;sort.c: 165: _delay((unsigned long)((70)*(32000000/4000.0)));
-"165
-[e ( __delay (1 -> * -> -> 70 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 350 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [; ;sort.c: 166: readIR();
 "166
 [e ( _readIR ..  ]
 [; ;sort.c: 167: if(IR_signal==1){
 "167
+[e $ ! == _IR_signal -> 1 `i 290  ]
+{
+[; ;sort.c: 168: _delay((unsigned long)((70)*(32000000/4000.0)));
+"168
+[e ( __delay (1 -> * -> -> 70 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 169: readIR();
+"169
+[e ( _readIR ..  ]
+[; ;sort.c: 170: if(IR_signal==1){
+"170
 [e $ ! == _IR_signal -> 1 `i 291  ]
 {
-[; ;sort.c: 168: if(sensor_outputs[0]){
-"168
+[; ;sort.c: 171: if(sensor_outputs[0]){
+"171
 [e $ ! != *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 292  ]
 {
-[; ;sort.c: 169: for(int i = 0; i<2500; i++){
-"169
+[; ;sort.c: 172: for(int i = 0; i<2500; i++){
+"172
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3464,37 +3468,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 294  ]
 [e :U 293 ]
 {
-[; ;sort.c: 170: LATAbits.LATA4 = 1;
-"170
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 171: _delay((unsigned long)((75)*(32000000/4000000.0)));
-"171
-[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 172: LATAbits.LATA4 = 0;
-"172
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 173: _delay((unsigned long)((25)*(32000000/4000000.0)));
+[; ;sort.c: 173: LATAbits.LATA4 = 1;
 "173
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 174: _delay((unsigned long)((75)*(32000000/4000000.0)));
 "174
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 175: LATAbits.LATA4 = 0;
+"175
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 176: _delay((unsigned long)((25)*(32000000/4000000.0)));
+"176
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"177
 }
-"169
+"172
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2500 `i 293  ]
 [e :U 294 ]
-"174
-}
-"175
-}
-[; ;sort.c: 174: }
-[; ;sort.c: 175: }
-[e $U 296  ]
-"176
-[e :U 292 ]
-[; ;sort.c: 176: else{
-{
-[; ;sort.c: 177: for(int i = 0; i<2500; i++){
 "177
+}
+"178
+}
+[; ;sort.c: 177: }
+[; ;sort.c: 178: }
+[e $U 296  ]
+"179
+[e :U 292 ]
+[; ;sort.c: 179: else{
+{
+[; ;sort.c: 180: for(int i = 0; i<2500; i++){
+"180
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3502,140 +3506,140 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 298  ]
 [e :U 297 ]
 {
-[; ;sort.c: 178: LATAbits.LATA4 = 1;
-"178
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 179: _delay((unsigned long)((58)*(32000000/4000000.0)));
-"179
-[e ( __delay (1 -> * -> -> 58 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 180: LATAbits.LATA4 = 0;
-"180
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 181: _delay((unsigned long)((42)*(32000000/4000000.0)));
+[; ;sort.c: 181: LATAbits.LATA4 = 1;
 "181
-[e ( __delay (1 -> * -> -> 42 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 182: _delay((unsigned long)((58)*(32000000/4000000.0)));
 "182
+[e ( __delay (1 -> * -> -> 58 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 183: LATAbits.LATA4 = 0;
+"183
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 184: _delay((unsigned long)((42)*(32000000/4000000.0)));
+"184
+[e ( __delay (1 -> * -> -> 42 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"185
 }
-"177
+"180
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2500 `i 297  ]
 [e :U 298 ]
-"182
+"185
 }
-"183
+"186
 }
 [e :U 296 ]
-"184
+"187
 }
 [e :U 291 ]
-[; ;sort.c: 182: }
-[; ;sort.c: 183: }
-[; ;sort.c: 184: }
-[; ;sort.c: 186: _delay((unsigned long)((350)*(32000000/4000.0)));
-"186
-[e ( __delay (1 -> * -> -> 350 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"188
-[v _j `i ~T0 @X0 1 a ]
-[; ;sort.c: 188: int j = 0;
-[e = _j -> 0 `i ]
-[; ;sort.c: 189: while(IR_signal == 1){
+[; ;sort.c: 185: }
+[; ;sort.c: 186: }
+[; ;sort.c: 187: }
+[; ;sort.c: 189: _delay((unsigned long)((350)*(32000000/4000.0)));
 "189
+[e ( __delay (1 -> * -> -> 350 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"191
+[v _j `i ~T0 @X0 1 a ]
+[; ;sort.c: 191: int j = 0;
+[e = _j -> 0 `i ]
+[; ;sort.c: 192: while(IR_signal == 1){
+"192
 [e $U 300  ]
 [e :U 301 ]
 {
-[; ;sort.c: 190: readIR();
-"190
+[; ;sort.c: 193: readIR();
+"193
 [e ( _readIR ..  ]
-[; ;sort.c: 191: if(j == 3 || j == 4){
-"191
+[; ;sort.c: 194: if(j == 3 || j == 4){
+"194
 [e $ ! || == _j -> 3 `i == _j -> 4 `i 303  ]
 {
-[; ;sort.c: 192: f_arm_position = 0;
-"192
-[e = _f_arm_position -> 0 `i ]
-"193
-}
-[; ;sort.c: 193: }
-[e $U 304  ]
-"194
-[e :U 303 ]
-[; ;sort.c: 194: else if(j == 5 || j == 6){
-[e $ ! || == _j -> 5 `i == _j -> 6 `i 305  ]
-{
-[; ;sort.c: 195: LATBbits.LATB2 = 1;
+[; ;sort.c: 195: f_arm_position = 0;
 "195
-[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
+[e = _f_arm_position -> 0 `i ]
 "196
 }
 [; ;sort.c: 196: }
-[e $U 306  ]
+[e $U 304  ]
 "197
-[e :U 305 ]
-[; ;sort.c: 197: else if(j == 7 || j == 8){
-[e $ ! || == _j -> 7 `i == _j -> 8 `i 307  ]
+[e :U 303 ]
+[; ;sort.c: 197: else if(j == 5 || j == 6){
+[e $ ! || == _j -> 5 `i == _j -> 6 `i 305  ]
 {
-[; ;sort.c: 198: f_arm_position = 1;
+[; ;sort.c: 198: LATBbits.LATB2 = 1;
 "198
-[e = _f_arm_position -> 1 `i ]
+[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
 "199
 }
 [; ;sort.c: 199: }
-[e $U 308  ]
+[e $U 306  ]
 "200
+[e :U 305 ]
+[; ;sort.c: 200: else if(j == 7 || j == 8){
+[e $ ! || == _j -> 7 `i == _j -> 8 `i 307  ]
+{
+[; ;sort.c: 201: f_arm_position = 1;
+"201
+[e = _f_arm_position -> 1 `i ]
+"202
+}
+[; ;sort.c: 202: }
+[e $U 308  ]
+"203
 [e :U 307 ]
-[; ;sort.c: 200: else if(j % 2 == 0){
+[; ;sort.c: 203: else if(j % 2 == 0){
 [e $ ! == % _j -> 2 `i -> 0 `i 309  ]
 {
-[; ;sort.c: 201: LATBbits.LATB2 = !LATBbits.LATB2;
-"201
+[; ;sort.c: 204: LATBbits.LATB2 = !LATBbits.LATB2;
+"204
 [e = . . _LATBbits 0 2 -> -> ! != -> . . _LATBbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;sort.c: 202: f_arm_position = !f_arm_position;
-"202
+[; ;sort.c: 205: f_arm_position = !f_arm_position;
+"205
 [e = _f_arm_position -> ! != _f_arm_position -> 0 `i `i ]
-"203
+"206
 }
 [e :U 309 ]
-"206
+"209
 [e :U 308 ]
 [e :U 306 ]
 [e :U 304 ]
-[; ;sort.c: 203: }
-[; ;sort.c: 206: if(IR_signal==1){
+[; ;sort.c: 206: }
+[; ;sort.c: 209: if(IR_signal==1){
 [e $ ! == _IR_signal -> 1 `i 310  ]
 {
-[; ;sort.c: 207: _delay((unsigned long)((350)*(32000000/4000.0)));
-"207
+[; ;sort.c: 210: _delay((unsigned long)((350)*(32000000/4000.0)));
+"210
 [e ( __delay (1 -> * -> -> 350 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 208: readIR();
-"208
+[; ;sort.c: 211: readIR();
+"211
 [e ( _readIR ..  ]
-[; ;sort.c: 209: if(IR_signal==1){
-"209
+[; ;sort.c: 212: if(IR_signal==1){
+"212
 [e $ ! == _IR_signal -> 1 `i 311  ]
 {
-[; ;sort.c: 210: if(sensor_outputs[0]){
-"210
+[; ;sort.c: 213: if(sensor_outputs[0]){
+"213
 [e $ ! != *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 312  ]
 {
-[; ;sort.c: 211: LATAbits.LATA4 = 1;
-"211
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 212: _delay((unsigned long)((250)*(32000000/4000.0)));
-"212
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 213: LATAbits.LATA4 = 0;
-"213
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 214: LATAbits.LATA4 = 1;
 "214
-}
-[; ;sort.c: 214: }
-[e $U 313  ]
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 215: _delay((unsigned long)((250)*(32000000/4000.0)));
 "215
-[e :U 312 ]
-[; ;sort.c: 215: else{
-{
-[; ;sort.c: 216: for(int i = 0; i<2500; i++){
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 216: LATAbits.LATA4 = 0;
 "216
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+"217
+}
+[; ;sort.c: 217: }
+[e $U 313  ]
+"218
+[e :U 312 ]
+[; ;sort.c: 218: else{
+{
+[; ;sort.c: 219: for(int i = 0; i<2500; i++){
+"219
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3643,117 +3647,117 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 315  ]
 [e :U 314 ]
 {
-[; ;sort.c: 217: switch(j){
-"217
+[; ;sort.c: 220: switch(j){
+"220
 [e $U 318  ]
 {
-[; ;sort.c: 218: case 0:
-"218
-[e :U 319 ]
-[; ;sort.c: 219: LATAbits.LATA4 = 1;
-"219
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 220: _delay((unsigned long)((75)*(32000000/4000000.0)));
-"220
-[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 221: LATAbits.LATA4 = 0;
+[; ;sort.c: 221: case 0:
 "221
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 222: _delay((unsigned long)((25)*(32000000/4000000.0)));
+[e :U 319 ]
+[; ;sort.c: 222: LATAbits.LATA4 = 1;
 "222
-[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 223: break;
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 223: _delay((unsigned long)((75)*(32000000/4000000.0)));
 "223
-[e $U 317  ]
-[; ;sort.c: 224: case 1:
+[e ( __delay (1 -> * -> -> 75 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 224: LATAbits.LATA4 = 0;
 "224
-[e :U 320 ]
-[; ;sort.c: 225: LATAbits.LATA4 = 1;
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 225: _delay((unsigned long)((25)*(32000000/4000000.0)));
 "225
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 226: _delay((unsigned long)((80)*(32000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 226: break;
 "226
-[e ( __delay (1 -> * -> -> 80 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 227: LATAbits.LATA4 = 0;
+[e $U 317  ]
+[; ;sort.c: 227: case 1:
 "227
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 228: _delay((unsigned long)((20)*(32000000/4000000.0)));
+[e :U 320 ]
+[; ;sort.c: 228: LATAbits.LATA4 = 1;
 "228
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 229: break;
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 229: _delay((unsigned long)((80)*(32000000/4000000.0)));
 "229
-[e $U 317  ]
-[; ;sort.c: 230: case 2:
+[e ( __delay (1 -> * -> -> 80 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 230: LATAbits.LATA4 = 0;
 "230
-[e :U 321 ]
-[; ;sort.c: 231: LATAbits.LATA4 = 1;
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 231: _delay((unsigned long)((20)*(32000000/4000000.0)));
 "231
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 232: _delay((unsigned long)((85)*(32000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 232: break;
 "232
-[e ( __delay (1 -> * -> -> 85 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 233: LATAbits.LATA4 = 0;
+[e $U 317  ]
+[; ;sort.c: 233: case 2:
 "233
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 234: _delay((unsigned long)((15)*(32000000/4000000.0)));
+[e :U 321 ]
+[; ;sort.c: 234: LATAbits.LATA4 = 1;
 "234
-[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 235: break;
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 235: _delay((unsigned long)((85)*(32000000/4000000.0)));
 "235
-[e $U 317  ]
-[; ;sort.c: 236: case 3:
+[e ( __delay (1 -> * -> -> 85 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 236: LATAbits.LATA4 = 0;
 "236
-[e :U 322 ]
-[; ;sort.c: 237: LATAbits.LATA4 = 1;
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 237: _delay((unsigned long)((15)*(32000000/4000000.0)));
 "237
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 238: _delay((unsigned long)((90)*(32000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 238: break;
 "238
-[e ( __delay (1 -> * -> -> 90 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 239: LATAbits.LATA4 = 0;
+[e $U 317  ]
+[; ;sort.c: 239: case 3:
 "239
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 240: _delay((unsigned long)((10)*(32000000/4000000.0)));
+[e :U 322 ]
+[; ;sort.c: 240: LATAbits.LATA4 = 1;
 "240
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 241: break;
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 241: _delay((unsigned long)((90)*(32000000/4000000.0)));
 "241
-[e $U 317  ]
-[; ;sort.c: 242: case 4:
+[e ( __delay (1 -> * -> -> 90 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 242: LATAbits.LATA4 = 0;
 "242
-[e :U 323 ]
-[; ;sort.c: 243: LATAbits.LATA4 = 1;
-"243
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 244: _delay((unsigned long)((95)*(32000000/4000000.0)));
-"244
-[e ( __delay (1 -> * -> -> 95 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 245: LATAbits.LATA4 = 0;
-"245
 [e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 246: _delay((unsigned long)((50)*(32000000/4000000.0)));
+[; ;sort.c: 243: _delay((unsigned long)((10)*(32000000/4000000.0)));
+"243
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 244: break;
+"244
+[e $U 317  ]
+[; ;sort.c: 245: case 4:
+"245
+[e :U 323 ]
+[; ;sort.c: 246: LATAbits.LATA4 = 1;
 "246
-[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 247: break;
-"247
-[e $U 317  ]
-[; ;sort.c: 248: default:
-"248
-[e :U 324 ]
-[; ;sort.c: 249: LATAbits.LATA4 = 1;
-"249
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-[; ;sort.c: 250: _delay((unsigned long)((100)*(32000000/4000000.0)));
+[; ;sort.c: 247: _delay((unsigned long)((95)*(32000000/4000000.0)));
+"247
+[e ( __delay (1 -> * -> -> 95 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 248: LATAbits.LATA4 = 0;
+"248
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 249: _delay((unsigned long)((50)*(32000000/4000000.0)));
+"249
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 250: break;
 "250
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 251: break;
+[e $U 317  ]
+[; ;sort.c: 251: default:
 "251
-[e $U 317  ]
+[e :U 324 ]
+[; ;sort.c: 252: LATAbits.LATA4 = 1;
 "252
-}
-[; ;sort.c: 252: }
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+[; ;sort.c: 253: _delay((unsigned long)((100)*(32000000/4000000.0)));
+"253
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 254: break;
+"254
 [e $U 317  ]
-"217
+"255
+}
+[; ;sort.c: 255: }
+[e $U 317  ]
+"220
 [e :U 318 ]
 [e [\ _j , $ -> 0 `i 319
  , $ -> 1 `i 320
@@ -3761,141 +3765,141 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> 3 `i 322
  , $ -> 4 `i 323
  324 ]
-"252
+"255
 [e :U 317 ]
-"253
+"256
 }
-"216
+"219
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 2500 `i 314  ]
 [e :U 315 ]
-"253
+"256
 }
-"254
+"257
 }
 [e :U 313 ]
-"255
-}
-[e :U 311 ]
-[; ;sort.c: 253: }
-[; ;sort.c: 254: }
-[; ;sort.c: 255: }
-[; ;sort.c: 256: LATAbits.LATA4 = 0;
-"256
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-[; ;sort.c: 257: j++;
-"257
-[e ++ _j -> 1 `i ]
 "258
 }
-[e :U 310 ]
+[e :U 311 ]
+[; ;sort.c: 256: }
+[; ;sort.c: 257: }
 [; ;sort.c: 258: }
-[; ;sort.c: 260: if(!IR_signal){
+[; ;sort.c: 259: LATAbits.LATA4 = 0;
+"259
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+[; ;sort.c: 260: j++;
 "260
+[e ++ _j -> 1 `i ]
+"261
+}
+[e :U 310 ]
+[; ;sort.c: 261: }
+[; ;sort.c: 263: if(!IR_signal){
+"263
 [e $ ! ! != _IR_signal -> 0 `i 325  ]
 {
-[; ;sort.c: 261: _delay((unsigned long)((500)*(32000000/4000.0)));
-"261
+[; ;sort.c: 264: _delay((unsigned long)((500)*(32000000/4000.0)));
+"264
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 262: readIR();
-"262
+[; ;sort.c: 265: readIR();
+"265
 [e ( _readIR ..  ]
-[; ;sort.c: 263: if(IR_signal==1){
-"263
+[; ;sort.c: 266: if(IR_signal==1){
+"266
 [e $ ! == _IR_signal -> 1 `i 326  ]
 {
-[; ;sort.c: 264: continue;
-"264
-[e $U 300  ]
-"265
-}
-[; ;sort.c: 265: }
-[e $U 327  ]
-"266
-[e :U 326 ]
-[; ;sort.c: 266: else{
-{
-[; ;sort.c: 267: break;
+[; ;sort.c: 267: continue;
 "267
-[e $U 302  ]
+[e $U 300  ]
 "268
 }
-[e :U 327 ]
-"269
-}
-[e :U 325 ]
-"270
-}
-[e :U 300 ]
-"189
-[e $ == _IR_signal -> 1 `i 301  ]
-[e :U 302 ]
 [; ;sort.c: 268: }
-[; ;sort.c: 269: }
-[; ;sort.c: 270: }
-[; ;sort.c: 271: LATBbits.LATB2 = 0;
+[e $U 327  ]
+"269
+[e :U 326 ]
+[; ;sort.c: 269: else{
+{
+[; ;sort.c: 270: break;
+"270
+[e $U 302  ]
 "271
-[e = . . _LATBbits 0 2 -> -> 0 `i `uc ]
+}
+[e :U 327 ]
 "272
 }
-[e :U 290 ]
-[; ;sort.c: 272: }
-[; ;sort.c: 273: f_can_coming_to_ID = 1;
+[e :U 325 ]
 "273
-[e = _f_can_coming_to_ID -> 1 `i ]
-[; ;sort.c: 274: TMR2IF = 1;
+}
+[e :U 300 ]
+"192
+[e $ == _IR_signal -> 1 `i 301  ]
+[e :U 302 ]
+[; ;sort.c: 271: }
+[; ;sort.c: 272: }
+[; ;sort.c: 273: }
+[; ;sort.c: 274: LATBbits.LATB2 = 0;
 "274
-[e = _TMR2IF -> -> 1 `i `b ]
+[e = . . _LATBbits 0 2 -> -> 0 `i `uc ]
 "275
 }
-[e :U 281 ]
+[e :U 290 ]
+[; ;sort.c: 275: }
+[; ;sort.c: 276: f_can_coming_to_ID = 1;
 "276
+[e = _f_can_coming_to_ID -> 1 `i ]
+[; ;sort.c: 277: TMR2IF = 1;
+"277
+[e = _TMR2IF -> -> 1 `i `b ]
+"278
+}
+[e :U 281 ]
+"279
 [e :U 280 ]
 }
 [e :U 275 ]
-[; ;sort.c: 275: }
-[; ;sort.c: 276: }
-[; ;sort.c: 277: }
-"277
+[; ;sort.c: 278: }
+[; ;sort.c: 279: }
+[; ;sort.c: 280: }
+"280
 [e :UE 270 ]
 }
-"278
+"281
 [v _ID `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 278: void ID(void){
+[; ;sort.c: 281: void ID(void){
 [e :U _ID ]
 [f ]
-[; ;sort.c: 279: if(f_can_coming_to_ID){
-"279
+[; ;sort.c: 282: if(f_can_coming_to_ID){
+"282
 [e $ ! != _f_can_coming_to_ID -> 0 `i 329  ]
 {
-[; ;sort.c: 281: _delay((unsigned long)((1000)*(32000000/4000.0)));
-"281
+[; ;sort.c: 284: _delay((unsigned long)((1000)*(32000000/4000.0)));
+"284
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 283: f_arm_position = 0;
-"283
+[; ;sort.c: 286: f_arm_position = 0;
+"286
 [e = _f_arm_position -> 0 `i ]
-[; ;sort.c: 285: LATAbits.LATA3 = 1;
-"285
-[e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
+[; ;sort.c: 288: LATAbits.LATA3 = 1;
 "288
+[e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
+"291
 [v _n `Ci ~T0 @X0 1 a ]
-[; ;sort.c: 288: const int n = 10;
+[; ;sort.c: 291: const int n = 10;
 [e = _n -> 10 `i ]
 [v _time `Cuc ~T0 @X0 1 a ]
-[; ;sort.c: 289: const unsigned char time = (600 / n);
-"289
-[e = _time -> / -> 600 `i _n `uc ]
-"290
-[v _res1 `i ~T0 @X0 1 a ]
-[; ;sort.c: 290: int res1 = 0;
-[e = _res1 -> 0 `i ]
-"291
-[v _res2 `i ~T0 @X0 1 a ]
-[; ;sort.c: 291: int res2 = 0;
-[e = _res2 -> 0 `i ]
-[; ;sort.c: 292: for(int i = 0; i<n; i++){
+[; ;sort.c: 292: const unsigned char time = (600 / n);
 "292
+[e = _time -> / -> 600 `i _n `uc ]
+"293
+[v _res1 `i ~T0 @X0 1 a ]
+[; ;sort.c: 293: int res1 = 0;
+[e = _res1 -> 0 `i ]
+"294
+[v _res2 `i ~T0 @X0 1 a ]
+[; ;sort.c: 294: int res2 = 0;
+[e = _res2 -> 0 `i ]
+[; ;sort.c: 295: for(int i = 0; i<n; i++){
+"295
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3903,35 +3907,35 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 331  ]
 [e :U 330 ]
 {
-[; ;sort.c: 293: delay_ms(time);
-"293
-[e ( _delay_ms (1 _time ]
-[; ;sort.c: 294: readCOND();
-"294
-[e ( _readCOND ..  ]
-[; ;sort.c: 295: res1 += COND_signal;
-"295
-[e =+ _res1 _COND_signal ]
+[; ;sort.c: 296: delay_ms(time);
 "296
+[e ( _delay_ms (1 _time ]
+[; ;sort.c: 297: readCOND();
+"297
+[e ( _readCOND ..  ]
+[; ;sort.c: 298: res1 += COND_signal;
+"298
+[e =+ _res1 _COND_signal ]
+"299
 }
-"292
+"295
 [e ++ _i -> 1 `i ]
 [e $ < _i _n 330  ]
 [e :U 331 ]
-"296
-}
-[; ;sort.c: 296: }
-[; ;sort.c: 297: LATAbits.LATA3 = 0;
-"297
-[e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
-[; ;sort.c: 298: _delay((unsigned long)((200)*(32000000/4000.0)));
-"298
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 299: LATAbits.LATA3 = 1;
 "299
-[e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
-[; ;sort.c: 300: for(int i = 0; i<n; i++){
+}
+[; ;sort.c: 299: }
+[; ;sort.c: 300: LATAbits.LATA3 = 0;
 "300
+[e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
+[; ;sort.c: 301: _delay((unsigned long)((200)*(32000000/4000.0)));
+"301
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 302: LATAbits.LATA3 = 1;
+"302
+[e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
+[; ;sort.c: 303: for(int i = 0; i<n; i++){
+"303
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3939,52 +3943,52 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 334  ]
 [e :U 333 ]
 {
-[; ;sort.c: 301: delay_ms(time);
-"301
-[e ( _delay_ms (1 _time ]
-[; ;sort.c: 302: readCOND();
-"302
-[e ( _readCOND ..  ]
-[; ;sort.c: 303: res2 += COND_signal;
-"303
-[e =+ _res2 _COND_signal ]
+[; ;sort.c: 304: delay_ms(time);
 "304
+[e ( _delay_ms (1 _time ]
+[; ;sort.c: 305: readCOND();
+"305
+[e ( _readCOND ..  ]
+[; ;sort.c: 306: res2 += COND_signal;
+"306
+[e =+ _res2 _COND_signal ]
+"307
 }
-"300
+"303
 [e ++ _i -> 1 `i ]
 [e $ < _i _n 333  ]
 [e :U 334 ]
-"304
+"307
 }
-[; ;sort.c: 304: }
-[; ;sort.c: 305: res1 = ((res1 / n) > 0.3) ? 1 : 0;
-"305
+[; ;sort.c: 307: }
+[; ;sort.c: 308: res1 = ((res1 / n) > 0.3) ? 1 : 0;
+"308
 [e = _res1 ? > -> / _res1 _n `d .0.3 : -> 1 `i -> 0 `i ]
-[; ;sort.c: 306: res2 = ((res2 / n) > 0.3) ? 1 : 0;
-"306
-[e = _res2 ? > -> / _res2 _n `d .0.3 : -> 1 `i -> 0 `i ]
-[; ;sort.c: 309: sensor_outputs[1] = (res1 || res2);
+[; ;sort.c: 309: res2 = ((res2 / n) > 0.3) ? 1 : 0;
 "309
-[e = *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> || != _res1 -> 0 `i != _res2 -> 0 `i `i ]
-[; ;sort.c: 310: LATAbits.LATA3 = 0;
-"310
-[e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
-[; ;sort.c: 312: if(sensor_outputs[0]){
+[e = _res2 ? > -> / _res2 _n `d .0.3 : -> 1 `i -> 0 `i ]
+[; ;sort.c: 312: sensor_outputs[1] = (res1 || res2);
 "312
+[e = *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> || != _res1 -> 0 `i != _res2 -> 0 `i `i ]
+[; ;sort.c: 313: LATAbits.LATA3 = 0;
+"313
+[e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
+[; ;sort.c: 315: if(sensor_outputs[0]){
+"315
 [e $ ! != *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 336  ]
 {
-[; ;sort.c: 313: _delay((unsigned long)((200)*(32000000/4000.0)));
-"313
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 314: LATAbits.LATA3 = 1;
-"314
-[e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
-"315
-[v _res3 `i ~T0 @X0 1 a ]
-[; ;sort.c: 315: int res3 = 0;
-[e = _res3 -> 0 `i ]
-[; ;sort.c: 316: for(int i = 0; i<n; i++){
+[; ;sort.c: 316: _delay((unsigned long)((200)*(32000000/4000.0)));
 "316
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 317: LATAbits.LATA3 = 1;
+"317
+[e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
+"318
+[v _res3 `i ~T0 @X0 1 a ]
+[; ;sort.c: 318: int res3 = 0;
+[e = _res3 -> 0 `i ]
+[; ;sort.c: 319: for(int i = 0; i<n; i++){
+"319
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -3992,124 +3996,124 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 338  ]
 [e :U 337 ]
 {
-[; ;sort.c: 317: delay_ms(time);
-"317
-[e ( _delay_ms (1 _time ]
-[; ;sort.c: 318: readCOND();
-"318
-[e ( _readCOND ..  ]
-[; ;sort.c: 319: res3 += COND_signal;
-"319
-[e =+ _res3 _COND_signal ]
+[; ;sort.c: 320: delay_ms(time);
 "320
+[e ( _delay_ms (1 _time ]
+[; ;sort.c: 321: readCOND();
+"321
+[e ( _readCOND ..  ]
+[; ;sort.c: 322: res3 += COND_signal;
+"322
+[e =+ _res3 _COND_signal ]
+"323
 }
-"316
+"319
 [e ++ _i -> 1 `i ]
 [e $ < _i _n 337  ]
 [e :U 338 ]
-"320
-}
-[; ;sort.c: 320: }
-[; ;sort.c: 321: LATAbits.LATA3 = 0;
-"321
-[e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
-[; ;sort.c: 322: sensor_outputs[1] = (sensor_outputs[1] || res3);
-"322
-[e = *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> || != *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i != _res3 -> 0 `i `i ]
 "323
 }
-[e :U 336 ]
 [; ;sort.c: 323: }
-[; ;sort.c: 331: if(!sensor_outputs[0]){
-"331
+[; ;sort.c: 324: LATAbits.LATA3 = 0;
+"324
+[e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
+[; ;sort.c: 325: sensor_outputs[1] = (sensor_outputs[1] || res3);
+"325
+[e = *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> || != *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i != _res3 -> 0 `i `i ]
+"326
+}
+[e :U 336 ]
+[; ;sort.c: 326: }
+[; ;sort.c: 334: if(!sensor_outputs[0]){
+"334
 [e $ ! ! != *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 340  ]
 {
-[; ;sort.c: 332: if(!sensor_outputs[1]){
-"332
+[; ;sort.c: 335: if(!sensor_outputs[1]){
+"335
 [e $ ! ! != *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 341  ]
 {
-[; ;sort.c: 333: count_pop_no_tab++;
-"333
-[e ++ _count_pop_no_tab -> 1 `i ]
-[; ;sort.c: 334: cur_can = 0;
-"334
-[e = _cur_can -> 0 `i ]
-"335
-}
-[; ;sort.c: 335: }
-[e $U 342  ]
+[; ;sort.c: 336: count_pop_no_tab++;
 "336
-[e :U 341 ]
-[; ;sort.c: 336: else{
-{
-[; ;sort.c: 337: count_pop_w_tab++;
+[e ++ _count_pop_no_tab -> 1 `i ]
+[; ;sort.c: 337: cur_can = 0;
 "337
-[e ++ _count_pop_w_tab -> 1 `i ]
-[; ;sort.c: 338: cur_can = 1;
+[e = _cur_can -> 0 `i ]
 "338
-[e = _cur_can -> 1 `i ]
+}
+[; ;sort.c: 338: }
+[e $U 342  ]
 "339
+[e :U 341 ]
+[; ;sort.c: 339: else{
+{
+[; ;sort.c: 340: count_pop_w_tab++;
+"340
+[e ++ _count_pop_w_tab -> 1 `i ]
+[; ;sort.c: 341: cur_can = 1;
+"341
+[e = _cur_can -> 1 `i ]
+"342
 }
 [e :U 342 ]
-"340
+"343
 }
 [e :U 340 ]
-[; ;sort.c: 339: }
-[; ;sort.c: 340: }
-[; ;sort.c: 341: if(sensor_outputs[0]){
-"341
+[; ;sort.c: 342: }
+[; ;sort.c: 343: }
+[; ;sort.c: 344: if(sensor_outputs[0]){
+"344
 [e $ ! != *U + &U _sensor_outputs * -> -> -> 0 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 343  ]
 {
-[; ;sort.c: 342: if(!sensor_outputs[1]){
-"342
+[; ;sort.c: 345: if(!sensor_outputs[1]){
+"345
 [e $ ! ! != *U + &U _sensor_outputs * -> -> -> 1 `i `ui `ux -> -> # *U &U _sensor_outputs `ui `ux -> 0 `i 344  ]
 {
-[; ;sort.c: 343: count_can_w_lab++;
-"343
-[e ++ _count_can_w_lab -> 1 `i ]
-[; ;sort.c: 344: cur_can = 2;
-"344
-[e = _cur_can -> 2 `i ]
-"345
-}
-[; ;sort.c: 345: }
-[e $U 345  ]
+[; ;sort.c: 346: count_can_w_lab++;
 "346
-[e :U 344 ]
-[; ;sort.c: 346: else{
-{
-[; ;sort.c: 347: count_can_no_lab++;
+[e ++ _count_can_w_lab -> 1 `i ]
+[; ;sort.c: 347: cur_can = 2;
 "347
-[e ++ _count_can_no_lab -> 1 `i ]
-[; ;sort.c: 348: cur_can = 3;
+[e = _cur_can -> 2 `i ]
 "348
-[e = _cur_can -> 3 `i ]
+}
+[; ;sort.c: 348: }
+[e $U 345  ]
 "349
+[e :U 344 ]
+[; ;sort.c: 349: else{
+{
+[; ;sort.c: 350: count_can_no_lab++;
+"350
+[e ++ _count_can_no_lab -> 1 `i ]
+[; ;sort.c: 351: cur_can = 3;
+"351
+[e = _cur_can -> 3 `i ]
+"352
 }
 [e :U 345 ]
-"350
+"353
 }
 [e :U 343 ]
-[; ;sort.c: 349: }
-[; ;sort.c: 350: }
-[; ;sort.c: 352: if(debug){
-"352
+[; ;sort.c: 352: }
+[; ;sort.c: 353: }
+[; ;sort.c: 355: if(debug){
+"355
 [e $ ! != _debug -> 0 `i 346  ]
 {
-[; ;sort.c: 353: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;lcdInst(0b10000000);;
-"353
+[; ;sort.c: 356: lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;lcdInst(0b10000000);;
+"356
 [e ( _lcdInst (1 -> -> 1 `i `uc ]
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 [e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;sort.c: 354: printf("            F%dL%d", res1, res2);
-"354
+[; ;sort.c: 357: printf("            F%dL%d", res1, res2);
+"357
 [e ( _printf , , (. :s 1C _res1 _res2 ]
-"355
+"358
 }
 [e :U 346 ]
-[; ;sort.c: 355: }
-[; ;sort.c: 357: while(!f_can_distributed){continue;}
-"357
+[; ;sort.c: 358: }
+[; ;sort.c: 360: while(!f_can_distributed){continue;}
+"360
 [e $U 347  ]
 [e :U 348 ]
 {
@@ -4118,56 +4122,56 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 347 ]
 [e $ ! != _f_can_distributed -> 0 `i 348  ]
 [e :U 349 ]
-[; ;sort.c: 359: for(int i=0;i<10000;i++)
-"359
+[; ;sort.c: 362: for(int i=0;i<10000;i++)
+"362
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 10000 `i 350  ]
 [e $U 351  ]
-"360
-[e :U 350 ]
-[; ;sort.c: 360: {
-{
-[; ;sort.c: 361: LATCbits.LATC0 = 1;
-"361
-[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
-[; ;sort.c: 362: _delay((unsigned long)((10)*(32000000/4000000.0)));
-"362
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 363: LATCbits.LATC0 = 0;
 "363
-[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
-[; ;sort.c: 364: _delay((unsigned long)((90)*(32000000/4000000.0)));
+[e :U 350 ]
+[; ;sort.c: 363: {
+{
+[; ;sort.c: 364: LATCbits.LATC0 = 1;
 "364
-[e ( __delay (1 -> * -> -> 90 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
+[; ;sort.c: 365: _delay((unsigned long)((10)*(32000000/4000000.0)));
 "365
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 366: LATCbits.LATC0 = 0;
+"366
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;sort.c: 367: _delay((unsigned long)((90)*(32000000/4000000.0)));
+"367
+[e ( __delay (1 -> * -> -> 90 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"368
 }
-"359
+"362
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 10000 `i 350  ]
 [e :U 351 ]
-"365
+"368
 }
-[; ;sort.c: 365: }
-[; ;sort.c: 367: LATCbits.LATC0 = 0;
-"367
-[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
-[; ;sort.c: 369: f_can_coming_to_distribution = 1;
-"369
-[e = _f_can_coming_to_distribution -> 1 `i ]
-[; ;sort.c: 370: _delay((unsigned long)((750)*(32000000/4000.0)));
+[; ;sort.c: 368: }
+[; ;sort.c: 370: LATCbits.LATC0 = 0;
 "370
+[e = . . _LATCbits 0 0 -> -> 0 `i `uc ]
+[; ;sort.c: 372: f_can_coming_to_distribution = 1;
+"372
+[e = _f_can_coming_to_distribution -> 1 `i ]
+[; ;sort.c: 373: _delay((unsigned long)((750)*(32000000/4000.0)));
+"373
 [e ( __delay (1 -> * -> -> 750 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 371: LATCbits.LATC0 = 1;
-"371
-[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
-[; ;sort.c: 374: if(!f_lastCan){
+[; ;sort.c: 374: LATCbits.LATC0 = 1;
 "374
+[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
+[; ;sort.c: 377: if(!f_lastCan){
+"377
 [e $ ! ! != _f_lastCan -> 0 `i 353  ]
 {
-[; ;sort.c: 375: for(int i=0; i<46; i++){
-"375
+[; ;sort.c: 378: for(int i=0; i<46; i++){
+"378
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -4175,215 +4179,218 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 355  ]
 [e :U 354 ]
 {
-[; ;sort.c: 376: LATBbits.LATB2 = !LATBbits.LATB2;
-"376
+[; ;sort.c: 379: LATBbits.LATB2 = !LATBbits.LATB2;
+"379
 [e = . . _LATBbits 0 2 -> -> ! != -> . . _LATBbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;sort.c: 377: delay_ms(45-i);
-"377
+[; ;sort.c: 380: delay_ms(45-i);
+"380
 [e ( _delay_ms (1 -> - -> 45 `i _i `uc ]
-"378
+"381
 }
-"375
+"378
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 46 `i 354  ]
 [e :U 355 ]
-"378
+"381
 }
-[; ;sort.c: 378: }
-[; ;sort.c: 379: LATBbits.LATB2 = 1;
-"379
-[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
-"380
-}
-[e :U 353 ]
-[; ;sort.c: 380: }
-[; ;sort.c: 382: f_can_coming_to_ID = 0;
+[; ;sort.c: 381: }
+[; ;sort.c: 382: LATBbits.LATB2 = 1;
 "382
-[e = _f_can_coming_to_ID -> 0 `i ]
+[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
 "383
 }
-[e :U 329 ]
+[e :U 353 ]
 [; ;sort.c: 383: }
-[; ;sort.c: 384: }
-"384
+[; ;sort.c: 385: f_can_coming_to_ID = 0;
+"385
+[e = _f_can_coming_to_ID -> 0 `i ]
+"386
+}
+[e :U 329 ]
+[; ;sort.c: 386: }
+[; ;sort.c: 387: }
+"387
 [e :UE 328 ]
 }
-"385
+"388
 [v _Distribution `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 385: void Distribution(void){
+[; ;sort.c: 388: void Distribution(void){
 [e :U _Distribution ]
 [f ]
-[; ;sort.c: 386: if(f_can_coming_to_distribution){
-"386
+[; ;sort.c: 389: if(f_can_coming_to_distribution){
+"389
 [e $ ! != _f_can_coming_to_distribution -> 0 `i 358  ]
 {
-[; ;sort.c: 387: f_can_distributed = 0;
-"387
+[; ;sort.c: 390: f_can_distributed = 0;
+"390
 [e = _f_can_distributed -> 0 `i ]
-[; ;sort.c: 394: switch(cur_can){
-"394
+[; ;sort.c: 397: switch(cur_can){
+"397
 [e $U 360  ]
 {
-[; ;sort.c: 395: case 0:
-"395
-[e :U 361 ]
-[; ;sort.c: 396: updateServoPosition(500, 1);
-"396
-[e ( _updateServoPosition (2 , -> 500 `i -> 1 `i ]
-[; ;sort.c: 397: break;
-"397
-[e $U 359  ]
-[; ;sort.c: 398: case 1:
+[; ;sort.c: 398: case 0:
 "398
-[e :U 362 ]
-[; ;sort.c: 399: updateServoPosition(850, 1);
+[e :U 361 ]
+[; ;sort.c: 399: updateServoPosition(500, 1);
 "399
-[e ( _updateServoPosition (2 , -> 850 `i -> 1 `i ]
+[e ( _updateServoPosition (2 , -> 500 `i -> 1 `i ]
 [; ;sort.c: 400: break;
 "400
 [e $U 359  ]
-[; ;sort.c: 401: case 2:
+[; ;sort.c: 401: case 1:
 "401
-[e :U 363 ]
-[; ;sort.c: 402: updateServoPosition(1670, 1);
+[e :U 362 ]
+[; ;sort.c: 402: updateServoPosition(850, 1);
 "402
-[e ( _updateServoPosition (2 , -> 1670 `i -> 1 `i ]
+[e ( _updateServoPosition (2 , -> 850 `i -> 1 `i ]
 [; ;sort.c: 403: break;
 "403
 [e $U 359  ]
-[; ;sort.c: 404: case 3:
+[; ;sort.c: 404: case 2:
 "404
-[e :U 364 ]
-[; ;sort.c: 405: updateServoPosition(2400, 1);
+[e :U 363 ]
+[; ;sort.c: 405: updateServoPosition(1670, 1);
 "405
-[e ( _updateServoPosition (2 , -> 2400 `i -> 1 `i ]
+[e ( _updateServoPosition (2 , -> 1670 `i -> 1 `i ]
 [; ;sort.c: 406: break;
 "406
 [e $U 359  ]
-[; ;sort.c: 407: default:
+[; ;sort.c: 407: case 3:
 "407
-[e :U 365 ]
-[; ;sort.c: 408: break;
+[e :U 364 ]
+[; ;sort.c: 408: updateServoPosition(2400, 1);
 "408
-[e $U 359  ]
+[e ( _updateServoPosition (2 , -> 2400 `i -> 1 `i ]
+[; ;sort.c: 409: break;
 "409
-}
-[; ;sort.c: 409: }
 [e $U 359  ]
-"394
+[; ;sort.c: 410: default:
+"410
+[e :U 365 ]
+[; ;sort.c: 411: break;
+"411
+[e $U 359  ]
+"412
+}
+[; ;sort.c: 412: }
+[e $U 359  ]
+"397
 [e :U 360 ]
 [e [\ _cur_can , $ -> 0 `i 361
  , $ -> 1 `i 362
  , $ -> 2 `i 363
  , $ -> 3 `i 364
  365 ]
-"409
-[e :U 359 ]
-[; ;sort.c: 410: updateServoPosition(1050, 3);
-"410
-[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
-[; ;sort.c: 411: servo_timer_target = 750;
-"411
-[e = _servo_timer_target -> 750 `i ]
-[; ;sort.c: 412: f_panning_to_bin = 1;
 "412
-[e = _f_panning_to_bin -> 1 `i ]
-[; ;sort.c: 413: f_can_coming_to_distribution = 0;
+[e :U 359 ]
+[; ;sort.c: 413: updateServoPosition(1050, 3);
 "413
-[e = _f_can_coming_to_distribution -> 0 `i ]
+[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
+[; ;sort.c: 414: servo_timer_target = 750;
 "414
+[e = _servo_timer_target -> 750 `i ]
+[; ;sort.c: 415: f_panning_to_bin = 1;
+"415
+[e = _f_panning_to_bin -> 1 `i ]
+[; ;sort.c: 416: f_can_coming_to_distribution = 0;
+"416
+[e = _f_can_coming_to_distribution -> 0 `i ]
+"417
 }
 [e :U 358 ]
-[; ;sort.c: 414: }
-[; ;sort.c: 415: }
-"415
+[; ;sort.c: 417: }
+[; ;sort.c: 418: }
+"418
 [e :UE 357 ]
 }
-"417
+"420
 [v _initGlobalVars `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 417: void initGlobalVars(void){
+[; ;sort.c: 420: void initGlobalVars(void){
 [e :U _initGlobalVars ]
 [f ]
-[; ;sort.c: 419: first = 0;
-"419
-[e = _first -> 0 `i ]
-[; ;sort.c: 422: f_loadingNewCan = 0;
+[; ;sort.c: 422: first = 0;
 "422
-[e = _f_loadingNewCan -> 0 `i ]
-[; ;sort.c: 423: f_lastCan = 0;
-"423
-[e = _f_lastCan -> 0 `i ]
-[; ;sort.c: 424: f_ID_receive = 1;
-"424
-[e = _f_ID_receive -> 1 `i ]
-[; ;sort.c: 425: f_can_coming_to_ID = 0;
+[e = _first -> 0 `i ]
+[; ;sort.c: 425: f_loadingNewCan = 0;
 "425
-[e = _f_can_coming_to_ID -> 0 `i ]
-[; ;sort.c: 426: f_can_coming_to_distribution = 0;
+[e = _f_loadingNewCan -> 0 `i ]
+[; ;sort.c: 426: f_lastCan = 0;
 "426
-[e = _f_can_coming_to_distribution -> 0 `i ]
-[; ;sort.c: 427: f_can_distributed = 1;
+[e = _f_lastCan -> 0 `i ]
+[; ;sort.c: 427: f_ID_receive = 1;
 "427
-[e = _f_can_distributed -> 1 `i ]
-[; ;sort.c: 428: f_most_recent_sort_time = 0;
+[e = _f_ID_receive -> 1 `i ]
+[; ;sort.c: 428: f_can_coming_to_ID = 0;
 "428
-[e = _f_most_recent_sort_time -> 0 `i ]
-[; ;sort.c: 431: count_total = 0;
+[e = _f_can_coming_to_ID -> 0 `i ]
+[; ;sort.c: 429: f_can_coming_to_distribution = 0;
+"429
+[e = _f_can_coming_to_distribution -> 0 `i ]
+[; ;sort.c: 430: f_can_distributed = 1;
+"430
+[e = _f_can_distributed -> 1 `i ]
+[; ;sort.c: 431: f_most_recent_sort_time = 0;
 "431
-[e = _count_total -> 0 `i ]
-[; ;sort.c: 432: count_pop_no_tab = 0;
-"432
-[e = _count_pop_no_tab -> 0 `i ]
-[; ;sort.c: 433: count_pop_w_tab = 0;
-"433
-[e = _count_pop_w_tab -> 0 `i ]
-[; ;sort.c: 434: count_can_w_lab = 0;
+[e = _f_most_recent_sort_time -> 0 `i ]
+[; ;sort.c: 434: count_total = 0;
 "434
-[e = _count_can_w_lab -> 0 `i ]
-[; ;sort.c: 435: count_can_no_lab = 0;
+[e = _count_total -> 0 `i ]
+[; ;sort.c: 435: count_pop_no_tab = 0;
 "435
-[e = _count_can_no_lab -> 0 `i ]
-[; ;sort.c: 438: most_recent_sort_time = 999;
+[e = _count_pop_no_tab -> 0 `i ]
+[; ;sort.c: 436: count_pop_w_tab = 0;
+"436
+[e = _count_pop_w_tab -> 0 `i ]
+[; ;sort.c: 437: count_can_w_lab = 0;
+"437
+[e = _count_can_w_lab -> 0 `i ]
+[; ;sort.c: 438: count_can_no_lab = 0;
 "438
-[e = _most_recent_sort_time -> 999 `i ]
-[; ;sort.c: 441: servo_timer_counter = 0;
+[e = _count_can_no_lab -> 0 `i ]
+[; ;sort.c: 441: most_recent_sort_time = 999;
 "441
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 442: servo_timer_target = 9999;
-"442
-[e = _servo_timer_target -> 9999 `i ]
-[; ;sort.c: 443: timer2_counter = 0;
-"443
-[e = _timer2_counter -> 0 `i ]
-[; ;sort.c: 444: f_arm_position = 0;
+[e = _most_recent_sort_time -> 999 `i ]
+[; ;sort.c: 444: motor_toggle_count = 0;
 "444
-[e = _f_arm_position -> 0 `i ]
-[; ;sort.c: 445: pan_servo_state = -1;
-"445
-[e = _pan_servo_state -U -> 1 `i ]
-[; ;sort.c: 446: tilt_servo_state = -1;
-"446
-[e = _tilt_servo_state -U -> 1 `i ]
-[; ;sort.c: 447: f_panning_to_bin = 0;
+[e = _motor_toggle_count -> 0 `i ]
+[; ;sort.c: 447: servo_timer_counter = 0;
 "447
-[e = _f_panning_to_bin -> 0 `i ]
-[; ;sort.c: 448: }
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 448: servo_timer_target = 9999;
 "448
+[e = _servo_timer_target -> 9999 `i ]
+[; ;sort.c: 449: timer2_counter = 0;
+"449
+[e = _timer2_counter -> 0 `i ]
+[; ;sort.c: 450: f_arm_position = 0;
+"450
+[e = _f_arm_position -> 0 `i ]
+[; ;sort.c: 451: pan_servo_state = -1;
+"451
+[e = _pan_servo_state -U -> 1 `i ]
+[; ;sort.c: 452: tilt_servo_state = -1;
+"452
+[e = _tilt_servo_state -U -> 1 `i ]
+[; ;sort.c: 453: f_panning_to_bin = 0;
+"453
+[e = _f_panning_to_bin -> 0 `i ]
+[; ;sort.c: 454: }
+"454
 [e :UE 366 ]
 }
-"449
+"455
 [v _initSortTimer `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 449: void initSortTimer(void){
+[; ;sort.c: 455: void initSortTimer(void){
 [e :U _initSortTimer ]
 [f ]
-[; ;sort.c: 451: getRTC();
-"451
+[; ;sort.c: 457: getRTC();
+"457
 [e ( _getRTC ..  ]
-[; ;sort.c: 452: for(int i = 0; i < 7; i++){
-"452
+[; ;sort.c: 458: for(int i = 0; i < 7; i++){
+"458
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -4391,94 +4398,94 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 369  ]
 [e :U 368 ]
 {
-[; ;sort.c: 453: startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
-"453
+[; ;sort.c: 459: startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
+"459
 [e = *U + &U _startTime * -> -> _i `ui `ux -> -> # *U &U _startTime `ui `ux + & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 15 `i * >> & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 240 `i -> 4 `i -> 10 `i ]
-"454
+"460
 }
-"452
+"458
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 7 `i 368  ]
 [e :U 369 ]
-"454
+"460
 }
-[; ;sort.c: 454: }
-[; ;sort.c: 456: T0CON = 0b00010111;
-"456
+[; ;sort.c: 460: }
+[; ;sort.c: 462: T0CON = 0b00010111;
+"462
 [e = _T0CON -> -> 23 `i `uc ]
-[; ;sort.c: 465: TMR0H = 0b10000101;
-"465
+[; ;sort.c: 471: TMR0H = 0b10000101;
+"471
 [e = _TMR0H -> -> 133 `i `uc ]
-[; ;sort.c: 466: TMR0L = 0b11101110;
-"466
+[; ;sort.c: 472: TMR0L = 0b11101110;
+"472
 [e = _TMR0L -> -> 238 `i `uc ]
-[; ;sort.c: 467: TMR0ON = 1;
-"467
+[; ;sort.c: 473: TMR0ON = 1;
+"473
 [e = _TMR0ON -> -> 1 `i `b ]
-[; ;sort.c: 468: }
-"468
+[; ;sort.c: 474: }
+"474
 [e :UE 367 ]
 }
-"469
+"475
 [v _initServos `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 469: void initServos(void){
+[; ;sort.c: 475: void initServos(void){
 [e :U _initServos ]
 [f ]
-[; ;sort.c: 471: updateServoPosition(1200, 1);
-"471
+[; ;sort.c: 477: updateServoPosition(1200, 1);
+"477
 [e ( _updateServoPosition (2 , -> 1200 `i -> 1 `i ]
-[; ;sort.c: 472: updateServoPosition(1050, 3);
-"472
-[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
-[; ;sort.c: 473: TMR1ON = 1;
-"473
-[e = _TMR1ON -> -> 1 `i `b ]
-[; ;sort.c: 474: was_low_1 = 0;
-"474
-[e = _was_low_1 -> 0 `i ]
-[; ;sort.c: 476: _delay((unsigned long)((5)*(32000000/4000.0)));
-"476
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 478: TMR3ON = 1;
+[; ;sort.c: 478: updateServoPosition(1050, 3);
 "478
-[e = _TMR3ON -> -> 1 `i `b ]
-[; ;sort.c: 479: was_low_3 = 0;
+[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
+[; ;sort.c: 479: TMR1ON = 1;
 "479
-[e = _was_low_3 -> 0 `i ]
-[; ;sort.c: 482: _delay((unsigned long)((1)*(32000000/4000.0)));
+[e = _TMR1ON -> -> 1 `i `b ]
+[; ;sort.c: 480: was_low_1 = 0;
+"480
+[e = _was_low_1 -> 0 `i ]
+[; ;sort.c: 482: _delay((unsigned long)((5)*(32000000/4000.0)));
 "482
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 483: LATBbits.LATB3 = 0;
-"483
-[e = . . _LATBbits 0 3 -> -> 0 `i `uc ]
-[; ;sort.c: 484: TMR2ON = 1;
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 484: TMR3ON = 1;
 "484
-[e = _TMR2ON -> -> 1 `i `b ]
-[; ;sort.c: 485: was_low_2 = 0;
+[e = _TMR3ON -> -> 1 `i `b ]
+[; ;sort.c: 485: was_low_3 = 0;
 "485
-[e = _was_low_2 -> 0 `i ]
-[; ;sort.c: 487: LATCbits.LATC0 = 1;
-"487
-[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
-[; ;sort.c: 488: }
+[e = _was_low_3 -> 0 `i ]
+[; ;sort.c: 488: _delay((unsigned long)((1)*(32000000/4000.0)));
 "488
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 489: LATBbits.LATB3 = 0;
+"489
+[e = . . _LATBbits 0 3 -> -> 0 `i `uc ]
+[; ;sort.c: 490: TMR2ON = 1;
+"490
+[e = _TMR2ON -> -> 1 `i `b ]
+[; ;sort.c: 491: was_low_2 = 0;
+"491
+[e = _was_low_2 -> 0 `i ]
+[; ;sort.c: 493: LATCbits.LATC0 = 1;
+"493
+[e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
+[; ;sort.c: 494: }
+"494
 [e :UE 371 ]
 }
-"489
+"495
 [v _printSortTimer `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 489: void printSortTimer(void){
+[; ;sort.c: 495: void printSortTimer(void){
 [e :U _printSortTimer ]
 [f ]
-[; ;sort.c: 490: getRTC();
-"490
+[; ;sort.c: 496: getRTC();
+"496
 [e ( _getRTC ..  ]
-"491
+"497
 [v _curTime `i ~T0 @X0 -> 7 `i a ]
-[; ;sort.c: 491: int curTime[7];
-[; ;sort.c: 492: for(int i = 0; i < 7; i++){
-"492
+[; ;sort.c: 497: int curTime[7];
+[; ;sort.c: 498: for(int i = 0; i < 7; i++){
+"498
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -4486,68 +4493,67 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 374  ]
 [e :U 373 ]
 {
-[; ;sort.c: 493: curTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
-"493
+[; ;sort.c: 499: curTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
+"499
 [e = *U + &U _curTime * -> -> _i `ui `ux -> -> # *U &U _curTime `ui `ux + & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 15 `i * >> & -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `i -> 240 `i -> 4 `i -> 10 `i ]
-"494
+"500
 }
-"492
+"498
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 7 `i 373  ]
 [e :U 374 ]
-"494
+"500
 }
-"495
-[v _start_sec `ui ~T0 @X0 1 a ]
-[; ;sort.c: 494: }
-[; ;sort.c: 495: unsigned int start_sec = startTime[0] + startTime[1]*60 + startTime[2]*3600;
-[e = _start_sec -> + + *U + &U _startTime * -> -> -> 0 `i `ui `ux -> -> # *U &U _startTime `ui `ux * *U + &U _startTime * -> -> -> 1 `i `ui `ux -> -> # *U &U _startTime `ui `ux -> 60 `i * *U + &U _startTime * -> -> -> 2 `i `ui `ux -> -> # *U &U _startTime `ui `ux -> 3600 `i `ui ]
-"496
-[v _cur_sec `ui ~T0 @X0 1 a ]
-[; ;sort.c: 496: unsigned int cur_sec = curTime[0] + curTime[1]*60 + curTime[2]*3600;
-[e = _cur_sec -> + + *U + &U _curTime * -> -> -> 0 `i `ui `ux -> -> # *U &U _curTime `ui `ux * *U + &U _curTime * -> -> -> 1 `i `ui `ux -> -> # *U &U _curTime `ui `ux -> 60 `i * *U + &U _curTime * -> -> -> 2 `i `ui `ux -> -> # *U &U _curTime `ui `ux -> 3600 `i `ui ]
-"497
-[v _timeDiff `ui ~T0 @X0 1 a ]
-[; ;sort.c: 497: unsigned int timeDiff = cur_sec - start_sec;
-[e = _timeDiff - _cur_sec _start_sec ]
-[; ;sort.c: 499: total_time = timeDiff;
-"499
-[e = _total_time -> _timeDiff `i ]
-[; ;sort.c: 501: if(f_most_recent_sort_time){
 "501
+[v _start_sec `ui ~T0 @X0 1 a ]
+[; ;sort.c: 500: }
+[; ;sort.c: 501: unsigned int start_sec = startTime[0] + startTime[1]*60 + startTime[2]*3600;
+[e = _start_sec -> + + *U + &U _startTime * -> -> -> 0 `i `ui `ux -> -> # *U &U _startTime `ui `ux * *U + &U _startTime * -> -> -> 1 `i `ui `ux -> -> # *U &U _startTime `ui `ux -> 60 `i * *U + &U _startTime * -> -> -> 2 `i `ui `ux -> -> # *U &U _startTime `ui `ux -> 3600 `i `ui ]
+"502
+[v _cur_sec `ui ~T0 @X0 1 a ]
+[; ;sort.c: 502: unsigned int cur_sec = curTime[0] + curTime[1]*60 + curTime[2]*3600;
+[e = _cur_sec -> + + *U + &U _curTime * -> -> -> 0 `i `ui `ux -> -> # *U &U _curTime `ui `ux * *U + &U _curTime * -> -> -> 1 `i `ui `ux -> -> # *U &U _curTime `ui `ux -> 60 `i * *U + &U _curTime * -> -> -> 2 `i `ui `ux -> -> # *U &U _curTime `ui `ux -> 3600 `i `ui ]
+"503
+[v _timeDiff `ui ~T0 @X0 1 a ]
+[; ;sort.c: 503: unsigned int timeDiff = cur_sec - start_sec;
+[e = _timeDiff - _cur_sec _start_sec ]
+[; ;sort.c: 505: total_time = timeDiff;
+"505
+[e = _total_time -> _timeDiff `i ]
+[; ;sort.c: 507: if(f_most_recent_sort_time){
+"507
 [e $ ! != _f_most_recent_sort_time -> 0 `i 376  ]
 {
-[; ;sort.c: 502: most_recent_sort_time = total_time;
-"502
+[; ;sort.c: 508: most_recent_sort_time = total_time;
+"508
 [e = _most_recent_sort_time _total_time ]
-[; ;sort.c: 503: f_most_recent_sort_time = 0;
-"503
-[e = _f_most_recent_sort_time -> 0 `i ]
-"504
-}
-[e :U 376 ]
-[; ;sort.c: 504: }
-[; ;sort.c: 506: if((total_time >= 20) && (total_time % 20 == 0)){
-"506
-[e $ ! && >= _total_time -> 20 `i == % _total_time -> 20 `i -> 0 `i 377  ]
-{
-[; ;sort.c: 507: if(LATBbits.LATB2){
-"507
-[e $ ! != -> . . _LATBbits 0 2 `i -> -> -> 0 `i `Vuc `i 378  ]
-{
-[; ;sort.c: 509: LATBbits.LATB2 = ~LATBbits.LATB2;
+[; ;sort.c: 509: f_most_recent_sort_time = 0;
 "509
-[e = . . _LATBbits 0 2 -> ~ -> . . _LATBbits 0 2 `i `uc ]
+[e = _f_most_recent_sort_time -> 0 `i ]
 "510
 }
+[e :U 376 ]
 [; ;sort.c: 510: }
-[e $U 379  ]
-"511
-[e :U 378 ]
-[; ;sort.c: 511: else{
+[; ;sort.c: 512: if(total_time >= 20){
+"512
+[e $ ! >= _total_time -> 20 `i 377  ]
 {
-[; ;sort.c: 513: for(int i=0; i<46; i++){
+[; ;sort.c: 513: if(LATBbits.LATB2 == 0){
 "513
+[e $ ! == -> . . _LATBbits 0 2 `i -> 0 `i 378  ]
+{
+[; ;sort.c: 514: motor_toggle_count++;
+"514
+[e ++ _motor_toggle_count -> 1 `i ]
+[; ;sort.c: 515: if(motor_toggle_count == 2){
+"515
+[e $ ! == _motor_toggle_count -> 2 `i 379  ]
+{
+[; ;sort.c: 516: motor_toggle_count = 0;
+"516
+[e = _motor_toggle_count -> 0 `i ]
+[; ;sort.c: 517: for(int i=0; i<46; i++){
+"517
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -4555,528 +4561,545 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 381  ]
 [e :U 380 ]
 {
-[; ;sort.c: 514: LATBbits.LATB2 = !LATBbits.LATB2;
-"514
+[; ;sort.c: 518: LATBbits.LATB2 = !LATBbits.LATB2;
+"518
 [e = . . _LATBbits 0 2 -> -> ! != -> . . _LATBbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;sort.c: 515: delay_ms(45-i);
-"515
+[; ;sort.c: 519: delay_ms(45-i);
+"519
 [e ( _delay_ms (1 -> - -> 45 `i _i `uc ]
-"516
+"520
 }
-"513
+"517
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 46 `i 380  ]
 [e :U 381 ]
-"516
+"520
 }
-[; ;sort.c: 516: }
-[; ;sort.c: 517: LATBbits.LATB2 = 1;
-"517
+[; ;sort.c: 520: }
+[; ;sort.c: 521: LATBbits.LATB2 = 1;
+"521
 [e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
-"518
+"522
 }
 [e :U 379 ]
-"519
+"523
+}
+[; ;sort.c: 522: }
+[; ;sort.c: 523: }
+[e $U 383  ]
+"524
+[e :U 378 ]
+[; ;sort.c: 524: else if(total_time % 20 == 0){
+[e $ ! == % _total_time -> 20 `i -> 0 `i 384  ]
+{
+[; ;sort.c: 525: LATBbits.LATB2 = !LATBbits.LATB2;
+"525
+[e = . . _LATBbits 0 2 -> -> ! != -> . . _LATBbits 0 2 `i -> -> -> 0 `i `Vuc `i `i `uc ]
+"526
+}
+[e :U 384 ]
+"527
+[e :U 383 ]
 }
 [e :U 377 ]
-[; ;sort.c: 518: }
-[; ;sort.c: 519: }
-[; ;sort.c: 521: if((total_time - most_recent_sort_time == 42) || (total_time == 179)){
-"521
-[e $ ! || == - _total_time _most_recent_sort_time -> 42 `i == _total_time -> 179 `i 383  ]
-{
-[; ;sort.c: 522: machine_state = DoneSorting_state;
-"522
-[e = _machine_state . `E3120 2 ]
-"524
-}
-[e :U 383 ]
-"526
-[v _min `i ~T0 @X0 1 a ]
-[; ;sort.c: 524: }
-[; ;sort.c: 526: int min = (timeDiff % 3600) / 60;
-[e = _min -> / % _timeDiff -> -> 3600 `i `ui -> -> 60 `i `ui `i ]
-"527
-[v _sec `i ~T0 @X0 1 a ]
-[; ;sort.c: 527: int sec = (timeDiff % 3600) % 60;
-[e = _sec -> % % _timeDiff -> -> 3600 `i `ui -> -> 60 `i `ui `i ]
-[; ;sort.c: 529: lcdInst(0b10000000);;
+[; ;sort.c: 526: }
+[; ;sort.c: 527: }
+[; ;sort.c: 529: if((total_time - most_recent_sort_time == 42) || (total_time == 179)){
 "529
-[e ( _lcdInst (1 -> -> 128 `i `uc ]
-[; ;sort.c: 530: printf("SORTING...     ");
+[e $ ! || == - _total_time _most_recent_sort_time -> 42 `i == _total_time -> 179 `i 385  ]
+{
+[; ;sort.c: 530: machine_state = DoneSorting_state;
 "530
-[e ( _printf :s 2C ]
-[; ;sort.c: 531: lcdInst(0b11000000);;
-"531
-[e ( _lcdInst (1 -> -> 192 `i `uc ]
-[; ;sort.c: 532: printf("TIME %d:%02d   ", min, sec);
+[e = _machine_state . `E3120 2 ]
 "532
+}
+[e :U 385 ]
+"534
+[v _min `i ~T0 @X0 1 a ]
+[; ;sort.c: 532: }
+[; ;sort.c: 534: int min = (timeDiff % 3600) / 60;
+[e = _min -> / % _timeDiff -> -> 3600 `i `ui -> -> 60 `i `ui `i ]
+"535
+[v _sec `i ~T0 @X0 1 a ]
+[; ;sort.c: 535: int sec = (timeDiff % 3600) % 60;
+[e = _sec -> % % _timeDiff -> -> 3600 `i `ui -> -> 60 `i `ui `i ]
+[; ;sort.c: 537: lcdInst(0b10000000);;
+"537
+[e ( _lcdInst (1 -> -> 128 `i `uc ]
+[; ;sort.c: 538: printf("SORTING...     ");
+"538
+[e ( _printf :s 2C ]
+[; ;sort.c: 539: lcdInst(0b11000000);;
+"539
+[e ( _lcdInst (1 -> -> 192 `i `uc ]
+[; ;sort.c: 540: printf("TIME %d:%02d   ", min, sec);
+"540
 [e ( _printf , , (. :s 3C _min _sec ]
-[; ;sort.c: 533: }
-"533
+[; ;sort.c: 541: }
+"541
 [e :UE 372 ]
 }
-"535
+"543
 [v _getIR `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 535: void getIR(void){
+[; ;sort.c: 543: void getIR(void){
 [e :U _getIR ]
 [f ]
-[; ;sort.c: 536: readIR();
-"536
+[; ;sort.c: 544: readIR();
+"544
 [e ( _readIR ..  ]
-[; ;sort.c: 537: for(int i = 0; i < 150; i++){
-"537
+[; ;sort.c: 545: for(int i = 0; i < 150; i++){
+"545
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 150 `i 385  ]
-[e $U 386  ]
-[e :U 385 ]
+[e $ < _i -> 150 `i 387  ]
+[e $U 388  ]
+[e :U 387 ]
 {
-[; ;sort.c: 538: _delay((unsigned long)((500)*(32000000/4000000.0)));
-"538
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;sort.c: 539: readIR();
-"539
-[e ( _readIR ..  ]
-[; ;sort.c: 540: if(!IR_signal){
-"540
-[e $ ! ! != _IR_signal -> 0 `i 388  ]
-{
-[; ;sort.c: 541: break;
-"541
-[e $U 386  ]
-"542
-}
-[e :U 388 ]
-"543
-}
-"537
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 150 `i 385  ]
-[e :U 386 ]
-"543
-}
-[; ;sort.c: 542: }
-[; ;sort.c: 543: }
-[; ;sort.c: 544: if(IR_signal==1){
-"544
-[e $ ! == _IR_signal -> 1 `i 389  ]
-{
-[; ;sort.c: 545: f_loadingNewCan = 1;
-"545
-[e = _f_loadingNewCan -> 1 `i ]
+[; ;sort.c: 546: _delay((unsigned long)((500)*(32000000/4000000.0)));
 "546
-}
-[; ;sort.c: 546: }
-[e $U 390  ]
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;sort.c: 547: readIR();
 "547
-[e :U 389 ]
-[; ;sort.c: 547: else{
-{
-[; ;sort.c: 548: f_loadingNewCan = 0;
+[e ( _readIR ..  ]
+[; ;sort.c: 548: if(!IR_signal){
 "548
-[e = _f_loadingNewCan -> 0 `i ]
+[e $ ! ! != _IR_signal -> 0 `i 390  ]
+{
+[; ;sort.c: 549: break;
 "549
+[e $U 388  ]
+"550
 }
 [e :U 390 ]
-[; ;sort.c: 549: }
-[; ;sort.c: 550: }
-"550
-[e :UE 384 ]
-}
 "551
-[v _getMAG `(v ~T0 @X0 1 ef ]
-{
-[; ;sort.c: 551: void getMAG(void){
-[e :U _getMAG ]
-[f ]
-[; ;sort.c: 552: readMAG();
+}
+"545
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 150 `i 387  ]
+[e :U 388 ]
+"551
+}
+[; ;sort.c: 550: }
+[; ;sort.c: 551: }
+[; ;sort.c: 552: if(IR_signal==1){
 "552
-[e ( _readMAG ..  ]
-[; ;sort.c: 554: if(MAG_signal==1){
-"554
-[e $ ! == _MAG_signal -> 1 `i 392  ]
+[e $ ! == _IR_signal -> 1 `i 391  ]
 {
-[; ;sort.c: 555: _delay((unsigned long)((500)*(32000000/4000.0)));
+[; ;sort.c: 553: f_loadingNewCan = 1;
+"553
+[e = _f_loadingNewCan -> 1 `i ]
+"554
+}
+[; ;sort.c: 554: }
+[e $U 392  ]
 "555
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;sort.c: 556: readMAG();
+[e :U 391 ]
+[; ;sort.c: 555: else{
+{
+[; ;sort.c: 556: f_loadingNewCan = 0;
 "556
-[e ( _readMAG ..  ]
+[e = _f_loadingNewCan -> 0 `i ]
 "557
 }
 [e :U 392 ]
 [; ;sort.c: 557: }
 [; ;sort.c: 558: }
 "558
-[e :UE 391 ]
+[e :UE 386 ]
 }
+"559
+[v _getMAG `(v ~T0 @X0 1 ef ]
+{
+[; ;sort.c: 559: void getMAG(void){
+[e :U _getMAG ]
+[f ]
+[; ;sort.c: 560: readMAG();
 "560
+[e ( _readMAG ..  ]
+[; ;sort.c: 562: if(MAG_signal==1){
+"562
+[e $ ! == _MAG_signal -> 1 `i 394  ]
+{
+[; ;sort.c: 563: _delay((unsigned long)((500)*(32000000/4000.0)));
+"563
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;sort.c: 564: readMAG();
+"564
+[e ( _readMAG ..  ]
+"565
+}
+[e :U 394 ]
+[; ;sort.c: 565: }
+[; ;sort.c: 566: }
+"566
+[e :UE 393 ]
+}
+"568
 [v _updateServoPosition `(v ~T0 @X0 1 ef2`i`i ]
 {
-[; ;sort.c: 560: void updateServoPosition(int time_us, int timer){
+[; ;sort.c: 568: void updateServoPosition(int time_us, int timer){
 [e :U _updateServoPosition ]
 [v _time_us `i ~T0 @X0 1 r1 ]
 [v _timer `i ~T0 @X0 1 r2 ]
 [f ]
-"561
-[v _my_time `ui ~T0 @X0 1 a ]
-[; ;sort.c: 561: unsigned int my_time = 65535 - time_us;
-[e = _my_time -> - -> 65535 `l -> _time_us `l `ui ]
-[; ;sort.c: 562: switch(timer){
-"562
-[e $U 395  ]
-{
-[; ;sort.c: 563: case 1:
-"563
-[e :U 396 ]
-[; ;sort.c: 564: servoTimes[0] = my_time >> 8;
-"564
-[e = *U + &U _servoTimes * -> -> -> 0 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux >> _my_time -> 8 `i ]
-[; ;sort.c: 565: servoTimes[1] = my_time & 0xFF;
-"565
-[e = *U + &U _servoTimes * -> -> -> 1 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux & _my_time -> -> 255 `i `ui ]
-[; ;sort.c: 567: pan_servo_state = time_us;
-"567
-[e = _pan_servo_state _time_us ]
-[; ;sort.c: 568: case 3:
-"568
-[e :U 397 ]
-[; ;sort.c: 569: servoTimes[2] = my_time >> 8;
 "569
-[e = *U + &U _servoTimes * -> -> -> 2 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux >> _my_time -> 8 `i ]
-[; ;sort.c: 570: servoTimes[3] = my_time & 0xFF;
+[v _my_time `ui ~T0 @X0 1 a ]
+[; ;sort.c: 569: unsigned int my_time = 65535 - time_us;
+[e = _my_time -> - -> 65535 `l -> _time_us `l `ui ]
+[; ;sort.c: 570: switch(timer){
 "570
-[e = *U + &U _servoTimes * -> -> -> 3 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux & _my_time -> -> 255 `i `ui ]
-[; ;sort.c: 572: tilt_servo_state = time_us;
+[e $U 397  ]
+{
+[; ;sort.c: 571: case 1:
+"571
+[e :U 398 ]
+[; ;sort.c: 572: servoTimes[0] = my_time >> 8;
 "572
-[e = _tilt_servo_state _time_us ]
+[e = *U + &U _servoTimes * -> -> -> 0 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux >> _my_time -> 8 `i ]
+[; ;sort.c: 573: servoTimes[1] = my_time & 0xFF;
 "573
-}
-[; ;sort.c: 573: }
-[e $U 394  ]
-"562
-[e :U 395 ]
-[e [\ _timer , $ -> 1 `i 396
- , $ -> 3 `i 397
- 394 ]
-"573
-[e :U 394 ]
-[; ;sort.c: 574: }
-"574
-[e :UE 393 ]
-}
+[e = *U + &U _servoTimes * -> -> -> 1 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux & _my_time -> -> 255 `i `ui ]
+[; ;sort.c: 575: pan_servo_state = time_us;
 "575
+[e = _pan_servo_state _time_us ]
+[; ;sort.c: 576: case 3:
+"576
+[e :U 399 ]
+[; ;sort.c: 577: servoTimes[2] = my_time >> 8;
+"577
+[e = *U + &U _servoTimes * -> -> -> 2 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux >> _my_time -> 8 `i ]
+[; ;sort.c: 578: servoTimes[3] = my_time & 0xFF;
+"578
+[e = *U + &U _servoTimes * -> -> -> 3 `i `ui `ux -> -> # *U &U _servoTimes `ui `ux & _my_time -> -> 255 `i `ui ]
+[; ;sort.c: 580: tilt_servo_state = time_us;
+"580
+[e = _tilt_servo_state _time_us ]
+"581
+}
+[; ;sort.c: 581: }
+[e $U 396  ]
+"570
+[e :U 397 ]
+[e [\ _timer , $ -> 1 `i 398
+ , $ -> 3 `i 399
+ 396 ]
+"581
+[e :U 396 ]
+[; ;sort.c: 582: }
+"582
+[e :UE 395 ]
+}
+"583
 [v _updateServoStates `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 575: void updateServoStates(void){
+[; ;sort.c: 583: void updateServoStates(void){
 [e :U _updateServoStates ]
 [f ]
-[; ;sort.c: 577: if(servo_timer_counter >= servo_timer_target){
-"577
-[e $ ! >= _servo_timer_counter _servo_timer_target 399  ]
-{
-[; ;sort.c: 579: if(f_panning_to_bin){
-"579
-[e $ ! != _f_panning_to_bin -> 0 `i 400  ]
-{
-[; ;sort.c: 580: switch(pan_servo_state){
-"580
-[e $U 402  ]
-{
-[; ;sort.c: 582: case 500:
-"582
-[e :U 403 ]
-[; ;sort.c: 583: updateServoPosition(1260, 3);
-"583
-[e ( _updateServoPosition (2 , -> 1260 `i -> 3 `i ]
-[; ;sort.c: 584: servo_timer_counter = 0;
-"584
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 585: servo_timer_target = 700;
+[; ;sort.c: 585: if(servo_timer_counter >= servo_timer_target){
 "585
-[e = _servo_timer_target -> 700 `i ]
-[; ;sort.c: 586: break;
-"586
-[e $U 401  ]
-[; ;sort.c: 587: case 850:
+[e $ ! >= _servo_timer_counter _servo_timer_target 401  ]
+{
+[; ;sort.c: 587: if(f_panning_to_bin){
 "587
-[e :U 404 ]
-[; ;sort.c: 588: updateServoPosition(1260, 3);
+[e $ ! != _f_panning_to_bin -> 0 `i 402  ]
+{
+[; ;sort.c: 588: switch(pan_servo_state){
 "588
-[e ( _updateServoPosition (2 , -> 1260 `i -> 3 `i ]
-[; ;sort.c: 589: servo_timer_counter = 0;
-"589
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 591: servo_timer_target = 700;
-"591
-[e = _servo_timer_target -> 700 `i ]
-[; ;sort.c: 592: break;
-"592
-[e $U 401  ]
-[; ;sort.c: 593: case 1670:
-"593
+[e $U 404  ]
+{
+[; ;sort.c: 590: case 500:
+"590
 [e :U 405 ]
-[; ;sort.c: 594: updateServoPosition(1390, 3);
+[; ;sort.c: 591: updateServoPosition(1260, 3);
+"591
+[e ( _updateServoPosition (2 , -> 1260 `i -> 3 `i ]
+[; ;sort.c: 592: servo_timer_counter = 0;
+"592
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 593: servo_timer_target = 700;
+"593
+[e = _servo_timer_target -> 700 `i ]
+[; ;sort.c: 594: break;
 "594
-[e ( _updateServoPosition (2 , -> 1390 `i -> 3 `i ]
-[; ;sort.c: 595: servo_timer_counter = 0;
+[e $U 403  ]
+[; ;sort.c: 595: case 850:
 "595
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 596: servo_timer_target = 700;
-"596
-[e = _servo_timer_target -> 700 `i ]
-[; ;sort.c: 597: break;
-"597
-[e $U 401  ]
-[; ;sort.c: 598: case 2400:
-"598
 [e :U 406 ]
-[; ;sort.c: 599: updateServoPosition(1390, 3);
+[; ;sort.c: 596: updateServoPosition(1260, 3);
+"596
+[e ( _updateServoPosition (2 , -> 1260 `i -> 3 `i ]
+[; ;sort.c: 597: servo_timer_counter = 0;
+"597
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 599: servo_timer_target = 700;
 "599
-[e ( _updateServoPosition (2 , -> 1390 `i -> 3 `i ]
-[; ;sort.c: 600: servo_timer_counter = 0;
-"600
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 601: servo_timer_target = 700;
-"601
 [e = _servo_timer_target -> 700 `i ]
-[; ;sort.c: 602: break;
-"602
-[e $U 401  ]
-[; ;sort.c: 603: default:
-"603
+[; ;sort.c: 600: break;
+"600
+[e $U 403  ]
+[; ;sort.c: 601: case 1670:
+"601
 [e :U 407 ]
-[; ;sort.c: 604: break;
+[; ;sort.c: 602: updateServoPosition(1390, 3);
+"602
+[e ( _updateServoPosition (2 , -> 1390 `i -> 3 `i ]
+[; ;sort.c: 603: servo_timer_counter = 0;
+"603
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 604: servo_timer_target = 700;
 "604
-[e $U 401  ]
+[e = _servo_timer_target -> 700 `i ]
+[; ;sort.c: 605: break;
 "605
-}
-[; ;sort.c: 605: }
-[e $U 401  ]
-"580
-[e :U 402 ]
-[e [\ _pan_servo_state , $ -> 500 `i 403
- , $ -> 850 `i 404
- , $ -> 1670 `i 405
- , $ -> 2400 `i 406
- 407 ]
-"605
-[e :U 401 ]
-[; ;sort.c: 606: f_panning_to_bin = 0;
+[e $U 403  ]
+[; ;sort.c: 606: case 2400:
 "606
-[e = _f_panning_to_bin -> 0 `i ]
-"607
-}
-[; ;sort.c: 607: }
-[e $U 408  ]
-"608
-[e :U 400 ]
-[; ;sort.c: 608: else if(pan_servo_state == 1200){
-[e $ ! == _pan_servo_state -> 1200 `i 409  ]
-{
-[; ;sort.c: 610: servo_timer_counter = 0;
-"610
-[e = _servo_timer_counter -> 0 `i ]
-"611
-}
-[; ;sort.c: 611: }
-[e $U 410  ]
-"612
-[e :U 409 ]
-[; ;sort.c: 612: else{
-{
-[; ;sort.c: 613: switch(tilt_servo_state){
-"613
-[e $U 412  ]
-{
-[; ;sort.c: 615: case 1260:
-"615
-[e :U 413 ]
-[; ;sort.c: 616: updateServoPosition(1050, 3);
-"616
-[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
-[; ;sort.c: 617: servo_timer_counter = 0;
-"617
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 618: servo_timer_target = 750;
-"618
-[e = _servo_timer_target -> 750 `i ]
-[; ;sort.c: 619: break;
-"619
-[e $U 411  ]
-[; ;sort.c: 620: case 1390:
-"620
-[e :U 414 ]
-[; ;sort.c: 621: updateServoPosition(1050, 3);
-"621
-[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
-[; ;sort.c: 622: servo_timer_counter = 0;
-"622
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 623: servo_timer_target = 750;
-"623
-[e = _servo_timer_target -> 750 `i ]
-[; ;sort.c: 624: break;
-"624
-[e $U 411  ]
-[; ;sort.c: 626: case 1050:
-"626
-[e :U 415 ]
-[; ;sort.c: 627: updateServoPosition(1200, 1);
-"627
-[e ( _updateServoPosition (2 , -> 1200 `i -> 1 `i ]
-[; ;sort.c: 628: updateServoPosition(1050, 3);
-"628
-[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
-[; ;sort.c: 629: servo_timer_counter = 0;
-"629
-[e = _servo_timer_counter -> 0 `i ]
-[; ;sort.c: 630: servo_timer_target = 9999;
-"630
-[e = _servo_timer_target -> 9999 `i ]
-[; ;sort.c: 632: f_can_distributed = 1;
-"632
-[e = _f_can_distributed -> 1 `i ]
-[; ;sort.c: 633: if(f_lastCan == 1){
-"633
-[e $ ! == _f_lastCan -> 1 `i 416  ]
-{
-[; ;sort.c: 634: machine_state = DoneSorting_state;
-"634
-[e = _machine_state . `E3120 2 ]
-"635
-}
-[e :U 416 ]
-[; ;sort.c: 635: }
-[; ;sort.c: 636: break;
-"636
-[e $U 411  ]
-[; ;sort.c: 638: default:
-"638
-[e :U 417 ]
-[; ;sort.c: 639: break;
-"639
-[e $U 411  ]
-"640
-}
-[; ;sort.c: 640: }
-[e $U 411  ]
-"613
-[e :U 412 ]
-[e [\ _tilt_servo_state , $ -> 1260 `i 413
- , $ -> 1390 `i 414
- , $ -> 1050 `i 415
- 417 ]
-"640
-[e :U 411 ]
-"641
-}
-[e :U 410 ]
 [e :U 408 ]
+[; ;sort.c: 607: updateServoPosition(1390, 3);
+"607
+[e ( _updateServoPosition (2 , -> 1390 `i -> 3 `i ]
+[; ;sort.c: 608: servo_timer_counter = 0;
+"608
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 609: servo_timer_target = 700;
+"609
+[e = _servo_timer_target -> 700 `i ]
+[; ;sort.c: 610: break;
+"610
+[e $U 403  ]
+[; ;sort.c: 611: default:
+"611
+[e :U 409 ]
+[; ;sort.c: 612: break;
+"612
+[e $U 403  ]
+"613
+}
+[; ;sort.c: 613: }
+[e $U 403  ]
+"588
+[e :U 404 ]
+[e [\ _pan_servo_state , $ -> 500 `i 405
+ , $ -> 850 `i 406
+ , $ -> 1670 `i 407
+ , $ -> 2400 `i 408
+ 409 ]
+"613
+[e :U 403 ]
+[; ;sort.c: 614: f_panning_to_bin = 0;
+"614
+[e = _f_panning_to_bin -> 0 `i ]
+"615
+}
+[; ;sort.c: 615: }
+[e $U 410  ]
+"616
+[e :U 402 ]
+[; ;sort.c: 616: else if(pan_servo_state == 1200){
+[e $ ! == _pan_servo_state -> 1200 `i 411  ]
+{
+[; ;sort.c: 618: servo_timer_counter = 0;
+"618
+[e = _servo_timer_counter -> 0 `i ]
+"619
+}
+[; ;sort.c: 619: }
+[e $U 412  ]
+"620
+[e :U 411 ]
+[; ;sort.c: 620: else{
+{
+[; ;sort.c: 621: switch(tilt_servo_state){
+"621
+[e $U 414  ]
+{
+[; ;sort.c: 623: case 1260:
+"623
+[e :U 415 ]
+[; ;sort.c: 624: updateServoPosition(1050, 3);
+"624
+[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
+[; ;sort.c: 625: servo_timer_counter = 0;
+"625
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 626: servo_timer_target = 750;
+"626
+[e = _servo_timer_target -> 750 `i ]
+[; ;sort.c: 627: break;
+"627
+[e $U 413  ]
+[; ;sort.c: 628: case 1390:
+"628
+[e :U 416 ]
+[; ;sort.c: 629: updateServoPosition(1050, 3);
+"629
+[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
+[; ;sort.c: 630: servo_timer_counter = 0;
+"630
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 631: servo_timer_target = 750;
+"631
+[e = _servo_timer_target -> 750 `i ]
+[; ;sort.c: 632: break;
+"632
+[e $U 413  ]
+[; ;sort.c: 634: case 1050:
+"634
+[e :U 417 ]
+[; ;sort.c: 635: updateServoPosition(1200, 1);
+"635
+[e ( _updateServoPosition (2 , -> 1200 `i -> 1 `i ]
+[; ;sort.c: 636: updateServoPosition(1050, 3);
+"636
+[e ( _updateServoPosition (2 , -> 1050 `i -> 3 `i ]
+[; ;sort.c: 637: servo_timer_counter = 0;
+"637
+[e = _servo_timer_counter -> 0 `i ]
+[; ;sort.c: 638: servo_timer_target = 9999;
+"638
+[e = _servo_timer_target -> 9999 `i ]
+[; ;sort.c: 640: f_can_distributed = 1;
+"640
+[e = _f_can_distributed -> 1 `i ]
+[; ;sort.c: 641: if(f_lastCan == 1){
+"641
+[e $ ! == _f_lastCan -> 1 `i 418  ]
+{
+[; ;sort.c: 642: machine_state = DoneSorting_state;
 "642
-}
-[e :U 399 ]
-[; ;sort.c: 641: }
-[; ;sort.c: 642: }
-[; ;sort.c: 643: }
+[e = _machine_state . `E3120 2 ]
 "643
-[e :UE 398 ]
 }
+[e :U 418 ]
+[; ;sort.c: 643: }
+[; ;sort.c: 644: break;
 "644
+[e $U 413  ]
+[; ;sort.c: 646: default:
+"646
+[e :U 419 ]
+[; ;sort.c: 647: break;
+"647
+[e $U 413  ]
+"648
+}
+[; ;sort.c: 648: }
+[e $U 413  ]
+"621
+[e :U 414 ]
+[e [\ _tilt_servo_state , $ -> 1260 `i 415
+ , $ -> 1390 `i 416
+ , $ -> 1050 `i 417
+ 419 ]
+"648
+[e :U 413 ]
+"649
+}
+[e :U 412 ]
+[e :U 410 ]
+"650
+}
+[e :U 401 ]
+[; ;sort.c: 649: }
+[; ;sort.c: 650: }
+[; ;sort.c: 651: }
+"651
+[e :UE 400 ]
+}
+"652
 [v _updateArmState `(v ~T0 @X0 1 ef ]
 {
-[; ;sort.c: 644: void updateArmState(void){
+[; ;sort.c: 652: void updateArmState(void){
 [e :U _updateArmState ]
 [f ]
-[; ;sort.c: 651: if(!was_low_2){
-"651
-[e $ ! ! != _was_low_2 -> 0 `i 419  ]
+[; ;sort.c: 659: if(!was_low_2){
+"659
+[e $ ! ! != _was_low_2 -> 0 `i 421  ]
 {
-[; ;sort.c: 653: switch(f_arm_position){
-"653
-[e $U 421  ]
-{
-[; ;sort.c: 654: case 0:
-"654
-[e :U 422 ]
-[; ;sort.c: 656: PR2 = 0x20;
-"656
-[e = _PR2 -> -> 32 `i `uc ]
-[; ;sort.c: 657: break;
-"657
-[e $U 420  ]
-[; ;sort.c: 658: case 1:
-"658
-[e :U 423 ]
-[; ;sort.c: 660: PR2 = 0x40;
-"660
-[e = _PR2 -> -> 64 `i `uc ]
-[; ;sort.c: 661: break;
+[; ;sort.c: 661: switch(f_arm_position){
 "661
-[e $U 420  ]
-"662
-}
-[; ;sort.c: 662: }
-[e $U 420  ]
-"653
-[e :U 421 ]
-[e [\ _f_arm_position , $ -> 0 `i 422
- , $ -> 1 `i 423
- 420 ]
-"662
-[e :U 420 ]
-"663
-}
-[; ;sort.c: 663: }
-[e $U 424  ]
-"664
-[e :U 419 ]
-[; ;sort.c: 664: else{
+[e $U 423  ]
 {
-[; ;sort.c: 666: PR2 = 0xFF;
-"666
-[e = _PR2 -> -> 255 `i `uc ]
-"667
-}
+[; ;sort.c: 662: case 0:
+"662
 [e :U 424 ]
-[; ;sort.c: 667: }
-[; ;sort.c: 668: }
+[; ;sort.c: 664: PR2 = 0x20;
+"664
+[e = _PR2 -> -> 32 `i `uc ]
+[; ;sort.c: 665: break;
+"665
+[e $U 422  ]
+[; ;sort.c: 666: case 1:
+"666
+[e :U 425 ]
+[; ;sort.c: 668: PR2 = 0x40;
 "668
-[e :UE 418 ]
-}
+[e = _PR2 -> -> 64 `i `uc ]
+[; ;sort.c: 669: break;
+"669
+[e $U 422  ]
 "670
-[v _delay_ms `(v ~T0 @X0 1 ef1`uc ]
-{
-[; ;sort.c: 670: void delay_ms(unsigned char milliseconds){
-[e :U _delay_ms ]
-[v _milliseconds `uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;sort.c: 671: while(milliseconds > 0)
+}
+[; ;sort.c: 670: }
+[e $U 422  ]
+"661
+[e :U 423 ]
+[e [\ _f_arm_position , $ -> 0 `i 424
+ , $ -> 1 `i 425
+ 422 ]
+"670
+[e :U 422 ]
 "671
+}
+[; ;sort.c: 671: }
 [e $U 426  ]
-[e :U 427 ]
-[; ;sort.c: 672: {
 "672
+[e :U 421 ]
+[; ;sort.c: 672: else{
 {
-[; ;sort.c: 673: milliseconds--;
-"673
-[e -- _milliseconds -> -> 1 `i `uc ]
-[; ;sort.c: 674: _delay((unsigned long)((990)*(32000000/4000000.0)));
+[; ;sort.c: 674: PR2 = 0xFF;
 "674
-[e ( __delay (1 -> * -> -> 990 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[e = _PR2 -> -> 255 `i `uc ]
 "675
 }
 [e :U 426 ]
-"671
-[e $ > -> _milliseconds `i -> 0 `i 427  ]
-[e :U 428 ]
 [; ;sort.c: 675: }
 [; ;sort.c: 676: }
 "676
-[e :UE 425 ]
+[e :UE 420 ]
+}
+"678
+[v _delay_ms `(v ~T0 @X0 1 ef1`uc ]
+{
+[; ;sort.c: 678: void delay_ms(unsigned char milliseconds){
+[e :U _delay_ms ]
+[v _milliseconds `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;sort.c: 679: while(milliseconds > 0)
+"679
+[e $U 428  ]
+[e :U 429 ]
+[; ;sort.c: 680: {
+"680
+{
+[; ;sort.c: 681: milliseconds--;
+"681
+[e -- _milliseconds -> -> 1 `i `uc ]
+[; ;sort.c: 682: _delay((unsigned long)((990)*(32000000/4000000.0)));
+"682
+[e ( __delay (1 -> * -> -> 990 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+"683
+}
+[e :U 428 ]
+"679
+[e $ > -> _milliseconds `i -> 0 `i 429  ]
+[e :U 430 ]
+[; ;sort.c: 683: }
+[; ;sort.c: 684: }
+"684
+[e :UE 427 ]
 }
 [p f _printf 8421508 ]
 [a 1C 32 32 32 32 32 32 32 32 32 32 32 32 70 37 100 76 37 100 0 ]

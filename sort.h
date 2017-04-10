@@ -31,6 +31,7 @@ extern int most_recent_sort_time;
 
 // DC motor control
 void delay_ms(unsigned char milliseconds);
+extern int motor_toggle_count;
 
 // Sensor inputs
 void getIR(void);

@@ -41,6 +41,9 @@ int IR_signal;
 int MAG_signal;
 int COND_signal;
 
+// DC motor control
+int motor_toggle_count;
+
 // Servo control
 unsigned int servoTimes[4];
 volatile int was_low_1;
@@ -437,6 +440,9 @@ void initGlobalVars(void){
     // Time variables
     most_recent_sort_time  = 999;
     
+    // DC motor control
+    motor_toggle_count = 0;
+    
     // Servo variables
     servo_timer_counter = 0;
     servo_timer_target = 9999;
@@ -503,18 +509,20 @@ void printSortTimer(void){
         f_most_recent_sort_time = 0;
     }
     
-    if((total_time >= TIME_INTERMITTENT_DRUM_STOP) && (total_time % TIME_INTERMITTENT_DRUM_STOP == 0)){
-        if(DC){
-            // If DC motors on...
-            DC = ~DC;
-        }
-        else{
-            // If DC motors off...
-            for(int i=0; i<46; i++){
-                DC = !DC;
-                delay_ms(45-i);
+    if(total_time >= TIME_INTERMITTENT_DRUM_STOP){
+        if(DC == 0){
+            motor_toggle_count++;
+            if(motor_toggle_count == 2){
+                motor_toggle_count = 0;
+                for(int i=0; i<46; i++){
+                    DC = !DC;
+                    delay_ms(45-i);
+                }
+                DC = 1;
             }
-            DC = 1;
+        }
+        else if(total_time % TIME_INTERMITTENT_DRUM_STOP == 0){
+            DC = !DC;
         }
     }
     
