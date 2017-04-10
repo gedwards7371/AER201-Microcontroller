@@ -430,7 +430,7 @@ int inputHandler(void){
             }
             return 0;
         case '2' :
-            if(cur_state == 22 | cur_state == 12){
+            if(cur_state == 22 || cur_state == 12){
                 return 0;
             }
             else if(cur_state == 23){

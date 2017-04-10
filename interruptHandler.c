@@ -68,7 +68,7 @@ void interrupt handler(void) {
             }
             TMR1ON = 1;
             servo_timer_counter += 10;
-            //servo_timer_counter += (float)((65535-((servoTimes[0] << 8) | (servoTimes[1] & 0xFF)))/1000);
+            //servo_timer_counter += (float)((65535-((servoTimes[0] << 8) || (servoTimes[1] & 0xFF)))/1000);
             updateServoStates();
         }
     }

@@ -157,7 +157,7 @@ void Loading(void){
             // Check if can is stuck. If so, hit it again.
             readIR();
             if(IR_signal==1){
-                __delay_ms(100);
+                __delay_ms(30); // 100
                 readIR();
                 if(IR_signal==1){
                     if(sensor_outputs[0]){
@@ -180,13 +180,24 @@ void Loading(void){
                 
                 __delay_ms(350);
                 // Check if can is still stuck. If so, hit it with all we've got!
-                int j = 1;
+                int j = 0;
                 while(IR_signal == 1){
                     readIR();
-                    if(j == 10){
-                        DC = !DC;
-                        j = 0;
+                    if(j == 3 || j == 4){
+                        f_arm_position = 0;
                     }
+                    else if(j == 5 || j == 6){
+                        DC = 1;
+                    }
+                    else if(j == 7 || j == 8){
+                        f_arm_position = 1;
+                    }
+                    else if(j % 2 == 0){
+                        DC = !DC;
+                        f_arm_position = !f_arm_position;
+                    }
+                    
+                    // Pushing code
                     if(IR_signal==1){
                         __delay_ms(350);
                         readIR();
@@ -199,31 +210,31 @@ void Loading(void){
                             else{
                                 for(int i = 0; i<25; i++){
                                     switch(j){
-                                        case 1:
+                                        case 0:
                                             SOL_PUSHER = 1;
                                             __delay_us(7500);
                                             SOL_PUSHER = 0;
                                             __delay_us(2500);
                                             break;
-                                        case 2:
+                                        case 1:
                                             SOL_PUSHER = 1;
                                             __delay_us(8000);
                                             SOL_PUSHER = 0;
                                             __delay_us(2000);
                                             break;
-                                        case 3:
+                                        case 2:
                                             SOL_PUSHER = 1;
                                             __delay_us(8500);
                                             SOL_PUSHER = 0;
                                             __delay_us(1500);
                                             break;
-                                        case 4:
+                                        case 3:
                                             SOL_PUSHER = 1;
                                             __delay_us(9000);
                                             SOL_PUSHER = 0;
                                             __delay_us(1000);
                                             break;
-                                        case 5:
+                                        case 4:
                                             SOL_PUSHER = 1;
                                             __delay_us(9500);
                                             SOL_PUSHER = 0;
@@ -273,7 +284,7 @@ void ID(void){
         __delay_ms(200);
         SOL_COND_SENSORS = 1;
         __delay_ms(TIME_CONDUCTIVITY);
-        sensor_outputs[1] = (sensor_outputs[1] | COND_SENSORS);
+        sensor_outputs[1] = (sensor_outputs[1] || COND_SENSORS);
         
         // Identify can type
         // cur_can:
@@ -482,7 +493,7 @@ void printSortTimer(void){
         DC = 1;
     }
     
-    if((total_time - most_recent_sort_time == MAX_NO_CANS) | (total_time == MAX_SORT_TIME)){
+    if((total_time - most_recent_sort_time == MAX_NO_CANS) || (total_time == MAX_SORT_TIME)){
         machine_state = DoneSorting_state;
         // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
     }

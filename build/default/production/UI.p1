@@ -4566,9 +4566,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UI.c: 432: case '2' :
 "432
 [e :U 463 ]
-[; ;UI.c: 433: if(cur_state == 22 | cur_state == 12){
+[; ;UI.c: 433: if(cur_state == 22 || cur_state == 12){
 "433
-[e $ ! | == _cur_state -> 22 `i == _cur_state -> 12 `i 464  ]
+[e $ ! || == _cur_state -> 22 `i == _cur_state -> 12 `i 464  ]
 {
 [; ;UI.c: 434: return 0;
 "434
