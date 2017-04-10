@@ -53,7 +53,6 @@ void main(void) {
                 stopSignals(); // kill all outputs
                 logRun();
                 first = 1; // Permit the sort operation to be re-initialized
-                initLCD();
                 UI(); // have a check for this state in the UI to display a special screen
                 break;
             case Testing_state :

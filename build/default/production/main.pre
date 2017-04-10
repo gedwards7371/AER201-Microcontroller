@@ -3993,7 +3993,6 @@ case DoneSorting_state :
 stopSignals();
 logRun();
 first = 1;
-initLCD();
 UI();
 break;
 case Testing_state :
