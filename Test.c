@@ -485,7 +485,15 @@ void PlatformTest(void){
                 on = !on;
             }
         }
-        
+        else if(PORTB >> 4 == 0b0100){
+            // key 4
+            for(int i = 0; i<3000; i++){
+                SOL_PUSHER = 1; // activate solenoid pusher
+                __delay_us(75);
+                SOL_PUSHER = 0;
+                __delay_us(25);
+            }
+        }
         else if(PORTB >> 4 == 0b0101){
             // key 5
             for(int i = 0; i<30; i++){
@@ -502,6 +510,15 @@ void PlatformTest(void){
                 __delay_us(5800);
                 SOL_PUSHER = 0;
                 __delay_us(4200);
+            }
+        }
+        else if (PORTB >> 4 == 0b1000){
+            // key 7
+            for(int i = 0; i<3000; i++){
+                SOL_PUSHER = 1; // activate solenoid pusher
+                __delay_us(58);
+                SOL_PUSHER = 0;
+                __delay_us(42);
             }
         }
 

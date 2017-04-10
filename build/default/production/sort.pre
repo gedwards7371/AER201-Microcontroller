@@ -4072,6 +4072,8 @@ LATBbits.LATB2 = 0;
 
 
 f_arm_position = 1;
+
+delay_ms(400);
 getMAG();
 sensor_outputs[0] = MAG_signal;
 
@@ -4214,7 +4216,7 @@ LATAbits.LATA3 = 1;
 _delay((unsigned long)((600)*(32000000/4000.0)));
 sensor_outputs[1] = (sensor_outputs[1] | PORTAbits.RA2);
 
-# 282
+# 284
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4289,7 +4291,7 @@ void Distribution(void){
 if(f_can_coming_to_distribution){
 f_can_distributed = 0;
 
-# 361
+# 363
 switch(cur_can){
 case 0:
 updateServoPosition(500, 1);
@@ -4354,7 +4356,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 432
+# 434
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4531,7 +4533,7 @@ break;
 }
 void updateArmState(void){
 
-# 613
+# 615
 if(!was_low_2){
 
 switch(f_arm_position){

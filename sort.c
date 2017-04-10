@@ -131,6 +131,8 @@ void Loading(void){
                     
             // Read magnetism to distinguish pop cans and soup cans (start of IDing)
             f_arm_position = 1;
+            
+            delay_ms(TIME_ARM_SWING_IN); // so that arm doesn't interfere with solenoid
             getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[0] = MAG_signal;
             
@@ -261,7 +263,7 @@ void ID(void){
         // Characteristic delay based on time it takes can to be transported here
         __delay_ms(TIME_LOADING_TO_ID);
         
-        f_arm_position = 0;
+        f_arm_position = 0; // ensures that any cans in the trommel are held back until they can no longer interfere with the current can
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
         __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
