@@ -39,6 +39,7 @@ int most_recent_sort_time;
 // Sensors
 int IR_signal;
 int MAG_signal;
+int COND_signal;
 
 // Servo control
 unsigned int servoTimes[4];
@@ -280,33 +281,27 @@ void ID(void){
         
         // Sample conductivity reading and later take the average to determine can ID
         const int n = 10;
-        const int time = (TIME_CONDUCTIVITY / n);
+        const unsigned char time = (TIME_CONDUCTIVITY / n);
         int res1 = 0; 
         int res2 = 0;
         for(int i = 0; i<n; i++){
             delay_ms(time);
-            res1 += COND_SENSORS;
+            readCOND();
+            res1 += COND_signal;
         }
         SOL_COND_SENSORS = 0;
         __delay_ms(200);
         SOL_COND_SENSORS = 1;
         for(int i = 0; i<n; i++){
             delay_ms(time);
-            res2 += COND_SENSORS;
+            readCOND();
+            res2 += COND_signal;
         }
         res1 = ((res1 / n) > 0.3) ? 1 : 0;
         res2 = ((res2 / n) > 0.3) ? 1 : 0;
         
         // Average value
         sensor_outputs[1] = (res1 || res2);
-        
-        //if(debug){
-        __lcd_clear();__lcd_home();
-        printf("res1: %d|res2: %d", res1,  res2);
-        __lcd_newline();
-        printf("out: %d", sensor_outputs[1]);
-        __delay_ms(5000);
-        //}
         
         // Identify can type
         // cur_can:
@@ -336,36 +331,21 @@ void ID(void){
         }
         SOL_COND_SENSORS = 0;
         
+        //if(debug){
+        __lcd_clear();__lcd_home();
+        printf("            F%dL%d", res1,  res2);
+        //}
+        
         while(!f_can_distributed){continue;}
         
-        if(sensor_outputs[0]){
-            // "If a soup can, grab it with the conductivity sensors so that the blocker can lower..."
-            SOL_COND_SENSORS = 1;
-            // Lower block
-            /* PWM to make the CAM servo work with Twesh's circuit */
-            for(int i=0;i<10000;i++)
-            {
-                SERVOCAM = 1;
-                __delay_us(10);
-                SERVOCAM = 0;
-                __delay_us(90);
-            }
-            
-            SOL_COND_SENSORS = 0; // Retract solenoids. Note that this needs to happen after the cam is down,
-                                  // because otherwise cans will sandwich the cam and it won't be able to
-                                  // retract.
+        for(int i=0;i<10000;i++)
+        {
+            SERVOCAM = 1;
+            __delay_us(10);
+            SERVOCAM = 0;
+            __delay_us(90);
         }
-        else{
-            // "If a pop can, allow it to rest against the blocker before lowering it..."
-            for(int i=0;i<10000;i++)
-            {
-                SERVOCAM = 1;
-                __delay_us(10);
-                SERVOCAM = 0;
-                __delay_us(90);
-            } 
-        }
-        
+
         SERVOCAM = 0;   
         
         f_can_coming_to_distribution = 1;

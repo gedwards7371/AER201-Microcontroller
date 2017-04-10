@@ -35,8 +35,10 @@ void delay_ms(unsigned char milliseconds);
 // Sensor inputs
 void getIR(void);
 void getMAG(void);
+void getCOND(void);
 extern int IR_signal;
 extern int MAG_signal;
+extern int COND_signal;
 
 // Servo control
 void updateServoPosition(int time_us, int timer); // pan & tilt

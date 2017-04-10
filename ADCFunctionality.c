@@ -30,5 +30,10 @@ void readMAG(void){
     readADC(1);
     int res = ADRESH<<8 | ADRESL;
     MAG_signal = (res < THMAG) ? 1 : 0;
+}
 
+void readCOND(void){
+    readADC(2);
+    int res = ADRESH<<8 | ADRESL;
+    COND_signal = (res > THCOND) ? 1 : 0;
 }

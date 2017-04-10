@@ -15,13 +15,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _initUI `(v ~T0 @X0 0 ef ]
 "13 sort.h
 [v _first `i ~T0 @X0 0 e ]
+"1 EEPROM.h
+[v _initEEPROM `(v ~T0 @X0 0 ef ]
 "5 UI.h
 [v _UI `(v ~T0 @X0 0 ef ]
 "7 sort.h
 [v _sort `(v ~T0 @X0 0 ef ]
 "5 main.h
 [v _stopSignals `(v ~T0 @X0 0 ef ]
-"3 EEPROM.h
+"4 EEPROM.h
 [v _logRun `(v ~T0 @X0 0 ef ]
 "1 Test.h
 [v _Test `(v ~T0 @X0 0 ef ]
@@ -2944,45 +2946,48 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 33: void delay_ms(unsigned char milliseconds);
 [; ;sort.h: 36: void getIR(void);
 [; ;sort.h: 37: void getMAG(void);
-[; ;sort.h: 38: extern int IR_signal;
-[; ;sort.h: 39: extern int MAG_signal;
-[; ;sort.h: 42: void updateServoPosition(int time_us, int timer);
-[; ;sort.h: 43: void updateServoStates(void);
-[; ;sort.h: 44: void updateArmState(void);
-[; ;sort.h: 45: extern unsigned int servoTimes[4];
-[; ;sort.h: 46: volatile extern int was_low_1;
-[; ;sort.h: 47: volatile extern int was_low_2;
-[; ;sort.h: 48: volatile extern int was_low_3;
-[; ;sort.h: 49: volatile extern int servo_timer_counter;
-[; ;sort.h: 50: volatile extern int servo_timer_target;
-[; ;sort.h: 51: volatile extern int pan_servo_state;
-[; ;sort.h: 52: volatile extern int tilt_servo_state;
-[; ;sort.h: 53: volatile extern int f_panning_to_bin;
-[; ;sort.h: 54: volatile extern int timer2_counter;
-[; ;sort.h: 55: volatile extern int f_arm_position;
-[; ;sort.h: 58: extern int sensor_outputs[2];
-[; ;sort.h: 59: extern int count_total;
-[; ;sort.h: 60: extern int count_pop_no_tab;
-[; ;sort.h: 61: extern int count_pop_w_tab;
-[; ;sort.h: 62: extern int count_can_w_lab;
-[; ;sort.h: 63: extern int count_can_no_lab;
-[; ;sort.h: 64: extern int cur_can;
+[; ;sort.h: 38: void getCOND(void);
+[; ;sort.h: 39: extern int IR_signal;
+[; ;sort.h: 40: extern int MAG_signal;
+[; ;sort.h: 41: extern int COND_signal;
+[; ;sort.h: 44: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 45: void updateServoStates(void);
+[; ;sort.h: 46: void updateArmState(void);
+[; ;sort.h: 47: extern unsigned int servoTimes[4];
+[; ;sort.h: 48: volatile extern int was_low_1;
+[; ;sort.h: 49: volatile extern int was_low_2;
+[; ;sort.h: 50: volatile extern int was_low_3;
+[; ;sort.h: 51: volatile extern int servo_timer_counter;
+[; ;sort.h: 52: volatile extern int servo_timer_target;
+[; ;sort.h: 53: volatile extern int pan_servo_state;
+[; ;sort.h: 54: volatile extern int tilt_servo_state;
+[; ;sort.h: 55: volatile extern int f_panning_to_bin;
+[; ;sort.h: 56: volatile extern int timer2_counter;
+[; ;sort.h: 57: volatile extern int f_arm_position;
+[; ;sort.h: 60: extern int sensor_outputs[2];
+[; ;sort.h: 61: extern int count_total;
+[; ;sort.h: 62: extern int count_pop_no_tab;
+[; ;sort.h: 63: extern int count_pop_w_tab;
+[; ;sort.h: 64: extern int count_can_w_lab;
+[; ;sort.h: 65: extern int count_can_no_lab;
+[; ;sort.h: 66: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(void);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
-[; ;EEPROM.h: 1: void EEPROM_write(unsigned short address, unsigned char data);
-[; ;EEPROM.h: 2: unsigned char EEPROM_read(unsigned short address);
-[; ;EEPROM.h: 3: void logRun(void);
-[; ;EEPROM.h: 4: void retrieveLog(int logNum);
-[; ;EEPROM.h: 7: extern unsigned char sel;
-[; ;EEPROM.h: 11: extern int log_completion;
-[; ;EEPROM.h: 12: extern int log_count_total;
-[; ;EEPROM.h: 14: extern int log_count_pop_no_tab;
-[; ;EEPROM.h: 15: extern int log_count_pop_w_tab;
-[; ;EEPROM.h: 17: extern int log_count_can_w_lab;
-[; ;EEPROM.h: 18: extern int log_count_can_no_lab;
-[; ;EEPROM.h: 20: extern int log_startTime[7];
-[; ;EEPROM.h: 22: extern int log_total_time;
+[; ;EEPROM.h: 1: void initEEPROM(void);
+[; ;EEPROM.h: 2: void EEPROM_write(unsigned short address, unsigned char data);
+[; ;EEPROM.h: 3: unsigned char EEPROM_read(unsigned short address);
+[; ;EEPROM.h: 4: void logRun(void);
+[; ;EEPROM.h: 5: void retrieveLog(int logNum);
+[; ;EEPROM.h: 8: extern unsigned char sel;
+[; ;EEPROM.h: 12: extern int log_completion;
+[; ;EEPROM.h: 13: extern int log_count_total;
+[; ;EEPROM.h: 15: extern int log_count_pop_no_tab;
+[; ;EEPROM.h: 16: extern int log_count_pop_w_tab;
+[; ;EEPROM.h: 18: extern int log_count_can_w_lab;
+[; ;EEPROM.h: 19: extern int log_count_can_no_lab;
+[; ;EEPROM.h: 21: extern int log_startTime[7];
+[; ;EEPROM.h: 23: extern int log_total_time;
 [; ;Test.h: 1: void Test(void);
 "16 main.c
 [v _debug `i ~T0 @X0 1 e ]
@@ -3033,84 +3038,87 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 33: first = 1;
 "33
 [e = _first -> 1 `i ]
-[; ;main.c: 43: while(1){
-"43
+[; ;main.c: 34: initEEPROM();
+"34
+[e ( _initEEPROM ..  ]
+[; ;main.c: 44: while(1){
+"44
 [e :U 270 ]
 {
-[; ;main.c: 44: switch(machine_state){
-"44
+[; ;main.c: 45: switch(machine_state){
+"45
 [e $U 273  ]
 {
-[; ;main.c: 45: case UI_state :
-"45
-[e :U 274 ]
-[; ;main.c: 46: UI();
+[; ;main.c: 46: case UI_state :
 "46
-[e ( _UI ..  ]
-[; ;main.c: 47: break;
+[e :U 274 ]
+[; ;main.c: 47: UI();
 "47
-[e $U 272  ]
-[; ;main.c: 48: case Sorting_state :
-"48
-[e :U 275 ]
-[; ;main.c: 49: sort();
-"49
-[e ( _sort ..  ]
-[; ;main.c: 50: break;
-"50
-[e $U 272  ]
-[; ;main.c: 51: case DoneSorting_state :
-"51
-[e :U 276 ]
-[; ;main.c: 52: stopSignals();
-"52
-[e ( _stopSignals ..  ]
-[; ;main.c: 53: logRun();
-"53
-[e ( _logRun ..  ]
-[; ;main.c: 54: first = 1;
-"54
-[e = _first -> 1 `i ]
-[; ;main.c: 55: UI();
-"55
 [e ( _UI ..  ]
-[; ;main.c: 56: break;
-"56
+[; ;main.c: 48: break;
+"48
 [e $U 272  ]
-[; ;main.c: 57: case Testing_state :
-"57
-[e :U 277 ]
-[; ;main.c: 58: Test();
-"58
-[e ( _Test ..  ]
-[; ;main.c: 59: break;
-"59
+[; ;main.c: 49: case Sorting_state :
+"49
+[e :U 275 ]
+[; ;main.c: 50: sort();
+"50
+[e ( _sort ..  ]
+[; ;main.c: 51: break;
+"51
 [e $U 272  ]
-[; ;main.c: 60: case EmergencyStop_state :
-"60
-[e :U 278 ]
-[; ;main.c: 61: stopSignals();
-"61
+[; ;main.c: 52: case DoneSorting_state :
+"52
+[e :U 276 ]
+[; ;main.c: 53: stopSignals();
+"53
 [e ( _stopSignals ..  ]
-[; ;main.c: 63: while(1){}
-"63
+[; ;main.c: 54: logRun();
+"54
+[e ( _logRun ..  ]
+[; ;main.c: 55: first = 1;
+"55
+[e = _first -> 1 `i ]
+[; ;main.c: 56: UI();
+"56
+[e ( _UI ..  ]
+[; ;main.c: 57: break;
+"57
+[e $U 272  ]
+[; ;main.c: 58: case Testing_state :
+"58
+[e :U 277 ]
+[; ;main.c: 59: Test();
+"59
+[e ( _Test ..  ]
+[; ;main.c: 60: break;
+"60
+[e $U 272  ]
+[; ;main.c: 61: case EmergencyStop_state :
+"61
+[e :U 278 ]
+[; ;main.c: 62: stopSignals();
+"62
+[e ( _stopSignals ..  ]
+[; ;main.c: 64: while(1){}
+"64
 [e :U 280 ]
 {
 }
 [e :U 279 ]
 [e $U 280  ]
 [e :U 281 ]
-[; ;main.c: 64: default :
-"64
-[e :U 282 ]
-[; ;main.c: 65: break;
+[; ;main.c: 65: default :
 "65
-[e $U 272  ]
+[e :U 282 ]
+[; ;main.c: 66: break;
 "66
-}
-[; ;main.c: 66: }
 [e $U 272  ]
-"44
+"67
+}
+[; ;main.c: 67: }
+[e $U 272  ]
+"45
 [e :U 273 ]
 [e [\ _machine_state , $ . `E3120 0 274
  , $ . `E3120 1 275
@@ -3118,50 +3126,50 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ . `E3120 3 277
  , $ . `E3120 4 278
  282 ]
-"66
-[e :U 272 ]
 "67
+[e :U 272 ]
+"68
 }
 [e :U 269 ]
-"43
+"44
 [e $U 270  ]
 [e :U 271 ]
-[; ;main.c: 67: }
 [; ;main.c: 68: }
-"68
+[; ;main.c: 69: }
+"69
 [e :UE 266 ]
 }
-"70
+"71
 [v _stopSignals `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 70: void stopSignals(void){
+[; ;main.c: 71: void stopSignals(void){
 [e :U _stopSignals ]
 [f ]
-[; ;main.c: 71: LATA = 0x00;
-"71
-[e = _LATA -> -> 0 `i `uc ]
-[; ;main.c: 72: LATB = 0x00;
+[; ;main.c: 72: LATA = 0x00;
 "72
-[e = _LATB -> -> 0 `i `uc ]
-[; ;main.c: 73: LATC = 0x00;
+[e = _LATA -> -> 0 `i `uc ]
+[; ;main.c: 73: LATB = 0x00;
 "73
-[e = _LATC -> -> 0 `i `uc ]
-[; ;main.c: 74: LATD = 0x00;
+[e = _LATB -> -> 0 `i `uc ]
+[; ;main.c: 74: LATC = 0x00;
 "74
-[e = _LATD -> -> 0 `i `uc ]
-[; ;main.c: 75: LATE = 0x00;
+[e = _LATC -> -> 0 `i `uc ]
+[; ;main.c: 75: LATD = 0x00;
 "75
-[e = _LATE -> -> 0 `i `uc ]
-[; ;main.c: 76: TMR1ON = 0;
+[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 76: LATE = 0x00;
 "76
-[e = _TMR1ON -> -> 0 `i `b ]
-[; ;main.c: 77: TMR2ON = 0;
+[e = _LATE -> -> 0 `i `uc ]
+[; ;main.c: 77: TMR1ON = 0;
 "77
-[e = _TMR2ON -> -> 0 `i `b ]
-[; ;main.c: 78: TMR3ON = 0;
+[e = _TMR1ON -> -> 0 `i `b ]
+[; ;main.c: 78: TMR2ON = 0;
 "78
-[e = _TMR3ON -> -> 0 `i `b ]
-[; ;main.c: 79: }
+[e = _TMR2ON -> -> 0 `i `b ]
+[; ;main.c: 79: TMR3ON = 0;
 "79
+[e = _TMR3ON -> -> 0 `i `b ]
+[; ;main.c: 80: }
+"80
 [e :UE 283 ]
 }

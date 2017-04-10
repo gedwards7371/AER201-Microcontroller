@@ -31,6 +31,7 @@ void main(void) {
     
     initUI();
     first = 1;
+    initEEPROM();
     
     // machine_state = Testing_state; // comment this out if you're not testing.
                                    // This will make the machine enter a

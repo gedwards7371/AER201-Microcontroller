@@ -485,15 +485,6 @@ void PlatformTest(void){
                 on = !on;
             }
         }
-        else if(PORTB >> 4 == 0b0100){
-            // key 4
-            for(int i = 0; i<3000; i++){
-                SOL_PUSHER = 1; // activate solenoid pusher
-                __delay_us(75);
-                SOL_PUSHER = 0;
-                __delay_us(25);
-            }
-        }
         else if(PORTB >> 4 == 0b0101){
             // key 5
             for(int i = 0; i<30; i++){
@@ -510,15 +501,6 @@ void PlatformTest(void){
                 __delay_us(5800);
                 SOL_PUSHER = 0;
                 __delay_us(4200);
-            }
-        }
-        else if (PORTB >> 4 == 0b1000){
-            // key 7
-            for(int i = 0; i<3000; i++){
-                SOL_PUSHER = 1; // activate solenoid pusher
-                __delay_us(58);
-                SOL_PUSHER = 0;
-                __delay_us(42);
             }
         }
 
@@ -597,16 +579,22 @@ void EEPROMTest(void){
 }
 
 void BlockerTest(void){
+    readADC(2);
+    int res = ADRESH<<8 | ADRESL;
+    
     __lcd_clear();__lcd_home();
-    printf("D: RET|2: COND %d", COND_SENSORS);
+    printf("D:RET|2:C %d  ", res);
     __lcd_newline();
     printf("OTHER: CAM TOGGLE");
     int cam_flag = 1; // 1 for up, 0 for down
     int cond_flag = 0; // 1 for out, 0 for in
+    
     while(1){
         while(PORTBbits.RB1 == 0){ 
+            readADC(2);
+            res = ADRESH<<8 | ADRESL;
             __lcd_home();
-            printf("D: RET|2: COND %d", COND_SENSORS);
+            printf("D:RET|2:C %d  ", res);
         }
         if(PORTB >> 4 == 0b1111){
             break;
@@ -640,8 +628,10 @@ void BlockerTest(void){
         }
         while(PORTBbits.RB1 == 1){
         /*If button still pressed*/
+            readADC(2);
+            res = ADRESH<<8 | ADRESL;
             __lcd_home();
-            printf("D: RET|2: COND %d", COND_SENSORS);
+            printf("D:RET|2:C %d  ", res);
         }
     }
 }

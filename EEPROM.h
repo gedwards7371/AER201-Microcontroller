@@ -1,3 +1,4 @@
+void initEEPROM(void);
 void EEPROM_write(unsigned short address, unsigned char data);
 unsigned char EEPROM_read(unsigned short address);
 void logRun(void);

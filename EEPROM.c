@@ -29,6 +29,10 @@ int log_startTime[7];
 int log_total_time;
 // </editor-fold>
 
+void initEEPROM(void){
+    sel = 1;
+}
+
 void EEPROM_write(unsigned short address, unsigned char data){    
     EECON1bits.WREN = 1;    // Enable writing of EEPROM
     

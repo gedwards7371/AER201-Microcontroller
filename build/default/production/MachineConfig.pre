@@ -3896,8 +3896,10 @@ void delay_ms(unsigned char milliseconds);
 
 void getIR(void);
 void getMAG(void);
+void getCOND(void);
 extern int IR_signal;
 extern int MAG_signal;
+extern int COND_signal;
 
 
 void updateServoPosition(int time_us, int timer);
@@ -3930,6 +3932,7 @@ void readIR(void);
 void readMAG(void);
 
 # 1 "EEPROM.h"
+void initEEPROM(void);
 void EEPROM_write(unsigned short address, unsigned char data);
 unsigned char EEPROM_read(unsigned short address);
 void logRun(void);
@@ -3986,7 +3989,7 @@ nRBPU = 0;
 
 
 ADCON0 = 0x00;
-ADCON1 = 0b00001101;
+ADCON1 = 0b00001100;
 
 
 CVRCON = 0x00;

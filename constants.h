@@ -34,8 +34,8 @@
 #define SERVOARM    LATBbits.LATB3
 
 // Characteristic travel times in milliseconds unless otherwise noted
-#define TIME_OUT_OF_TROMMEL     750
-#define TIME_ARM_SWING_IN       400
+#define TIME_OUT_OF_TROMMEL     400
+#define TIME_ARM_SWING_IN       750
 #define TIME_LOADING_TO_ID      1000
 #define TIME_ID_TO_DISTRIBUTION 750
 #define TIME_SOLENOID_MOTION    300
@@ -52,6 +52,7 @@
 // IR sensor thresholds
 #define THIR    800
 #define THMAG   150
+#define THCOND  300
 
 //LCD Control Registers
 #define RS          LATDbits.LATD2          

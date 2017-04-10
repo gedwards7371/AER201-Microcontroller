@@ -44,7 +44,7 @@ void machineConfig(void) {
     
      //**A/D Converter Module**//
     ADCON0 = 0x00;  //Disable ADC
-    ADCON1 = 0b00001101;  // bits 0-3 set pins with ADC capabilities as either analog  or digital. Here, we set AN0 and  AN1 as analog inputs and the rest as digital
+    ADCON1 = 0b00001100;  // bits 0-3 set pins with ADC capabilities as either analog  or digital. Here, we set AN0 and  AN1 as analog inputs and the rest as digital
                     // bits 4-5 determine whether to use external voltage references or VDD and VSS
                     // Reference: pg. 7- 158
     CVRCON = 0x00; // Disable comparator voltage reference (pg. 239 of datasheet)

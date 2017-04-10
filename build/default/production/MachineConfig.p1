@@ -2998,45 +2998,48 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 33: void delay_ms(unsigned char milliseconds);
 [; ;sort.h: 36: void getIR(void);
 [; ;sort.h: 37: void getMAG(void);
-[; ;sort.h: 38: extern int IR_signal;
-[; ;sort.h: 39: extern int MAG_signal;
-[; ;sort.h: 42: void updateServoPosition(int time_us, int timer);
-[; ;sort.h: 43: void updateServoStates(void);
-[; ;sort.h: 44: void updateArmState(void);
-[; ;sort.h: 45: extern unsigned int servoTimes[4];
-[; ;sort.h: 46: volatile extern int was_low_1;
-[; ;sort.h: 47: volatile extern int was_low_2;
-[; ;sort.h: 48: volatile extern int was_low_3;
-[; ;sort.h: 49: volatile extern int servo_timer_counter;
-[; ;sort.h: 50: volatile extern int servo_timer_target;
-[; ;sort.h: 51: volatile extern int pan_servo_state;
-[; ;sort.h: 52: volatile extern int tilt_servo_state;
-[; ;sort.h: 53: volatile extern int f_panning_to_bin;
-[; ;sort.h: 54: volatile extern int timer2_counter;
-[; ;sort.h: 55: volatile extern int f_arm_position;
-[; ;sort.h: 58: extern int sensor_outputs[2];
-[; ;sort.h: 59: extern int count_total;
-[; ;sort.h: 60: extern int count_pop_no_tab;
-[; ;sort.h: 61: extern int count_pop_w_tab;
-[; ;sort.h: 62: extern int count_can_w_lab;
-[; ;sort.h: 63: extern int count_can_no_lab;
-[; ;sort.h: 64: extern int cur_can;
+[; ;sort.h: 38: void getCOND(void);
+[; ;sort.h: 39: extern int IR_signal;
+[; ;sort.h: 40: extern int MAG_signal;
+[; ;sort.h: 41: extern int COND_signal;
+[; ;sort.h: 44: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 45: void updateServoStates(void);
+[; ;sort.h: 46: void updateArmState(void);
+[; ;sort.h: 47: extern unsigned int servoTimes[4];
+[; ;sort.h: 48: volatile extern int was_low_1;
+[; ;sort.h: 49: volatile extern int was_low_2;
+[; ;sort.h: 50: volatile extern int was_low_3;
+[; ;sort.h: 51: volatile extern int servo_timer_counter;
+[; ;sort.h: 52: volatile extern int servo_timer_target;
+[; ;sort.h: 53: volatile extern int pan_servo_state;
+[; ;sort.h: 54: volatile extern int tilt_servo_state;
+[; ;sort.h: 55: volatile extern int f_panning_to_bin;
+[; ;sort.h: 56: volatile extern int timer2_counter;
+[; ;sort.h: 57: volatile extern int f_arm_position;
+[; ;sort.h: 60: extern int sensor_outputs[2];
+[; ;sort.h: 61: extern int count_total;
+[; ;sort.h: 62: extern int count_pop_no_tab;
+[; ;sort.h: 63: extern int count_pop_w_tab;
+[; ;sort.h: 64: extern int count_can_w_lab;
+[; ;sort.h: 65: extern int count_can_no_lab;
+[; ;sort.h: 66: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(void);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
-[; ;EEPROM.h: 1: void EEPROM_write(unsigned short address, unsigned char data);
-[; ;EEPROM.h: 2: unsigned char EEPROM_read(unsigned short address);
-[; ;EEPROM.h: 3: void logRun(void);
-[; ;EEPROM.h: 4: void retrieveLog(int logNum);
-[; ;EEPROM.h: 7: extern unsigned char sel;
-[; ;EEPROM.h: 11: extern int log_completion;
-[; ;EEPROM.h: 12: extern int log_count_total;
-[; ;EEPROM.h: 14: extern int log_count_pop_no_tab;
-[; ;EEPROM.h: 15: extern int log_count_pop_w_tab;
-[; ;EEPROM.h: 17: extern int log_count_can_w_lab;
-[; ;EEPROM.h: 18: extern int log_count_can_no_lab;
-[; ;EEPROM.h: 20: extern int log_startTime[7];
-[; ;EEPROM.h: 22: extern int log_total_time;
+[; ;EEPROM.h: 1: void initEEPROM(void);
+[; ;EEPROM.h: 2: void EEPROM_write(unsigned short address, unsigned char data);
+[; ;EEPROM.h: 3: unsigned char EEPROM_read(unsigned short address);
+[; ;EEPROM.h: 4: void logRun(void);
+[; ;EEPROM.h: 5: void retrieveLog(int logNum);
+[; ;EEPROM.h: 8: extern unsigned char sel;
+[; ;EEPROM.h: 12: extern int log_completion;
+[; ;EEPROM.h: 13: extern int log_count_total;
+[; ;EEPROM.h: 15: extern int log_count_pop_no_tab;
+[; ;EEPROM.h: 16: extern int log_count_pop_w_tab;
+[; ;EEPROM.h: 18: extern int log_count_can_w_lab;
+[; ;EEPROM.h: 19: extern int log_count_can_no_lab;
+[; ;EEPROM.h: 21: extern int log_startTime[7];
+[; ;EEPROM.h: 23: extern int log_total_time;
 "15 MachineConfig.c
 [v _machineConfig `(v ~T0 @X0 1 ef ]
 {
@@ -3085,9 +3088,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MachineConfig.c: 46: ADCON0 = 0x00;
 "46
 [e = _ADCON0 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 47: ADCON1 = 0b00001101;
+[; ;MachineConfig.c: 47: ADCON1 = 0b00001100;
 "47
-[e = _ADCON1 -> -> 13 `i `uc ]
+[e = _ADCON1 -> -> 12 `i `uc ]
 [; ;MachineConfig.c: 50: CVRCON = 0x00;
 "50
 [e = _CVRCON -> -> 0 `i `uc ]
