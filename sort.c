@@ -277,14 +277,36 @@ void ID(void){
         f_arm_position = 0; // ensures that any cans in the trommel are held back until they can no longer interfere with the current can
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
-        __delay_ms(TIME_CONDUCTIVITY); // Characteristic delay for time it takes solenoids move out
-        sensor_outputs[1] = COND_SENSORS;
-        SOL_COND_SENSORS = 0;
         
+        // Sample conductivity reading and later take the average to determine can ID
+        const int n = 10;
+        const int time = (TIME_CONDUCTIVITY / n);
+        int res1 = 0; 
+        int res2 = 0;
+        for(int i = 0; i<n; i++){
+            delay_ms(time);
+            res1 += COND_SENSORS;
+        }
+        SOL_COND_SENSORS = 0;
         __delay_ms(200);
         SOL_COND_SENSORS = 1;
-        __delay_ms(TIME_CONDUCTIVITY);
-        sensor_outputs[1] = (sensor_outputs[1] || COND_SENSORS);
+        for(int i = 0; i<n; i++){
+            delay_ms(time);
+            res2 += COND_SENSORS;
+        }
+        res1 = ((res1 / n) > 0.3) ? 1 : 0;
+        res2 = ((res2 / n) > 0.3) ? 1 : 0;
+        
+        // Average value
+        sensor_outputs[1] = (res1 || res2);
+        
+        //if(debug){
+        __lcd_clear();__lcd_home();
+        printf("res1: %d|res2: %d", res1,  res2);
+        __lcd_newline();
+        printf("out: %d", sensor_outputs[1]);
+        __delay_ms(5000);
+        //}
         
         // Identify can type
         // cur_can:

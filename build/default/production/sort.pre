@@ -4218,16 +4218,37 @@ _delay((unsigned long)((1000)*(32000000/4000.0)));
 f_arm_position = 0;
 
 LATAbits.LATA3 = 1;
-_delay((unsigned long)((600)*(32000000/4000.0)));
-sensor_outputs[1] = PORTAbits.RA2;
-LATAbits.LATA3 = 0;
 
+
+const int n = 10;
+const int time = (600 / n);
+int res1 = 0;
+int res2 = 0;
+for(int i = 0; i<n; i++){
+delay_ms(time);
+res1 += PORTAbits.RA2;
+}
+LATAbits.LATA3 = 0;
 _delay((unsigned long)((200)*(32000000/4000.0)));
 LATAbits.LATA3 = 1;
-_delay((unsigned long)((600)*(32000000/4000.0)));
-sensor_outputs[1] = (sensor_outputs[1] || PORTAbits.RA2);
+for(int i = 0; i<n; i++){
+delay_ms(time);
+res2 += PORTAbits.RA2;
+}
+res1 = ((res1 / n) > 0.3) ? 1 : 0;
+res2 = ((res2 / n) > 0.3) ? 1 : 0;
 
-# 295
+
+sensor_outputs[1] = (res1 || res2);
+
+
+lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;lcdInst(0b10000000);;
+printf("res1: %d|res2: %d", res1, res2);
+lcdInst(0b11000000);;
+printf("out: %d", sensor_outputs[1]);
+_delay((unsigned long)((5000)*(32000000/4000.0)));
+
+# 317
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4302,7 +4323,7 @@ void Distribution(void){
 if(f_can_coming_to_distribution){
 f_can_distributed = 0;
 
-# 374
+# 396
 switch(cur_can){
 case 0:
 updateServoPosition(500, 1);
@@ -4367,7 +4388,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 445
+# 467
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4544,7 +4565,7 @@ break;
 }
 void updateArmState(void){
 
-# 626
+# 648
 if(!was_low_2){
 
 switch(f_arm_position){
