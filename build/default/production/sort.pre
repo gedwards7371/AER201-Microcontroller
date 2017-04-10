@@ -4228,6 +4228,7 @@ const int n = 10;
 const unsigned char time = (600 / n);
 int res1 = 0;
 int res2 = 0;
+int res3 = 0;
 for(int i = 0; i<n; i++){
 delay_ms(time);
 readCOND();
@@ -4246,8 +4247,26 @@ res2 = ((res2 / n) > 0.3) ? 1 : 0;
 
 
 sensor_outputs[1] = (res1 || res2);
+LATAbits.LATA3 = 0;
 
-# 312
+if(sensor_outputs[0]){
+_delay((unsigned long)((200)*(32000000/4000.0)));
+LATAbits.LATA3 = 1;
+for(int i = 0; i<n; i++){
+delay_ms(time);
+readCOND();
+res3 += COND_signal;
+}
+res3 = ((res3 / n) > 0.3) ? 1 : 0;
+sensor_outputs[1] = (sensor_outputs[1] || res3);
+LATAbits.LATA3 = 0;
+}
+
+
+lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;lcdInst(0b10000000);;
+printf("            F%dM%dL%d", res1, res2, res3);
+
+# 332
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4268,12 +4287,6 @@ count_can_no_lab++;
 cur_can = 3;
 }
 }
-LATAbits.LATA3 = 0;
-
-
-lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;lcdInst(0b10000000);;
-printf("            F%dL%d", res1, res2);
-
 
 while(!f_can_distributed){continue;}
 
@@ -4307,7 +4320,7 @@ void Distribution(void){
 if(f_can_coming_to_distribution){
 f_can_distributed = 0;
 
-# 376
+# 390
 switch(cur_can){
 case 0:
 updateServoPosition(500, 1);
@@ -4372,7 +4385,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 447
+# 461
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4414,16 +4427,6 @@ most_recent_sort_time = total_time;
 f_most_recent_sort_time = 0;
 }
 
-if(total_time - most_recent_sort_time == 20){
-LATBbits.LATB2 = 0;
-_delay((unsigned long)((2000)*(32000000/4000.0)));
-for(int i=0; i<46; i++){
-LATBbits.LATB2 = !LATBbits.LATB2;
-delay_ms(45-i);
-}
-LATBbits.LATB2 = 1;
-}
-
 if((total_time - most_recent_sort_time == 42) || (total_time == 179)){
 machine_state = DoneSorting_state;
 
@@ -4433,9 +4436,41 @@ int min = (timeDiff % 3600) / 60;
 int sec = (timeDiff % 3600) % 60;
 
 lcdInst(0b10000000);;
-printf("SORTING...");
+printf("SORTING...      ");
 lcdInst(0b11000000);;
-printf("TIME %d:%02d", min, sec);
+printf("TIME %d:%02d    ", min, sec);
+
+if(total_time % 4 == 0){
+LATBbits.LATB2 = 0;
+
+sec++;
+if(sec==60){
+sec = 0;
+min++;
+}
+_delay((unsigned long)((1000)*(32000000/4000.0)));
+lcdInst(0b10000000);;
+printf("SORTING...      ");
+lcdInst(0b11000000);;
+printf("TIME %d:%02d    ", min, sec);
+
+sec++;
+if(sec==60){
+sec = 0;
+min++;
+}
+_delay((unsigned long)((1000)*(32000000/4000.0)));
+lcdInst(0b10000000);;
+printf("SORTING...      ");
+lcdInst(0b11000000);;
+printf("TIME %d:%02d    ", min, sec);
+
+for(int i=0; i<46; i++){
+LATBbits.LATB2 = !LATBbits.LATB2;
+delay_ms(45-i);
+}
+LATBbits.LATB2 = 1;
+}
 }
 
 void getIR(void){
@@ -4549,7 +4584,7 @@ break;
 }
 void updateArmState(void){
 
-# 628
+# 664
 if(!was_low_2){
 
 switch(f_arm_position){

@@ -284,6 +284,7 @@ void ID(void){
         const unsigned char time = (TIME_CONDUCTIVITY / n);
         int res1 = 0; 
         int res2 = 0;
+        int res3 = 0;
         for(int i = 0; i<n; i++){
             delay_ms(time);
             readCOND();
@@ -302,6 +303,25 @@ void ID(void){
         
         // Average value
         sensor_outputs[1] = (res1 || res2);
+        SOL_COND_SENSORS = 0;
+        
+        if(sensor_outputs[0]){
+            __delay_ms(200);
+            SOL_COND_SENSORS = 1;
+            for(int i = 0; i<n; i++){
+                delay_ms(time);
+                readCOND();
+                res3 += COND_signal;
+            }
+            res3 = ((res3 / n) > 0.3) ? 1 : 0;
+            sensor_outputs[1] = (sensor_outputs[1] || res3);
+            SOL_COND_SENSORS = 0;
+        }
+        
+        //if(debug){
+        __lcd_clear();__lcd_home();
+        printf("            F%dM%dL%d", res1, res2, res3);
+        //}
         
         // Identify can type
         // cur_can:
@@ -329,12 +349,6 @@ void ID(void){
                 cur_can = 3;
             }
         }
-        SOL_COND_SENSORS = 0;
-        
-        //if(debug){
-        __lcd_clear();__lcd_home();
-        printf("            F%dL%d", res1,  res2);
-        //}
         
         while(!f_can_distributed){continue;}
         
@@ -485,16 +499,6 @@ void printSortTimer(void){
         f_most_recent_sort_time = 0;
     }
     
-    if(total_time - most_recent_sort_time == TIME_INTERMITTENT_DRUM_STOP){
-        DC = 0;
-        __delay_ms(2000);
-        for(int i=0; i<46; i++){
-                DC = !DC;
-                delay_ms(45-i);
-        }
-        DC = 1;
-    }
-    
     if((total_time - most_recent_sort_time == MAX_NO_CANS) || (total_time == MAX_SORT_TIME)){
         machine_state = DoneSorting_state;
         // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
@@ -504,9 +508,41 @@ void printSortTimer(void){
     int sec = (timeDiff % 3600) % 60;
     
     __lcd_home();
-    printf("SORTING...");
+    printf("SORTING...      ");
     __lcd_newline();
-    printf("TIME %d:%02d", min, sec);
+    printf("TIME %d:%02d    ", min, sec);
+    
+    if(total_time % TIME_INTERMITTENT_DRUM_STOP == 0){
+        DC = 0;
+        
+        sec++;
+        if(sec==60){
+            sec = 0;
+            min++;
+        }
+        __delay_ms(1000);
+        __lcd_home();
+        printf("SORTING...      ");
+        __lcd_newline();
+        printf("TIME %d:%02d    ", min, sec);
+        
+        sec++;
+        if(sec==60){
+            sec = 0;
+            min++;
+        }
+        __delay_ms(1000);
+        __lcd_home();
+        printf("SORTING...      ");
+        __lcd_newline();
+        printf("TIME %d:%02d    ", min, sec);
+        
+        for(int i=0; i<46; i++){
+                DC = !DC;
+                delay_ms(45-i);
+        }
+        DC = 1;
+    }
 }
 
 void getIR(void){
@@ -564,7 +600,6 @@ void updateServoStates(void){
                 case PAN_RMID:
                     updateServoPosition(POP_TILT_DROP, 3);
                     servo_timer_counter = 0;
-              
                     servo_timer_target = TILT_DROP_DELAY;
                     break;
                 case PAN_LMID:

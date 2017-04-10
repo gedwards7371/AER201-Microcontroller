@@ -3079,44 +3079,47 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 55: first = 1;
 "55
 [e = _first -> 1 `i ]
-[; ;main.c: 56: UI();
+[; ;main.c: 56: initLCD();
 "56
-[e ( _UI ..  ]
-[; ;main.c: 57: break;
+[e ( _initLCD ..  ]
+[; ;main.c: 57: UI();
 "57
-[e $U 272  ]
-[; ;main.c: 58: case Testing_state :
+[e ( _UI ..  ]
+[; ;main.c: 58: break;
 "58
-[e :U 277 ]
-[; ;main.c: 59: Test();
-"59
-[e ( _Test ..  ]
-[; ;main.c: 60: break;
-"60
 [e $U 272  ]
-[; ;main.c: 61: case EmergencyStop_state :
+[; ;main.c: 59: case Testing_state :
+"59
+[e :U 277 ]
+[; ;main.c: 60: Test();
+"60
+[e ( _Test ..  ]
+[; ;main.c: 61: break;
 "61
-[e :U 278 ]
-[; ;main.c: 62: stopSignals();
+[e $U 272  ]
+[; ;main.c: 62: case EmergencyStop_state :
 "62
+[e :U 278 ]
+[; ;main.c: 63: stopSignals();
+"63
 [e ( _stopSignals ..  ]
-[; ;main.c: 64: while(1){}
-"64
+[; ;main.c: 65: while(1){}
+"65
 [e :U 280 ]
 {
 }
 [e :U 279 ]
 [e $U 280  ]
 [e :U 281 ]
-[; ;main.c: 65: default :
-"65
-[e :U 282 ]
-[; ;main.c: 66: break;
+[; ;main.c: 66: default :
 "66
-[e $U 272  ]
+[e :U 282 ]
+[; ;main.c: 67: break;
 "67
+[e $U 272  ]
+"68
 }
-[; ;main.c: 67: }
+[; ;main.c: 68: }
 [e $U 272  ]
 "45
 [e :U 273 ]
@@ -3126,50 +3129,50 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ . `E3120 3 277
  , $ . `E3120 4 278
  282 ]
-"67
-[e :U 272 ]
 "68
+[e :U 272 ]
+"69
 }
 [e :U 269 ]
 "44
 [e $U 270  ]
 [e :U 271 ]
-[; ;main.c: 68: }
 [; ;main.c: 69: }
-"69
+[; ;main.c: 70: }
+"70
 [e :UE 266 ]
 }
-"71
+"72
 [v _stopSignals `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 71: void stopSignals(void){
+[; ;main.c: 72: void stopSignals(void){
 [e :U _stopSignals ]
 [f ]
-[; ;main.c: 72: LATA = 0x00;
-"72
-[e = _LATA -> -> 0 `i `uc ]
-[; ;main.c: 73: LATB = 0x00;
+[; ;main.c: 73: LATA = 0x00;
 "73
-[e = _LATB -> -> 0 `i `uc ]
-[; ;main.c: 74: LATC = 0x00;
+[e = _LATA -> -> 0 `i `uc ]
+[; ;main.c: 74: LATB = 0x00;
 "74
-[e = _LATC -> -> 0 `i `uc ]
-[; ;main.c: 75: LATD = 0x00;
+[e = _LATB -> -> 0 `i `uc ]
+[; ;main.c: 75: LATC = 0x00;
 "75
-[e = _LATD -> -> 0 `i `uc ]
-[; ;main.c: 76: LATE = 0x00;
+[e = _LATC -> -> 0 `i `uc ]
+[; ;main.c: 76: LATD = 0x00;
 "76
-[e = _LATE -> -> 0 `i `uc ]
-[; ;main.c: 77: TMR1ON = 0;
+[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 77: LATE = 0x00;
 "77
-[e = _TMR1ON -> -> 0 `i `b ]
-[; ;main.c: 78: TMR2ON = 0;
+[e = _LATE -> -> 0 `i `uc ]
+[; ;main.c: 78: TMR1ON = 0;
 "78
-[e = _TMR2ON -> -> 0 `i `b ]
-[; ;main.c: 79: TMR3ON = 0;
+[e = _TMR1ON -> -> 0 `i `b ]
+[; ;main.c: 79: TMR2ON = 0;
 "79
-[e = _TMR3ON -> -> 0 `i `b ]
-[; ;main.c: 80: }
+[e = _TMR2ON -> -> 0 `i `b ]
+[; ;main.c: 80: TMR3ON = 0;
 "80
+[e = _TMR3ON -> -> 0 `i `b ]
+[; ;main.c: 81: }
+"81
 [e :UE 283 ]
 }
