@@ -4101,10 +4101,10 @@ _delay((unsigned long)((4200)*(32000000/4000000.0)));
 _delay((unsigned long)((350)*(32000000/4000.0)));
 
 readIR();
-if(IR_signal){
-_delay((unsigned long)((70)*(32000000/4000.0)));
+if(IR_signal==1){
+_delay((unsigned long)((30)*(32000000/4000.0)));
 readIR();
-if(IR_signal){
+if(IR_signal==1){
 if(sensor_outputs[0]){
 for(int i = 0; i<25; i++){
 LATAbits.LATA4 = 1;
@@ -4126,7 +4126,7 @@ _delay((unsigned long)((4200)*(32000000/4000000.0)));
 _delay((unsigned long)((350)*(32000000/4000.0)));
 
 int j = 0;
-while(IR_signal){
+while(IR_signal == 1){
 readIR();
 if(j == 3 || j == 4){
 f_arm_position = 0;
@@ -4143,10 +4143,10 @@ f_arm_position = !f_arm_position;
 }
 
 
-if(IR_signal){
+if(IR_signal==1){
 _delay((unsigned long)((350)*(32000000/4000.0)));
 readIR();
-if(IR_signal){
+if(IR_signal==1){
 if(sensor_outputs[0]){
 LATAbits.LATA4 = 1;
 _delay((unsigned long)((250)*(32000000/4000.0)));
@@ -4200,7 +4200,7 @@ j++;
 if(!IR_signal){
 _delay((unsigned long)((500)*(32000000/4000.0)));
 readIR();
-if(IR_signal){
+if(IR_signal==1){
 continue;
 }
 else{
@@ -4440,24 +4440,36 @@ printf("SORTING...      ");
 lcdInst(0b11000000);;
 printf("TIME %d:%02d    ", min, sec);
 
+if(total_time % 4 == 0){
+LATBbits.LATB2 = 0;
 
-if(total_time >= 2){
-
-if(total_time % 2 == 0){
-
-if(LATBbits.LATB2){
-
-LATBbits.LATB2 = !LATBbits.LATB2;
+sec++;
+if(sec==60){
+sec = 0;
+min++;
 }
-else{
+_delay((unsigned long)((1000)*(32000000/4000.0)));
+lcdInst(0b10000000);;
+printf("SORTING...      ");
+lcdInst(0b11000000);;
+printf("TIME %d:%02d    ", min, sec);
+
+sec++;
+if(sec==60){
+sec = 0;
+min++;
+}
+_delay((unsigned long)((1000)*(32000000/4000.0)));
+lcdInst(0b10000000);;
+printf("SORTING...      ");
+lcdInst(0b11000000);;
+printf("TIME %d:%02d    ", min, sec);
 
 for(int i=0; i<46; i++){
 LATBbits.LATB2 = !LATBbits.LATB2;
 delay_ms(45-i);
 }
 LATBbits.LATB2 = 1;
-}
-}
 }
 }
 
@@ -4516,6 +4528,7 @@ break;
 case 850:
 updateServoPosition(1260, 3);
 servo_timer_counter = 0;
+
 servo_timer_target = 700;
 break;
 case 1670:
@@ -4571,7 +4584,7 @@ break;
 }
 void updateArmState(void){
 
-# 651
+# 664
 if(!was_low_2){
 
 switch(f_arm_position){

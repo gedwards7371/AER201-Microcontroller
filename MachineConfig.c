@@ -47,7 +47,6 @@ void machineConfig(void) {
     ADCON1 = 0b00001100;  // bits 0-3 set pins with ADC capabilities as either analog  or digital. Here, we set AN0 and  AN1 as analog inputs and the rest as digital
                     // bits 4-5 determine whether to use external voltage references or VDD and VSS
                     // Reference: pg. 7- 158
-                    // 2017-04-10: changed from 0b00001101 to 0b00001100 for COND sensors.
     CVRCON = 0x00; // Disable comparator voltage reference (pg. 239 of datasheet)
     CMCONbits.CIS = 0; // Connect C1 Vin and C2 Vin to RA0/AN0 and RA1/AN1 (pg. 233 datasheet)
     ADCON2 = 0b10110001; // Right justify A/D result, 16TAD, FOSC/8 clock

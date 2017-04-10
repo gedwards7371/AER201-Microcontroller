@@ -30,8 +30,7 @@ int log_total_time;
 // </editor-fold>
 
 void initEEPROM(void){
-    // Initialize selection bit to 1
-    EEPROM_write(0, 0x01);
+    sel = 1;
 }
 
 void EEPROM_write(unsigned short address, unsigned char data){    
