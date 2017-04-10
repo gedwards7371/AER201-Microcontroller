@@ -157,10 +157,10 @@ void Loading(void){
             __delay_ms(350);
             // Check if can is stuck. If so, hit it again.
             readIR();
-            if(IR_signal==1){
-                __delay_ms(30); // 100
+            if(IR_signal){
+                __delay_ms(70); // 100
                 readIR();
-                if(IR_signal==1){
+                if(IR_signal){
                     if(sensor_outputs[0]){
                         for(int i = 0; i<25; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
@@ -182,7 +182,7 @@ void Loading(void){
                 __delay_ms(350);
                 // Check if can is still stuck. If so, hit it with all we've got!
                 int j = 0;
-                while(IR_signal == 1){
+                while(IR_signal){
                     readIR();
                     if(j == 3 || j == 4){
                         f_arm_position = 0;
@@ -199,10 +199,10 @@ void Loading(void){
                     }
                     
                     // Pushing code
-                    if(IR_signal==1){
+                    if(IR_signal){
                         __delay_ms(350);
                         readIR();
-                        if(IR_signal==1){
+                        if(IR_signal){
                             if(sensor_outputs[0]){
                                 SOL_PUSHER = 1;
                                 __delay_ms(250);
@@ -256,7 +256,7 @@ void Loading(void){
                     if(!IR_signal){
                         __delay_ms(500);
                         readIR();
-                        if(IR_signal==1){
+                        if(IR_signal){
                             continue;
                         }
                         else{
@@ -423,7 +423,7 @@ void initGlobalVars(void){
     f_can_distributed = 1;
     f_most_recent_sort_time = 0;
     
-    // Count variables
+    // Can count variables
     count_total = 0;
     count_pop_no_tab = 0;
     count_pop_w_tab = 0;
@@ -512,36 +512,24 @@ void printSortTimer(void){
     __lcd_newline();
     printf("TIME %d:%02d    ", min, sec);
     
-    if(total_time % TIME_INTERMITTENT_DRUM_STOP == 0){
-        DC = 0;
-        
-        sec++;
-        if(sec==60){
-            sec = 0;
-            min++;
-        }
-        __delay_ms(1000);
-        __lcd_home();
-        printf("SORTING...      ");
-        __lcd_newline();
-        printf("TIME %d:%02d    ", min, sec);
-        
-        sec++;
-        if(sec==60){
-            sec = 0;
-            min++;
-        }
-        __delay_ms(1000);
-        __lcd_home();
-        printf("SORTING...      ");
-        __lcd_newline();
-        printf("TIME %d:%02d    ", min, sec);
-        
-        for(int i=0; i<46; i++){
+    // Drum toggle code
+    if(total_time >= TIME_INTERMITTENT_DRUM_STOP){
+        // If we are waiting for the first time to stop the trommel...
+        if(total_time % TIME_INTERMITTENT_DRUM_STOP == 0){
+            // In general, if a time multiple of TIME_INTERMITTENT_DRUM_STOP has elapsed...
+            if(DC){
+                // If the DC motors were on, turn them off
                 DC = !DC;
-                delay_ms(45-i);
+            }
+            else{
+                // If the DC motors were off, ramp them on
+                for(int i=0; i<46; i++){
+                    DC = !DC;
+                    delay_ms(45-i);
+                }
+                DC = 1;
+            }
         }
-        DC = 1;
     }
 }
 
