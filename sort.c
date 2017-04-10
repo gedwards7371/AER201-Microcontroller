@@ -78,6 +78,9 @@ void sort(void){
 
 void Loading(void){
     if(first){
+        TMR1IF = 1;
+        TMR2IF = 1;
+        TMR3IF = 1;
         initGlobalVars();
         __lcd_clear();
         initSortTimer();
@@ -137,20 +140,21 @@ void Loading(void){
             getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[0] = MAG_signal;
             
+            TMR2IF = 0; // disable PWM to arm for now so that it doesn't spaz...
             if(sensor_outputs[0]){
-                for(int i = 0; i<25; i++){
+                for(int i = 0; i<2500; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
-                    __delay_us(7500);
+                    __delay_us(75);
                     SOL_PUSHER = 0;
-                    __delay_us(2500);
+                    __delay_us(25);
                 }
             }
             else{
-                for(int i = 0; i<25; i++){
+                for(int i = 0; i<2500; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                    __delay_us(5800);
+                    __delay_us(58);
                     SOL_PUSHER = 0;
-                    __delay_us(4200);
+                    __delay_us(42);
                 }
             }
             
@@ -158,23 +162,23 @@ void Loading(void){
             // Check if can is stuck. If so, hit it again.
             readIR();
             if(IR_signal==1){
-                __delay_ms(30); // 100
+                __delay_ms(70); // 100
                 readIR();
                 if(IR_signal==1){
                     if(sensor_outputs[0]){
-                        for(int i = 0; i<25; i++){
+                        for(int i = 0; i<2500; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
-                            __delay_us(7500);
+                            __delay_us(75);
                             SOL_PUSHER = 0;
-                            __delay_us(2500);
+                            __delay_us(25);
                         }
                     }
                     else{
-                        for(int i = 0; i<25; i++){
+                        for(int i = 0; i<2500; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                            __delay_us(5800);
+                            __delay_us(58);
                             SOL_PUSHER = 0;
-                            __delay_us(4200);
+                            __delay_us(42);
                         }
                     }
                 }
@@ -209,41 +213,41 @@ void Loading(void){
                                 SOL_PUSHER = 0;
                             }
                             else{
-                                for(int i = 0; i<25; i++){
+                                for(int i = 0; i<2500; i++){
                                     switch(j){
                                         case 0:
                                             SOL_PUSHER = 1;
-                                            __delay_us(7500);
+                                            __delay_us(75);
                                             SOL_PUSHER = 0;
-                                            __delay_us(2500);
+                                            __delay_us(25);
                                             break;
                                         case 1:
                                             SOL_PUSHER = 1;
-                                            __delay_us(8000);
+                                            __delay_us(80);
                                             SOL_PUSHER = 0;
-                                            __delay_us(2000);
+                                            __delay_us(20);
                                             break;
                                         case 2:
                                             SOL_PUSHER = 1;
-                                            __delay_us(8500);
+                                            __delay_us(85);
                                             SOL_PUSHER = 0;
-                                            __delay_us(1500);
+                                            __delay_us(15);
                                             break;
                                         case 3:
                                             SOL_PUSHER = 1;
-                                            __delay_us(9000);
+                                            __delay_us(90);
                                             SOL_PUSHER = 0;
-                                            __delay_us(1000);
+                                            __delay_us(10);
                                             break;
                                         case 4:
                                             SOL_PUSHER = 1;
-                                            __delay_us(9500);
+                                            __delay_us(95);
                                             SOL_PUSHER = 0;
-                                            __delay_us(5000);
+                                            __delay_us(50);
                                             break;
                                         default:
                                             SOL_PUSHER = 1;
-                                            __delay_ms(10);
+                                            __delay_us(100);
                                             break;
                                     }  
                                 }
@@ -267,6 +271,7 @@ void Loading(void){
                 DC = 0;
             }
             f_can_coming_to_ID = 1;
+            TMR2IF = 1;
         }
     }
 }

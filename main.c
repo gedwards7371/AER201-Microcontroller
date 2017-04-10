@@ -60,7 +60,7 @@ void main(void) {
                 break;
             case EmergencyStop_state :
                 stopSignals(); // kill all outputs
-                // I think we will actually just kill MCLR using an external circuit though
+                // I think we will actually just kill power using an external circuit though
                 while(1){}
             default :
                 break;
@@ -74,7 +74,7 @@ void stopSignals(void){
     LATC = 0x00; // output low
     LATD = 0x00; // output low
     LATE = 0x00; // output low
-    TMR1ON = 0;
-    TMR2ON = 0;
-    TMR3ON = 0;
+    TMR1IF = 0;
+    TMR2IF = 0;
+    TMR3IF = 0;
 }

@@ -4022,6 +4022,9 @@ Distribution();
 
 void Loading(void){
 if(first){
+TMR1IF = 1;
+TMR2IF = 1;
+TMR3IF = 1;
 initGlobalVars();
 lcdInst(0x01);_delay((unsigned long)((10)*(32000000/4000.0)));;
 initSortTimer();
@@ -4081,20 +4084,21 @@ delay_ms(750);
 getMAG();
 sensor_outputs[0] = MAG_signal;
 
+TMR2IF = 0;
 if(sensor_outputs[0]){
-for(int i = 0; i<25; i++){
+for(int i = 0; i<2500; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((7500)*(32000000/4000000.0)));
+_delay((unsigned long)((75)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((2500)*(32000000/4000000.0)));
+_delay((unsigned long)((25)*(32000000/4000000.0)));
 }
 }
 else{
-for(int i = 0; i<25; i++){
+for(int i = 0; i<2500; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((5800)*(32000000/4000000.0)));
+_delay((unsigned long)((58)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((4200)*(32000000/4000000.0)));
+_delay((unsigned long)((42)*(32000000/4000000.0)));
 }
 }
 
@@ -4102,23 +4106,23 @@ _delay((unsigned long)((350)*(32000000/4000.0)));
 
 readIR();
 if(IR_signal==1){
-_delay((unsigned long)((30)*(32000000/4000.0)));
+_delay((unsigned long)((70)*(32000000/4000.0)));
 readIR();
 if(IR_signal==1){
 if(sensor_outputs[0]){
-for(int i = 0; i<25; i++){
+for(int i = 0; i<2500; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((7500)*(32000000/4000000.0)));
+_delay((unsigned long)((75)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((2500)*(32000000/4000000.0)));
+_delay((unsigned long)((25)*(32000000/4000000.0)));
 }
 }
 else{
-for(int i = 0; i<25; i++){
+for(int i = 0; i<2500; i++){
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((5800)*(32000000/4000000.0)));
+_delay((unsigned long)((58)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((4200)*(32000000/4000000.0)));
+_delay((unsigned long)((42)*(32000000/4000000.0)));
 }
 }
 }
@@ -4153,41 +4157,41 @@ _delay((unsigned long)((250)*(32000000/4000.0)));
 LATAbits.LATA4 = 0;
 }
 else{
-for(int i = 0; i<25; i++){
+for(int i = 0; i<2500; i++){
 switch(j){
 case 0:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((7500)*(32000000/4000000.0)));
+_delay((unsigned long)((75)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((2500)*(32000000/4000000.0)));
+_delay((unsigned long)((25)*(32000000/4000000.0)));
 break;
 case 1:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((8000)*(32000000/4000000.0)));
+_delay((unsigned long)((80)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((2000)*(32000000/4000000.0)));
+_delay((unsigned long)((20)*(32000000/4000000.0)));
 break;
 case 2:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((8500)*(32000000/4000000.0)));
+_delay((unsigned long)((85)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((1500)*(32000000/4000000.0)));
+_delay((unsigned long)((15)*(32000000/4000000.0)));
 break;
 case 3:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((9000)*(32000000/4000000.0)));
+_delay((unsigned long)((90)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((1000)*(32000000/4000000.0)));
+_delay((unsigned long)((10)*(32000000/4000000.0)));
 break;
 case 4:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((9500)*(32000000/4000000.0)));
+_delay((unsigned long)((95)*(32000000/4000000.0)));
 LATAbits.LATA4 = 0;
-_delay((unsigned long)((5000)*(32000000/4000000.0)));
+_delay((unsigned long)((50)*(32000000/4000000.0)));
 break;
 default:
 LATAbits.LATA4 = 1;
-_delay((unsigned long)((10)*(32000000/4000.0)));
+_delay((unsigned long)((100)*(32000000/4000000.0)));
 break;
 }
 }
@@ -4211,6 +4215,7 @@ break;
 LATBbits.LATB2 = 0;
 }
 f_can_coming_to_ID = 1;
+TMR2IF = 1;
 }
 }
 }
@@ -4261,7 +4266,7 @@ LATAbits.LATA3 = 0;
 sensor_outputs[1] = (sensor_outputs[1] || res3);
 }
 
-# 326
+# 331
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4320,7 +4325,7 @@ void Distribution(void){
 if(f_can_coming_to_distribution){
 f_can_distributed = 0;
 
-# 389
+# 394
 switch(cur_can){
 case 0:
 updateServoPosition(500, 1);
@@ -4385,7 +4390,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 460
+# 465
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4427,7 +4432,7 @@ most_recent_sort_time = total_time;
 f_most_recent_sort_time = 0;
 }
 
-if((total_time >= 4) && (total_time % 4 == 0)){
+if((total_time >= 20) && (total_time % 20 == 0)){
 if(LATBbits.LATB2){
 
 LATBbits.LATB2 = ~LATBbits.LATB2;
@@ -4567,7 +4572,7 @@ break;
 }
 void updateArmState(void){
 
-# 646
+# 651
 if(!was_low_2){
 
 switch(f_arm_position){
