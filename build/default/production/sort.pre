@@ -4427,14 +4427,19 @@ most_recent_sort_time = total_time;
 f_most_recent_sort_time = 0;
 }
 
-if(total_time - most_recent_sort_time == 20){
-LATBbits.LATB2 = 0;
-_delay((unsigned long)((2000)*(32000000/4000.0)));
+if((total_time >= 4) && (total_time % 4 == 0)){
+if(LATBbits.LATB2){
+
+LATBbits.LATB2 = ~LATBbits.LATB2;
+}
+else{
+
 for(int i=0; i<46; i++){
 LATBbits.LATB2 = !LATBbits.LATB2;
 delay_ms(45-i);
 }
 LATBbits.LATB2 = 1;
+}
 }
 
 if((total_time - most_recent_sort_time == 42) || (total_time == 179)){
@@ -4562,7 +4567,7 @@ break;
 }
 void updateArmState(void){
 
-# 641
+# 646
 if(!was_low_2){
 
 switch(f_arm_position){

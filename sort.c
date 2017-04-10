@@ -498,14 +498,19 @@ void printSortTimer(void){
         f_most_recent_sort_time = 0;
     }
     
-    if(total_time - most_recent_sort_time == TIME_INTERMITTENT_DRUM_STOP){
-        DC = 0;
-        __delay_ms(2000);
-        for(int i=0; i<46; i++){
+    if((total_time >= TIME_INTERMITTENT_DRUM_STOP) && (total_time % TIME_INTERMITTENT_DRUM_STOP == 0)){
+        if(DC){
+            // If DC motors on...
+            DC = ~DC;
+        }
+        else{
+            // If DC motors off...
+            for(int i=0; i<46; i++){
                 DC = !DC;
                 delay_ms(45-i);
+            }
+            DC = 1;
         }
-        DC = 1;
     }
     
     if((total_time - most_recent_sort_time == MAX_NO_CANS) || (total_time == MAX_SORT_TIME)){
