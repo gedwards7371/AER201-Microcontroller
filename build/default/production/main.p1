@@ -37,12 +37,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
 "1316
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
-"7574
-[v _TMR1IF `Vb ~T0 @X0 0 e@31984 ]
-"7582
-[v _TMR2IF `Vb ~T0 @X0 0 e@31985 ]
-"7592
-[v _TMR3IF `Vb ~T0 @X0 0 e@32009 ]
+"7572
+[v _TMR1IE `Vb ~T0 @X0 0 e@31976 ]
+"7580
+[v _TMR2IE `Vb ~T0 @X0 0 e@31977 ]
+"7590
+[v _TMR3IE `Vb ~T0 @X0 0 e@32001 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3161,15 +3161,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 76: LATE = 0x00;
 "76
 [e = _LATE -> -> 0 `i `uc ]
-[; ;main.c: 77: TMR1IF = 0;
+[; ;main.c: 77: TMR1IE = 0;
 "77
-[e = _TMR1IF -> -> 0 `i `b ]
-[; ;main.c: 78: TMR2IF = 0;
+[e = _TMR1IE -> -> 0 `i `b ]
+[; ;main.c: 78: TMR2IE = 0;
 "78
-[e = _TMR2IF -> -> 0 `i `b ]
-[; ;main.c: 79: TMR3IF = 0;
+[e = _TMR2IE -> -> 0 `i `b ]
+[; ;main.c: 79: TMR3IE = 0;
 "79
-[e = _TMR3IF -> -> 0 `i `b ]
+[e = _TMR3IE -> -> 0 `i `b ]
 [; ;main.c: 80: }
 "80
 [e :UE 283 ]

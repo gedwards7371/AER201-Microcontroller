@@ -74,7 +74,7 @@ void stopSignals(void){
     LATC = 0x00; // output low
     LATD = 0x00; // output low
     LATE = 0x00; // output low
-    TMR1IF = 0;
-    TMR2IF = 0;
-    TMR3IF = 0;
+    TMR1IE = 0;
+    TMR2IE = 0;
+    TMR3IE = 0;
 }

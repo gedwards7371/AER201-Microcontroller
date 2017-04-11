@@ -81,9 +81,9 @@ void sort(void){
 
 void Loading(void){
     if(first){
-        TMR1IF = 1;
-        TMR2IF = 1;
-        TMR3IF = 1;
+        TMR1IE = 1;
+        TMR2IE = 1;
+        TMR3IE = 1;
         initGlobalVars();
         __lcd_clear();
         initSortTimer();
@@ -143,7 +143,7 @@ void Loading(void){
             getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[0] = MAG_signal;
             
-            TMR2IF = 0; // disable PWM to arm for now so that it doesn't spaz...
+            TMR2IE = 0; // disable PWM to arm for now so that it doesn't spaz...
             if(sensor_outputs[0]){
                 for(int i = 0; i<2500; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
@@ -160,7 +160,7 @@ void Loading(void){
                     __delay_us(42);
                 }
             }
-            
+            TMR2IE = 1;
             __delay_ms(350);
             // Check if can is stuck. If so, hit it again.
             readIR();
@@ -216,6 +216,7 @@ void Loading(void){
                                 SOL_PUSHER = 0;
                             }
                             else{
+                                TMR2IE = 0;
                                 for(int i = 0; i<2500; i++){
                                     switch(j){
                                         case 0:
@@ -254,6 +255,7 @@ void Loading(void){
                                             break;
                                     }  
                                 }
+                                TMR2IE = 1;
                             }
                         }
                         SOL_PUSHER = 0;
@@ -274,7 +276,6 @@ void Loading(void){
                 DC = 0;
             }
             f_can_coming_to_ID = 1;
-            TMR2IF = 1;
         }
     }
 }
@@ -509,7 +510,8 @@ void printSortTimer(void){
         f_most_recent_sort_time = 0;
     }
     
-    if(total_time >= TIME_INTERMITTENT_DRUM_STOP){
+    // Every 20 seconds, turns off drum for 2 seconds.
+    /*if(total_time >= TIME_INTERMITTENT_DRUM_STOP){
         if(DC == 0){
             motor_toggle_count++;
             if(motor_toggle_count == 2){
@@ -524,7 +526,7 @@ void printSortTimer(void){
         else if(total_time % TIME_INTERMITTENT_DRUM_STOP == 0){
             DC = !DC;
         }
-    }
+    }*/
     
     if((total_time - most_recent_sort_time == MAX_NO_CANS) || (total_time == MAX_SORT_TIME)){
         machine_state = DoneSorting_state;
