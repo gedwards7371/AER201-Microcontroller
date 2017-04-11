@@ -155,9 +155,9 @@ void Loading(void){
             else{
                 for(int i = 0; i<2500; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                    __delay_us(58);
+                    __delay_us(50);
                     SOL_PUSHER = 0;
-                    __delay_us(42);
+                    __delay_us(50);
                 }
             }
             TMR2IE = 1;
@@ -179,9 +179,9 @@ void Loading(void){
                     else{
                         for(int i = 0; i<2500; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                            __delay_us(58);
+                            __delay_us(50);
                             SOL_PUSHER = 0;
-                            __delay_us(42);
+                            __delay_us(40);
                         }
                     }
                 }
@@ -290,41 +290,56 @@ void ID(void){
         
         // Sample conductivity reading and later take the average to determine can ID
         const int n = 10;
-        const unsigned char time = (TIME_CONDUCTIVITY / n);
-        int res1 = 0; 
-        int res2 = 0;
-        for(int i = 0; i<n; i++){
-            delay_ms(time);
-            readCOND();
-            res1 += COND_signal;
-        }
-        SOL_COND_SENSORS = 0;
-        __delay_ms(200);
-        SOL_COND_SENSORS = 1;
-        for(int i = 0; i<n; i++){
-            delay_ms(time);
-            readCOND();
-            res2 += COND_signal;
-        }
-        res1 = ((res1 / n) > 0.3) ? 1 : 0;
-        res2 = ((res2 / n) > 0.3) ? 1 : 0;
-        
-        // Average value
-        sensor_outputs[1] = (res1 || res2);
-        SOL_COND_SENSORS = 0;
-        
-        if(sensor_outputs[0]){
-            __delay_ms(200);
-            SOL_COND_SENSORS = 1;
-            int res3 = 0;
+        // If a pop can...
+        if(!sensor_outputs[0]){
+            const unsigned char time = (TIME_CONDUCTIVITY_POP / n);
+            int res1 = 0; 
+            int res2 = 0;
             for(int i = 0; i<n; i++){
                 delay_ms(time);
                 readCOND();
-                res3 += COND_signal;
+                res1 += COND_signal;
             }
             SOL_COND_SENSORS = 0;
-            sensor_outputs[1] = (sensor_outputs[1] || res3);
-        }        
+            __delay_ms(200);
+            SOL_COND_SENSORS = 1;
+            for(int i = 0; i<n; i++){
+                delay_ms(time);
+                readCOND();
+                res2 += COND_signal;
+            }
+            SOL_COND_SENSORS = 0;
+            res1 = ((res1 / n) > 0.3) ? 1 : 0;
+            res2 = ((res2 / n) > 0.3) ? 1 : 0;
+
+            // Average value
+            sensor_outputs[1] = (res1 || res2);
+        }
+        else{
+            const unsigned char time = (TIME_CONDUCTIVITY_SOUP / n);
+            int res[NUM_SOUP_TESTS];
+            
+            for(int j = 0; j < NUM_SOUP_TESTS; j++){
+                SOL_COND_SENSORS = 1;
+                for(int i = 0; i < n; i++){
+                    delay_ms(time);
+                    readCOND();
+                    res[j] += COND_signal;
+                }
+                SOL_COND_SENSORS = 0;
+                
+                __delay_ms(200); // For solenoid retraction
+                
+                // Logical OR of all samples
+                res[j] = ((res[j] / n) > 0.3) ? 1 : 0;
+                if(j==0){
+                    sensor_outputs[1] = res[j];
+                }
+                else{
+                    sensor_outputs[1] = sensor_outputs[1] || res[j];
+                }
+            }
+        }
         
         // Identify can type
         // cur_can:
@@ -351,11 +366,6 @@ void ID(void){
                 count_can_no_lab++;
                 cur_can = 3;
             }
-        }
-        
-        if(debug){
-        __lcd_clear();__lcd_home();
-        printf("            F%dL%d", res1,  res2);
         }
         
         while(!f_can_distributed){continue;}

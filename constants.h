@@ -4,6 +4,7 @@
 
 //Conductivity sensors
 #define COND_SENSORS  PORTAbits.RA2 // conductivity sensors
+#define NUM_SOUP_TESTS  5
 
 //IR emitter
 // #define IR_EMITTER LATAbits.LATA6
@@ -41,7 +42,8 @@
 #define TIME_SOLENOID_MOTION    300
 #define TIME_SERVO_MOTION       750
 #define TILT_DROP_DELAY         700 // 2500
-#define TIME_CONDUCTIVITY       600
+#define TIME_CONDUCTIVITY_POP   600
+#define TIME_CONDUCTIVITY_SOUP  400
 #define TIME_INTERMITTENT_DRUM_STOP 20 // Seconds
 
 // Maximum operation allowances before forced termination
