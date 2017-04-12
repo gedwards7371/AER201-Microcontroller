@@ -4507,34 +4507,12 @@ LATBbits.LATB2 = !LATBbits.LATB2;
 
 
 
-if((total_time >= 20 && total_time <= 21) && count_total == 0){
+if(total_time >= 4){
+if(total_time % 4 == 0){
 LATBbits.LATB0 = 1;
-agitator_toggle_count++;
-if(agitator_toggle_count == 2){
-agitator_toggle_count = 0;
+_delay((unsigned long)((200)*(32000000/4000.0)));
 LATBbits.LATB0 = 0;
 }
-}
-else if(total_time >= 30){
-if(total_time % 30 == 0){
-LATBbits.LATB0 = !LATBbits.LATB0;
-agitator_toggle_count = 0;
-}
-else if(LATBbits.LATB0 == 1){
-agitator_toggle_count++;
-if(agitator_toggle_count == 2){
-LATBbits.LATB0 = 0;
-time_recent_agitator = total_time;
-agitator_toggle_count = 0;
-}
-
-
-
-
-}
-
-
-
 }
 
 if(total_time - most_recent_sort_time == 42){
@@ -4667,7 +4645,7 @@ break;
 }
 void updateArmState(void){
 
-# 746
+# 724
 if(!was_low_2){
 
 switch(f_arm_position){
