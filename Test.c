@@ -130,11 +130,9 @@ void sensorTest(void){
     while(PORTBbits.RB1 == 1) {continue;}
     __lcd_clear();__lcd_home();
     
-    // IR sensor pair reading
+    // IR break beam reading
     // Pass: IR_signal is default low but beam break sets it high.
-    // Justification: Since we haven't tested this, this is a placeholder.
-    printf("TST: IR SNSR");
-    __delay_ms(100);
+    // Justification: Required to detect can presence out of trommel
     IR_EMITTER = 1;
     //DC = 1;
     while(PORTBbits.RB1 == 0){
@@ -143,12 +141,33 @@ void sensorTest(void){
         IR_signal = (res > THIR) ? 1 : 0;
         
         __lcd_clear();__lcd_home();
-        printf("IR_signal: %d ", IR_signal);
+        printf("IR (PUSHER): %d  ", IR_signal);
         __lcd_newline();
         printf("%d", res);
         __delay_ms(100);
     }  
     IR_EMITTER = 0;
+    while(PORTBbits.RB1 == 1) {continue;}
+    
+    // IR reflectivity reading
+    // Pass: res is about
+    // Justification: Required to detect can presence out of trommel
+    IR_EMITTER_LABEL = 1;
+    //DC = 1;
+    while(PORTBbits.RB1 == 0){
+        readADC(3);
+        int res = ADRESH<<8 | ADRESL;
+        IR_signal = (res > THIR) ? 1 : 0;
+        
+        __lcd_clear();__lcd_home();
+        printf("IR (REFLEC): %d  ", IR_signal);
+        __lcd_newline();
+        printf("%d", res);
+        __delay_ms(100);
+    }  
+    IR_EMITTER_LABEL = 0;
+    while(PORTBbits.RB1 == 1) {continue;}
+    
     //DC = 0;
     
     
@@ -166,6 +185,7 @@ void sensorTest(void){
        printf("MAG_signal: %d ", MAG_signal);
        __delay_ms(100);
     }
+    while(PORTBbits.RB1 == 1) {continue;}
     
     // Conductivity sensor reading
     // Pass: 

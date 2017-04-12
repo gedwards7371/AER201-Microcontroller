@@ -594,7 +594,6 @@ void getIR(int port){
         f_loadingNewCan = 0;
     }
 }
-
 void getMAG(void){
     readMAG();
     

@@ -4526,7 +4526,6 @@ else{
 f_loadingNewCan = 0;
 }
 }
-
 void getMAG(void){
 readMAG();
 
@@ -4622,7 +4621,7 @@ break;
 }
 void updateArmState(void){
 
-# 698
+# 697
 if(!was_low_2){
 
 switch(f_arm_position){
