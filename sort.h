@@ -35,7 +35,7 @@ extern int motor_toggle_count;
 extern int agitator_toggle_count;
 
 // Sensor inputs
-void getIR(void);
+void getIR(int port);
 void getMAG(void);
 void getCOND(void);
 extern int IR_signal;

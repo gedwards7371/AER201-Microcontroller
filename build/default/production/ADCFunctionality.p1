@@ -2950,7 +2950,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 33: void delay_ms(unsigned char milliseconds);
 [; ;sort.h: 34: extern int motor_toggle_count;
 [; ;sort.h: 35: extern int agitator_toggle_count;
-[; ;sort.h: 38: void getIR(void);
+[; ;sort.h: 38: void getIR(int port);
 [; ;sort.h: 39: void getMAG(void);
 [; ;sort.h: 40: void getCOND(void);
 [; ;sort.h: 41: extern int IR_signal;
@@ -2978,8 +2978,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 67: extern int count_can_no_lab;
 [; ;sort.h: 68: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
-[; ;ADCFunctionality.h: 2: void readIR(void);
+[; ;ADCFunctionality.h: 2: void readIR(int ana_port);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
+[; ;ADCFunctionality.h: 4: void readCOND(void);
 [; ;EEPROM.h: 1: void initEEPROM(void);
 [; ;EEPROM.h: 2: void EEPROM_write(unsigned short address, unsigned char data);
 [; ;EEPROM.h: 3: unsigned char EEPROM_read(unsigned short address);
@@ -3025,62 +3026,99 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 266 ]
 }
 "23
-[v _readIR `(v ~T0 @X0 1 ef ]
+[v _readIR `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;ADCFunctionality.c: 23: void readIR(void){
+[; ;ADCFunctionality.c: 23: void readIR(int ana_port){
 [e :U _readIR ]
+[v _ana_port `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADCFunctionality.c: 24: readADC(0);
+[; ;ADCFunctionality.c: 24: readADC(ana_port);
 "24
-[e ( _readADC (1 -> -> 0 `i `uc ]
+[e ( _readADC (1 -> _ana_port `uc ]
 "25
 [v _res `i ~T0 @X0 1 a ]
 [; ;ADCFunctionality.c: 25: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 26: IR_signal = (res > 800) ? 1 : 0;
+[; ;ADCFunctionality.c: 26: switch(ana_port){
 "26
-[e = _IR_signal ? > _res -> 800 `i : -> 1 `i -> 0 `i ]
-[; ;ADCFunctionality.c: 27: }
+[e $U 272  ]
+{
+[; ;ADCFunctionality.c: 27: case 0:
 "27
+[e :U 273 ]
+[; ;ADCFunctionality.c: 28: IR_signal = (res > 800) ? 1 : 0;
+"28
+[e = _IR_signal ? > _res -> 800 `i : -> 1 `i -> 0 `i ]
+[; ;ADCFunctionality.c: 29: break;
+"29
+[e $U 271  ]
+[; ;ADCFunctionality.c: 30: case 3:
+"30
+[e :U 274 ]
+[; ;ADCFunctionality.c: 31: IR_signal = (res > 500) ? 1 : 0;
+"31
+[e = _IR_signal ? > _res -> 500 `i : -> 1 `i -> 0 `i ]
+[; ;ADCFunctionality.c: 32: break;
+"32
+[e $U 271  ]
+[; ;ADCFunctionality.c: 33: default:
+"33
+[e :U 275 ]
+[; ;ADCFunctionality.c: 34: break;
+"34
+[e $U 271  ]
+"35
+}
+[; ;ADCFunctionality.c: 35: }
+[e $U 271  ]
+"26
+[e :U 272 ]
+[e [\ _ana_port , $ -> 0 `i 273
+ , $ -> 3 `i 274
+ 275 ]
+"35
+[e :U 271 ]
+[; ;ADCFunctionality.c: 36: }
+"36
 [e :UE 270 ]
 }
-"29
+"38
 [v _readMAG `(v ~T0 @X0 1 ef ]
 {
-[; ;ADCFunctionality.c: 29: void readMAG(void){
+[; ;ADCFunctionality.c: 38: void readMAG(void){
 [e :U _readMAG ]
 [f ]
-[; ;ADCFunctionality.c: 30: readADC(1);
-"30
+[; ;ADCFunctionality.c: 39: readADC(1);
+"39
 [e ( _readADC (1 -> -> 1 `i `uc ]
-"31
+"40
 [v _res `i ~T0 @X0 1 a ]
-[; ;ADCFunctionality.c: 31: int res = ADRESH<<8 | ADRESL;
+[; ;ADCFunctionality.c: 40: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 32: MAG_signal = (res < 150) ? 1 : 0;
-"32
+[; ;ADCFunctionality.c: 41: MAG_signal = (res < 150) ? 1 : 0;
+"41
 [e = _MAG_signal ? < _res -> 150 `i : -> 1 `i -> 0 `i ]
-[; ;ADCFunctionality.c: 33: }
-"33
-[e :UE 271 ]
+[; ;ADCFunctionality.c: 42: }
+"42
+[e :UE 276 ]
 }
-"35
+"44
 [v _readCOND `(v ~T0 @X0 1 ef ]
 {
-[; ;ADCFunctionality.c: 35: void readCOND(void){
+[; ;ADCFunctionality.c: 44: void readCOND(void){
 [e :U _readCOND ]
 [f ]
-[; ;ADCFunctionality.c: 36: readADC(2);
-"36
+[; ;ADCFunctionality.c: 45: readADC(2);
+"45
 [e ( _readADC (1 -> -> 2 `i `uc ]
-"37
+"46
 [v _res `i ~T0 @X0 1 a ]
-[; ;ADCFunctionality.c: 37: int res = ADRESH<<8 | ADRESL;
+[; ;ADCFunctionality.c: 46: int res = ADRESH<<8 | ADRESL;
 [e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
-[; ;ADCFunctionality.c: 38: COND_signal = (res > 300) ? 1 : 0;
-"38
+[; ;ADCFunctionality.c: 47: COND_signal = (res > 300) ? 1 : 0;
+"47
 [e = _COND_signal ? > _res -> 300 `i : -> 1 `i -> 0 `i ]
-[; ;ADCFunctionality.c: 39: }
-"39
-[e :UE 272 ]
+[; ;ADCFunctionality.c: 48: }
+"48
+[e :UE 277 ]
 }

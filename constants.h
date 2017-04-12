@@ -3,17 +3,17 @@
 #define	CONSTANTS_H //Prevent multiple inclusion 
 
 //Conductivity sensors
-#define COND_SENSORS  PORTAbits.RA2 // conductivity sensors
+#define COND_SENSORS  PORTAbits.RA2 // conductivity sensor for access by debugging menu
 #define NUM_SOUP_TESTS  2
 #define NUM_POP_TESTS   2
 #define NUM_SAMPLES     10
 
 //IR emitter
 #define IR_EMITTER LATCbits.LATC5
-#define IR_EMITTER_COND LATCbits.LATC6
+#define IR_EMITTER_LABEL LATCbits.LATC6
 
 //Solenoids (1 cm)
-#define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
+#define SOL_COND_SENSORS       LATCbits.LATC7 // solenoids for moving conductivity sensors
 #define SOL_PUSHER      LATAbits.LATA4 // solenoid for pushing cans off trommel
 #define SOL_OUT         1 // signal to move solenoids out
 

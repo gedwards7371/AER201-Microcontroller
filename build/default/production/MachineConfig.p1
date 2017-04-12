@@ -2998,7 +2998,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 33: void delay_ms(unsigned char milliseconds);
 [; ;sort.h: 34: extern int motor_toggle_count;
 [; ;sort.h: 35: extern int agitator_toggle_count;
-[; ;sort.h: 38: void getIR(void);
+[; ;sort.h: 38: void getIR(int port);
 [; ;sort.h: 39: void getMAG(void);
 [; ;sort.h: 40: void getCOND(void);
 [; ;sort.h: 41: extern int IR_signal;
@@ -3026,8 +3026,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 67: extern int count_can_no_lab;
 [; ;sort.h: 68: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
-[; ;ADCFunctionality.h: 2: void readIR(void);
+[; ;ADCFunctionality.h: 2: void readIR(int ana_port);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
+[; ;ADCFunctionality.h: 4: void readCOND(void);
 [; ;EEPROM.h: 1: void initEEPROM(void);
 [; ;EEPROM.h: 2: void EEPROM_write(unsigned short address, unsigned char data);
 [; ;EEPROM.h: 3: unsigned char EEPROM_read(unsigned short address);
@@ -3054,9 +3055,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MachineConfig.c: 18: OSCTUNEbits.PLLEN = 1;
 "18
 [e = . . _OSCTUNEbits 0 2 -> -> 1 `i `uc ]
-[; ;MachineConfig.c: 22: TRISA = 0b00000111;
+[; ;MachineConfig.c: 22: TRISA = 0b00001111;
 "22
-[e = _TRISA -> -> 7 `i `uc ]
+[e = _TRISA -> -> 15 `i `uc ]
 [; ;MachineConfig.c: 24: TRISB = 0b11110010;
 "24
 [e = _TRISB -> -> 242 `i `uc ]
@@ -3090,55 +3091,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MachineConfig.c: 46: ADCON0 = 0x00;
 "46
 [e = _ADCON0 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 47: ADCON1 = 0b00001100;
+[; ;MachineConfig.c: 47: ADCON1 = 0b00001011;
 "47
-[e = _ADCON1 -> -> 12 `i `uc ]
-[; ;MachineConfig.c: 51: CVRCON = 0x00;
-"51
-[e = _CVRCON -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 52: CMCONbits.CIS = 0;
+[e = _ADCON1 -> -> 11 `i `uc ]
+[; ;MachineConfig.c: 52: CVRCON = 0x00;
 "52
-[e = . . _CMCONbits 0 1 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 53: ADCON2 = 0b10110001;
+[e = _CVRCON -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 53: CMCONbits.CIS = 0;
 "53
+[e = . . _CMCONbits 0 1 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 54: ADCON2 = 0b10110001;
+"54
 [e = _ADCON2 -> -> 177 `i `uc ]
-[; ;MachineConfig.c: 56: INT1IE = 1;
-"56
+[; ;MachineConfig.c: 57: INT1IE = 1;
+"57
 [e = _INT1IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 58: TMR0IE = 1;
-"58
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 59: TMR1IE = 1;
+[; ;MachineConfig.c: 59: TMR0IE = 1;
 "59
-[e = _TMR1IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 60: TMR2IE = 1;
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 60: TMR1IE = 1;
 "60
-[e = _TMR2IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 61: TMR3IE = 1;
+[e = _TMR1IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 61: TMR2IE = 1;
 "61
+[e = _TMR2IE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 62: TMR3IE = 1;
+"62
 [e = _TMR3IE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 63: T1CON = 0b10110000;
-"63
-[e = _T1CON -> -> 176 `i `uc ]
-[; ;MachineConfig.c: 64: T2CON = 0b01111011;
+[; ;MachineConfig.c: 64: T1CON = 0b10110000;
 "64
-[e = _T2CON -> -> 123 `i `uc ]
-[; ;MachineConfig.c: 65: PR2 = 0x22;
+[e = _T1CON -> -> 176 `i `uc ]
+[; ;MachineConfig.c: 65: T2CON = 0b01111011;
 "65
-[e = _PR2 -> -> 34 `i `uc ]
-[; ;MachineConfig.c: 66: T3CON = 0b10110000;
+[e = _T2CON -> -> 123 `i `uc ]
+[; ;MachineConfig.c: 66: PR2 = 0x22;
 "66
-[e = _T3CON -> -> 176 `i `uc ]
-[; ;MachineConfig.c: 67: PEIE = 1;
+[e = _PR2 -> -> 34 `i `uc ]
+[; ;MachineConfig.c: 67: T3CON = 0b10110000;
 "67
-[e = _PEIE -> -> 1 `i `b ]
-[; ;MachineConfig.c: 68: ADIE = 0;
+[e = _T3CON -> -> 176 `i `uc ]
+[; ;MachineConfig.c: 68: PEIE = 1;
 "68
-[e = _ADIE -> -> 0 `i `b ]
-[; ;MachineConfig.c: 69: (INTCONbits.GIE = 0);
+[e = _PEIE -> -> 1 `i `b ]
+[; ;MachineConfig.c: 69: ADIE = 0;
 "69
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;MachineConfig.c: 70: }
+[e = _ADIE -> -> 0 `i `b ]
+[; ;MachineConfig.c: 70: (INTCONbits.GIE = 0);
 "70
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;MachineConfig.c: 71: }
+"71
 [e :UE 266 ]
 }

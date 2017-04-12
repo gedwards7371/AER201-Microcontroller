@@ -2935,7 +2935,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 33: void delay_ms(unsigned char milliseconds);
 [; ;sort.h: 34: extern int motor_toggle_count;
 [; ;sort.h: 35: extern int agitator_toggle_count;
-[; ;sort.h: 38: void getIR(void);
+[; ;sort.h: 38: void getIR(int port);
 [; ;sort.h: 39: void getMAG(void);
 [; ;sort.h: 40: void getCOND(void);
 [; ;sort.h: 41: extern int IR_signal;
@@ -2963,8 +2963,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 67: extern int count_can_no_lab;
 [; ;sort.h: 68: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
-[; ;ADCFunctionality.h: 2: void readIR(void);
+[; ;ADCFunctionality.h: 2: void readIR(int ana_port);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
+[; ;ADCFunctionality.h: 4: void readCOND(void);
 [; ;EEPROM.h: 1: void initEEPROM(void);
 [; ;EEPROM.h: 2: void EEPROM_write(unsigned short address, unsigned char data);
 [; ;EEPROM.h: 3: unsigned char EEPROM_read(unsigned short address);
@@ -3140,8 +3141,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.c: 64: getRTC();
 "64
 [e ( _getRTC ..  ]
-[v F3238 `uc ~T0 @X0 -> 0 `x s ]
-[i F3238
+[v F3240 `uc ~T0 @X0 -> 0 `x s ]
+[i F3240
 :U ..
 -> 77 `c
 -> 77 `c
@@ -3152,7 +3153,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "65
 [v _month `uc ~T0 @X0 4  a ]
 [; ;RTC.c: 65: char month[] = "MMM";
-[e = _month F3238 ]
+[e = _month F3240 ]
 "66
 [v _INT_time `i ~T0 @X0 -> 7 `i a ]
 [; ;RTC.c: 66: int INT_time[7];

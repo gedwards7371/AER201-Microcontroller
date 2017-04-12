@@ -3896,7 +3896,7 @@ extern int motor_toggle_count;
 extern int agitator_toggle_count;
 
 
-void getIR(void);
+void getIR(int port);
 void getMAG(void);
 void getCOND(void);
 extern int IR_signal;
@@ -3930,8 +3930,9 @@ extern int cur_can;
 
 # 1 "ADCFunctionality.h"
 void readADC(char channel);
-void readIR(void);
+void readIR(int ana_port);
 void readMAG(void);
+void readCOND(void);
 
 # 1 "EEPROM.h"
 void initEEPROM(void);
@@ -3967,10 +3968,19 @@ ADCON0bits.GO = 1;
 while(ADCON0bits.GO_NOT_DONE){_delay((unsigned long)((5)*(32000000/4000.0)));}
 }
 
-void readIR(void){
-readADC(0);
+void readIR(int ana_port){
+readADC(ana_port);
 int res = ADRESH<<8 | ADRESL;
+switch(ana_port){
+case 0:
 IR_signal = (res > 800) ? 1 : 0;
+break;
+case 3:
+IR_signal = (res > 500) ? 1 : 0;
+break;
+default:
+break;
+}
 }
 
 void readMAG(void){

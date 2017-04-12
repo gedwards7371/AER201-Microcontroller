@@ -89,7 +89,7 @@ void Loading(void){
         __lcd_clear();
         initSortTimer();
         IR_EMITTER = 1;
-        IR_EMITTER_COND = 1;
+        IR_EMITTER_LABEL = 1;
         
         // Write to EEPROM that the sort did not complete. This will be changed
         // after a successful run, but until then we must assume the run will
@@ -116,7 +116,7 @@ void Loading(void){
         // code to be able to enter straight down to check if the ID stage is ready
         if(!f_loadingNewCan){
             // Call getIR to update f_loadingNewCan flag
-            getIR();
+            getIR(0);
             // "If no new can is being loaded..."
             if(!f_loadingNewCan){
                return; // get out of sort function (i.e. restart it)

@@ -3896,7 +3896,7 @@ extern int motor_toggle_count;
 extern int agitator_toggle_count;
 
 
-void getIR(void);
+void getIR(int port);
 void getMAG(void);
 void getCOND(void);
 extern int IR_signal;
@@ -3930,8 +3930,9 @@ extern int cur_can;
 
 # 1 "ADCFunctionality.h"
 void readADC(char channel);
-void readIR(void);
+void readIR(int ana_port);
 void readMAG(void);
+void readCOND(void);
 
 # 1 "EEPROM.h"
 void initEEPROM(void);
@@ -3966,7 +3967,7 @@ OSCTUNEbits.PLLEN = 1;
 
 
 
-TRISA = 0b00000111;
+TRISA = 0b00001111;
 
 TRISB = 0b11110010;
 
@@ -3991,7 +3992,8 @@ nRBPU = 0;
 
 
 ADCON0 = 0x00;
-ADCON1 = 0b00001100;
+ADCON1 = 0b00001011;
+
 
 
 
