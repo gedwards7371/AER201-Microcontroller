@@ -38,6 +38,7 @@ extern int agitator_toggle_count;
 void getIR(int port);
 void getMAG(void);
 void getCOND(void);
+extern int IR_res;
 extern int IR_signal;
 extern int MAG_signal;
 extern int COND_signal;

@@ -3899,6 +3899,7 @@ extern int agitator_toggle_count;
 void getIR(int port);
 void getMAG(void);
 void getCOND(void);
+extern int IR_res;
 extern int IR_signal;
 extern int MAG_signal;
 extern int COND_signal;
@@ -3970,13 +3971,13 @@ while(ADCON0bits.GO_NOT_DONE){_delay((unsigned long)((5)*(32000000/4000.0)));}
 
 void readIR(int ana_port){
 readADC(ana_port);
-int res = ADRESH<<8 | ADRESL;
+IR_res = ADRESH<<8 | ADRESL;
 switch(ana_port){
 case 0:
-IR_signal = (res > 800) ? 1 : 0;
+IR_signal = (IR_res > 800) ? 1 : 0;
 break;
 case 3:
-IR_signal = (res > 500) ? 1 : 0;
+IR_signal = (IR_res > 250) ? 1 : 0;
 break;
 default:
 break;

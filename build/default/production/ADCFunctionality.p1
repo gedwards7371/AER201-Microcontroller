@@ -37,15 +37,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "159 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18.h
 [v __delay `JF2878 ~T0 @X0 0 e ]
 [p i __delay ]
+"41 sort.h
+[v _IR_res `i ~T0 @X0 0 e ]
 "4604 D:\Program Files (x86)\Microchip\xc8\v1.40\include\pic18f4620.h
 [v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "4598
 [v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
-"41 sort.h
+"42 sort.h
 [v _IR_signal `i ~T0 @X0 0 e ]
-"42
-[v _MAG_signal `i ~T0 @X0 0 e ]
 "43
+[v _MAG_signal `i ~T0 @X0 0 e ]
+"44
 [v _COND_signal `i ~T0 @X0 0 e ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -2953,30 +2955,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;sort.h: 38: void getIR(int port);
 [; ;sort.h: 39: void getMAG(void);
 [; ;sort.h: 40: void getCOND(void);
-[; ;sort.h: 41: extern int IR_signal;
-[; ;sort.h: 42: extern int MAG_signal;
-[; ;sort.h: 43: extern int COND_signal;
-[; ;sort.h: 46: void updateServoPosition(int time_us, int timer);
-[; ;sort.h: 47: void updateServoStates(void);
-[; ;sort.h: 48: void updateArmState(void);
-[; ;sort.h: 49: extern unsigned int servoTimes[4];
-[; ;sort.h: 50: volatile extern int was_low_1;
-[; ;sort.h: 51: volatile extern int was_low_2;
-[; ;sort.h: 52: volatile extern int was_low_3;
-[; ;sort.h: 53: volatile extern int servo_timer_counter;
-[; ;sort.h: 54: volatile extern int servo_timer_target;
-[; ;sort.h: 55: volatile extern int pan_servo_state;
-[; ;sort.h: 56: volatile extern int tilt_servo_state;
-[; ;sort.h: 57: volatile extern int f_panning_to_bin;
-[; ;sort.h: 58: volatile extern int timer2_counter;
-[; ;sort.h: 59: volatile extern int f_arm_position;
-[; ;sort.h: 62: extern int sensor_outputs[2];
-[; ;sort.h: 63: extern int count_total;
-[; ;sort.h: 64: extern int count_pop_no_tab;
-[; ;sort.h: 65: extern int count_pop_w_tab;
-[; ;sort.h: 66: extern int count_can_w_lab;
-[; ;sort.h: 67: extern int count_can_no_lab;
-[; ;sort.h: 68: extern int cur_can;
+[; ;sort.h: 41: extern int IR_res;
+[; ;sort.h: 42: extern int IR_signal;
+[; ;sort.h: 43: extern int MAG_signal;
+[; ;sort.h: 44: extern int COND_signal;
+[; ;sort.h: 47: void updateServoPosition(int time_us, int timer);
+[; ;sort.h: 48: void updateServoStates(void);
+[; ;sort.h: 49: void updateArmState(void);
+[; ;sort.h: 50: extern unsigned int servoTimes[4];
+[; ;sort.h: 51: volatile extern int was_low_1;
+[; ;sort.h: 52: volatile extern int was_low_2;
+[; ;sort.h: 53: volatile extern int was_low_3;
+[; ;sort.h: 54: volatile extern int servo_timer_counter;
+[; ;sort.h: 55: volatile extern int servo_timer_target;
+[; ;sort.h: 56: volatile extern int pan_servo_state;
+[; ;sort.h: 57: volatile extern int tilt_servo_state;
+[; ;sort.h: 58: volatile extern int f_panning_to_bin;
+[; ;sort.h: 59: volatile extern int timer2_counter;
+[; ;sort.h: 60: volatile extern int f_arm_position;
+[; ;sort.h: 63: extern int sensor_outputs[2];
+[; ;sort.h: 64: extern int count_total;
+[; ;sort.h: 65: extern int count_pop_no_tab;
+[; ;sort.h: 66: extern int count_pop_w_tab;
+[; ;sort.h: 67: extern int count_can_w_lab;
+[; ;sort.h: 68: extern int count_can_no_lab;
+[; ;sort.h: 69: extern int cur_can;
 [; ;ADCFunctionality.h: 1: void readADC(char channel);
 [; ;ADCFunctionality.h: 2: void readIR(int ana_port);
 [; ;ADCFunctionality.h: 3: void readMAG(void);
@@ -3035,10 +3038,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADCFunctionality.c: 24: readADC(ana_port);
 "24
 [e ( _readADC (1 -> _ana_port `uc ]
+[; ;ADCFunctionality.c: 25: IR_res = ADRESH<<8 | ADRESL;
 "25
-[v _res `i ~T0 @X0 1 a ]
-[; ;ADCFunctionality.c: 25: int res = ADRESH<<8 | ADRESL;
-[e = _res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
+[e = _IR_res | << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
 [; ;ADCFunctionality.c: 26: switch(ana_port){
 "26
 [e $U 272  ]
@@ -3046,18 +3048,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADCFunctionality.c: 27: case 0:
 "27
 [e :U 273 ]
-[; ;ADCFunctionality.c: 28: IR_signal = (res > 800) ? 1 : 0;
+[; ;ADCFunctionality.c: 28: IR_signal = (IR_res > 800) ? 1 : 0;
 "28
-[e = _IR_signal ? > _res -> 800 `i : -> 1 `i -> 0 `i ]
+[e = _IR_signal ? > _IR_res -> 800 `i : -> 1 `i -> 0 `i ]
 [; ;ADCFunctionality.c: 29: break;
 "29
 [e $U 271  ]
 [; ;ADCFunctionality.c: 30: case 3:
 "30
 [e :U 274 ]
-[; ;ADCFunctionality.c: 31: IR_signal = (res > 500) ? 1 : 0;
+[; ;ADCFunctionality.c: 31: IR_signal = (IR_res > 250) ? 1 : 0;
 "31
-[e = _IR_signal ? > _res -> 500 `i : -> 1 `i -> 0 `i ]
+[e = _IR_signal ? > _IR_res -> 250 `i : -> 1 `i -> 0 `i ]
 [; ;ADCFunctionality.c: 32: break;
 "32
 [e $U 271  ]

@@ -22,13 +22,13 @@ void readADC(char channel){
 
 void readIR(int ana_port){
     readADC(ana_port);
-    int res = ADRESH<<8 | ADRESL;
+    IR_res = ADRESH<<8 | ADRESL;
     switch(ana_port){
         case 0:
-            IR_signal = (res > THIR) ? 1 : 0;
+            IR_signal = (IR_res > THIR) ? 1 : 0;
             break;
         case 3:
-            IR_signal = (res > THIR_COND) ? 1 : 0;
+            IR_signal = (IR_res > THIR_COND) ? 1 : 0;
             break;
         default:
             break;
