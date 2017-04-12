@@ -38,7 +38,7 @@
 #define SERVOARM    LATBbits.LATB3
 
 // Characteristic travel times in milliseconds unless otherwise noted
-#define TIME_OUT_OF_TROMMEL     1000
+#define TIME_OUT_OF_TROMMEL     750
 #define TIME_ARM_SWING_IN       750
 #define TIME_LOADING_TO_ID      750
 #define TIME_ID_TO_DISTRIBUTION 500

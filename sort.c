@@ -165,7 +165,7 @@ void Loading(void){
                 }
             }
             TMR2IE = 1;
-            __delay_ms(350);
+            __delay_ms(500);  // 350
             // Check if can is stuck. If so, hit it again.
             readIR(0);
             if(IR_signal==1){
@@ -578,10 +578,10 @@ void printSortTimer(void){
     
     // After 6 cans have been sorted, turn on agitator for 2 seconds every 30 seconds. Otherwise,
     // turn on agitator every 30 sec after 1 min
-    if((total_time >= 20 && total_time <= 24) && count_total == 0){
+    if((total_time >= 20 && total_time <= 21) && count_total == 0){
         AGITATOR = 1;
         agitator_toggle_count++;
-        if(agitator_toggle_count == 5){
+        if(agitator_toggle_count == 2){
             agitator_toggle_count = 0;
             AGITATOR = 0;
         }
@@ -593,22 +593,29 @@ void printSortTimer(void){
         }
         else if(AGITATOR == 1){
             agitator_toggle_count++;
-            if(agitator_toggle_count == 4){
+            if(agitator_toggle_count == 2){
                 AGITATOR = 0;
                 time_recent_agitator = total_time;
-            }
-            else if(f_loadingNewCan){
-                AGITATOR = 0;
                 agitator_toggle_count = 0;
             }
+            //else if(f_loadingNewCan){
+            //    AGITATOR = 0;
+            //    agitator_toggle_count = 0;
+            //}
         }
-        else if((total_time - time_recent_agitator == 10) && !f_loadingNewCan){
-            AGITATOR = 1;
-        }
+        //else if((total_time - time_recent_agitator == 10) && !f_loadingNewCan){
+        //    AGITATOR = 1;
+        //}
     }
     
-    if((total_time - most_recent_sort_time == MAX_NO_CANS) || (total_time == MAX_SORT_TIME)){
-        machine_state = DoneSorting_state;
+    if(total_time - most_recent_sort_time == MAX_NO_CANS){
+        if((count_pop_no_tab > 0) && (count_pop_w_tab > 0) && (count_can_w_lab > 0) && (count_can_no_lab > 0)){
+            machine_state = DoneSorting_state;
+             // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
+        }
+    }
+    else if (total_time == MAX_SORT_TIME){
+         machine_state = DoneSorting_state;
         // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
     }
     
