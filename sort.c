@@ -578,7 +578,7 @@ void printSortTimer(void){
     
     // After 6 cans have been sorted, turn on agitator for 2 seconds every 30 seconds. Otherwise,
     // turn on agitator every 30 sec after 1 min
-    if((total_time >= 15 && total_time <= 19) && count_total == 0){
+    if((total_time >= 20 && total_time <= 24) && count_total == 0){
         AGITATOR = 1;
         agitator_toggle_count++;
         if(agitator_toggle_count == 5){
@@ -604,9 +604,6 @@ void printSortTimer(void){
         }
         else if((total_time - time_recent_agitator == 10) && !f_loadingNewCan){
             AGITATOR = 1;
-        }
-        else if(f_loadingNewCan){
-            AGITATOR = 0;
         }
     }
     

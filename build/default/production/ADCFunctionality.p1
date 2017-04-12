@@ -3049,9 +3049,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADCFunctionality.c: 27: case 0:
 "27
 [e :U 273 ]
-[; ;ADCFunctionality.c: 28: IR_signal = (IR_res > 800) ? 1 : 0;
+[; ;ADCFunctionality.c: 28: IR_signal = (IR_res > 700) ? 1 : 0;
 "28
-[e = _IR_signal ? > _IR_res -> 800 `i : -> 1 `i -> 0 `i ]
+[e = _IR_signal ? > _IR_res -> 700 `i : -> 1 `i -> 0 `i ]
 [; ;ADCFunctionality.c: 29: break;
 "29
 [e $U 271  ]

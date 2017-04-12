@@ -56,7 +56,7 @@
 #define MAX_NO_CANS             42
 
 // IR sensor thresholds
-#define THIR    800
+#define THIR    700
 #define THIR_COND   250
 #define THMAG   150
 #define THCOND  300

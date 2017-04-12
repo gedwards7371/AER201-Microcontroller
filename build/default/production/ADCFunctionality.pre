@@ -3975,7 +3975,7 @@ readADC(ana_port);
 IR_res = ADRESH<<8 | ADRESL;
 switch(ana_port){
 case 0:
-IR_signal = (IR_res > 800) ? 1 : 0;
+IR_signal = (IR_res > 700) ? 1 : 0;
 break;
 case 3:
 IR_signal = (IR_res > 250) ? 1 : 0;
