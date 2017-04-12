@@ -458,6 +458,7 @@ void PortTestDC(void){
             while(PORTBbits.RB1 == 1) {continue;}
             AGITATOR = 0;
         }
+        while(PORTBbits.RB1 == 1) {continue;}
     }
 }
 
