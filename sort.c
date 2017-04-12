@@ -35,6 +35,7 @@ int count_can_no_lab;
 int startTime[7];
 int total_time;
 int most_recent_sort_time;
+int time_recent_agitator;
 
 // Sensors
 int IR_signal;
@@ -192,7 +193,7 @@ void Loading(void){
                     }
                 }
                 
-                __delay_ms(350);
+                __delay_ms(400); // 350
                 // Check if can is still stuck. If so, hit it with all we've got!
                 int j = 0;
                 while(IR_signal == 1){
@@ -271,7 +272,7 @@ void Loading(void){
                     }
                     // Recognition of "almost got unstuck" case
                     if(!IR_signal){
-                        __delay_ms(500);
+                        __delay_ms(750); // 500
                         readIR(0);
                         if(IR_signal==1){
                             continue;
@@ -371,10 +372,10 @@ void ID(void){
         }
         int reflectivity2 = IR_res;
         
-        __lcd_clear();__lcd_home();
-        printf("r1: %d|r2: %d", reflectivity1, reflectivity2);
-        __lcd_newline();
-        printf("cond: %d", cond1);
+        //__lcd_clear();__lcd_home();
+        //printf("r1: %d|r2: %d", reflectivity1, reflectivity2);
+        //__lcd_newline();
+        // printf("cond: %d", cond1);
         
         // Identify can type
         // cur_can:
@@ -485,6 +486,7 @@ void initGlobalVars(void){
     
     // Time variables
     most_recent_sort_time  = 999;
+    int time_recent_agitator = 0;
     
     // DC motor control
     motor_toggle_count = 0;
@@ -562,10 +564,10 @@ void printSortTimer(void){
             motor_toggle_count++;
             if(motor_toggle_count == 2){
                 motor_toggle_count = 0;
-                for(int i=0; i<46; i++){
-                    DC = !DC;
-                    delay_ms(45-i);
-                }
+                //for(int i=0; i<46; i++){
+                //    DC = !DC;
+                //    delay_ms(45-i);
+                //}
                 DC = 1;
             }
         }
@@ -576,28 +578,35 @@ void printSortTimer(void){
     
     // After 6 cans have been sorted, turn on agitator for 2 seconds every 30 seconds. Otherwise,
     // turn on agitator every 30 sec after 1 min
-    if((total_time >= TIME_INTERMITTENT_AGITATOR) && (count_total >= 6)){
-        if(AGITATOR == 1){
-            agitator_toggle_count++;
-            if(agitator_toggle_count == 2){
-                agitator_toggle_count = 0;
-                AGITATOR = 0;
-            }
-        }
-        else if(total_time % TIME_INTERMITTENT_AGITATOR == 0){
-            AGITATOR = !AGITATOR;
+    if((total_time >= 15 && total_time <= 19) && count_total == 0){
+        AGITATOR = 1;
+        agitator_toggle_count++;
+        if(agitator_toggle_count == 5){
+            agitator_toggle_count = 0;
+            AGITATOR = 0;
         }
     }
-    else if(total_time >= 60){
-         if(AGITATOR == 1){
+    else if(total_time >= TIME_INTERMITTENT_AGITATOR){
+        if(total_time % TIME_INTERMITTENT_AGITATOR == 0){
+            AGITATOR = !AGITATOR;
+            agitator_toggle_count = 0;
+        }
+        else if(AGITATOR == 1){
             agitator_toggle_count++;
-            if(agitator_toggle_count == 2){
-                agitator_toggle_count = 0;
+            if(agitator_toggle_count == 4){
                 AGITATOR = 0;
+                time_recent_agitator = total_time;
+            }
+            else if(f_loadingNewCan){
+                AGITATOR = 0;
+                agitator_toggle_count = 0;
             }
         }
-        else if(total_time % TIME_INTERMITTENT_AGITATOR == 0){
-            AGITATOR = !AGITATOR;
+        else if((total_time - time_recent_agitator == 10) && !f_loadingNewCan){
+            AGITATOR = 1;
+        }
+        else if(f_loadingNewCan){
+            AGITATOR = 0;
         }
     }
     
@@ -609,10 +618,10 @@ void printSortTimer(void){
     int min = (timeDiff % 3600) / 60;
     int sec = (timeDiff % 3600) % 60;
     
-    //__lcd_home();
-    //printf("SORTING...     ");
-    //__lcd_newline();
-    //printf("TIME %d:%02d   ", min, sec);
+    __lcd_home();
+    printf("SORTING...     ");
+    __lcd_newline();
+    printf("TIME %d:%02d   ", min, sec);
 }
 
 void getIR(int port){

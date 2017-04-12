@@ -28,6 +28,7 @@ void printSortTimer(void);
 extern int startTime[7];
 extern int total_time;
 extern int most_recent_sort_time;
+extern int time_recent_agitator;
 
 // DC motor control
 void delay_ms(unsigned char milliseconds);
