@@ -43,6 +43,7 @@ int COND_signal;
 
 // DC motor control
 int motor_toggle_count;
+int agitator_toggle_count;
 
 // Servo control
 unsigned int servoTimes[4];
@@ -88,6 +89,7 @@ void Loading(void){
         __lcd_clear();
         initSortTimer();
         IR_EMITTER = 1;
+        IR_EMITTER_COND = 1;
         
         // Write to EEPROM that the sort did not complete. This will be changed
         // after a successful run, but until then we must assume the run will
@@ -163,10 +165,10 @@ void Loading(void){
             TMR2IE = 1;
             __delay_ms(350);
             // Check if can is stuck. If so, hit it again.
-            readIR();
+            readIR(0);
             if(IR_signal==1){
                 __delay_ms(70); // 100
-                readIR();
+                readIR(0);
                 if(IR_signal==1){
                     if(sensor_outputs[0]){
                         for(int i = 0; i<2500; i++){
@@ -181,7 +183,7 @@ void Loading(void){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
                             __delay_us(50);
                             SOL_PUSHER = 0;
-                            __delay_us(40);
+                            __delay_us(50);
                         }
                     }
                 }
@@ -190,14 +192,14 @@ void Loading(void){
                 // Check if can is still stuck. If so, hit it with all we've got!
                 int j = 0;
                 while(IR_signal == 1){
-                    readIR();
+                    readIR(0);
                     if(j == 3 || j == 4){
                         f_arm_position = 0;
                     }
                     else if(j == 5 || j == 6){
                         DC = 1;
                     }
-                    else if(j == 7 || j == 8){
+                    else if(j == 7 || j == 8 || j == 9 || j == 10){
                         f_arm_position = 1;
                     }
                     else if(j % 2 == 0){
@@ -208,7 +210,7 @@ void Loading(void){
                     // Pushing code
                     if(IR_signal==1){
                         __delay_ms(350);
-                        readIR();
+                        readIR(0);
                         if(IR_signal==1){
                             if(sensor_outputs[0]){
                                 SOL_PUSHER = 1;
@@ -264,7 +266,7 @@ void Loading(void){
                     // Recognition of "almost got unstuck" case
                     if(!IR_signal){
                         __delay_ms(500);
-                        readIR();
+                        readIR(0);
                         if(IR_signal==1){
                             continue;
                         }
@@ -285,6 +287,15 @@ void ID(void){
         __delay_ms(TIME_LOADING_TO_ID);
         
         f_arm_position = 0; // ensures that any cans in the trommel are held back until they can no longer interfere with the current can
+        
+        if(sensor_outputs[0]){
+            // Read side of can reflectivity (calibrated for soup cans to detect label)
+            readIR(3);
+            sensor_outputs[1] = IR_signal;
+            __delay_ms(200);
+            readIR(3);
+            sensor_outputs[1] = sensor_outputs[1] || IR_signal;
+        }
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
         
@@ -453,6 +464,7 @@ void initGlobalVars(void){
     
     // DC motor control
     motor_toggle_count = 0;
+    agitator_toggle_count = 0;
     
     // Servo variables
     servo_timer_counter = 0;
@@ -521,7 +533,7 @@ void printSortTimer(void){
     }
     
     // Every 20 seconds, turns off drum for 2 seconds.
-    /*if(total_time >= TIME_INTERMITTENT_DRUM_STOP){
+    if(total_time >= TIME_INTERMITTENT_DRUM_STOP){
         if(DC == 0){
             motor_toggle_count++;
             if(motor_toggle_count == 2){
@@ -536,7 +548,21 @@ void printSortTimer(void){
         else if(total_time % TIME_INTERMITTENT_DRUM_STOP == 0){
             DC = !DC;
         }
-    }*/
+    }
+    
+    // Every 30 seconds, turn on agitator for 2 seconds
+    if(total_time >= TIME_INTERMITTENT_AGITATOR){
+        if(AGITATOR == 1){
+            agitator_toggle_count++;
+            if(agitator_toggle_count == 2){
+                agitator_toggle_count = 0;
+                AGITATOR = 0;
+            }
+        }
+        else if(total_time % TIME_INTERMITTENT_AGITATOR == 0){
+            AGITATOR = !AGITATOR;
+        }
+    }
     
     if((total_time - most_recent_sort_time == MAX_NO_CANS) || (total_time == MAX_SORT_TIME)){
         machine_state = DoneSorting_state;
@@ -552,11 +578,11 @@ void printSortTimer(void){
     printf("TIME %d:%02d   ", min, sec);
 }
 
-void getIR(void){
-    readIR();
+void getIR(int port){
+    readIR(port);
     for(int i = 0; i < 150; i++){
         __delay_us(500);
-        readIR();
+        readIR(port);
         if(!IR_signal){
             break;
         }
@@ -568,6 +594,7 @@ void getIR(void){
         f_loadingNewCan = 0;
     }
 }
+
 void getMAG(void){
     readMAG();
     

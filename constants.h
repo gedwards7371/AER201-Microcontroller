@@ -4,11 +4,13 @@
 
 //Conductivity sensors
 #define COND_SENSORS  PORTAbits.RA2 // conductivity sensors
-#define NUM_SOUP_TESTS  5
+#define NUM_SOUP_TESTS  2
+#define NUM_POP_TESTS   2
+#define NUM_SAMPLES     10
 
 //IR emitter
-// #define IR_EMITTER LATAbits.LATA6
 #define IR_EMITTER LATCbits.LATC5
+#define IR_EMITTER_COND LATCbits.LATC6
 
 //Solenoids (1 cm)
 #define SOL_COND_SENSORS       LATAbits.LATA3 // solenoids for moving conductivity sensors
@@ -17,8 +19,9 @@
 
 //DC motors
 #define DC_RAMP     45
-//define DC          LATAbits.LATA5 // DC motors
-#define DC          LATBbits.LATB2 // DC motors
+//define DC          LATAbits.LATA5 // DC motors (trommel)
+#define DC          LATBbits.LATB2 // DC motors (trommel)
+#define AGITATOR    LATBbits.LATB0
 
 //Servo motors, times in microseconds. Each must be unique
 #define SERVOCAM    LATCbits.LATC0 // cam servo for blocker
@@ -45,6 +48,7 @@
 #define TIME_CONDUCTIVITY_POP   600
 #define TIME_CONDUCTIVITY_SOUP  400
 #define TIME_INTERMITTENT_DRUM_STOP 20 // Seconds
+#define TIME_INTERMITTENT_AGITATOR 30 // seconds
 
 // Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           179
@@ -53,6 +57,7 @@
 
 // IR sensor thresholds
 #define THIR    800
+#define THIR_COND   500
 #define THMAG   150
 #define THCOND  300
 

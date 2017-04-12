@@ -21,7 +21,6 @@ void actuatorTest(void);
 void BothServos(void);
 void PortTestDC(void);
 void EEPROMTest(void);
-void ToggleTestA5(void);
 void SpeedTest(void);
 void PlatformTest(void);
 void BlockerTest(void);
@@ -421,6 +420,10 @@ void PortTestDC(void){
         if(PORTB >> 4 == 0b1111){
             break;
         }
+        if(PORTB >> 4 == 0b0000){
+            // Toggle on key 1 press
+            DC = !DC;
+        }
         else{
             DC = 1;
             while(PORTBbits.RB1 == 1){
@@ -510,32 +513,6 @@ void PlatformTest(void){
     IR_EMITTER = 0;
     stopSignals();
     machine_state = Testing_state;
-}
-
-void ToggleTestA5(void){
-    __lcd_clear();__lcd_home();
-    printf("D WILL RETURN   ");
-    __lcd_newline();
-    printf("ELSE TOGGLES RA5");
-    int on = 0;
-    while(1){
-        while(PORTBbits.RB1 == 0){ 
-            // RB1 is the interrupt pin, so if there is no key pressed, RB1 will be 0
-            // the PIC will wait and do nothing until a key press is signaled
-            continue;
-        }
-        if(PORTB >> 4 == 0b1111){
-            break;
-        }
-        else{
-            while(1){
-                LATAbits.LATA5 = 1;
-                __delay_ms(3000);
-                LATAbits.LATA5 = 0;
-                __delay_ms(1000);
-            }  
-        }
-    }
 }
 
 void SpeedTest(void){

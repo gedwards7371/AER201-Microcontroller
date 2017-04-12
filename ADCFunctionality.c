@@ -20,10 +20,19 @@ void readADC(char channel){
     while(ADCON0bits.GO_NOT_DONE){__delay_ms(5);}
 }
 
-void readIR(void){
-    readADC(0);
+void readIR(int ana_port){
+    readADC(ana_port);
     int res = ADRESH<<8 | ADRESL;
-    IR_signal = (res > THIR) ? 1 : 0;
+    switch(ana_port){
+        case 0:
+            IR_signal = (res > THIR) ? 1 : 0;
+            break;
+        case 3:
+            IR_signal = (res > THIR_COND) ? 1 : 0;
+            break;
+        default:
+            break;
+    }
 }
 
 void readMAG(void){
