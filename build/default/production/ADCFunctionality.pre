@@ -3978,7 +3978,7 @@ case 0:
 IR_signal = (IR_res > 700) ? 1 : 0;
 break;
 case 3:
-IR_signal = (IR_res > 250) ? 1 : 0;
+IR_signal = (IR_res > 220) ? 1 : 0;
 break;
 default:
 break;
