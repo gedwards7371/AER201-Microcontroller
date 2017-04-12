@@ -137,6 +137,8 @@ void Loading(void){
             f_most_recent_sort_time = 1;
             f_loadingNewCan = 0; // clear the new can flag after it's gone to ID
             __delay_ms(TIME_OUT_OF_TROMMEL); 
+            DC  =  0; // Stop trommel to minimize can-within-can chances and meet our
+                     // design requirement of "simplicity" by not having unnecessary actions
                     
             // Read magnetism to distinguish pop cans and soup cans (start of IDing)
             f_arm_position = 1;
@@ -144,9 +146,6 @@ void Loading(void){
             delay_ms(TIME_ARM_SWING_IN); // so that arm doesn't interfere with solenoid
             getMAG(); // Get analog input from magnetism sensor. Sets MAG_signal
             sensor_outputs[0] = MAG_signal;
-            
-            DC  =  0; // Stop trommel to minimize can-within-can chances and meet our
-            // design requirement of "simplicity" by not having unnecessary actions
             
             TMR2IE = 0; // disable PWM to arm for now so that it doesn't spaz...
             if(sensor_outputs[0]){
@@ -559,12 +558,6 @@ void printSortTimer(void){
         f_most_recent_sort_time = 0;
     }
     
-    if (total_time == MAX_SORT_TIME){
-         machine_state = DoneSorting_state;
-        // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
-        return;
-    }
-    
     // Every 20 seconds, turns off drum for 2 seconds.
     if(total_time >= TIME_INTERMITTENT_DRUM_STOP){
         if(DC == 0){
@@ -585,15 +578,8 @@ void printSortTimer(void){
     
     // After 6 cans have been sorted, turn on agitator for 2 seconds every 30 seconds. Otherwise,
     // turn on agitator every 30 sec after 1 min
-    if(total_time >= TIME_INTERMITTENT_AGITATOR && (total_time < 60)){
+    if(total_time >= TIME_INTERMITTENT_AGITATOR){
         if(total_time % TIME_INTERMITTENT_AGITATOR == 0){
-            AGITATOR = 1;
-            __delay_ms(200);
-            AGITATOR = 0;
-        }
-    }
-    else if(total_time >= TIME_INTERMITTENT_AGITATOR && (total_time >= 60)){
-        if(total_time % (TIME_INTERMITTENT_AGITATOR/2) == 0){
             AGITATOR = 1;
             __delay_ms(200);
             AGITATOR = 0;
@@ -605,6 +591,10 @@ void printSortTimer(void){
             machine_state = DoneSorting_state;
              // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
         }
+    }
+    else if (total_time == MAX_SORT_TIME){
+         machine_state = DoneSorting_state;
+        // STOP EXECUTION (switch to DoneSorting_state and make sure loop executing will see this)
     }
     
     int min = (timeDiff % 3600) / 60;

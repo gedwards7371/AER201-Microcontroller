@@ -48,7 +48,7 @@
 #define TIME_CONDUCTIVITY_POP   600
 #define TIME_CONDUCTIVITY_SOUP  400
 #define TIME_INTERMITTENT_DRUM_STOP 20 // Seconds
-#define TIME_INTERMITTENT_AGITATOR 18 // seconds
+#define TIME_INTERMITTENT_AGITATOR 4 // seconds
 
 // Maximum operation allowances before forced termination
 #define MAX_SORT_TIME           179
@@ -57,7 +57,7 @@
 
 // IR sensor thresholds
 #define THIR    700
-#define THIR_COND   220
+#define THIR_COND   250
 #define THMAG   150
 #define THCOND  300
 

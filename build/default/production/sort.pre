@@ -4086,6 +4086,8 @@ else if(f_ID_receive){
 f_most_recent_sort_time = 1;
 f_loadingNewCan = 0;
 _delay((unsigned long)((750)*(32000000/4000.0)));
+LATBbits.LATB2 = 0;
+
 
 
 f_arm_position = 1;
@@ -4093,9 +4095,6 @@ f_arm_position = 1;
 delay_ms(750);
 getMAG();
 sensor_outputs[0] = MAG_signal;
-
-LATBbits.LATB2 = 0;
-
 
 TMR2IE = 0;
 if(sensor_outputs[0]){
@@ -4322,7 +4321,7 @@ sensor_outputs[1] = sensor_outputs[1] || IR_signal;
 }
 int reflectivity2 = IR_res;
 
-# 387
+# 386
 if(!sensor_outputs[0]){
 if(!sensor_outputs[1]){
 count_pop_no_tab++;
@@ -4376,7 +4375,7 @@ void Distribution(void){
 if(f_can_coming_to_distribution){
 f_can_distributed = 0;
 
-# 445
+# 444
 switch(cur_can){
 case 0:
 updateServoPosition(400, 1);
@@ -4446,7 +4445,7 @@ startTime[i] = (time[i] & 0x0F) + ((time[i] & 0xF0)>>4)*10;
 
 T0CON = 0b00010111;
 
-# 521
+# 520
 TMR0H = 0b10000101;
 TMR0L = 0b11101110;
 TMR0ON = 1;
@@ -4488,12 +4487,6 @@ most_recent_sort_time = total_time;
 f_most_recent_sort_time = 0;
 }
 
-if (total_time == 179){
-machine_state = DoneSorting_state;
-
-return;
-}
-
 
 if(total_time >= 20){
 if(LATBbits.LATB2 == 0){
@@ -4514,15 +4507,8 @@ LATBbits.LATB2 = !LATBbits.LATB2;
 
 
 
-if(total_time >= 18 && (total_time < 60)){
-if(total_time % 18 == 0){
-LATBbits.LATB0 = 1;
-_delay((unsigned long)((200)*(32000000/4000.0)));
-LATBbits.LATB0 = 0;
-}
-}
-else if(total_time >= 18 && (total_time >= 60)){
-if(total_time % (18/2) == 0){
+if(total_time >= 4){
+if(total_time % 4 == 0){
 LATBbits.LATB0 = 1;
 _delay((unsigned long)((200)*(32000000/4000.0)));
 LATBbits.LATB0 = 0;
@@ -4534,6 +4520,10 @@ if((count_pop_no_tab > 0) && (count_pop_w_tab > 0) && (count_can_w_lab > 0) && (
 machine_state = DoneSorting_state;
 
 }
+}
+else if (total_time == 179){
+machine_state = DoneSorting_state;
+
 }
 
 int min = (timeDiff % 3600) / 60;
@@ -4655,7 +4645,7 @@ break;
 }
 void updateArmState(void){
 
-# 734
+# 724
 if(!was_low_2){
 
 switch(f_arm_position){
