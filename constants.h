@@ -57,7 +57,7 @@
 
 // IR sensor thresholds
 #define THIR    800
-#define THIR_COND   60
+#define THIR_COND   500
 #define THMAG   150
 #define THCOND  300
 
