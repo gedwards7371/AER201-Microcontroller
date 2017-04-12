@@ -440,16 +440,23 @@ void PortTestDC(void){
         if(PORTB >> 4 == 0b1111){
             break;
         }
-        if(PORTB >> 4 == 0b0000){
-            // Toggle on key 1 press
+        else if(PORTB >> 4 == 0b0000){
+            // Toggle trommel motor on key 1 press
             DC = !DC;
         }
-        else{
+        else if(PORTB >> 4 == 0b0001){
+            // Toggle agitator motor on key 2 press
+            AGITATOR = !AGITATOR;
+        }
+        else if(PORTB >> 4 == 0b0100){
             DC = 1;
-            while(PORTBbits.RB1 == 1){
-                // Wait until the key has been released
-            }
+            while(PORTBbits.RB1 == 1) {continue;}
             DC = 0;
+        }
+        else if(PORTB >> 4 == 0b0101){
+            AGITATOR = 1;
+            while(PORTBbits.RB1 == 1) {continue;}
+            AGITATOR = 0;
         }
     }
 }

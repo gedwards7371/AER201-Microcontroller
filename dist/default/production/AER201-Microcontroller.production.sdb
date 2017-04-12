@@ -237,15 +237,15 @@ EmergencyStop_state 4
 [v _BothServos BothServos `(v  1 e 1 0 ]
 "430
 [v _PortTestDC PortTestDC `(v  1 e 1 0 ]
-"457
+"464
 [v _PlatformTest PlatformTest `(v  1 e 1 0 ]
-"538
+"545
 [v _SpeedTest SpeedTest `(v  1 e 1 0 ]
-"578
+"585
 [v _BlockerTest BlockerTest `(v  1 e 1 0 ]
-"636
+"643
 [v _arm arm `(v  1 e 1 0 ]
-"679
+"686
 [v _PortTestPusher PortTestPusher `(v  1 e 1 0 ]
 "62 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\UI.c
 [v _initUI initUI `(v  1 e 1 0 ]
@@ -1196,12 +1196,12 @@ EmergencyStop_state 4
 [v readMAG@res res `i  1 a 2 4 ]
 "42
 } 0
-"636 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"643 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _arm arm `(v  1 e 1 0 ]
 {
-"650
+"657
 [v arm@on on `i  1 a 2 44 ]
-"677
+"684
 } 0
 "78
 [v _algorithmTest algorithmTest `(v  1 e 1 0 ]
@@ -1250,35 +1250,35 @@ EmergencyStop_state 4
 [v actuatorTest@i i `i  1 a 2 68 ]
 "368
 } 0
-"538
+"545
 [v _SpeedTest SpeedTest `(v  1 e 1 0 ]
 {
-"564
+"571
 } 0
-"679
+"686
 [v _PortTestPusher PortTestPusher `(v  1 e 1 0 ]
 {
-"700
+"707
 } 0
 "430
 [v _PortTestDC PortTestDC `(v  1 e 1 0 ]
 {
-"455
+"462
 } 0
-"457
+"464
 [v _PlatformTest PlatformTest `(v  1 e 1 0 ]
 {
-"522
+"529
 [v PlatformTest@i_1803 i `i  1 a 2 51 ]
-"513
+"520
 [v PlatformTest@i i `i  1 a 2 49 ]
-"486
+"493
 [v PlatformTest@res_1799 res `i  1 a 2 47 ]
-"473
+"480
 [v PlatformTest@res res `i  1 a 2 45 ]
-"467
+"474
 [v PlatformTest@on on `i  1 a 2 53 ]
-"536
+"543
 } 0
 "370
 [v _BothServos BothServos `(v  1 e 1 0 ]
@@ -1305,18 +1305,18 @@ EmergencyStop_state 4
 [v updateServoPosition@timer timer `i  1 p 2 2 ]
 "620
 } 0
-"578 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
+"585 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\Test.c
 [v _BlockerTest BlockerTest `(v  1 e 1 0 ]
 {
-"615
+"622
 [v BlockerTest@i i `i  1 a 2 45 ]
-"587
+"594
 [v BlockerTest@cond_flag cond_flag `i  1 a 2 51 ]
-"586
+"593
 [v BlockerTest@cam_flag cam_flag `i  1 a 2 49 ]
-"580
+"587
 [v BlockerTest@res res `i  1 a 2 47 ]
-"634
+"641
 } 0
 "15 D:\Users\Tyler\Documents\GitHub\AER201-Microcontroller\ADCFunctionality.c
 [v _readADC readADC `(v  1 e 1 0 ]
