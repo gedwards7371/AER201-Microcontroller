@@ -38,6 +38,7 @@ int most_recent_sort_time;
 
 // Sensors
 int IR_signal;
+int IR_res;
 int MAG_signal;
 int COND_signal;
 
@@ -147,7 +148,7 @@ void Loading(void){
             
             TMR2IE = 0; // disable PWM to arm for now so that it doesn't spaz...
             if(sensor_outputs[0]){
-                for(int i = 0; i<2500; i++){
+                for(int i = 0; i<3000; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
                     __delay_us(75);
                     SOL_PUSHER = 0;
@@ -155,11 +156,11 @@ void Loading(void){
                 }
             }
             else{
-                for(int i = 0; i<2500; i++){
+                for(int i = 0; i<3000; i++){
                     SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                    __delay_us(50);
+                    __delay_us(58);
                     SOL_PUSHER = 0;
-                    __delay_us(50);
+                    __delay_us(42);
                 }
             }
             TMR2IE = 1;
@@ -167,11 +168,14 @@ void Loading(void){
             // Check if can is stuck. If so, hit it again.
             readIR(0);
             if(IR_signal==1){
-                __delay_ms(70); // 100
+                __delay_ms(100);
                 readIR(0);
                 if(IR_signal==1){
+                    getMAG();
+                    sensor_outputs[0] = sensor_outputs[0] || MAG_signal;
+                    
                     if(sensor_outputs[0]){
-                        for(int i = 0; i<2500; i++){
+                        for(int i = 0; i<3000; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 9 V
                             __delay_us(75);
                             SOL_PUSHER = 0;
@@ -179,11 +183,11 @@ void Loading(void){
                         }
                     }
                     else{
-                        for(int i = 0; i<2500; i++){
+                        for(int i = 0; i<3000; i++){
                             SOL_PUSHER = 1; // activate solenoid pusher @ 6.96 V
-                            __delay_us(50);
+                            __delay_us(58);
                             SOL_PUSHER = 0;
-                            __delay_us(50);
+                            __delay_us(42);
                         }
                     }
                 }
@@ -201,10 +205,12 @@ void Loading(void){
                     }
                     else if(j == 7 || j == 8 || j == 9 || j == 10){
                         f_arm_position = 1;
+                        __delay_ms(200);
                     }
                     else if(j % 2 == 0){
                         DC = !DC;
                         f_arm_position = !f_arm_position;
+                        __delay_ms(200);
                     }
                     
                     // Pushing code
@@ -214,12 +220,12 @@ void Loading(void){
                         if(IR_signal==1){
                             if(sensor_outputs[0]){
                                 SOL_PUSHER = 1;
-                                __delay_ms(250);
+                                __delay_ms(300);
                                 SOL_PUSHER = 0;
                             }
                             else{
                                 TMR2IE = 0;
-                                for(int i = 0; i<2500; i++){
+                                for(int i = 0; i<3000; i++){
                                     switch(j){
                                         case 0:
                                             SOL_PUSHER = 1;
@@ -292,10 +298,11 @@ void ID(void){
             // Read side of can reflectivity (calibrated for soup cans to detect label)
             readIR(3);
             sensor_outputs[1] = IR_signal;
-            __delay_ms(200);
+            __delay_ms(10);
             readIR(3);
             sensor_outputs[1] = sensor_outputs[1] || IR_signal;
         }
+        int reflectivity1 = IR_res;
         
         SOL_COND_SENSORS = 1; // Activate solenoids for top/bottom conductivity sensors
         
@@ -351,6 +358,23 @@ void ID(void){
                 }
             }
         }
+        int cond1 = sensor_outputs[1];
+        
+        
+        if(sensor_outputs[0]){
+            // Read side of can reflectivity (calibrated for soup cans to detect label)
+            readIR(3);
+            sensor_outputs[1] = sensor_outputs[1] || IR_signal;
+            __delay_ms(10);
+            readIR(3);
+            sensor_outputs[1] = sensor_outputs[1] || IR_signal;
+        }
+        int reflectivity2 = IR_res;
+        
+        __lcd_clear();__lcd_home();
+        printf("r1: %d|r2: %d", reflectivity1, reflectivity2);
+        __lcd_newline();
+        printf("cond: %d", cond1);
         
         // Identify can type
         // cur_can:
@@ -550,9 +574,22 @@ void printSortTimer(void){
         }
     }
     
-    // Every 30 seconds, turn on agitator for 2 seconds
-    if(total_time >= TIME_INTERMITTENT_AGITATOR){
+    // After 6 cans have been sorted, turn on agitator for 2 seconds every 30 seconds. Otherwise,
+    // turn on agitator every 30 sec after 1 min
+    if((total_time >= TIME_INTERMITTENT_AGITATOR) && (count_total >= 6)){
         if(AGITATOR == 1){
+            agitator_toggle_count++;
+            if(agitator_toggle_count == 2){
+                agitator_toggle_count = 0;
+                AGITATOR = 0;
+            }
+        }
+        else if(total_time % TIME_INTERMITTENT_AGITATOR == 0){
+            AGITATOR = !AGITATOR;
+        }
+    }
+    else if(total_time >= 60){
+         if(AGITATOR == 1){
             agitator_toggle_count++;
             if(agitator_toggle_count == 2){
                 agitator_toggle_count = 0;
@@ -572,10 +609,10 @@ void printSortTimer(void){
     int min = (timeDiff % 3600) / 60;
     int sec = (timeDiff % 3600) % 60;
     
-    __lcd_home();
-    printf("SORTING...     ");
-    __lcd_newline();
-    printf("TIME %d:%02d   ", min, sec);
+    //__lcd_home();
+    //printf("SORTING...     ");
+    //__lcd_newline();
+    //printf("TIME %d:%02d   ", min, sec);
 }
 
 void getIR(int port){
@@ -596,9 +633,8 @@ void getIR(int port){
 }
 void getMAG(void){
     readMAG();
-    
-    if(MAG_signal==1){
-        __delay_ms(500);
+    if(MAG_signal){
+        __delay_ms(100);
         readMAG();
     }
 }

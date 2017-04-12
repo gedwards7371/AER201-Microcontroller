@@ -27,21 +27,21 @@
 #define SERVOCAM    LATCbits.LATC0 // cam servo for blocker
 #define SERVOPAN    LATCbits.LATC1 // pan servo (sides)
 #define SERVOTILT   LATCbits.LATC2 // tilt servo (up/down)
-#define PAN_R       500  
+#define PAN_R       400  
 #define PAN_RMID    850
 #define PAN_MID     1200 // 1500
-#define PAN_LMID    1670
-#define PAN_L       2400 // 2200
+#define PAN_LMID    1550
+#define PAN_L       2500 // 2200
 #define TILT_REST   1050 // 1150
 #define POP_TILT_DROP  1260
 #define SOUP_TILT_DROP 1390
 #define SERVOARM    LATBbits.LATB3
 
 // Characteristic travel times in milliseconds unless otherwise noted
-#define TIME_OUT_OF_TROMMEL     400
+#define TIME_OUT_OF_TROMMEL     1000
 #define TIME_ARM_SWING_IN       750
-#define TIME_LOADING_TO_ID      1000
-#define TIME_ID_TO_DISTRIBUTION 750
+#define TIME_LOADING_TO_ID      750
+#define TIME_ID_TO_DISTRIBUTION 500
 #define TIME_SOLENOID_MOTION    300
 #define TIME_SERVO_MOTION       750
 #define TILT_DROP_DELAY         700 // 2500
@@ -57,7 +57,7 @@
 
 // IR sensor thresholds
 #define THIR    800
-#define THIR_COND   500
+#define THIR_COND   250
 #define THMAG   150
 #define THCOND  300
 

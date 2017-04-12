@@ -474,10 +474,12 @@ void PortTestDC(void){
 void PlatformTest(void){
     IR_EMITTER = 1;
     
+    ei();
     machine_state = Sorting_state;
     f_arm_position = 0;
     timer2_counter = 0;
     SERVOARM = 0;
+    TMR2IE = 1;
     TMR2ON = 1;
     was_low_2 = 0;
     
@@ -527,21 +529,29 @@ void PlatformTest(void){
         }
         else if(PORTB >> 4 == 0b0101){
             // key 5
-            for(int i = 0; i<30; i++){
+            di();
+            TMR2IE = 0;
+            for(int i = 0; i<3000; i++){
                 SOL_PUSHER = 1; // activate solenoid pusher
-                __delay_us(7500);
+                __delay_us(75);
                 SOL_PUSHER = 0;
-                __delay_us(2500);
+                __delay_us(25);
             }
+            TMR2IE = 1;
+            ei();
         }
         else if (PORTB >> 4 == 0b0110){
             // key 6
-            for(int i = 0; i<30; i++){
+            di();
+            TMR2IE = 0;
+            for(int i = 0; i<3000; i++){
                 SOL_PUSHER = 1; // activate solenoid pusher
-                __delay_us(5800);
+                __delay_us(58);
                 SOL_PUSHER = 0;
-                __delay_us(4200);
+                __delay_us(42);
             }
+            ei();
+            TMR2IE = 1;
         }
 
         while(PORTBbits.RB1 == 1) {continue;}
@@ -658,7 +668,7 @@ void arm(void){
     
     ei();
     machine_state = Sorting_state;
-    f_arm_position = 2;
+    f_arm_position = 1;
     timer2_counter = 0;
     SERVOARM = 1;
     TMR2ON = 1;
